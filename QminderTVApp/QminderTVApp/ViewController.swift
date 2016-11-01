@@ -19,6 +19,8 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   
   @IBOutlet var pairingCode: UILabel!
   @IBOutlet var tableView:UITableView?
+  @IBOutlet var offlineLabel: UILabel!
+  @IBOutlet var onlineLabel: UILabel!
   
   var eventsArray:[EventInfo] = []
   
@@ -112,10 +114,16 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
 
   public func onDisconnected(error: NSError?) {
     print("disconnected")
+    
+    onlineLabel.isHidden = true
+    offlineLabel.isHidden = false
   }
 
   public func onConnected() {
     print("connected")
+    
+    onlineLabel.isHidden = false
+    offlineLabel.isHidden = true
     
     tableView?.isHidden = false
     pairingCode.isHidden = true

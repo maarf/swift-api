@@ -30,10 +30,12 @@ public class QminderEvents : WebSocketDelegate {
   public var delegate:QminderEventsDelegate?
   
   private var connectionOpen:Bool = false
+  private var openingConnection = false
   private var socketRetriedConnections = 0
   private var socket:WebSocket
   
-  private var timer = Timer()
+  private var pingTimer = Timer()
+  private var autoReopenTimer = Timer()
   
   public init(apiKey:String) {
     self.socket = WebSocket(url: URL(string: "wss://api.qminderapp.com/events?rest-api-key=\(apiKey)")!)
@@ -42,6 +44,14 @@ public class QminderEvents : WebSocketDelegate {
   }
   
   public func openSocket() {
+    print("openSocket")
+    
+    openingConnection = true
+    
+    if autoReopenTimer.isValid {
+      autoReopenTimer.invalidate()
+    }
+    
     self.socket.connect()
   }
   
@@ -67,6 +77,7 @@ public class QminderEvents : WebSocketDelegate {
   public func websocketDidConnect(socket: WebSocket) {
     print("Connection opened")
 
+    openingConnection = false
     connectionOpen = true
     socketRetriedConnections = 0
     
@@ -75,7 +86,7 @@ public class QminderEvents : WebSocketDelegate {
     //send message queue
     
     // set up ping interval
-    self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
+    self.pingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
       (timer) in
         if self.socket.isConnected {
           self.socket.write(ping: "PING".data(using: .utf8)!)
@@ -88,9 +99,25 @@ public class QminderEvents : WebSocketDelegate {
   public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
     connectionOpen = false
     
-    self.timer.invalidate()
+    self.pingTimer.invalidate()
     
     print(error)
+    
+    var timeoutMult = floor(Double(socketRetriedConnections / 10))
+    var newTimeout = min(5 + timeoutMult * 1, 6)
+    print("Connection closed, Trying to reconnect in \(newTimeout) seconds")
+    
+    if autoReopenTimer.isValid {
+      autoReopenTimer.invalidate()
+    }
+    
+    autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {
+      (timer) in
+        print("autoReopenTimer")
+        self.openSocket()
+    })
+    
+    socketRetriedConnections += 1
     
     delegate?.onDisconnected(error: error)
     
