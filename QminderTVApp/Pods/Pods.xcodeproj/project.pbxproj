@@ -1,0 +1,1188 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07FD29E26B1A02A4F17ADE0A7E1540DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */; };
+		0C1B4E9FFB8B81E8833A3BAD537B1990 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAEEFE8C3A0478192A9BB631075D286 /* Notifications.swift */; };
+		12118C354EFA36292F82A8D0CFCE45B2 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECCB7BB80B51B18EF11AB7F259B9714 /* Request.swift */; };
+		3360C1A3DB7D5908D36379038725E6C5 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F26D5B00CF6D10A5E5FE94110B333 /* SwiftyJSON.swift */; };
+		37334FDA04F069AE729AB379C607F22E /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B8AA846BC1664BCB51962FF72E778C /* WebSocket.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3982B850C43B41BA6D25F440F0412E9B /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0C05AF09DC151535DB4E972D5451CC /* Timeline.swift */; };
+		4AE07686EE81F767B84F9C5B14BE4E23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */; };
+		56C0A17066E1AC9BEF83D94E2B9A236A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */; };
+		57EC152F538293C078D40AD1B6DD4305 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52689F54DF68DC8301624A44F021A0BB /* Starscream.framework */; };
+		5C8B1664540E912CFE299C70AAE3F794 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7723097B49FC962CD443775326B681B6 /* SwiftyJSON-dummy.m */; };
+		62143065F94E53F437DCE5D7A998D66D /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E756BBA9186BE4FBE8444E9D5BCF889 /* AFError.swift */; };
+		6223CD9FF33E5A3A9E2C3F236165366A /* Pods-QminderTVApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 212EBD580D6D2AC609DE0F50354273C8 /* Pods-QminderTVApp-dummy.m */; };
+		63CF667A1DC35FB100F8B621 /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CF66791DC35FB100F8B621 /* QminderEvents.swift */; };
+		6AF00039B1BAEE85A0BFDE87A3B9B9E9 /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4F9C0564B1D1C7A2935721E6978432 /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7CA5A9BA5246FDA8227233E310029392 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970FE12D045B4803CA08C548271DED6F /* Alamofire.swift */; };
+		860BEB48BCBF95F52246A2966B841ADC /* QminderTV-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A41BF17E01A1E72BCF703D98A90D30 /* QminderTV-dummy.m */; };
+		86ED08F33B7D357932A9AB743E9D9EA7 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9266D76F9F1EC417DFA5536915B86A6 /* Response.swift */; };
+		8D463A0A4C65C02FDD5211F0F3C6F8B8 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DDD210120976D1CB8B4C904E4CD6B9 /* Alamofire-dummy.m */; };
+		907AB123FBC8BC9340D5B7350CE828DF /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B7AAC83FACB6A36EB9B401E3D8AB44 /* SessionDelegate.swift */; };
+		9469DF81ECB494E84675969B5E13374C /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B01465959D221DF23164C2497A5F6049 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9748B3B9EA2A9EF201971FBD1DCB2A84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */; };
+		9A0A4A018D25FB67D9B858F69E80F5AC /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 80D1B115AFC045541CF37D9FB98256E2 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A79AC30123B0C2177D67F6ED6A1B3215 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB3CFD3CFECDE5ABF253D14AA04705A /* SessionManager.swift */; };
+		AF158CAAF4DD319009AFC855DC995D90 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683993C4BD1AAE74E90AF8E5F4777F4 /* ParameterEncoding.swift */; };
+		B8154C96802336E5DDA5CEE97C3180A0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13B1BD6720BFFE296A79F99A6CA6CAB /* ResponseSerialization.swift */; };
+		BE6D3BD3D4E5F91D2AD4E83463922B28 /* Pods-QminderTVApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D6807237A895BC966B666EE61EA9013 /* Pods-QminderTVApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0374CD91D903359DF04FA65B2E035A9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CF7251AA5C27B643FCD7E534881198 /* Alamofire.framework */; };
+		C0AEA97E7684DDAD56998C0AE198A433 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250ACC68D00EFA2B1C26459B775D72EE /* ServerTrustPolicy.swift */; };
+		C7A3408350643ADE1018826C766EE356 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43953063BAE8AE69833349BF6005FE1 /* MultipartFormData.swift */; };
+		D0B8F21463BA3486C1E098AB054C0CA8 /* QminderTV-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15940C889CAAF312397E319C8A768DC4 /* QminderTV-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA945DC8E912840E41B9AF8AFEEF7DFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */; };
+		DF1BBF94997A2F4248B42B25EA919EC2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF6FAAECAA0361A57133EC7A5AAB99 /* Result.swift */; };
+		E1F583CB4A68A928CD197250AA752926 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EA2CAC67B8EC7244563DABBFA1E817 /* TaskDelegate.swift */; };
+		E2A1C34237B4E928E5F85C097F4C2551 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AF2BA959C0D03D188C41077B72B93C /* DispatchQueue+Alamofire.swift */; };
+		E59BF19C0AFA68B741552319FC478C7B /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D795526723C5E388B39CD05AA76FDA /* NetworkReachabilityManager.swift */; };
+		EA8275AD8CBB0012BDACD3BB24E09728 /* QminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA697D75EE38F922B33FDCC683AC1A /* QminderAPI.swift */; };
+		ED01304C1C34210CC9DEEB79FB5B7719 /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F30C1FF73F02845D8637CCA26E7A02CC /* Starscream-dummy.m */; };
+		F0B0F62D800F6DCBBB0CA5749697A68D /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B2D5C055B57A0C9CE8EF52DB8F107E /* SSLSecurity.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F3112FDE63D1492B9C864B49AC1082D9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422AFA8CBA65079922B9F906C6B5F695 /* SwiftyJSON.framework */; };
+		FFFDD494EE6D1B83DDAF5F2721F685A6 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781C9B10EC6A5027CF23A564CD497E1A /* Validation.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		044CAABA7E9CE0B850CC27EF60BF6BA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79C040AFDDCE1BCBF6D8B5EB0B85887F;
+			remoteInfo = Alamofire;
+		};
+		3AF7B0FE68AF9B9DAADA73B194AE6BA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81E1185D38C07EA01CEA1F039DA06125;
+			remoteInfo = Starscream;
+		};
+		57AB033F61D7F6BD64DDC003D7BAE7F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA087D5EA42109B80552141FA84972D8;
+			remoteInfo = SwiftyJSON;
+		};
+		A17FDCCDCB6B7B99C25C141E9EB7CD13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79C040AFDDCE1BCBF6D8B5EB0B85887F;
+			remoteInfo = Alamofire;
+		};
+		A588A5AA3959985913894C1BE84268D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94841783C37DC82425710B5107BAAC68;
+			remoteInfo = QminderTV;
+		};
+		EBB9643D0D29448F680137C24E27B1A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81E1185D38C07EA01CEA1F039DA06125;
+			remoteInfo = Starscream;
+		};
+		ECD5EA30F89C41F3573BA21D2247D8B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA087D5EA42109B80552141FA84972D8;
+			remoteInfo = SwiftyJSON;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00EA2CAC67B8EC7244563DABBFA1E817 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
+		04BA697D75EE38F922B33FDCC683AC1A /* QminderAPI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QminderAPI.swift; sourceTree = "<group>"; };
+		0DAEEFE8C3A0478192A9BB631075D286 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
+		0E94FA208CA9ED9B2FB18C53C56CE7BF /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		15940C889CAAF312397E319C8A768DC4 /* QminderTV-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QminderTV-umbrella.h"; sourceTree = "<group>"; };
+		164A8AD6409B6C81B41F1546F0888E3F /* QminderTV.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QminderTV.xcconfig; sourceTree = "<group>"; };
+		1E1E37109EABC891BA335F480981538B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		212EBD580D6D2AC609DE0F50354273C8 /* Pods-QminderTVApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QminderTVApp-dummy.m"; sourceTree = "<group>"; };
+		250ACC68D00EFA2B1C26459B775D72EE /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		33FFA10038D59DDD28292FCF348FDE0D /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		36B8AA846BC1664BCB51962FF72E778C /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Source/WebSocket.swift; sourceTree = "<group>"; };
+		379C01B76B0ED5152F6468A6853B5330 /* QminderTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QminderTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37CF7251AA5C27B643FCD7E534881198 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4F9C0564B1D1C7A2935721E6978432 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
+		422AFA8CBA65079922B9F906C6B5F695 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43571D3109AE0B4747981062758FE030 /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Starscream.modulemap; sourceTree = "<group>"; };
+		4683993C4BD1AAE74E90AF8E5F4777F4 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
+		4864148E1D1C9FE2BF4E7552E1BB5B4C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52689F54DF68DC8301624A44F021A0BB /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56AF2BA959C0D03D188C41077B72B93C /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		576B45A4F1B0B861A1B43C0B51960FFA /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		5EB3CFD3CFECDE5ABF253D14AA04705A /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
+		5F0DFC9CFCC2EA1F55D06DBED6CD1EA3 /* Pods_QminderTVApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QminderTVApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DA1C745C30BC03B4A179D9B20A40C9 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
+		617D2AA022D8588E9609E439BDAF32BD /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63CF66791DC35FB100F8B621 /* QminderEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderEvents.swift; sourceTree = "<group>"; };
+		6E756BBA9186BE4FBE8444E9D5BCF889 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
+		7178F5914BFAA6B3FFAF5AAE2A46FEA9 /* Pods-QminderTVApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QminderTVApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		72C38657A6ABE39D117DCB25ABDC3B7E /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
+		75B06A16652C36F5AD07BE336DD0B528 /* QminderTV.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = QminderTV.modulemap; sourceTree = "<group>"; };
+		7723097B49FC962CD443775326B681B6 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		781C9B10EC6A5027CF23A564CD497E1A /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
+		790A867B2838862517DD1F7DCB1DEE52 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		807F26D5B00CF6D10A5E5FE94110B333 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
+		80D1B115AFC045541CF37D9FB98256E2 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		86697966ED67591D4EC3F97D04EB68D2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88B2D5C055B57A0C9CE8EF52DB8F107E /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SSLSecurity.swift; sourceTree = "<group>"; };
+		89C370CEEAA5B0CC9D43FACC517CDAC5 /* Pods-QminderTVApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QminderTVApp-frameworks.sh"; sourceTree = "<group>"; };
+		89D795526723C5E388B39CD05AA76FDA /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		8CCD0807487268805925F790EA4692B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D6807237A895BC966B666EE61EA9013 /* Pods-QminderTVApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QminderTVApp-umbrella.h"; sourceTree = "<group>"; };
+		8E0C05AF09DC151535DB4E972D5451CC /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93DDD210120976D1CB8B4C904E4CD6B9 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
+		964C53DCA72E2738ACCFE4566461BAE4 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		970FE12D045B4803CA08C548271DED6F /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
+		9ECCB7BB80B51B18EF11AB7F259B9714 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
+		A43953063BAE8AE69833349BF6005FE1 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
+		A5B7AAC83FACB6A36EB9B401E3D8AB44 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
+		A9016D3DE7B0A34327CCA5919F4CC74C /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		AEFF6FAAECAA0361A57133EC7A5AAB99 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
+		B01465959D221DF23164C2497A5F6049 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
+		B6E6CE11C1BF5727AA8C4DB677E647DC /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		B800F1D6FC4C623B836DF976BA543370 /* Pods-QminderTVApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QminderTVApp-resources.sh"; sourceTree = "<group>"; };
+		BC81FBC47168F9634FD3A94327250ECC /* QminderTV-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QminderTV-prefix.pch"; sourceTree = "<group>"; };
+		C13B1BD6720BFFE296A79F99A6CA6CAB /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
+		C9266D76F9F1EC417DFA5536915B86A6 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
+		CE6480FD779D7B280308AED03A8D5916 /* Pods-QminderTVApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QminderTVApp.release.xcconfig"; sourceTree = "<group>"; };
+		D1D6A6F41CE420B13E2111740F1784FA /* Pods-QminderTVApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QminderTVApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D8A41BF17E01A1E72BCF703D98A90D30 /* QminderTV-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QminderTV-dummy.m"; sourceTree = "<group>"; };
+		DD168AFA20FB6E219CE31B93091CC00F /* Pods-QminderTVApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QminderTVApp.debug.xcconfig"; sourceTree = "<group>"; };
+		DD49B0AFCC91AD8134834EEE99E40EFE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E27408A9454AB8C9E04FC9B8F0D76ECE /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
+		E2B16FC277A633DCA49959B6AD2232A2 /* Pods-QminderTVApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-QminderTVApp.modulemap"; sourceTree = "<group>"; };
+		F30C1FF73F02845D8637CCA26E7A02CC /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22D385C4F0B0002F01165C776FD4B77A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56C0A17066E1AC9BEF83D94E2B9A236A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42B9DC1053DDEDD24B23EADCE2C48AC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA945DC8E912840E41B9AF8AFEEF7DFD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1729F851F648EC60EE93CDB3C8BAEAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE07686EE81F767B84F9C5B14BE4E23 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9CF8F27129204EEC839E2CC3D7606BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9748B3B9EA2A9EF201971FBD1DCB2A84 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCCBD572A81AE439A803557FE256DAD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0374CD91D903359DF04FA65B2E035A9 /* Alamofire.framework in Frameworks */,
+				07FD29E26B1A02A4F17ADE0A7E1540DB /* Foundation.framework in Frameworks */,
+				57EC152F538293C078D40AD1B6DD4305 /* Starscream.framework in Frameworks */,
+				F3112FDE63D1492B9C864B49AC1082D9 /* SwiftyJSON.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1CC96642B458A47F29D505A1DC993703 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				229C1E80679433B063293422F1215E4A /* Pods-QminderTVApp */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		229C1E80679433B063293422F1215E4A /* Pods-QminderTVApp */ = {
+			isa = PBXGroup;
+			children = (
+				DD49B0AFCC91AD8134834EEE99E40EFE /* Info.plist */,
+				E2B16FC277A633DCA49959B6AD2232A2 /* Pods-QminderTVApp.modulemap */,
+				D1D6A6F41CE420B13E2111740F1784FA /* Pods-QminderTVApp-acknowledgements.markdown */,
+				7178F5914BFAA6B3FFAF5AAE2A46FEA9 /* Pods-QminderTVApp-acknowledgements.plist */,
+				212EBD580D6D2AC609DE0F50354273C8 /* Pods-QminderTVApp-dummy.m */,
+				89C370CEEAA5B0CC9D43FACC517CDAC5 /* Pods-QminderTVApp-frameworks.sh */,
+				B800F1D6FC4C623B836DF976BA543370 /* Pods-QminderTVApp-resources.sh */,
+				8D6807237A895BC966B666EE61EA9013 /* Pods-QminderTVApp-umbrella.h */,
+				DD168AFA20FB6E219CE31B93091CC00F /* Pods-QminderTVApp.debug.xcconfig */,
+				CE6480FD779D7B280308AED03A8D5916 /* Pods-QminderTVApp.release.xcconfig */,
+			);
+			name = "Pods-QminderTVApp";
+			path = "Target Support Files/Pods-QminderTVApp";
+			sourceTree = "<group>";
+		};
+		23FE91C64484850BB264AAF76471396B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9697FB3923DF520B29E3B960F0A88783 /* Alamofire */,
+				3059EE4B0157A3715CC402597500A3B3 /* Starscream */,
+				802D935289AAEB21DBBF9ABF459A5415 /* SwiftyJSON */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3059EE4B0157A3715CC402597500A3B3 /* Starscream */ = {
+			isa = PBXGroup;
+			children = (
+				88B2D5C055B57A0C9CE8EF52DB8F107E /* SSLSecurity.swift */,
+				36B8AA846BC1664BCB51962FF72E778C /* WebSocket.swift */,
+				51F58B30D99A8D26EC09CF02F1E94B2C /* Support Files */,
+			);
+			path = Starscream;
+			sourceTree = "<group>";
+		};
+		4788954AAA0F275781C49D0E95F63773 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				86697966ED67591D4EC3F97D04EB68D2 /* Info.plist */,
+				0E94FA208CA9ED9B2FB18C53C56CE7BF /* SwiftyJSON.modulemap */,
+				576B45A4F1B0B861A1B43C0B51960FFA /* SwiftyJSON.xcconfig */,
+				7723097B49FC962CD443775326B681B6 /* SwiftyJSON-dummy.m */,
+				A9016D3DE7B0A34327CCA5919F4CC74C /* SwiftyJSON-prefix.pch */,
+				80D1B115AFC045541CF37D9FB98256E2 /* SwiftyJSON-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyJSON";
+			sourceTree = "<group>";
+		};
+		47EF9187ACE17A875F8482FA02E6C485 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1E1E37109EABC891BA335F480981538B /* Info.plist */,
+				75B06A16652C36F5AD07BE336DD0B528 /* QminderTV.modulemap */,
+				164A8AD6409B6C81B41F1546F0888E3F /* QminderTV.xcconfig */,
+				D8A41BF17E01A1E72BCF703D98A90D30 /* QminderTV-dummy.m */,
+				BC81FBC47168F9634FD3A94327250ECC /* QminderTV-prefix.pch */,
+				15940C889CAAF312397E319C8A768DC4 /* QminderTV-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "QminderTVApp/Pods/Target Support Files/QminderTV";
+			sourceTree = "<group>";
+		};
+		51F58B30D99A8D26EC09CF02F1E94B2C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8CCD0807487268805925F790EA4692B4 /* Info.plist */,
+				43571D3109AE0B4747981062758FE030 /* Starscream.modulemap */,
+				60DA1C745C30BC03B4A179D9B20A40C9 /* Starscream.xcconfig */,
+				F30C1FF73F02845D8637CCA26E7A02CC /* Starscream-dummy.m */,
+				B6E6CE11C1BF5727AA8C4DB677E647DC /* Starscream-prefix.pch */,
+				3C4F9C0564B1D1C7A2935721E6978432 /* Starscream-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Starscream";
+			sourceTree = "<group>";
+		};
+		607A4BAD916C8DA934A3DF63C7536372 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				617D2AA022D8588E9609E439BDAF32BD /* Alamofire.framework */,
+				5F0DFC9CFCC2EA1F55D06DBED6CD1EA3 /* Pods_QminderTVApp.framework */,
+				379C01B76B0ED5152F6468A6853B5330 /* QminderTV.framework */,
+				33FFA10038D59DDD28292FCF348FDE0D /* Starscream.framework */,
+				790A867B2838862517DD1F7DCB1DEE52 /* SwiftyJSON.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7C240658456094D1B396CF7FE823318F /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				11DC282C3A1FED76DE6A53CECFB3E8CE /* Foundation.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				DFEEDB3401967B296E12011087DA4431 /* Development Pods */,
+				EA8DB65C351B5473D267D5514F8E31B8 /* Frameworks */,
+				23FE91C64484850BB264AAF76471396B /* Pods */,
+				607A4BAD916C8DA934A3DF63C7536372 /* Products */,
+				1CC96642B458A47F29D505A1DC993703 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		802D935289AAEB21DBBF9ABF459A5415 /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				807F26D5B00CF6D10A5E5FE94110B333 /* SwiftyJSON.swift */,
+				4788954AAA0F275781C49D0E95F63773 /* Support Files */,
+			);
+			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
+		9697FB3923DF520B29E3B960F0A88783 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				6E756BBA9186BE4FBE8444E9D5BCF889 /* AFError.swift */,
+				970FE12D045B4803CA08C548271DED6F /* Alamofire.swift */,
+				56AF2BA959C0D03D188C41077B72B93C /* DispatchQueue+Alamofire.swift */,
+				A43953063BAE8AE69833349BF6005FE1 /* MultipartFormData.swift */,
+				89D795526723C5E388B39CD05AA76FDA /* NetworkReachabilityManager.swift */,
+				0DAEEFE8C3A0478192A9BB631075D286 /* Notifications.swift */,
+				4683993C4BD1AAE74E90AF8E5F4777F4 /* ParameterEncoding.swift */,
+				9ECCB7BB80B51B18EF11AB7F259B9714 /* Request.swift */,
+				C9266D76F9F1EC417DFA5536915B86A6 /* Response.swift */,
+				C13B1BD6720BFFE296A79F99A6CA6CAB /* ResponseSerialization.swift */,
+				AEFF6FAAECAA0361A57133EC7A5AAB99 /* Result.swift */,
+				250ACC68D00EFA2B1C26459B775D72EE /* ServerTrustPolicy.swift */,
+				A5B7AAC83FACB6A36EB9B401E3D8AB44 /* SessionDelegate.swift */,
+				5EB3CFD3CFECDE5ABF253D14AA04705A /* SessionManager.swift */,
+				00EA2CAC67B8EC7244563DABBFA1E817 /* TaskDelegate.swift */,
+				8E0C05AF09DC151535DB4E972D5451CC /* Timeline.swift */,
+				781C9B10EC6A5027CF23A564CD497E1A /* Validation.swift */,
+				CE9B52F8DECF0AFE5BE85F641843AC0B /* Support Files */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		9CB8D0DFD20FE6D237C0C3295F1029A5 /* QminderTV */ = {
+			isa = PBXGroup;
+			children = (
+				A6C89878C43C8F8C764FA83E88305B4B /* Classes */,
+			);
+			path = QminderTV;
+			sourceTree = "<group>";
+		};
+		A6C89878C43C8F8C764FA83E88305B4B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				04BA697D75EE38F922B33FDCC683AC1A /* QminderAPI.swift */,
+				63CF66791DC35FB100F8B621 /* QminderEvents.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BD8CB72576909B3F2BCE1C6250D45BFE /* QminderTV */ = {
+			isa = PBXGroup;
+			children = (
+				9CB8D0DFD20FE6D237C0C3295F1029A5 /* QminderTV */,
+				47EF9187ACE17A875F8482FA02E6C485 /* Support Files */,
+			);
+			name = QminderTV;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		CE9B52F8DECF0AFE5BE85F641843AC0B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				964C53DCA72E2738ACCFE4566461BAE4 /* Alamofire.modulemap */,
+				72C38657A6ABE39D117DCB25ABDC3B7E /* Alamofire.xcconfig */,
+				93DDD210120976D1CB8B4C904E4CD6B9 /* Alamofire-dummy.m */,
+				E27408A9454AB8C9E04FC9B8F0D76ECE /* Alamofire-prefix.pch */,
+				B01465959D221DF23164C2497A5F6049 /* Alamofire-umbrella.h */,
+				4864148E1D1C9FE2BF4E7552E1BB5B4C /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Alamofire";
+			sourceTree = "<group>";
+		};
+		DFEEDB3401967B296E12011087DA4431 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BD8CB72576909B3F2BCE1C6250D45BFE /* QminderTV */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		EA8DB65C351B5473D267D5514F8E31B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37CF7251AA5C27B643FCD7E534881198 /* Alamofire.framework */,
+				52689F54DF68DC8301624A44F021A0BB /* Starscream.framework */,
+				422AFA8CBA65079922B9F906C6B5F695 /* SwiftyJSON.framework */,
+				7C240658456094D1B396CF7FE823318F /* tvOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1A066632DBB2505371942B1A11A39804 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0B8F21463BA3486C1E098AB054C0CA8 /* QminderTV-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		303BD2AEC605631CBF5951368ACA996F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A0A4A018D25FB67D9B858F69E80F5AC /* SwiftyJSON-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82BD4278275B116879C365C2AC3E8CE1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AF00039B1BAEE85A0BFDE87A3B9B9E9 /* Starscream-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA571ACFFB2B139723000993141A1E73 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE6D3BD3D4E5F91D2AD4E83463922B28 /* Pods-QminderTVApp-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFDF3B631BBB965A372347705CA14854 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9469DF81ECB494E84675969B5E13374C /* Alamofire-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		79C040AFDDCE1BCBF6D8B5EB0B85887F /* Alamofire */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CFB42910790CF0BDBCCEBAACD6B9367 /* Build configuration list for PBXNativeTarget "Alamofire" */;
+			buildPhases = (
+				120C4E824DDCCA024C170A491FF221A5 /* Sources */,
+				B1729F851F648EC60EE93CDB3C8BAEAD /* Frameworks */,
+				EFDF3B631BBB965A372347705CA14854 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Alamofire;
+			productName = Alamofire;
+			productReference = 617D2AA022D8588E9609E439BDAF32BD /* Alamofire.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		81E1185D38C07EA01CEA1F039DA06125 /* Starscream */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4E0B6A84AD761E1B96AF64125F793BE /* Build configuration list for PBXNativeTarget "Starscream" */;
+			buildPhases = (
+				8F01D5C3D17BC573B5B273EA18CB7202 /* Sources */,
+				42B9DC1053DDEDD24B23EADCE2C48AC3 /* Frameworks */,
+				82BD4278275B116879C365C2AC3E8CE1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Starscream;
+			productName = Starscream;
+			productReference = 33FFA10038D59DDD28292FCF348FDE0D /* Starscream.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		94841783C37DC82425710B5107BAAC68 /* QminderTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42BDE303F987F1D9982B7174BA93C128 /* Build configuration list for PBXNativeTarget "QminderTV" */;
+			buildPhases = (
+				4FEAE96081475D0BF1F1FB98DAD2EC25 /* Sources */,
+				DCCBD572A81AE439A803557FE256DAD0 /* Frameworks */,
+				1A066632DBB2505371942B1A11A39804 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03FD13CC876DA19D7A98DFA6F5662442 /* PBXTargetDependency */,
+				013B61F2613FE88C109529C886A61249 /* PBXTargetDependency */,
+				4620DAC2C87C23D439F3DCE7846C97A1 /* PBXTargetDependency */,
+			);
+			name = QminderTV;
+			productName = QminderTV;
+			productReference = 379C01B76B0ED5152F6468A6853B5330 /* QminderTV.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CC6643EF14CBAF11506637451044D426 /* Pods-QminderTVApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7609C2D6853C09270292154C81EB789B /* Build configuration list for PBXNativeTarget "Pods-QminderTVApp" */;
+			buildPhases = (
+				256F975F5B9632D2639B923B6D15E868 /* Sources */,
+				C9CF8F27129204EEC839E2CC3D7606BA /* Frameworks */,
+				AA571ACFFB2B139723000993141A1E73 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E91E986A0CA07087C034F3FAC51A9E0D /* PBXTargetDependency */,
+				A47F367F29F7C8D51C2F40EF97636AC2 /* PBXTargetDependency */,
+				4753A778DE0998E9449BBC841685940A /* PBXTargetDependency */,
+				1E0ABF4A1DAC82DB2C32492C8606EB7F /* PBXTargetDependency */,
+			);
+			name = "Pods-QminderTVApp";
+			productName = "Pods-QminderTVApp";
+			productReference = 5F0DFC9CFCC2EA1F55D06DBED6CD1EA3 /* Pods_QminderTVApp.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EA087D5EA42109B80552141FA84972D8 /* SwiftyJSON */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 330FF330325E317AEAA8D3207B520380 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildPhases = (
+				A4C611F6F4F2BF807AB20F3519D87A79 /* Sources */,
+				22D385C4F0B0002F01165C776FD4B77A /* Frameworks */,
+				303BD2AEC605631CBF5951368ACA996F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftyJSON;
+			productName = SwiftyJSON;
+			productReference = 790A867B2838862517DD1F7DCB1DEE52 /* SwiftyJSON.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 607A4BAD916C8DA934A3DF63C7536372 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				79C040AFDDCE1BCBF6D8B5EB0B85887F /* Alamofire */,
+				CC6643EF14CBAF11506637451044D426 /* Pods-QminderTVApp */,
+				94841783C37DC82425710B5107BAAC68 /* QminderTV */,
+				81E1185D38C07EA01CEA1F039DA06125 /* Starscream */,
+				EA087D5EA42109B80552141FA84972D8 /* SwiftyJSON */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		120C4E824DDCCA024C170A491FF221A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62143065F94E53F437DCE5D7A998D66D /* AFError.swift in Sources */,
+				8D463A0A4C65C02FDD5211F0F3C6F8B8 /* Alamofire-dummy.m in Sources */,
+				7CA5A9BA5246FDA8227233E310029392 /* Alamofire.swift in Sources */,
+				E2A1C34237B4E928E5F85C097F4C2551 /* DispatchQueue+Alamofire.swift in Sources */,
+				C7A3408350643ADE1018826C766EE356 /* MultipartFormData.swift in Sources */,
+				E59BF19C0AFA68B741552319FC478C7B /* NetworkReachabilityManager.swift in Sources */,
+				0C1B4E9FFB8B81E8833A3BAD537B1990 /* Notifications.swift in Sources */,
+				AF158CAAF4DD319009AFC855DC995D90 /* ParameterEncoding.swift in Sources */,
+				12118C354EFA36292F82A8D0CFCE45B2 /* Request.swift in Sources */,
+				86ED08F33B7D357932A9AB743E9D9EA7 /* Response.swift in Sources */,
+				B8154C96802336E5DDA5CEE97C3180A0 /* ResponseSerialization.swift in Sources */,
+				DF1BBF94997A2F4248B42B25EA919EC2 /* Result.swift in Sources */,
+				C0AEA97E7684DDAD56998C0AE198A433 /* ServerTrustPolicy.swift in Sources */,
+				907AB123FBC8BC9340D5B7350CE828DF /* SessionDelegate.swift in Sources */,
+				A79AC30123B0C2177D67F6ED6A1B3215 /* SessionManager.swift in Sources */,
+				E1F583CB4A68A928CD197250AA752926 /* TaskDelegate.swift in Sources */,
+				3982B850C43B41BA6D25F440F0412E9B /* Timeline.swift in Sources */,
+				FFFDD494EE6D1B83DDAF5F2721F685A6 /* Validation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		256F975F5B9632D2639B923B6D15E868 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6223CD9FF33E5A3A9E2C3F236165366A /* Pods-QminderTVApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FEAE96081475D0BF1F1FB98DAD2EC25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63CF667A1DC35FB100F8B621 /* QminderEvents.swift in Sources */,
+				EA8275AD8CBB0012BDACD3BB24E09728 /* QminderAPI.swift in Sources */,
+				860BEB48BCBF95F52246A2966B841ADC /* QminderTV-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F01D5C3D17BC573B5B273EA18CB7202 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0B0F62D800F6DCBBB0CA5749697A68D /* SSLSecurity.swift in Sources */,
+				ED01304C1C34210CC9DEEB79FB5B7719 /* Starscream-dummy.m in Sources */,
+				37334FDA04F069AE729AB379C607F22E /* WebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4C611F6F4F2BF807AB20F3519D87A79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C8B1664540E912CFE299C70AAE3F794 /* SwiftyJSON-dummy.m in Sources */,
+				3360C1A3DB7D5908D36379038725E6C5 /* SwiftyJSON.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		013B61F2613FE88C109529C886A61249 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Starscream;
+			target = 81E1185D38C07EA01CEA1F039DA06125 /* Starscream */;
+			targetProxy = EBB9643D0D29448F680137C24E27B1A7 /* PBXContainerItemProxy */;
+		};
+		03FD13CC876DA19D7A98DFA6F5662442 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = 79C040AFDDCE1BCBF6D8B5EB0B85887F /* Alamofire */;
+			targetProxy = A17FDCCDCB6B7B99C25C141E9EB7CD13 /* PBXContainerItemProxy */;
+		};
+		1E0ABF4A1DAC82DB2C32492C8606EB7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = EA087D5EA42109B80552141FA84972D8 /* SwiftyJSON */;
+			targetProxy = 57AB033F61D7F6BD64DDC003D7BAE7F1 /* PBXContainerItemProxy */;
+		};
+		4620DAC2C87C23D439F3DCE7846C97A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = EA087D5EA42109B80552141FA84972D8 /* SwiftyJSON */;
+			targetProxy = ECD5EA30F89C41F3573BA21D2247D8B3 /* PBXContainerItemProxy */;
+		};
+		4753A778DE0998E9449BBC841685940A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Starscream;
+			target = 81E1185D38C07EA01CEA1F039DA06125 /* Starscream */;
+			targetProxy = 3AF7B0FE68AF9B9DAADA73B194AE6BA3 /* PBXContainerItemProxy */;
+		};
+		A47F367F29F7C8D51C2F40EF97636AC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QminderTV;
+			target = 94841783C37DC82425710B5107BAAC68 /* QminderTV */;
+			targetProxy = A588A5AA3959985913894C1BE84268D9 /* PBXContainerItemProxy */;
+		};
+		E91E986A0CA07087C034F3FAC51A9E0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = 79C040AFDDCE1BCBF6D8B5EB0B85887F /* Alamofire */;
+			targetProxy = 044CAABA7E9CE0B850CC27EF60BF6BA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00B12F4BDC815553137E9192A2577D72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72C38657A6ABE39D117DCB25ABDC3B7E /* Alamofire.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Alamofire;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		038A0B031AF1EC759A8EBA9104124E79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 164A8AD6409B6C81B41F1546F0888E3F /* QminderTV.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/QminderTV/QminderTV-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QminderTV/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/QminderTV/QminderTV.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = QminderTV;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0DB657992A2AEB5CBAFECCB5E578960C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60DA1C745C30BC03B4A179D9B20A40C9 /* Starscream.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Starscream;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0ED305471769368C0A1DDE0C8DF59C2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD168AFA20FB6E219CE31B93091CC00F /* Pods-QminderTVApp.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-QminderTVApp/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_QminderTVApp;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		127B0553742519E23100E12F448D7B84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1FF910DAEBDAFD200274B8A80047030D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 164A8AD6409B6C81B41F1546F0888E3F /* QminderTV.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/QminderTV/QminderTV-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QminderTV/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/QminderTV/QminderTV.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = QminderTV;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		59A5EFF2D851496527D5DC78432496E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE6480FD779D7B280308AED03A8D5916 /* Pods-QminderTVApp.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-QminderTVApp/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_QminderTVApp;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5BA1D3775826187337FB7D0F220E3ECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		5E379B2675356F363392E8A0171960B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60DA1C745C30BC03B4A179D9B20A40C9 /* Starscream.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Starscream;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		623C0C2D13FC4B84941CECE21F321569 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72C38657A6ABE39D117DCB25ABDC3B7E /* Alamofire.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Alamofire;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9BCAA098C3711BE0492EA2A4932B4719 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 576B45A4F1B0B861A1B43C0B51960FFA /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C17682BB7BEECAE0522CC13259A5F7E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 576B45A4F1B0B861A1B43C0B51960FFA /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BA1D3775826187337FB7D0F220E3ECE /* Debug */,
+				127B0553742519E23100E12F448D7B84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		330FF330325E317AEAA8D3207B520380 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BCAA098C3711BE0492EA2A4932B4719 /* Debug */,
+				C17682BB7BEECAE0522CC13259A5F7E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CFB42910790CF0BDBCCEBAACD6B9367 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00B12F4BDC815553137E9192A2577D72 /* Debug */,
+				623C0C2D13FC4B84941CECE21F321569 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42BDE303F987F1D9982B7174BA93C128 /* Build configuration list for PBXNativeTarget "QminderTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FF910DAEBDAFD200274B8A80047030D /* Debug */,
+				038A0B031AF1EC759A8EBA9104124E79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7609C2D6853C09270292154C81EB789B /* Build configuration list for PBXNativeTarget "Pods-QminderTVApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ED305471769368C0A1DDE0C8DF59C2A /* Debug */,
+				59A5EFF2D851496527D5DC78432496E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4E0B6A84AD761E1B96AF64125F793BE /* Build configuration list for PBXNativeTarget "Starscream" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DB657992A2AEB5CBAFECCB5E578960C /* Debug */,
+				5E379B2675356F363392E8A0171960B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

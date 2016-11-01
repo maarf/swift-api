@@ -1,0 +1,6 @@
+framework module QminderTV {
+  umbrella header "QminderTV-umbrella.h"
+
+  export *
+  module * { export * }
+}
