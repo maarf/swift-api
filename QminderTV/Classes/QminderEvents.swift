@@ -21,15 +21,23 @@ public protocol QminderEventsDelegate {
   
 }
 
-public class QminderEvents : WebSocketDelegate {
 
-  public typealias CallbackType = (_ data:JSON?, _ error:NSError?) -> Void
-  
-  public var callbackMap:[String:CallbackType]
+public class QminderEvents : WebSocketDelegate {
 
   public var delegate:QminderEventsDelegate?
   
-  private var connectionOpen:Bool = false
+  public typealias CallbackType = (_ data:JSON?, _ error:NSError?) -> Void
+  
+  struct WebsocketMessage {
+    var subscriptionId:String
+    var messageToSend:String
+    var callback:CallbackType
+  }
+  
+  var messageHistory = [String]()
+  var messageQueue = [WebsocketMessage]()
+  public var callbackMap = [String:CallbackType]()
+  
   private var openingConnection = false
   private var socketRetriedConnections = 0
   private var socket:WebSocket
@@ -37,12 +45,13 @@ public class QminderEvents : WebSocketDelegate {
   private var pingTimer = Timer()
   private var autoReopenTimer = Timer()
   
+  
   public init(apiKey:String) {
     self.socket = WebSocket(url: URL(string: "wss://api.qminderapp.com/events?rest-api-key=\(apiKey)")!)
-    self.callbackMap = [:]
     self.socket.delegate = self
   }
   
+  // open websocket
   public func openSocket() {
     print("openSocket")
     
@@ -55,35 +64,51 @@ public class QminderEvents : WebSocketDelegate {
     self.socket.connect()
   }
   
-  public func subscribe(eventName:String, parameters:NSMutableDictionary, completionHandler:@escaping CallbackType) {
-    if self.socket.isConnected {
+  // subscribe to event
+  public func subscribe(eventName:String, parameters:NSMutableDictionary, callback:@escaping CallbackType) {
+  
+    let subscriptionId = self.createRandomId()
+    
+    parameters.setValue(subscriptionId, forKey: "id")
+    parameters.setValue(eventName, forKey: "subscribe")
+    
+    var json = JSON(parameters)
+    
+    if let messageToSend = json.rawString() {
       
-      let subscriptionId = self.createRandomId()
-      
-      parameters.setValue(subscriptionId, forKey: "id")
-      parameters.setValue(eventName, forKey: "subscribe")
-      
-      var json = JSON(parameters)
-      
-      if let string = json.rawString() {
-        self.socket.write(string: json.rawString()!)
-        self.callbackMap[subscriptionId] = completionHandler
+      if self.socket.isConnected {
+        sendMessage(subscriptionId: subscriptionId, messageToSend: messageToSend, callback: callback);
+        
+        messageHistory.append(messageToSend);
+      } else {
+        messageQueue.append(WebsocketMessage(subscriptionId:subscriptionId, messageToSend: messageToSend, callback: callback))
+        
+        if !openingConnection {
+          openSocket()
+        }
       }
     }
   }
   
-//  private var pingInterval:Timer
+  
+  // MARK: - Websocket delegate methods
 
   public func websocketDidConnect(socket: WebSocket) {
     print("Connection opened")
 
     openingConnection = false
-    connectionOpen = true
     socketRetriedConnections = 0
     
-    //send message history
+    for message in messageHistory {
+      socket.write(string: message)
+    }
     
     //send message queue
+    while messageQueue.count > 0 {
+      var websocketMessage:WebsocketMessage = messageQueue.removeFirst()
+      socket.write(string: websocketMessage.messageToSend)
+      callbackMap[websocketMessage.subscriptionId] = websocketMessage.callback
+    }
     
     // set up ping interval
     self.pingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
@@ -97,8 +122,6 @@ public class QminderEvents : WebSocketDelegate {
   }
   
   public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-    connectionOpen = false
-    
     self.pingTimer.invalidate()
     
     print(error)
@@ -140,6 +163,11 @@ public class QminderEvents : WebSocketDelegate {
   
   
   // MARK: - Additional methods
+  
+  func sendMessage(subscriptionId:String, messageToSend:String, callback:@escaping CallbackType) {
+    self.callbackMap[subscriptionId] = callback
+    self.socket.write(string: messageToSend)
+  }
 
   private func createRandomId() -> String {
     let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

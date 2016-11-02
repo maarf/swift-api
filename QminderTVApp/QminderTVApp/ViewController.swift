@@ -128,42 +128,42 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     tableView?.isHidden = false
     pairingCode.isHidden = true
     
-    self.events?.subscribe(eventName: "TICKET_CREATED", parameters: ["location": "1698"], completionHandler: {
+    self.events?.subscribe(eventName: "TICKET_CREATED", parameters: ["location": "1698"], callback: {
       (data:JSON?, error:NSError?) in
         if error == nil {
           self.messageReceived(event: "TICKET_CREATED", json: data!)
         }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CALLED", parameters: ["location": "1698"], completionHandler: {
+    self.events?.subscribe(eventName: "TICKET_CALLED", parameters: ["location": "1698"], callback: {
       (data:JSON?, error:NSError?) in
         if error == nil {
           self.messageReceived(event: "TICKET_CALLED", json: data!)
         }
     })
     
-    self.events?.subscribe(eventName: "TICKET_RECALLED", parameters: ["location": "1698"], completionHandler: {
+    self.events?.subscribe(eventName: "TICKET_RECALLED", parameters: ["location": "1698"], callback: {
       (data:JSON?, error:NSError?) in
         if error == nil {
           self.messageReceived(event: "TICKET_RECALLED", json: data!)
         }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CANCELLED", parameters: ["location": "1698"], completionHandler: {
+    self.events?.subscribe(eventName: "TICKET_CANCELLED", parameters: ["location": "1698"], callback: {
       (data:JSON?, error:NSError?) in
         if error == nil {
           self.messageReceived(event:"TICKET_CANCELLED", json: data!)
         }
     })
     
-    self.events?.subscribe(eventName: "TICKET_SERVED", parameters: ["location": "1698"], completionHandler: {
+    self.events?.subscribe(eventName: "TICKET_SERVED", parameters: ["location": "1698"], callback: {
       (data:JSON?, error:NSError?) in
         if error == nil {
           self.messageReceived(event:"TICKET_SERVED", json: data!)
         }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CHANGED", parameters: ["location": "1698"], completionHandler: {
+    self.events?.subscribe(eventName: "TICKET_CHANGED", parameters: ["location": "1698"], callback: {
       (data:JSON?, error:NSError?) in
         if error == nil {
           self.messageReceived(event:"TICKET_CHANGED", json: data!)
