@@ -10,13 +10,24 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+/// Qminder API for iOS in Swift
 public class QminderAPI {
   
+  /// Qminder API server address
   static let SERVER = "https://api.qminderapp.com/v1"
+  
+  /// Qminder API key
   public var API_KEY:String?
   
   
-  // get pairing code and secret key
+  /**
+    Gets pairing code and secred key
+    
+    - Parameters:
+      - completionHandler: Callback block what is executed when pairing code and secret key is received from server
+        - code: Pairing code
+        - secret: Secret key
+  */
   public class func getPairingCodeAndSecret(completionHandler: @escaping (_ code:String?, _ secret:String?, Error?) -> Void) {
   
     Alamofire.request("\(self.SERVER)/tv/code").responseJSON {
@@ -32,8 +43,19 @@ public class QminderAPI {
     }
   }
   
-  
-  public class func pairTV(code:String, secret:String, completionHandler: @escaping (_ status:String?, _ apiKey:String?, Error?) -> Void) {
+  /**
+    Pair TV with code.
+    
+    - Parameters:
+      - code: Pairing code
+      - secret: Secret key
+      - completionHandler: Callback block when pairing is done on server:
+        - status: Status if TV is paired
+        - apiKey: Qminder API key
+        - error: Error with pairing process
+   
+  */
+  public class func pairTV(code:String, secret:String, completionHandler: @escaping (_ status:String?, _ apiKey:String?, _ error:Error?) -> Void) {
     
     Alamofire.request("\(self.SERVER)/tv/code/\(code)", parameters: ["secret": secret]).responseJSON {
       response in
@@ -50,6 +72,16 @@ public class QminderAPI {
   
   // MARK: - Additonal methods
   
+  /**
+    Validate request
+    
+    - Parameters:
+      - response: Data response to validate
+        - valid: Returns if response is valid
+        - json: JSON data
+        - error: Validation errors
+   
+  */
   class func validateRequest(response:DataResponse<Any>) -> (valid:Bool, json:JSON?, error:Error?) {
     if let responseValue = response.result.value {
       let swiftyJson = JSON(responseValue)

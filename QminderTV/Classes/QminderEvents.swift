@@ -13,45 +13,93 @@ import SwiftyJSON
 import Starscream
 
 
-// Delegate methods
+/**
+  QminderEvents delagate methods
+*/
 public protocol QminderEventsDelegate {
   
+  /**
+    Called when connected to Websocket
+  */
   func onConnected()
+  
+  /**
+    Called when disconnected from Websocket
+    
+    - Parameter error: Error why it got disconnected
+  */
   func onDisconnected(error:NSError?)
   
 }
 
-
+/// Qminder Events class to work with Websockets API
 public class QminderEvents : WebSocketDelegate {
 
+  /// Class delegate
   public var delegate:QminderEventsDelegate?
   
+  
+  /**
+    Callback type when subscrubing to evenets
+   
+    - Parameters:
+      - data: JSON data
+      - error: Error if exists
+  */
   public typealias CallbackType = (_ data:JSON?, _ error:NSError?) -> Void
   
+  /// Websocket message
   struct WebsocketMessage {
+  
+    /// Unique subscribtion ID
     var subscriptionId:String
+    
+    /// String message what should be sent to Websocket
     var messageToSend:String
+    
+    /// Callback block
     var callback:CallbackType
   }
   
+  /// Message history to hold sent messages to Websocket
   var messageHistory = [String]()
+  
+  /// Message queue to hold not sent messages to Websocket
   var messageQueue = [WebsocketMessage]()
+  
+  /// Callback map to call specific block when data is received from Websocket
   public var callbackMap = [String:CallbackType]()
   
+  /// Is currently connection being opened (Boolean)
   private var openingConnection = false
+  
+  /// Retried connections to open socket
   private var socketRetriedConnections = 0
+  
+  /// Websocket object
   private var socket:WebSocket
   
+  
+  /// Ping timer
   private var pingTimer = Timer()
+  
+  /// Auto reopen timer
   private var autoReopenTimer = Timer()
   
   
+  /**
+    Initialization function. Initializes Websocket object and sets Websocket library delegate to self.
+    
+    - Parameter apiKey: Qminder API key
+  */
   public init(apiKey:String) {
     self.socket = WebSocket(url: URL(string: "wss://api.qminderapp.com/events?rest-api-key=\(apiKey)")!)
     self.socket.delegate = self
   }
   
-  // open websocket
+  /**
+    Open websocket
+  */
   public func openSocket() {
     print("openSocket")
     
@@ -64,7 +112,14 @@ public class QminderEvents : WebSocketDelegate {
     self.socket.connect()
   }
   
-  // subscribe to event
+  /**
+    Subscribe to event
+    
+    - Parameters:
+      - eventName: Event name to subscribe
+      - parameters: Dictionary of parameters
+      - callback: Callback executed when response got from Websocket
+  */
   public func subscribe(eventName:String, parameters:NSMutableDictionary, callback:@escaping CallbackType) {
   
     let subscriptionId = self.createRandomId()
@@ -92,7 +147,11 @@ public class QminderEvents : WebSocketDelegate {
   
   
   // MARK: - Websocket delegate methods
-
+  /**
+    Delegate methods when websocket did connect
+    
+    - Parameter socket: Websocket object
+  */
   public func websocketDidConnect(socket: WebSocket) {
     print("Connection opened")
 
@@ -105,9 +164,10 @@ public class QminderEvents : WebSocketDelegate {
     
     //send message queue
     while messageQueue.count > 0 {
-      var websocketMessage:WebsocketMessage = messageQueue.removeFirst()
-      socket.write(string: websocketMessage.messageToSend)
-      callbackMap[websocketMessage.subscriptionId] = websocketMessage.callback
+      var queueItem:WebsocketMessage = messageQueue.removeFirst()
+      
+      sendMessage(subscriptionId: queueItem.subscriptionId, messageToSend: queueItem.messageToSend, callback: queueItem.callback)
+      messageHistory.append(queueItem.messageToSend)
     }
     
     // set up ping interval
@@ -121,6 +181,13 @@ public class QminderEvents : WebSocketDelegate {
     delegate?.onConnected()
   }
   
+  /**
+    Delegate method when Websocket did disconnect
+    
+    - Parameters:
+      - socket: Websocket object
+      - error: Error why Websocket disconnected
+  */
   public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
     self.pingTimer.invalidate()
     
@@ -147,6 +214,13 @@ public class QminderEvents : WebSocketDelegate {
     //try to reconnect
   }
   
+  /**
+    Delegate function when Websocket received message
+    
+    - Parameters:
+      - socket: Websocket object
+      - text: Received text
+  */
   public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
     if var t = text.removingPercentEncoding {
       var json = JSON.parse(text)
@@ -157,18 +231,37 @@ public class QminderEvents : WebSocketDelegate {
     }
   }
 
+  /**
+    Delegate function when Websocket received data
+    
+    - Parameters:
+      - socket: Websocket object
+      - data: Received data
+  */
   public func websocketDidReceiveData(socket: WebSocket, data: Data) {
     print(data)
   }
   
   
   // MARK: - Additional methods
-  
+  /**
+    Send message to Websocket
+    
+    - Parameters:
+      - subscriptionId: Unique subscription ID
+      - messageToSend: Message to send to Websocket
+      - callback: Callback block when response is received
+  */
   func sendMessage(subscriptionId:String, messageToSend:String, callback:@escaping CallbackType) {
     self.callbackMap[subscriptionId] = callback
     self.socket.write(string: messageToSend)
   }
 
+  /**
+    Create random string for subscription ID
+   
+    - Returns: String random ID
+  */
   private func createRandomId() -> String {
     let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
