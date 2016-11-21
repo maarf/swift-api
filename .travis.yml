@@ -1,6 +1,5 @@
 osx_image: xcode8.1
 language: objective-c
-# cache: cocoapods
 before_install:
   - gem install cocoapods
   - pod install --project-directory=Example
