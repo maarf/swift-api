@@ -1,6 +1,6 @@
 # QminderTV
 
-[![Build [![Build Status](https://travis-ci.org/Qminder/qminder-ios-api.svg?branch=master)](https://travis-ci.org/Qminder/qminder-ios-api)
+[![Build Status](https://travis-ci.org/Qminder/qminder-ios-api.svg?branch=master)](https://travis-ci.org/Qminder/qminder-ios-api)
 [![Version](https://img.shields.io/cocoapods/v/QminderTV.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![License](https://img.shields.io/cocoapods/l/QminderTV.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![Platform](https://img.shields.io/cocoapods/p/QminderTV.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
