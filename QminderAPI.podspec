@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://www.qminderapp.com/'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Kristaps Grinbergs' => 'kristaps@qminderapp.com' }
+  s.author           = { 'Qminder Ltd.' => 'info@qminderapp.com' }
   s.source           = { :git => 'https://github.com/Qminder/qminder-ios-api.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'

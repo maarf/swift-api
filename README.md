@@ -22,7 +22,7 @@ pod "QminderAPI"
 
 ## Author
 
-Kristaps Grinbergs, kristaps@qminderapp.com
+Qminder Ltd., info@qminderapp.com
 
 ## License
 
