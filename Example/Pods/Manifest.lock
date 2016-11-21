@@ -1,0 +1,31 @@
+PODS:
+  - Alamofire (4.2.0)
+  - Nimble (5.1.1)
+  - QminderAPI (0.1.0):
+    - Alamofire (~> 4.2)
+    - Starscream (~> 2.0)
+    - SwiftyJSON (~> 3.1)
+  - Quick (0.10.0)
+  - Starscream (2.0.2)
+  - SwiftyJSON (3.1.3)
+
+DEPENDENCIES:
+  - Nimble
+  - QminderAPI (from `../`)
+  - Quick
+
+EXTERNAL SOURCES:
+  QminderAPI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  QminderAPI: 00007f91198f21559d062535191cb625c0f814d8
+  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
+  Starscream: 6c135a34e0a6e60cedaa0b30db67a4c05cf7cd38
+  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+
+PODFILE CHECKSUM: 16dc59b5b3b0f365ad2bc48e587b1dff2753a7b7
+
+COCOAPODS: 1.1.1
