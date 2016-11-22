@@ -187,7 +187,7 @@
 					};
 					639473301DC1E87C00E37961 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
