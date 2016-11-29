@@ -1,9 +1,9 @@
-# QminderTV
+# Qminder Swift API
 
 [![Build Status](https://travis-ci.org/Qminder/qminder-ios-api.svg?branch=master)](https://travis-ci.org/Qminder/qminder-ios-api)
-[![Version](https://img.shields.io/cocoapods/v/QminderTV.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
-[![License](https://img.shields.io/cocoapods/l/QminderTV.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
-[![Platform](https://img.shields.io/cocoapods/p/QminderTV.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
+[![Version](https://img.shields.io/cocoapods/v/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
+[![License](https://img.shields.io/cocoapods/l/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
+[![Platform](https://img.shields.io/cocoapods/p/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 
 ## Example
 
@@ -26,4 +26,4 @@ Qminder Ltd., info@qminderapp.com
 
 ## License
 
-QminderTV is available under the MIT license. See the LICENSE file for more info.
+QminderAPI is available under the MIT license. See the LICENSE file for more info.
