@@ -77,6 +77,11 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_API_KEY"
+            value = "$(QMINDER_API_KEY)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
