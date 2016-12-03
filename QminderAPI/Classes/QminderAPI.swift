@@ -323,37 +323,25 @@ open class QminderAPI {
         - error: Error
   */
   private func makeRequest(url:String, parameters:Parameters? = nil, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:Error?) -> Void)) {
+  
+    let headers : HTTPHeaders = [
+      "X-Qminder-REST-API-Key": self.apiKey
+    ]
     
-    if self.apiKey != nil {
+    let url:String = "https://api.qminderapp.com/v1\(url)"
     
-      let headers : HTTPHeaders = [
-        "X-Qminder-REST-API-Key": self.apiKey
-      ]
+    Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: {
+      response in
       
-      var url:String = "https://api.qminderapp.com/v1\(url)"
+        let parsedResponse = self.validateRequest(response: response)
       
-      Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: {
-        response in
+        if parsedResponse.valid {
+          callback(parsedResponse.json!)
+        } else {
+          errorCallback(parsedResponse.error)
+        }
         
-          let parsedResponse = self.validateRequest(response: response)
-        
-          if parsedResponse.valid {
-            callback(parsedResponse.json!)
-          } else {
-            errorCallback(parsedResponse.error)
-          }
-          
-      })
-    } else {
-      
-      
-      
-      
-      
-      
-      
-              
-    }
+    })
   }
   
   /**
