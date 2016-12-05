@@ -18,10 +18,10 @@ class QminderApiTests : QuickSpec {
     var qminderAPI:QminderAPI!
     
     /// Location ID
-    let locationId:Int = 7701
+    let locationId:Int = Int(ProcessInfo.processInfo.environment["QMINDER_LOCATION_ID"]!)!
     
     /// Line ID
-    let lineId:Int = 47466
+    let lineId:Int = Int(ProcessInfo.processInfo.environment["QMINDER_LINE_ID"]!)!
     
     /// Ticket ID
     var ticketId:Int!
