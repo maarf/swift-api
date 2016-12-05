@@ -15,20 +15,34 @@ struct EventInfo {
   var json:JSON
 }
 
+/// Demonstrates Qminder iOS API usage in Apple TV
 class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelegate, UITableViewDataSource {
   
-  @IBOutlet var pairingCode: UILabel!
-  @IBOutlet var tableView:UITableView?
-  @IBOutlet var offlineLabel: UILabel!
-  @IBOutlet var onlineLabel: UILabel!
+  /// Events array
+  private var eventsArray:[EventInfo] = []
   
-  var eventsArray:[EventInfo] = []
-  
+  /// Timer to check pair status
   private var timer = Timer()
+  
+  /// Qminder API provider
+  private var qminderAPI: QminderAPI = QminderAPI()
+  
+  /// Qminder Websockets provider
   private var events:QminderEvents?
   
-  private var qminderAPI:QminderAPI?
-
+  /// Pairing code label
+  @IBOutlet var pairingCode: UILabel!
+  
+  /// Events table view
+  @IBOutlet var tableView:UITableView?
+  
+  /// Offline label
+  @IBOutlet var offlineLabel: UILabel!
+  
+  /// Online label
+  @IBOutlet var onlineLabel: UILabel!
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -36,15 +50,13 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   
     if key != nil && UserDefaults.standard.object(forKey: "LOCATION_ID") != nil {
     
-      print("key loaded from UserDefaults")
+      print("API key loaded from UserDefaults")
       
-      qminderAPI = QminderAPI(apiKey: key!)
+      qminderAPI.setApiKey(key: key!)
 
-      qminderAPI?.getLocationsList(completionHandler: {(locations, error) in
-        print(locations)
+      qminderAPI.getLocationsList(completionHandler: {(locations, error) in
+        print(locations!)
       })
-      
-      
     
       self.events = QminderEvents(apiKey: key!)
       self.events?.delegate = self
@@ -55,7 +67,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       setEvents(locationId: locationId)
       
     } else {
-      self.qminderAPI?.getPairingCodeAndSecret(completionHandler: {
+      qminderAPI.getPairingCodeAndSecret(completionHandler: {
         (code, secret, error) in
         
           self.pairingCode.text = code
@@ -65,7 +77,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
           self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
             (timer) in
 
-              self.qminderAPI?.pairTV(code: code!, secret: secret!, completionHandler: {
+              self.qminderAPI.pairTV(code: code!, secret: secret!, completionHandler: {
                 (status, apiKey, locationId, error) in
                 
                   if status == "PAIRED" {

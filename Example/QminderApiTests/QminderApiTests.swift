@@ -15,7 +15,7 @@ class QminderApiTests : QuickSpec {
   override func spec() {
   
     /// Qminder API client
-    var qminderAPI:QminderAPI!
+    let qminderAPI:QminderAPI = QminderAPI()
     
     /// Location ID
     let locationId:Int = Int(ProcessInfo.processInfo.environment["QMINDER_LOCATION_ID"]!)!
@@ -27,9 +27,9 @@ class QminderApiTests : QuickSpec {
     var ticketId:Int!
     
     // Create Qminder API client
-    beforeEach {
+    beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
-        qminderAPI = QminderAPI(apiKey: apiKey)
+        qminderAPI.setApiKey(key: apiKey)
       }
     }
     

@@ -15,18 +15,23 @@ import SwiftyJSON
 open class QminderAPI {
 
   /// Qminder API key
-  private let apiKey: String
+  private var apiKey: String?
+  
   
   /**
-    Qminder API init function
+    Public init function
     
-    - Parameters:
-      - apiKey: API key
-      
-    - Returns: Initializes Qminder API client with API key
+    - Returns: Qminder API object
   */
-  public init(apiKey:String) {
-    self.apiKey = apiKey
+  public init() {}
+  
+  /**
+    Set Qminder API key
+    
+    - Parameter key: API key
+  */
+  open func setApiKey(key:String) {
+    apiKey = key
   }
   
   // MARK: - Locations
@@ -42,13 +47,11 @@ open class QminderAPI {
   open func getLocationsList(completionHandler: @escaping (_ locations:Array<Any>?, _ error:Error?) -> Void) {
   
     makeRequest(url: "/locations/",
-      callback: {
-        json in
-          completionHandler(json["data"].arrayObject, nil)
+      callback: { json in
+        completionHandler(json["data"].arrayObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -65,13 +68,11 @@ open class QminderAPI {
   public func getLocationDetails(locationId:Int, completionHandler: @escaping (_ details:Dictionary<String, Any>?, _ error:Error?) -> Void) {
   
     makeRequest(url: "/locations/\(locationId)",
-      callback: {
-        json in
-          completionHandler(json.dictionaryObject, nil)
+      callback: { json in
+        completionHandler(json.dictionaryObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -88,13 +89,11 @@ open class QminderAPI {
   public func getLocationLines(locationId:Int, completionHandler: @escaping (_ lines:Array<Any>?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/locations/\(locationId)/lines",
-      callback: {
-        json in
-          completionHandler(json["data"].arrayObject, nil)
+      callback: { json in
+        completionHandler(json["data"].arrayObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -111,13 +110,11 @@ open class QminderAPI {
   public func getLocationUsers(locationId:Int, completionHandler: @escaping (_ users:Array<Any>?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/locations/\(locationId)/users",
-      callback: {
-        json in
-          completionHandler(json["data"].arrayObject, nil)
+      callback: { json in
+        completionHandler(json["data"].arrayObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -136,13 +133,11 @@ open class QminderAPI {
   public func getLineDetails(lineId:Int, completionHandler: @escaping (_ details:Dictionary<String, Any>?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/lines/\(lineId)",
-      callback: {
-        json in
-          completionHandler(json.dictionaryObject, nil)
+      callback: { json in
+        completionHandler(json.dictionaryObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -150,13 +145,11 @@ open class QminderAPI {
   public func getEstimatedTimeOfService(lineId:Int, completionHandler: @escaping (_ estimatedTimeOfService:String?, _ estimatedPeopleWaiting:Int?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/lines/\(lineId)/estimated-time",
-      callback: {
-        json in
-          completionHandler(json["estimatedTimeOfService"].string, json["estimatedPeopleWaiting"].int, nil)
+      callback: { json in
+        completionHandler(json["estimatedTimeOfService"].string, json["estimatedPeopleWaiting"].int, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, nil, error)
+      errorCallback: { error in
+        completionHandler(nil, nil, error)
       }
     )
   }
@@ -200,13 +193,11 @@ open class QminderAPI {
     
     
     makeRequest(url: "/tickets/search", parameters: parameters,
-      callback: {
-        json in
-          completionHandler(json["data"].arrayObject, nil)
+      callback: { json in
+        completionHandler(json["data"].arrayObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -223,13 +214,11 @@ open class QminderAPI {
   public func getTicketDetails(ticketId:Int, completionHandler: @escaping (_ details:Dictionary<String, Any>?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/tickets/\(ticketId)",
-      callback: {
-        json in
-          completionHandler(json.dictionaryObject, nil)
+      callback: { json in
+        completionHandler(json.dictionaryObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -248,13 +237,11 @@ open class QminderAPI {
   */
   public func getUserDetails(userId:Int, completionHandler: @escaping (_ details:Dictionary<String, Any>?, _ error:Error?) -> Void) {
     makeRequest(url: "/users/\(userId)",
-      callback: {
-        json in
-          completionHandler(json.dictionaryObject, nil)
+      callback: { json in
+        completionHandler(json.dictionaryObject, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, error)
+      errorCallback: { error in
+        completionHandler(nil, error)
       }
     )
   }
@@ -273,14 +260,13 @@ open class QminderAPI {
   public func getPairingCodeAndSecret(completionHandler: @escaping (_ code:String?, _ secret:String?, _ error:Error?) -> Void) {
   
     makeRequest(url: "/tv/code",
-      callback: {
-        json in
-          completionHandler(json["code"].string, json["secret"].string, nil)
+      callback: { json in
+        completionHandler(json["code"].string, json["secret"].string, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, nil, error)
-      }
+      errorCallback: { error in
+        completionHandler(nil, nil, error)
+      },
+      apiKeyNeeded: false
     )
   }
   
@@ -299,14 +285,14 @@ open class QminderAPI {
   public func pairTV(code:String, secret:String, completionHandler: @escaping (_ status:String?, _ apiKey:String?, _ location:Int?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/tv/code/\(code)",
-      callback: {
-        json in
-          completionHandler(json["status"].string, json["apiKey"].string, json["location"].int, nil)
+      parameters: ["secret": secret]
+      ,callback: { json in
+        completionHandler(json["status"].string, json["apiKey"].string, json["location"].int, nil)
       },
-      errorCallback: {
-        error in
-          completionHandler(nil, nil, nil, error)
-      }
+      errorCallback: { error in
+        completionHandler(nil, nil, nil, error)
+      },
+      apiKeyNeeded: false
     )
   }
   
@@ -322,23 +308,27 @@ open class QminderAPI {
       - errorCallback: Error callback
         - error: Error
   */
-  private func makeRequest(url:String, parameters:Parameters? = nil, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:Error?) -> Void)) {
+  private func makeRequest(url:String, parameters:Parameters? = nil, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:QminderError) -> Void), apiKeyNeeded:Bool = true) {
   
-    let headers : HTTPHeaders = [
-      "X-Qminder-REST-API-Key": self.apiKey
-    ]
+    var headers: HTTPHeaders = [:]
+  
+    if apiKeyNeeded {
+      guard let key = self.apiKey else {
+        errorCallback(QminderError.apiKeyNotSet)
+        return
+      }
+      
+      headers["X-Qminder-REST-API-Key"] = key
+    }
     
-    let url:String = "https://api.qminderapp.com/v1\(url)"
-    
-    Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: {
-      response in
+    Alamofire.request("https://api.qminderapp.com/v1\(url)", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: { response in
       
         let parsedResponse = self.validateRequest(response: response)
       
         if parsedResponse.valid {
           callback(parsedResponse.json!)
         } else {
-          errorCallback(parsedResponse.error)
+          errorCallback(QminderError.alamofire(parsedResponse.error!))
         }
         
     })
@@ -376,9 +366,11 @@ open class QminderAPI {
       - parameterName: Parameter name
   */
   private func addParameter(value:Any?, name:String, parameters: inout Dictionary<String, Any>) {
-    if let val = value {
-      parameters[name] = val
+    guard let val = value else {
+      return
     }
+    
+    parameters[name] = val
   }
   
 }
