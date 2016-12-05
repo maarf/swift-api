@@ -7,4 +7,4 @@ before_install:
   - instruments -s devices
   - xcodebuild -showsdks
 script:
-  - build.sh
+  - ./build.sh
