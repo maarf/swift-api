@@ -73,8 +73,23 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
+            key = "QMINDER_LOCATION_ID"
+            value = "$(QMINDER_LOCATION_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_LINE_ID"
+            value = "$(QMINDER_LINE_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "OS_ACTIVITY_MODE"
             value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_API_KEY"
+            value = "$(QMINDER_API_KEY)"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

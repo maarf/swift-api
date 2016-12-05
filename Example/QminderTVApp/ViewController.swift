@@ -26,6 +26,8 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   
   private var timer = Timer()
   private var events:QminderEvents?
+  
+  private var qminderAPI:QminderAPI?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,6 +37,14 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     if key != nil && UserDefaults.standard.object(forKey: "LOCATION_ID") != nil {
     
       print("key loaded from UserDefaults")
+      
+      qminderAPI = QminderAPI(apiKey: key!)
+
+      qminderAPI?.getLocationsList(completionHandler: {(locations, error) in
+        print(locations)
+      })
+      
+      
     
       self.events = QminderEvents(apiKey: key!)
       self.events?.delegate = self
@@ -45,7 +55,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       setEvents(locationId: locationId)
       
     } else {
-      QminderAPI.getPairingCodeAndSecret(completionHandler: {
+      self.qminderAPI?.getPairingCodeAndSecret(completionHandler: {
         (code, secret, error) in
         
           self.pairingCode.text = code
@@ -55,7 +65,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
           self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
             (timer) in
 
-              QminderAPI.pairTV(code: code!, secret: secret!, completionHandler: {
+              self.qminderAPI?.pairTV(code: code!, secret: secret!, completionHandler: {
                 (status, apiKey, locationId, error) in
                 
                   if status == "PAIRED" {

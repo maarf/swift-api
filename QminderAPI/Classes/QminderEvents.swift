@@ -89,7 +89,11 @@ public class QminderEvents : WebSocketDelegate {
   /**
     Initialization function. Initializes Websocket object and sets Websocket library delegate to self.
     
-    - Parameter apiKey: Qminder API key
+    - Parameters:
+      - apiKey: Qminder API key
+    
+    - Returns: Creates Qminder Events client
+   
   */
   public init(apiKey:String) {
     self.socket = WebSocket(url: URL(string: "wss://api.qminderapp.com/events?rest-api-key=\(apiKey)")!)
