@@ -52,7 +52,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     
       print("API key loaded from UserDefaults")
       
-      qminderAPI.setApi(key: key!)
+      qminderAPI.setApiKey(key: key!)
 
       qminderAPI.getLocationsList(completionHandler: {(locations, error) in
         print(locations!)

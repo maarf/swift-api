@@ -29,7 +29,7 @@ class QminderApiTests : QuickSpec {
     // Create Qminder API client
     beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
-        qminderAPI.setApi(key: apiKey)
+        qminderAPI.setApiKey(key: apiKey)
       }
     }
     

@@ -30,7 +30,7 @@ open class QminderAPI {
     
     - Parameter key: API key
   */
-  open func setApi(key:String) {
+  open func setApiKey(key:String) {
     apiKey = key
   }
   
@@ -285,7 +285,8 @@ open class QminderAPI {
   public func pairTV(code:String, secret:String, completionHandler: @escaping (_ status:String?, _ apiKey:String?, _ location:Int?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/tv/code/\(code)",
-      callback: { json in
+      parameters: ["secret": secret]
+      ,callback: { json in
         completionHandler(json["status"].string, json["apiKey"].string, json["location"].int, nil)
       },
       errorCallback: { error in
