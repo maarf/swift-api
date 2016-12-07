@@ -162,8 +162,8 @@ open class QminderAPI {
     
     - Parameters:
       - locationId: Optional parameter for searching tickets in specified location
-      - lineId: Optional comma separated list of lines to search tickets from
-      - status: Optional parameter for searching tickets with specified status(es). Comma separated list of "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
+      - lineId: Optional array of line ID's
+      - status: Optional array of statuses "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
       - callerId: Optional parameter for searching tickets which were called by specified user ID
       - minCreatedTimestamp: Optional parameter for searching tickets which are created after specified time. UTF Unix timestamp or ISO 8601
       - maxCreatedTimestamp: Optional parameter for searching tickets which are created before specified time. UTF Unix timestamp or ISO 8601
@@ -175,14 +175,14 @@ open class QminderAPI {
       - tickets: Tickets Array
       - error: Error
   */
-  public func searchTickets(locationId:Int? = nil, lineId:Int? = nil, status:String? = nil, callerId:Int? = nil, minCreatedTimestamp:Int? = nil, maxCreatedTimestamp:Int? = nil, minCalledTimestamp:Int? = nil, maxCalledTimestamp:Int? = nil, limit:Int? = nil, order:String? = nil, completionHandler: @escaping (_ tickets:Array<Any>?, _ error:Error?) -> Void) {
+  public func searchTickets(locationId:Int? = nil, lineId:Array<Int>? = nil, status:Array<String>? = nil, callerId:Int? = nil, minCreatedTimestamp:Int? = nil, maxCreatedTimestamp:Int? = nil, minCalledTimestamp:Int? = nil, maxCalledTimestamp:Int? = nil, limit:Int? = nil, order:String? = nil, completionHandler: @escaping (_ tickets:Array<Any>?, _ error:Error?) -> Void) {
   
     var parameters:Parameters = Parameters()
     
     // check if parameters exist and add them to url
     addParameter(value: locationId, name: "location", parameters: &parameters)
-    addParameter(value: lineId, name: "line", parameters: &parameters)
-    addParameter(value: status, name: "status", parameters: &parameters)
+    addParameter(value: lineId?.flatMap({ String($0) }).joined(separator: ","), name: "line", parameters: &parameters)
+    addParameter(value: status?.joined(separator: ","), name: "status", parameters: &parameters)
     addParameter(value: callerId, name: "caller", parameters: &parameters)
     addParameter(value: minCreatedTimestamp, name: "minCreated", parameters: &parameters)
     addParameter(value: maxCreatedTimestamp, name: "maxCreated", parameters: &parameters)
