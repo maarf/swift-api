@@ -148,8 +148,8 @@ class QminderApiTests : QuickSpec {
       // MARK: - Tickets
       
       // search tickets
-      it("Search tickets", closure: {
-        
+      it("Search tickets with location ID", closure: {
+      
         var tickets:Array<Any>?
         
         waitUntil(action: {done in
@@ -169,6 +169,37 @@ class QminderApiTests : QuickSpec {
         
         expect(tickets).toEventuallyNot(beNil())
       })
+      
+      it("Search tickets with line ID", closure: {
+      
+        var tickets:Array<Any>?
+        
+        waitUntil(action: {done in
+          qminderAPI.searchTickets(locationId: locationId, lineId: [lineId], limit: 10, completionHandler: {(t, error) in
+            tickets = t
+            
+            done()
+          })
+        })
+        
+        expect(tickets).toEventuallyNot(beNil())
+      })
+      
+      it("Search tickets with status", closure: {
+      
+        var tickets:Array<Any>?
+        
+        waitUntil(action: {done in
+          qminderAPI.searchTickets(locationId: locationId, status: ["NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW", "SERVED"], limit: 10, completionHandler: {(t, error) in
+            tickets = t
+            
+            done()
+          })
+        })
+        
+        expect(tickets).toEventuallyNot(beNil())
+      })
+      
       
       // ticket details
       
