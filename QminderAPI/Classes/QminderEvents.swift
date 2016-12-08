@@ -45,7 +45,7 @@ public class QminderEvents : WebSocketDelegate {
       - data: JSON data
       - error: Error if exists
   */
-  public typealias CallbackType = (_ data:JSON?, _ error:NSError?) -> Void
+  public typealias CallbackType = (_ data:Dictionary<String, Any>?, _ error:NSError?) -> Void
   
   /// Websocket message
   struct WebsocketMessage {
@@ -203,10 +203,9 @@ public class QminderEvents : WebSocketDelegate {
       autoReopenTimer.invalidate()
     }
     
-    autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {
-      (timer) in
-        print("autoReopenTimer")
-        self.openSocket()
+    autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {timer in
+      print("autoReopenTimer")
+      self.openSocket()
     })
     
     socketRetriedConnections += 1
@@ -228,7 +227,7 @@ public class QminderEvents : WebSocketDelegate {
       let json = JSON.parse(t)
       
       if let callback:CallbackType = callbackMap[json["subscriptionId"].stringValue] {
-        callback(json["data"], nil)
+        callback(json["data"].dictionaryObject, nil)
       }
     }
   }

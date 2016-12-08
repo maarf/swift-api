@@ -12,7 +12,7 @@ import QminderAPI
 
 struct EventInfo {
   var eventName:String
-  var json:JSON
+  var data:Dictionary<String, Any>
 }
 
 /// Demonstrates Qminder iOS API usage in Apple TV
@@ -105,46 +105,40 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     
     let parameters = ["location": locationId]
   
-    self.events?.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {
-    (data:JSON?, error:NSError?) in
+    self.events?.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
       if error == nil {
-        self.messageReceived(event: "TICKET_CREATED", json: data!)
+        self.messageReceived(event: "TICKET_CREATED", data: data!)
       }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {
-      (data:JSON?, error:NSError?) in
+    self.events?.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
         if error == nil {
-          self.messageReceived(event: "TICKET_CALLED", json: data!)
+          self.messageReceived(event: "TICKET_CALLED", data: data!)
         }
     })
     
-    self.events?.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {
-      (data:JSON?, error:NSError?) in
-        if error == nil {
-          self.messageReceived(event: "TICKET_RECALLED", json: data!)
-        }
+    self.events?.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
+      if error == nil {
+        self.messageReceived(event: "TICKET_RECALLED", data: data!)
+      }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {
-      (data:JSON?, error:NSError?) in
-        if error == nil {
-          self.messageReceived(event:"TICKET_CANCELLED", json: data!)
-        }
+    self.events?.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
+      if error == nil {
+        self.messageReceived(event:"TICKET_CANCELLED", data: data!)
+      }
     })
     
-    self.events?.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {
-      (data:JSON?, error:NSError?) in
-        if error == nil {
-          self.messageReceived(event:"TICKET_SERVED", json: data!)
-        }
+    self.events?.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
+      if error == nil {
+        self.messageReceived(event:"TICKET_SERVED", data: data!)
+      }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {
-      (data:JSON?, error:NSError?) in
-        if error == nil {
-          self.messageReceived(event:"TICKET_CHANGED", json: data!)
-        }
+    self.events?.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
+      if error == nil {
+        self.messageReceived(event:"TICKET_CHANGED", data: data!)
+      }
     })
   }
   
@@ -159,7 +153,10 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")
     }
     
-    cell?.textLabel?.text = "\(eventInfo.eventName) : \(eventInfo.json["status"].stringValue)"
+    
+    if let status = eventInfo.data["status"] {
+      cell?.textLabel?.text = "\(eventInfo.eventName) : \(status)"
+    }
     
     return cell!
   }
@@ -194,11 +191,10 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     pairingCode.isHidden = true
   }
   
-  func messageReceived(event:String, json:JSON) {
-    print("TICKET_CHANGED")
-    print(json);
+  func messageReceived(event:String, data:Dictionary<String, Any>) {
+    print(data);
     
-    self.eventsArray.insert(EventInfo(eventName: event, json: json), at: 0)
+    self.eventsArray.insert(EventInfo(eventName: event, data: data), at: 0)
     self.tableView?.reloadData()
   }
 
