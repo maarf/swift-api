@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Qminder Ltd.' => 'info@qminderapp.com' }
   s.social_media_url = 'https://www.facebook.com/QMinder/'
-  s.source           = { :git => 'https://github.com/Qminder/qminder-ios-api.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Qminder/swift-api.git', :tag => s.version.to_s }
   
   s.source_files = "QminderAPI/Classes/*.swift"
   
