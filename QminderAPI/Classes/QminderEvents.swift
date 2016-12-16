@@ -45,7 +45,7 @@ public class QminderEvents : WebSocketDelegate {
       - data: JSON data
       - error: Error if exists
   */
-  public typealias CallbackType = (_ data:Dictionary<String, Any>?, _ error:NSError?) -> Void
+  public typealias CallbackType = (_ data:[String: Any]?, _ error:NSError?) -> Void
   
   /// Websocket message
   struct WebsocketMessage {
@@ -96,7 +96,7 @@ public class QminderEvents : WebSocketDelegate {
    
   */
   public init(apiKey:String) {
-    self.socket = WebSocket(url: URL(string: "wss://api.qminderapp.com/events?rest-api-key=\(apiKey)")!)
+    self.socket = WebSocket(url: URL(string: "wss://api.qminder.com/events?rest-api-key=\(apiKey)")!)
     self.socket.delegate = self
   }
   

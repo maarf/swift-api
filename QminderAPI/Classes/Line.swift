@@ -10,11 +10,17 @@ import Foundation
 
 import ObjectMapper
 
+
+/// Line Object
 public struct Line: Mappable {
   
+  /// ID of a line
   public var id: Int?
+  
+  /// Name of a line
   public var name: String?
   
+  /// ID of the location this line belongs to
   public var location: Int?
   
   public init?(map: Map) {}
@@ -26,7 +32,11 @@ public struct Line: Mappable {
   }
 }
 
+
+/// Lines object
 struct Lines: Mappable {
+
+  /// Lines array
   var lines: Array<Line>?
   
   init?(map: Map) {}

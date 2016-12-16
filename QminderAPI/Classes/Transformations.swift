@@ -10,6 +10,8 @@ import Foundation
 
 import ObjectMapper
 
+
+/// Transform ID field to Int
 let transformID = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
   // transform value from String? to Int?
   return Int(value!)
@@ -18,5 +20,6 @@ let transformID = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? 
   if let value = value {
     return String(value)
   }
+  
   return nil
 })
