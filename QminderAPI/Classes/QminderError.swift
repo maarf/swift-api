@@ -16,4 +16,6 @@ public enum QminderError : Error {
   
   /// Alamofire error
   case alamofire(Error)
+  
+  case unreadableObject
 }

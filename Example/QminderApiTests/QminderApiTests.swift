@@ -39,7 +39,7 @@ class QminderApiTests : QuickSpec {
       
       it("Get location list", closure: {
       
-        var locations:Array<Any>?
+        var locations: Array<Location>?
       
         waitUntil(action: {done in
           qminderAPI.getLocationsList(completionHandler: {(l, error) in
@@ -49,13 +49,13 @@ class QminderApiTests : QuickSpec {
           })
         })
         
+        expect(locations).toEventuallyNot(beNil())
         expect(locations).toEventuallyNot(beEmpty())
-        expect(locationId).toEventuallyNot(beNil())
       })
       
       it("Get location details", closure: {
         
-        var details:Dictionary<String,Any>?
+        var details:Location?
         
         waitUntil(action: {done in
           qminderAPI.getLocationDetails(locationId: locationId, completionHandler: {(d, error) in
@@ -67,13 +67,13 @@ class QminderApiTests : QuickSpec {
         
         expect(details).notTo(beNil())
         
-        expect(details?["id"]).notTo(beNil())
-        expect(details?["name"]).notTo(beNil())
+        expect(details?.id).notTo(beNil())
+        expect(details?.name).notTo(beNil())
       })
       
       it("Get list of lines", closure: {
         
-        var lines:Array<Any>?
+        var lines:Array<Line>?
         
         waitUntil(action: {done in
           qminderAPI.getLocationLines(locationId: locationId, completionHandler: {(l, error) in
@@ -85,11 +85,10 @@ class QminderApiTests : QuickSpec {
         })
         
         expect(lines).toEventuallyNot(beEmpty())
-        expect(lineId).toEventuallyNot(beNil())
       })
       
       it("Get location users", closure: {
-        var users:Array<Any>?
+        var users:Array<User>?
         
         waitUntil(action: {done in
           qminderAPI.getLocationUsers(locationId: locationId, completionHandler: {(u, error) in
@@ -107,7 +106,7 @@ class QminderApiTests : QuickSpec {
       
       it("Get line details", closure: {
       
-        var details:Dictionary<String, Any>?
+        var details:Line?
         
         waitUntil(action: {done in
           qminderAPI.getLineDetails(lineId: lineId, completionHandler: {(d, error) in
@@ -119,9 +118,9 @@ class QminderApiTests : QuickSpec {
         
         expect(details).toEventuallyNot(beNil())
         
-        expect(details?["id"]).toEventuallyNot(beNil())
-        expect(details?["name"]).toEventuallyNot(beNil())
-        expect(details?["location"]).toEventuallyNot(beNil())
+        expect(details?.id).toEventuallyNot(beNil())
+        expect(details?.name).toEventuallyNot(beNil())
+        expect(details?.location).toEventuallyNot(beNil())
       
       })
       
@@ -150,17 +149,15 @@ class QminderApiTests : QuickSpec {
       // search tickets
       it("Search tickets with location ID", closure: {
       
-        var tickets:Array<Any>?
+        var tickets: Array<Ticket>?
         
         waitUntil(action: {done in
           qminderAPI.searchTickets(locationId: locationId, limit: 10, completionHandler: {(t, error) in
             tickets = t
             
             // get first ticket id
-            if var ticket = tickets?.first as? Dictionary<String, Any> {
-              if let id = Int((ticket["id"] as? String)!) {
-                ticketId = id
-              }
+            if let ticket = tickets?.first {
+              ticketId = ticket.id
             }
             
             done()
@@ -168,11 +165,12 @@ class QminderApiTests : QuickSpec {
         })
         
         expect(tickets).toEventuallyNot(beNil())
+        expect(ticketId).toEventuallyNot(beNil())
       })
       
       it("Search tickets with line ID", closure: {
       
-        var tickets:Array<Any>?
+        var tickets:Array<Ticket>?
         
         waitUntil(action: {done in
           qminderAPI.searchTickets(locationId: locationId, lineId: [lineId], limit: 10, completionHandler: {(t, error) in
@@ -187,7 +185,7 @@ class QminderApiTests : QuickSpec {
       
       it("Search tickets with status", closure: {
       
-        var tickets:Array<Any>?
+        var tickets:Array<Ticket>?
         
         waitUntil(action: {done in
           qminderAPI.searchTickets(locationId: locationId, status: ["NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW", "SERVED"], limit: 10, completionHandler: {(t, error) in
@@ -205,7 +203,7 @@ class QminderApiTests : QuickSpec {
       
       it("Get ticket details", closure: {
         
-        var details:Dictionary<String, Any>?
+        var details:Ticket?
         
         waitUntil(action: {done in
           qminderAPI.getTicketDetails(ticketId: ticketId, completionHandler: {(d, error) in
@@ -217,11 +215,11 @@ class QminderApiTests : QuickSpec {
         
         expect(details).toEventuallyNot(beNil())
         
-        expect(details?["id"]).toEventuallyNot(beNil())
-        expect(details?["source"]).toEventuallyNot(beNil())
-        expect(details?["status"]).toEventuallyNot(beNil())
-        expect(details?["line"]).toEventuallyNot(beNil())
-        expect(details?["created"]).toEventuallyNot(beNil())
+        expect(details?.id).toEventuallyNot(beNil())
+        expect(details?.source).toEventuallyNot(beNil())
+        expect(details?.status).toEventuallyNot(beNil())
+        expect(details?.line).toEventuallyNot(beNil())
+        expect(details?.created).toEventuallyNot(beNil())
       })
 
       
