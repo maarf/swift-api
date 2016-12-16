@@ -112,9 +112,9 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     })
     
     self.events?.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
-        if error == nil {
-          self.messageReceived(event: "TICKET_CALLED", data: data!)
-        }
+      if error == nil {
+        self.messageReceived(event: "TICKET_CALLED", data: data!)
+      }
     })
     
     self.events?.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
@@ -192,7 +192,11 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   }
   
   func messageReceived(event:String, data:Dictionary<String, Any>) {
-    print(data);
+    guard let ticket = Ticket(JSON: data) else {
+      return
+    }
+  
+    print(ticket)
     
     self.eventsArray.insert(EventInfo(eventName: event, data: data), at: 0)
     self.tableView?.reloadData()
