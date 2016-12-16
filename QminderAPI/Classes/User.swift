@@ -34,11 +34,11 @@ public struct User: Mappable {
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
-    id <- (map["id"], transformID)
+    id <- map["id"]
     email <- map["email"]
     firstName <- map["firstName"]
     lastName <- map["lastName"]
-    desk <- (map["desk"], transformID)
+    desk <- (map["desk"], transformFromStringToInt)
     roles <- map["roles"]
   }
 }
@@ -56,7 +56,7 @@ public struct Role: Mappable {
   
   mutating public func mapping(map: Map) {
     type <- map["type"]
-    location <- (map["location"], transformID)
+    location <- map["location"]
   }
   
 }

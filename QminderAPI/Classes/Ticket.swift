@@ -55,7 +55,7 @@ public struct Ticket: Mappable {
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
-    id <- (map["id"], transformID)
+    id <- (map["id"], transformFromStringToInt)
     number <- map["number"]
     line <- map["line"]
     
@@ -104,7 +104,7 @@ public struct Called: Mappable {
   
   mutating public func mapping(map: Map) {
     date <- (map["date"], DateTransform())
-    desk <- map["desk"]
+    desk <- (map["desk"], transformFromStringToInt)
     caller <- map["caller"]
   }
 }
