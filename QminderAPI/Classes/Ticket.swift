@@ -52,6 +52,9 @@ public struct Ticket: Mappable {
   /// Extra info
   public var extra: Array<Extra>?
   
+  /// Order after
+  public var orderAfter: Date?
+  
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
@@ -70,6 +73,9 @@ public struct Ticket: Mappable {
     called <- map["called"]
     served <- map["served"]
     
+    // need to parse also miliseconds
+    orderAfter <- (map["orderAfter"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
+    
     labels <- map["labels"]
     extra <- map["extra"]
   }
@@ -84,7 +90,7 @@ public struct Created: Mappable {
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
-    date <- (map["date"], DateTransform())
+    date <- (map["date"], ISO8601DateTransform())
   }
 }
 
@@ -103,7 +109,7 @@ public struct Called: Mappable {
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
-    date <- (map["date"], DateTransform())
+    date <- (map["date"], ISO8601DateTransform())
     desk <- map["desk"]
     caller <- map["caller"]
   }
@@ -118,7 +124,7 @@ public struct Served: Mappable {
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
-    date <- (map["date"], DateTransform())
+    date <- (map["date"], ISO8601DateTransform())
   }
 }
 
