@@ -226,6 +226,8 @@ public class QminderEvents : WebSocketDelegate {
     if let t = text.removingPercentEncoding {
       let json = JSON.parse(t)
       
+      print(json)
+      
       if let callback:CallbackType = callbackMap[json["subscriptionId"].stringValue] {
         callback(json["data"].dictionaryObject, nil)
       }
