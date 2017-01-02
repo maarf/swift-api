@@ -11,7 +11,7 @@ import Foundation
 import ObjectMapper
 
 /// Ticket mapping object
-public struct Ticket: Mappable {
+public class Ticket: Mappable {
   
   /// A unique ticket ID
   public var id: Int?
@@ -55,9 +55,9 @@ public struct Ticket: Mappable {
   /// Order after
   public var orderAfter: Date?
   
-  public init?(map: Map) {}
+  public required init?(map: Map) {}
   
-  mutating public func mapping(map: Map) {
+  public func mapping(map: Map) {
     id <- (map["id"], transformFromStringToInt)
     number <- map["number"]
     line <- map["line"]
@@ -74,7 +74,12 @@ public struct Ticket: Mappable {
     served <- map["served"]
     
     // need to parse also miliseconds
-    orderAfter <- (map["orderAfter"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
+    
+    let formatter = DateFormatter()
+		formatter.locale = Locale(identifier: "en_US_POSIX")
+		formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    orderAfter <- (map["orderAfter"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
     
     labels <- map["labels"]
     extra <- map["extra"]
