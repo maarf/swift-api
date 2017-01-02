@@ -11,7 +11,7 @@ import Foundation
 import ObjectMapper
 
 /// User object
-public class User: Mappable {
+public struct User: Mappable {
   
   /// User ID
   public var id: Int?
@@ -31,9 +31,9 @@ public class User: Mappable {
   /// User role
   public var roles: Array<Role>?
   
-  public required init?(map: Map) {}
+  public init?(map: Map) {}
   
-  public func mapping(map: Map) {
+  public mutating func mapping(map: Map) {
     id <- map["id"]
     email <- map["email"]
     firstName <- map["firstName"]

@@ -11,7 +11,7 @@ import Foundation
 import ObjectMapper
 
 /// Location object
-public class Location: Mappable {
+public struct Location: Mappable {
 
   /// A unique location ID
   public var id: Int?
@@ -28,9 +28,9 @@ public class Location: Mappable {
   /// Offset from UTC timezone in minutes
   public var timezoneOffset: Int?
 
-  public required init?(map: Map) {}
+  public init?(map: Map) {}
   
-  public func mapping(map: Map) {
+  public mutating func mapping(map: Map) {
     id <- map["id"]
     name <- map["name"]
     latitude <- map["latitude"]
