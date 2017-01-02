@@ -11,7 +11,7 @@ import Foundation
 import ObjectMapper
 
 /// Ticket mapping object
-public class Ticket: Mappable {
+public struct Ticket: Mappable {
   
   /// A unique ticket ID
   public var id: Int?
@@ -55,9 +55,12 @@ public class Ticket: Mappable {
   /// Order after
   public var orderAfter: Date?
   
-  public required init?(map: Map) {}
+  /// Dictionary for extra parameters for convenience
+  public var extraParams: Dictionary<String, Any> = [:]
   
-  public func mapping(map: Map) {
+  public init?(map: Map) {}
+  
+  public mutating func mapping(map: Map) {
     id <- (map["id"], transformFromStringToInt)
     number <- map["number"]
     line <- map["line"]

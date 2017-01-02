@@ -12,7 +12,7 @@ import ObjectMapper
 
 
 /// Line Object
-public class Line: Mappable {
+public struct Line: Mappable {
   
   /// ID of a line
   public var id: Int?
@@ -23,9 +23,9 @@ public class Line: Mappable {
   /// ID of the location this line belongs to
   public var location: Int?
   
-  public required init?(map: Map) {}
+  public init?(map: Map) {}
   
-  public func mapping(map: Map) {
+  public mutating func mapping(map: Map) {
     id <- map["id"]
     name <- map["name"]
     location <- map["location"]
