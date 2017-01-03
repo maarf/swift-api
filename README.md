@@ -1,6 +1,6 @@
 # Qminder Swift API
 
-[![Build Status](https://travis-ci.org/Qminder/qminder-ios-api.svg?branch=master)](https://travis-ci.org/Qminder/qminder-ios-api)
+[![Build Status](https://travis-ci.org/Qminder/swift-api.svg?branch=master)](https://travis-ci.org/Qminder/swift-api)
 [![Version](https://img.shields.io/cocoapods/v/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![License](https://img.shields.io/cocoapods/l/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![Platform](https://img.shields.io/cocoapods/p/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
