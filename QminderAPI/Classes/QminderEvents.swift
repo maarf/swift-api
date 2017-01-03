@@ -116,6 +116,16 @@ public class QminderEvents : WebSocketDelegate {
   }
   
   /**
+    Reopen websocket
+  */
+  public func reOpenSocket() {
+    if !self.socket.isConnected && openingConnection {
+      socketRetriedConnections = 0
+      openSocket()
+    }
+  }
+  
+  /**
     Subscribe to event
     
     - Parameters:
@@ -203,6 +213,7 @@ public class QminderEvents : WebSocketDelegate {
       autoReopenTimer.invalidate()
     }
     
+    //try to reconnect
     autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {timer in
       print("autoReopenTimer")
       self.openSocket()
@@ -211,8 +222,6 @@ public class QminderEvents : WebSocketDelegate {
     socketRetriedConnections += 1
     
     delegate?.onDisconnected(error: error)
-    
-    //try to reconnect
   }
   
   /**
