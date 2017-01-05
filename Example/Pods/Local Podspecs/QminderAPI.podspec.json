@@ -1,6 +1,6 @@
 {
   "name": "QminderAPI",
-  "version": "0.1.6",
+  "version": "0.1.13",
   "summary": "Qminder iOS API",
   "description": "iOS wrapper for Qminder API.",
   "homepage": "https://www.qminderapp.com/",
@@ -14,7 +14,7 @@
   "social_media_url": "https://www.facebook.com/QMinder/",
   "source": {
     "git": "https://github.com/Qminder/swift-api.git",
-    "tag": "0.1.6"
+    "tag": "0.1.13"
   },
   "source_files": "QminderAPI/Classes/**/*",
   "platforms": {

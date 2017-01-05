@@ -340,6 +340,25 @@ open class QminderAPI {
     )
   }
   
+  /**
+    Get a details of a TV
+   
+    - Parameters:
+      - tvID: TV ID
+      - name: Name of a TV
+      - error: Error with pairing process
+  */
+  public func tvDetails(_ id:Int, completionHandler: @escaping (_ name:String?, _ error:Error?) -> Void) {
+    makeRequest(url: "/tv/\(id)"
+      ,callback: { json in
+        completionHandler(json["name"].string, nil)
+      },
+      errorCallback: { error in
+        completionHandler(nil, error)
+      }
+    )
+  }
+  
   // MARK: - Additonal methods
   
   /**
@@ -352,7 +371,7 @@ open class QminderAPI {
       - errorCallback: Error callback
         - error: Error
   */
-  private func makeRequest(url:String, parameters:Parameters? = nil, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:QminderError) -> Void), apiKeyNeeded:Bool = true) {
+  private func makeRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:QminderError) -> Void), apiKeyNeeded:Bool = true) {
   
     var headers: HTTPHeaders = [:]
   
@@ -365,7 +384,7 @@ open class QminderAPI {
       headers["X-Qminder-REST-API-Key"] = key
     }
     
-    Alamofire.request("https://api.qminder.com/v1\(url)", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: { response in
+    Alamofire.request("https://api.qminder.com/v1\(url)", method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: { response in
       
         let parsedResponse = self.validateRequest(response: response)
       

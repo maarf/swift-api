@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'QminderAPI'
-  s.version          = '0.1.12'
+  s.version          = '0.1.13'
   s.summary          = 'Qminder iOS API'
 
   s.description      = <<-DESC
