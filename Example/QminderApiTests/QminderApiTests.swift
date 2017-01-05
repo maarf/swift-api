@@ -280,6 +280,25 @@ class QminderApiTests : QuickSpec {
         expect(error).toEventually(beNil())
         
       }
+      
+      it("Getting TV details even if it doesn't exist") {
+        var name: String?
+        var error: NSError?
+        
+        waitUntil(action: {done in
+          qminderAPI.tvDetails(666, completionHandler: {n, e in
+            name = n
+            error = e as? NSError
+            
+            print("TESTS name: \(name)")
+            print("TESTS Error: \(error)")
+            
+            done()
+          })
+        })
+        
+        expect(error).toEventuallyNot(beNil())
+      }
     }
   }
 }
