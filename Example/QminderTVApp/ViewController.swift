@@ -78,12 +78,13 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
             (timer) in
 
               self.qminderAPI.pairTV(code: code!, secret: secret!, completionHandler: {
-                (status, apiKey, locationId, error) in
+                (status, id, apiKey, locationId, error) in
                 
                   if status == "PAIRED" {
                     timer.invalidate()
                     
                     UserDefaults.standard.set(apiKey, forKey: "API_KEY")
+                    UserDefaults.standard.set(id, forKey: "TV_ID")
                     UserDefaults.standard.set(locationId, forKey: "LOCATION_ID")
                     
                     if let key = apiKey {

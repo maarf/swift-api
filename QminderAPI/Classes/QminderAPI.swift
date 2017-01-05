@@ -321,19 +321,20 @@ open class QminderAPI {
       - secret: Secret key
       - completionHandler: Callback block when pairing is done on server:
       - status: Status if TV is paired
+      - id: TV ID
       - apiKey: Qminder API key
       - error: Error with pairing process
    
   */
-  public func pairTV(code:String, secret:String, completionHandler: @escaping (_ status:String?, _ apiKey:String?, _ location:Int?, _ error:Error?) -> Void) {
+  public func pairTV(code:String, secret:String, completionHandler: @escaping (_ status:String?, _ id:Int?, _ apiKey:String?, _ location:Int?, _ error:Error?) -> Void) {
     
     makeRequest(url: "/tv/code/\(code)",
       parameters: ["secret": secret]
       ,callback: { json in
-        completionHandler(json["status"].string, json["apiKey"].string, json["location"].int, nil)
+        completionHandler(json["status"].string, json["id"].int, json["apiKey"].string, json["location"].int, nil)
       },
       errorCallback: { error in
-        completionHandler(nil, nil, nil, error)
+        completionHandler(nil, nil, nil, nil, error)
       },
       apiKeyNeeded: false
     )
