@@ -408,7 +408,7 @@ open class QminderAPI {
       headers["X-Qminder-REST-API-Key"] = key
     }
     
-    Alamofire.request("https://api.qminder.com/v1\(url)", method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler: { response in
+    Alamofire.request("https://api.qminder.com/v1\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON(completionHandler: { response in
       
         let parsedResponse = self.validateRequest(response: response)
       
