@@ -267,10 +267,6 @@ class QminderApiTests : QuickSpec {
                 secret = s
                 error = e as NSError?
               
-                print("TESTS Pairing code: \(code)")
-                print("TESTS Secret key: \(secret)")
-                print("TESTS Secret key: \(error)")
-              
                 done()
             })
         })
@@ -286,12 +282,23 @@ class QminderApiTests : QuickSpec {
         var error: NSError?
         
         waitUntil(action: {done in
-          qminderAPI.tvDetails(666, completionHandler: {n, e in
+          qminderAPI.tvDetails(id: 666, completionHandler: {n, e in
             name = n
             error = e as? NSError
             
-            print("TESTS name: \(name)")
-            print("TESTS Error: \(error)")
+            done()
+          })
+        })
+        
+        expect(error).toEventuallyNot(beNil())
+      }
+      
+      it("Send TV heartbeat even if it doesn't exist") {
+        var error: NSError?
+        
+        waitUntil(action: {done in
+          qminderAPI.tvHeartbeat(id: 666, metadata: ["foo": "bar"], completionHandler: {e in
+            error = e as? NSError
             
             done()
           })
