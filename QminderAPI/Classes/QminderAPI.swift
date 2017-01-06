@@ -348,7 +348,7 @@ open class QminderAPI {
       - name: Name of a TV
       - error: Error with pairing process
   */
-  public func tvDetails(_ id:Int, completionHandler: @escaping (_ name:String?, _ error:Error?) -> Void) {
+  public func tvDetails(id:Int, completionHandler: @escaping (_ name:String?, _ error:Error?) -> Void) {
     makeRequest(url: "/tv/\(id)"
       ,callback: { json in
         completionHandler(json["name"].string, nil)
@@ -357,6 +357,30 @@ open class QminderAPI {
         completionHandler(nil, error)
       }
     )
+  }
+  
+  /**
+    Update the heartbeat of the TV and add optional metadata in JSON format
+   
+    - Parameters:
+      - tvID: TV ID
+      - metadata: Dictionary of metadata to send with heartbeat
+      - error: Error with pairing process
+  */
+  public func tvHeartbeat(id:Int, metadata:Dictionary<String, Any>, completionHandler: @escaping (_ error:Error?) -> Void) {
+    let parameters: Parameters = metadata
+    
+    makeRequest(url: "/tv/\(id)/heartbeat",
+      method: .post,
+      parameters: parameters,
+      encoding: JSONEncoding.default,
+      callback: {json in
+        completionHandler(nil)
+      },
+      errorCallback: {
+      error in
+        completionHandler(error)
+      })
   }
   
   // MARK: - Additonal methods
@@ -371,7 +395,7 @@ open class QminderAPI {
       - errorCallback: Error callback
         - error: Error
   */
-  private func makeRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:QminderError) -> Void), apiKeyNeeded:Bool = true) {
+  private func makeRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, callback: @escaping ((_ json:JSON) -> Void), errorCallback: @escaping ((_ error:QminderError) -> Void), apiKeyNeeded:Bool = true) {
   
     var headers: HTTPHeaders = [:]
   
