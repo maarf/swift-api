@@ -32,3 +32,5 @@ Carthage
 #
 # Pods/
 test.sh
+
+*.coverage.txt
