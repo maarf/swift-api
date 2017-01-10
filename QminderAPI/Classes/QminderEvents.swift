@@ -233,7 +233,12 @@ public class QminderEvents : WebSocketDelegate {
   */
   public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
     if let t = text.removingPercentEncoding {
-      let json = JSON.parse(t)
+    
+      guard let dataFromString = t.data(using: .utf8) else {
+        print("Can't parse to data \(text)")
+        return
+      }
+      let json = JSON(data: dataFromString)
       
       print(json)
       
