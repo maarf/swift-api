@@ -1,5 +1,5 @@
 ignore:
-  - "Example/Pods/*"
+  - "Example/*"
 comment:
   layout: "header, diff"
   behavior: default
