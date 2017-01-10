@@ -8,3 +8,5 @@ before_install:
   - xcodebuild -showsdks
 script:
   - ./build.sh
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
