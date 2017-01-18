@@ -119,7 +119,7 @@ public class QminderEvents : WebSocketDelegate {
     Reopen websocket
   */
   public func reOpenSocket() {
-    if !self.socket.isConnected && openingConnection {
+    if !self.socket.isConnected {
       socketRetriedConnections = 0
       openSocket()
     }
