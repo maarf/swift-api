@@ -119,7 +119,7 @@ public class QminderEvents : WebSocketDelegate {
     Reopen websocket
   */
   public func reOpenSocket() {
-    if !self.socket.isConnected && openingConnection {
+    if !self.socket.isConnected {
       socketRetriedConnections = 0
       openSocket()
     }
@@ -218,26 +218,26 @@ public class QminderEvents : WebSocketDelegate {
       return
     }
   
-    self.pingTimer.invalidate()
-    
-    // if isn't normally disconnected (via disconnect() func) then reconnect
-    if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
-      let timeoutMult = floor(Double(socketRetriedConnections / 10))
-      let newTimeout = min(5 + timeoutMult * 1, 6)
-      print("Connection closed, Trying to reconnect in \(newTimeout) seconds")
-      
-      if autoReopenTimer.isValid {
-        autoReopenTimer.invalidate()
-      }
-      
-      //try to reconnect
-      autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {timer in
-        print("autoReopenTimer")
-        self.openSocket()
-      })
-      
-      socketRetriedConnections += 1
-    }
+//    self.pingTimer.invalidate()
+//    
+//    // if isn't normally disconnected (via disconnect() func) then reconnect
+//    if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
+//      let timeoutMult = floor(Double(socketRetriedConnections / 10))
+//      let newTimeout = min(5 + timeoutMult * 1, 6)
+//      print("Connection closed, Trying to reconnect in \(newTimeout) seconds")
+//      
+//      if autoReopenTimer.isValid {
+//        autoReopenTimer.invalidate()
+//      }
+//      
+//      //try to reconnect
+//      autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {timer in
+//        print("autoReopenTimer")
+//        self.openSocket()
+//      })
+//      
+//      socketRetriedConnections += 1
+//    }
     
     delegate?.onDisconnected(error: error)
   }
