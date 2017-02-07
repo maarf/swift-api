@@ -1,0 +1,15 @@
+{
+  "name": "Qminder TV Websockets",
+  "version": "1.0.0",
+  "description": "Qminder TV websockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Qminder",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.4",
+    "ws": "^2.0.2"
+  }
+}

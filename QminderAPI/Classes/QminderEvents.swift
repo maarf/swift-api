@@ -91,12 +91,13 @@ public class QminderEvents : WebSocketDelegate {
     
     - Parameters:
       - apiKey: Qminder API key
+      - serverAddress: Optional server address (used for tests)
     
     - Returns: Creates Qminder Events client
    
   */
-  public init(apiKey:String) {
-    self.socket = WebSocket(url: URL(string: "wss://api.qminder.com/events?rest-api-key=\(apiKey)")!)
+  public init(apiKey:String, serverAddress:String="wss://api.qminder.com") {
+    self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket.delegate = self
   }
   
