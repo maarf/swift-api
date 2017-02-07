@@ -3,12 +3,11 @@
 use_frameworks!
 
 target 'QminderTVApp' do
-  
   pod 'QminderAPI', :path => '../'
+end
 
-  target 'QminderApiTests' do
-    pod 'Quick'
-    pod 'Nimble'
-    pod 'QminderAPI', :path => '../'
-  end
+target 'QminderApiTests' do
+  pod 'Quick'
+  pod 'Nimble'
+  pod 'QminderAPI', :path => '../'
 end
