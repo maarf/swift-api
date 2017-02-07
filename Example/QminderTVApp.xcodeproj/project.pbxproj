@@ -40,12 +40,10 @@
 		6394733B1DC1E87C00E37961 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6394733D1DC1E87C00E37961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F3BC6394EF24E9C8CFE219E /* Pods-QminderTVApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderTVApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp.debug.xcconfig"; sourceTree = "<group>"; };
-		81F8E525289B7AC42CB79B17 /* Pods-QminderApiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderApiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests.release.xcconfig"; sourceTree = "<group>"; };
 		8A110045E5EABEEB66546DA9 /* Pods-QminderTVApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderTVApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp.release.xcconfig"; sourceTree = "<group>"; };
 		B54458F6059A0E2902560923 /* Pods_QminderApiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QminderApiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C14E1E12C27EC50F3B9A56DE /* Pods-QminderTVApp-QminderApiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderTVApp-QminderApiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QminderTVApp-QminderApiTests/Pods-QminderTVApp-QminderApiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D6DBAF4F4D3A1D5B173B9262 /* Pods-QminderTVApp-QminderApiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderTVApp-QminderApiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QminderTVApp-QminderApiTests/Pods-QminderTVApp-QminderApiTests.release.xcconfig"; sourceTree = "<group>"; };
-		FD980FE1481149C2A928C0B0 /* Pods-QminderApiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderApiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +113,6 @@
 			children = (
 				7F3BC6394EF24E9C8CFE219E /* Pods-QminderTVApp.debug.xcconfig */,
 				8A110045E5EABEEB66546DA9 /* Pods-QminderTVApp.release.xcconfig */,
-				FD980FE1481149C2A928C0B0 /* Pods-QminderApiTests.debug.xcconfig */,
-				81F8E525289B7AC42CB79B17 /* Pods-QminderApiTests.release.xcconfig */,
 				C14E1E12C27EC50F3B9A56DE /* Pods-QminderTVApp-QminderApiTests.debug.xcconfig */,
 				D6DBAF4F4D3A1D5B173B9262 /* Pods-QminderTVApp-QminderApiTests.release.xcconfig */,
 			);
