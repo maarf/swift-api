@@ -1,11 +1,12 @@
 {
-  "name": "Qminder TV Websockets",
+  "name": "QminderTVWebsockets",
   "version": "1.0.0",
   "description": "Qminder TV websockets",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "https://github.com/Qminder/swift-api",
   "author": "Qminder",
   "license": "ISC",
   "dependencies": {
