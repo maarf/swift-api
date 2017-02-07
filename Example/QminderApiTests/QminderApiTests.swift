@@ -9,6 +9,7 @@
 import Quick
 import Nimble
 import QminderAPI
+import ObjectMapper
 
 class QminderApiTests : QuickSpec {
 
@@ -16,6 +17,9 @@ class QminderApiTests : QuickSpec {
   
     /// Qminder API client
     let qminderAPI:QminderAPI = QminderAPI()
+    
+    var events:QminderEvents?
+    
     
     /// Location ID
     let locationId:Int = Int(ProcessInfo.processInfo.environment["QMINDER_LOCATION_ID"]!)!
@@ -30,6 +34,187 @@ class QminderApiTests : QuickSpec {
     beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
         qminderAPI.setApiKey(key: apiKey)
+        events = QminderEvents(apiKey: apiKey, serverAddress: "ws://localhost:8889")
+      }
+    }
+    
+    describe("Qminder Events tests") {
+    
+      let parameters = ["location": locationId]
+      var eventsResponses:Array<[String: Any?]> = []
+    
+      it("Subscribe to events") {
+        events?.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+            
+            eventsResponses.append(data!)
+          }
+        })
+        
+        events?.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+            
+            eventsResponses.append(data!)
+          }
+        })
+        
+        events?.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+            
+            eventsResponses.append(data!)
+          }
+        })
+        
+        events?.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+            
+            eventsResponses.append(data!)
+          }
+        })
+        
+        events?.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+            
+            eventsResponses.append(data!)
+          }
+        })
+        
+        events?.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+            
+            eventsResponses.append(data!)
+          }
+        })
+        
+        
+      }
+      
+      it("Get response from Websockets"){
+        // Test run #1
+        // Ticket created
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+        
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          return ticket.id == 23853943 && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+          
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket created")
+        
+        // Ticket edited
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          return ticket.id == 23853943 && ticket.status == "NEW" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        // Ticket deleted
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          return ticket.id == 23853943 && ticket.status == "CANCELLED_BY_CLERK" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        
+        // Test run #2
+        // Ticket created
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          return ticket.id == 23856820 && ticket.status == "NEW" && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        // Ticket edited
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          return ticket.id == 23856820 && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        // Ticket edited
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          return ticket.id == 23856820 && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        // Ticket called
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: "2017-02-06T13:36:11Z") else {
+            return false
+          }
+          
+          guard let calledDate = ticket.called?.date else {
+            return false
+          }
+          
+          return ticket.id == 23856820 && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
+          
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        // Ticket re-called
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: "2017-02-06T13:36:21Z") else {
+            return false
+          }
+          
+          guard let calledDate = ticket.called?.date else {
+            return false
+          }
+          
+          return ticket.id == 23856820 && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
+          
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
+        // Ticket served
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          guard let ticket = Ticket(JSON: data) else {
+            return false
+          }
+          
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: "2017-02-06T13:36:36Z") else {
+            return false
+          }
+          
+          guard let servedDate = ticket.served?.date else {
+            return false
+          }
+          
+          return ticket.id == 23856820 && ticket.status == "SERVED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(servedDate) == ComparisonResult.orderedSame
+          
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+        
       }
     }
     

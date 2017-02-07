@@ -4,11 +4,10 @@ use_frameworks!
 
 target 'QminderTVApp' do
   pod 'QminderAPI', :path => '../'
+end
 
-  target 'QminderApiTests' do
-    inherit! :search_paths
-
-    pod 'Quick'
-    pod 'Nimble'
-  end
+target 'QminderApiTests' do
+  pod 'Quick'
+  pod 'Nimble'
+  pod 'QminderAPI', :path => '../'
 end
