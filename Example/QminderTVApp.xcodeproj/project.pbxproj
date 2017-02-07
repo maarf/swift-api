@@ -13,7 +13,6 @@
 		6394733A1DC1E87C00E37961 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 639473381DC1E87C00E37961 /* Main.storyboard */; };
 		6394733C1DC1E87C00E37961 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6394733B1DC1E87C00E37961 /* Assets.xcassets */; };
 		657407E528C30B634F74D6D9 /* Pods_QminderApiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54458F6059A0E2902560923 /* Pods_QminderApiTests.framework */; };
-		777B929DE0677D84AE8FF515 /* Pods_QminderTVApp_QminderApiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410D08679EA27C093654692F /* Pods_QminderTVApp_QminderApiTests.framework */; };
 		8EDE36A0DF7A5D0663BFC41C /* Pods_QminderTVApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DBD28E244AAEF28DC824181 /* Pods_QminderTVApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				657407E528C30B634F74D6D9 /* Pods_QminderApiTests.framework in Frameworks */,
-				777B929DE0677D84AE8FF515 /* Pods_QminderTVApp_QminderApiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
