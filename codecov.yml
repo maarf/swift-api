@@ -1,7 +1,7 @@
 ignore:
   - "Example/*"
-  - "test-websockets/*"
-  - "/Example"
+  - "test-websockets"
+  - "Example"
 comment:
   layout: "header, diff"
   behavior: default
