@@ -195,11 +195,10 @@ public class QminderEvents : WebSocketDelegate {
     }
     
     // set up ping interval
-    self.pingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
-      (timer) in
-        if self.socket.isConnected {
-          self.socket.write(ping: "PING".data(using: .utf8)!)
-        }
+    self.pingTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: {timer in
+      if self.socket.isConnected {
+        self.socket.write(ping: "PING".data(using: .utf8)!)
+      }
     })
     
     delegate?.onConnected()
@@ -276,6 +275,10 @@ public class QminderEvents : WebSocketDelegate {
   */
   public func websocketDidReceiveData(socket: WebSocket, data: Data) {
     print(data)
+  }
+  
+  func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+    print("Got pong! Maybe some data: \(data)")
   }
   
   
