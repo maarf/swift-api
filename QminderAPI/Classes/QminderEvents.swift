@@ -10,6 +10,7 @@ import Foundation
 
 import SwiftyJSON
 import Starscream
+import RxSwift
 
 
 /**
@@ -77,10 +78,6 @@ public class QminderEvents : WebSocketDelegate {
   
   /// Websocket object
   private var socket:WebSocket
-  
-  
-  /// Ping timer
-  private var pingTimer = Timer()
   
   /// Auto reopen timer
   private var autoReopenTimer = Timer()
@@ -194,12 +191,15 @@ public class QminderEvents : WebSocketDelegate {
       messageHistory.append(queueItem.messageToSend)
     }
     
-    // set up ping interval
-    self.pingTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: {timer in
-      if self.socket.isConnected {
-        self.socket.write(ping: "PING".data(using: .utf8)!)
-      }
-    })
+    // Ping server each 30 seconds
+    Observable<Int>.interval(30, scheduler: MainScheduler.instance)
+      .startWith(-1)
+      .subscribe(onNext: {sec in
+        // check only if has connected
+        if self.socket.isConnected {
+          self.socket.write(ping: "PING".data(using: .utf8)!)
+        }
+      })
     
     delegate?.onConnected()
   }
@@ -217,8 +217,6 @@ public class QminderEvents : WebSocketDelegate {
       delegate?.onDisconnected(error: nil)
       return
     }
-  
-    self.pingTimer.invalidate()
     
     // if isn't normally disconnected (via disconnect() func) then reconnect
     if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
