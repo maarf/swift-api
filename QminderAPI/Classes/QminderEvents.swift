@@ -82,6 +82,8 @@ public class QminderEvents : WebSocketDelegate {
   /// Auto reopen timer
   private var autoReopenTimer = Timer()
   
+  private var disposeBag = DisposeBag()
+  
   
   /**
     Initialization function. Initializes Websocket object and sets Websocket library delegate to self.
@@ -96,6 +98,15 @@ public class QminderEvents : WebSocketDelegate {
   public init(apiKey:String, serverAddress:String="wss://api.qminder.com") {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket.delegate = self
+    
+    // Ping server each 30 seconds
+    Observable<Int>.interval(RxTimeInterval(3), scheduler: MainScheduler.instance)
+      .startWith(-1)
+      .filter({_ in self.socket.isConnected })
+      .subscribe(onNext: {sec in
+        self.socket.write(ping: "PING".data(using: .utf8)!)
+      })
+      .addDisposableTo(disposeBag)
   }
   
   /**
@@ -190,16 +201,6 @@ public class QminderEvents : WebSocketDelegate {
       sendMessage(subscriptionId: queueItem.subscriptionId, messageToSend: queueItem.messageToSend, callback: queueItem.callback)
       messageHistory.append(queueItem.messageToSend)
     }
-    
-    // Ping server each 30 seconds
-    Observable<Int>.interval(30, scheduler: MainScheduler.instance)
-      .startWith(-1)
-      .subscribe(onNext: {sec in
-        // check only if has connected
-        if self.socket.isConnected {
-          self.socket.write(ping: "PING".data(using: .utf8)!)
-        }
-      })
     
     delegate?.onConnected()
   }
