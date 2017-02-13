@@ -10,6 +10,7 @@ import Foundation
 
 import SwiftyJSON
 import Starscream
+import RxSwift
 
 
 /**
@@ -78,12 +79,10 @@ public class QminderEvents : WebSocketDelegate {
   /// Websocket object
   private var socket:WebSocket
   
-  
-  /// Ping timer
-  private var pingTimer = Timer()
-  
   /// Auto reopen timer
   private var autoReopenTimer = Timer()
+  
+  private var disposeBag = DisposeBag()
   
   
   /**
@@ -99,6 +98,15 @@ public class QminderEvents : WebSocketDelegate {
   public init(apiKey:String, serverAddress:String="wss://api.qminder.com") {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket.delegate = self
+    
+    // Ping server each 30 seconds
+    Observable<Int>.interval(RxTimeInterval(3), scheduler: MainScheduler.instance)
+      .startWith(-1)
+      .filter({_ in self.socket.isConnected })
+      .subscribe(onNext: {sec in
+        self.socket.write(ping: "PING".data(using: .utf8)!)
+      })
+      .addDisposableTo(disposeBag)
   }
   
   /**
@@ -194,14 +202,6 @@ public class QminderEvents : WebSocketDelegate {
       messageHistory.append(queueItem.messageToSend)
     }
     
-    // set up ping interval
-    self.pingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
-      (timer) in
-        if self.socket.isConnected {
-          self.socket.write(ping: "PING".data(using: .utf8)!)
-        }
-    })
-    
     delegate?.onConnected()
   }
   
@@ -218,8 +218,6 @@ public class QminderEvents : WebSocketDelegate {
       delegate?.onDisconnected(error: nil)
       return
     }
-  
-    self.pingTimer.invalidate()
     
     // if isn't normally disconnected (via disconnect() func) then reconnect
     if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
@@ -276,6 +274,10 @@ public class QminderEvents : WebSocketDelegate {
   */
   public func websocketDidReceiveData(socket: WebSocket, data: Data) {
     print(data)
+  }
+  
+  func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+    print("Got pong! Maybe some data: \(data)")
   }
   
   

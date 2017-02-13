@@ -1,6 +1,6 @@
 {
   "name": "QminderAPI",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "summary": "Qminder iOS API",
   "description": "iOS wrapper for Qminder API.",
   "homepage": "https://www.qminderapp.com/",
@@ -14,7 +14,7 @@
   "social_media_url": "https://www.facebook.com/QMinder/",
   "source": {
     "git": "https://github.com/Qminder/swift-api.git",
-    "tag": "0.1.18"
+    "tag": "0.1.19"
   },
   "source_files": "QminderAPI/Classes/**/*",
   "platforms": {
@@ -34,6 +34,9 @@
     ],
     "ObjectMapper": [
       "~> 2.2"
+    ],
+    "RxSwift": [
+      "~> 3.2"
     ]
   }
 }
