@@ -73,14 +73,8 @@ public class QminderEvents : WebSocketDelegate {
   /// Is currently connection being opened (Boolean)
   private var openingConnection = false
   
-  /// Retried connections to open socket
-  private var socketRetriedConnections = 0
-  
   /// Websocket object
   private var socket:WebSocket
-  
-  /// Auto reopen timer
-  private var autoReopenTimer = Timer()
   
   private var disposeBag = DisposeBag()
   
@@ -117,10 +111,6 @@ public class QminderEvents : WebSocketDelegate {
     
     openingConnection = true
     
-    if autoReopenTimer.isValid {
-      autoReopenTimer.invalidate()
-    }
-    
     self.socket.connect()
   }
   
@@ -129,7 +119,6 @@ public class QminderEvents : WebSocketDelegate {
   */
   public func reOpenSocket() {
     if !self.socket.isConnected {
-      socketRetriedConnections = 0
       openSocket()
     }
   }
@@ -188,7 +177,6 @@ public class QminderEvents : WebSocketDelegate {
     print("Connection opened")
 
     openingConnection = false
-    socketRetriedConnections = 0
     
     for message in messageHistory {
       socket.write(string: message)
@@ -221,21 +209,18 @@ public class QminderEvents : WebSocketDelegate {
     
     // if isn't normally disconnected (via disconnect() func) then reconnect
     if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
-      let timeoutMult = floor(Double(socketRetriedConnections / 10))
-      let newTimeout = min(5 + timeoutMult * 1, 6)
-      print("Connection closed, Trying to reconnect in \(newTimeout) seconds")
       
-      if autoReopenTimer.isValid {
-        autoReopenTimer.invalidate()
+      // Need to run auto reopening timer only if not opening connection right now
+      if !openingConnection {
+        Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+          .takeWhile({_ in !self.socket.isConnected })
+          .filter({ ($0 < 60 && $0 % 5 == 0) || ($0 > 60 && $0 % 60 == 0)})
+          .subscribe(onNext: {_ in
+            print("Auto reopen Socket")
+            self.openSocket()
+          })
+          .addDisposableTo(disposeBag)
       }
-      
-      //try to reconnect
-      autoReopenTimer = Timer.scheduledTimer(withTimeInterval: newTimeout, repeats: false, block: {timer in
-        print("autoReopenTimer")
-        self.openSocket()
-      })
-      
-      socketRetriedConnections += 1
     }
     
     delegate?.onDisconnected(error: error)
