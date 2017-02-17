@@ -234,19 +234,16 @@ public class QminderEvents : WebSocketDelegate {
       - text: Received text
   */
   public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-    if let t = text.removingPercentEncoding {
+    guard let dataFromString = text.data(using: .utf8) else {
+      print("Can't parse to data \(text)")
+      return
+    }
+    let json = JSON(data: dataFromString)
     
-      guard let dataFromString = t.data(using: .utf8) else {
-        print("Can't parse to data \(text)")
-        return
-      }
-      let json = JSON(data: dataFromString)
-      
-      print(json)
-      
-      if let callback:CallbackType = callbackMap[json["subscriptionId"].stringValue] {
-        callback(json["data"].dictionaryObject, nil)
-      }
+    print(json)
+    
+    if let callback:CallbackType = callbackMap[json["subscriptionId"].stringValue] {
+      callback(json["data"].dictionaryObject, nil)
     }
   }
 
