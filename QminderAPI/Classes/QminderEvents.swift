@@ -209,18 +209,13 @@ public class QminderEvents : WebSocketDelegate {
     
     // if isn't normally disconnected (via disconnect() func) then reconnect
     if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
-      
-      // Need to run auto reopening timer only if not opening connection right now
-      if !openingConnection {
-        Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-          .takeWhile({_ in !self.socket.isConnected })
-          .filter({ ($0 < 60 && $0 % 5 == 0) || ($0 > 60 && $0 % 60 == 0)})
-          .subscribe(onNext: {_ in
-            print("Auto reopen Socket")
-            self.openSocket()
-          })
-          .addDisposableTo(disposeBag)
-      }
+      Observable<Int>.timer(RxTimeInterval(5), scheduler: MainScheduler.instance)
+        .filter({ _ in !self.socket.isConnected })
+        .subscribe(onNext: {_ in
+          print("Auto reopen Socket")
+          self.openSocket()
+        })
+        .addDisposableTo(disposeBag)
     }
     
     delegate?.onDisconnected(error: error)

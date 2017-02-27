@@ -22,7 +22,7 @@
   "source_files": "QminderTV/Classes/**/*",
   "dependencies": {
     "Alamofire": [
-      "~> 4.0"
+      "~> 4.4"
     ],
     "SwiftyJSON": [
       "~> 3.1"

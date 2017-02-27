@@ -1,6 +1,6 @@
 {
   "name": "QminderAPI",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "summary": "Qminder iOS API",
   "description": "iOS wrapper for Qminder API.",
   "homepage": "https://www.qminderapp.com/",
@@ -14,7 +14,7 @@
   "social_media_url": "https://www.facebook.com/QMinder/",
   "source": {
     "git": "https://github.com/Qminder/swift-api.git",
-    "tag": "0.1.19"
+    "tag": "0.1.20"
   },
   "source_files": "QminderAPI/Classes/**/*",
   "platforms": {
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "Alamofire": [
-      "~> 4.3"
+      "~> 4.4"
     ],
     "SwiftyJSON": [
       "~> 3.1"
