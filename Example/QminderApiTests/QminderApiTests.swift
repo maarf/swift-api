@@ -463,12 +463,12 @@ class QminderApiTests : QuickSpec {
       }
       
       it("Getting TV details even if it doesn't exist") {
-        var name: String?
+        var device: Device?
         var error: NSError?
         
         waitUntil(action: {done in
-          qminderAPI.tvDetails(id: 666, completionHandler: {n, e in
-            name = n
+          qminderAPI.tvDetails(id: 666, completionHandler: {d, e in
+            device = d
             error = e as? NSError
             
             done()
