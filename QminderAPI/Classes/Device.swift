@@ -11,7 +11,7 @@ import Foundation
 import ObjectMapper
 
 /// User object
-public struct Device: Mappable {
+public struct TVDevice: Mappable {
 
   /// Device ID
   public var id: Int?

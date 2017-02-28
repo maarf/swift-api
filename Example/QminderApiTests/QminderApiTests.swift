@@ -463,7 +463,7 @@ class QminderApiTests : QuickSpec {
       }
       
       it("Getting TV details even if it doesn't exist") {
-        var device: Device?
+        var device: TVDevice?
         var error: NSError?
         
         waitUntil(action: {done in
