@@ -348,10 +348,15 @@ open class QminderAPI {
       - name: Name of a TV
       - error: Error with pairing process
   */
-  public func tvDetails(id:Int, completionHandler: @escaping (_ name:String?, _ error:Error?) -> Void) {
+  public func tvDetails(id:Int, completionHandler: @escaping (_ device:TVDevice?, _ error:Error?) -> Void) {
     makeRequest(url: "/tv/\(id)"
       ,callback: { json in
-        completionHandler(json["name"].string, nil)
+        guard let device = TVDevice(JSON: json.dictionaryObject!) else {
+          completionHandler(nil, QminderError.unreadableObject)
+          return
+        }
+      
+        completionHandler(device, nil)
       },
       errorCallback: { error in
         completionHandler(nil, error)
