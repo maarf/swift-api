@@ -128,6 +128,10 @@ public class QminderEvents : WebSocketDelegate {
   */
   public func closeConnection() {
     if self.socket.isConnected {
+      // Remove messages from history
+      messageHistory.removeAll()
+      messageQueue.removeAll()
+      
       self.socket.disconnect()
     }
   }
