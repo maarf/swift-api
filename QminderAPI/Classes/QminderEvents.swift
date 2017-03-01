@@ -107,11 +107,11 @@ public class QminderEvents : WebSocketDelegate {
     Open websocket
   */
   public func openSocket() {
-    print("openSocket")
-    
-    openingConnection = true
-    
-    self.socket.connect()
+    if !openingConnection {
+      print("openSocket")
+      openingConnection = true
+      self.socket.connect()
+    }
   }
   
   /**
