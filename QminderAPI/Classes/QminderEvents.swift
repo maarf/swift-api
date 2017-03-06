@@ -206,6 +206,8 @@ public class QminderEvents : WebSocketDelegate {
   */
   public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
   
+    openingConnection = false
+  
     guard let err = error else {
       delegate?.onDisconnected(error: nil)
       return
