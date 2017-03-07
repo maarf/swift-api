@@ -132,7 +132,7 @@ public class QminderEvents : WebSocketDelegate {
       messageHistory.removeAll()
       messageQueue.removeAll()
       
-      self.socket.disconnect()
+      self.socket.disconnect(closeCode: WebSocket.CloseCode.goingAway.rawValue)
     }
   }
   
@@ -207,23 +207,26 @@ public class QminderEvents : WebSocketDelegate {
   public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
   
     openingConnection = false
+    
+    Observable<Int>.timer(RxTimeInterval(5), scheduler: MainScheduler.instance)
+      .filter({_ in
+        
+        // if there is error at all
+        guard let err = error else {
+          return true
+        }
+        
+        // don't reopen if going away normally
+        return UInt16(err.code) != WebSocket.CloseCode.goingAway.rawValue
+      })
+      // do it onlu if disconnected
+      .filter({ _ in !self.socket.isConnected })
+      .subscribe(onNext: {_ in
+        print("Auto reopen Socket")
+        self.openSocket()
+      })
+      .addDisposableTo(disposeBag)
   
-    guard let err = error else {
-      delegate?.onDisconnected(error: nil)
-      return
-    }
-    
-    // if isn't normally disconnected (via disconnect() func) then reconnect
-    if UInt16(err.code) != WebSocket.CloseCode.normal.rawValue, !err.localizedDescription.isEmpty {
-      Observable<Int>.timer(RxTimeInterval(5), scheduler: MainScheduler.instance)
-        .filter({ _ in !self.socket.isConnected })
-        .subscribe(onNext: {_ in
-          print("Auto reopen Socket")
-          self.openSocket()
-        })
-        .addDisposableTo(disposeBag)
-    }
-    
     delegate?.onDisconnected(error: error)
   }
   
