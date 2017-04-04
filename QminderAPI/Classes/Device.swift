@@ -22,12 +22,16 @@ public struct TVDevice: Mappable {
   /// Created data
   public var settings: Settings?
   
+  /// Theme
+  public var theme: String?
+  
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
     id <- map["id"]
     name <- map["name"]
     settings <- map["settings"]
+    theme <- map["theme"]
   }
 
 }
