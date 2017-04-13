@@ -346,7 +346,7 @@ open class QminderAPI {
     - Parameters:
       - tvID: TV ID
       - name: Name of a TV
-      - error: Error with pairing process
+      - error: Error
   */
   public func tvDetails(id:Int, completionHandler: @escaping (_ device:TVDevice?, _ error:Error?) -> Void) {
     makeRequest(url: "/tv/\(id)"
@@ -368,9 +368,9 @@ open class QminderAPI {
     Update the heartbeat of the TV and add optional metadata in JSON format
    
     - Parameters:
-      - tvID: TV ID
+      - id: TV ID
       - metadata: Dictionary of metadata to send with heartbeat
-      - error: Error with pairing process
+      - error: Error
   */
   public func tvHeartbeat(id:Int, metadata:Dictionary<String, Any>, completionHandler: @escaping (_ error:Error?) -> Void) {
     let parameters: Parameters = metadata
@@ -385,6 +385,27 @@ open class QminderAPI {
       errorCallback: {
       error in
         completionHandler(error)
+      })
+  }
+  
+  /**
+    Empty state text message for TV
+    
+    - Parameters:
+      - id: TV ID
+      - message: Empty state message
+      - error: Error
+  */
+  public func tvEmptyState(id: Int, completionHandler: @escaping (_ message: String?, _ error: Error?) -> Void) {
+    makeRequest(url: "/tv/\(id)/emptystate",
+      method: .get,
+      encoding: JSONEncoding.default,
+      callback: {json in
+        completionHandler(json["message"].string, nil)
+      },
+      errorCallback: {
+      error in
+        completionHandler(nil, error)
       })
   }
   
