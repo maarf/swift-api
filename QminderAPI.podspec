@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'QminderAPI'
-  s.version          = '0.1.27'
+  s.version          = '0.1.28'
   s.summary          = 'Qminder iOS API'
 
   s.description      = <<-DESC
@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   s.dependency 'SwiftyJSON', '~> 3.1'
   s.dependency 'Starscream', '~> 2.0'
   s.dependency 'ObjectMapper', '~> 2.2'
-  s.dependency 'RxSwift', '~> 3.3'
+  s.dependency 'RxSwift', '~> 3.4'
   
 end
