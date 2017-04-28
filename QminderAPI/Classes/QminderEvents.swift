@@ -38,6 +38,9 @@ public class QminderEvents : WebSocketDelegate {
   /// Class delegate
   public var delegate:QminderEventsDelegate?
   
+  /// Qminder close code
+  private let websocketReservedCloseCode = UInt16(1099)
+  
   
   /**
     Callback type when subscrubing to evenets
@@ -132,7 +135,7 @@ public class QminderEvents : WebSocketDelegate {
       messageHistory.removeAll()
       messageQueue.removeAll()
       
-      self.socket.disconnect(closeCode: WebSocket.CloseCode.goingAway.rawValue)
+      self.socket.disconnect(closeCode: websocketReservedCloseCode)
     }
   }
   
@@ -217,7 +220,7 @@ public class QminderEvents : WebSocketDelegate {
         }
         
         // don't reopen if going away normally
-        return UInt16(err.code) != WebSocket.CloseCode.goingAway.rawValue
+        return UInt16(err.code) != self.websocketReservedCloseCode
       })
       // do it onlu if disconnected
       .filter({ _ in !self.socket.isConnected })
