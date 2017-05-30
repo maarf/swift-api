@@ -28,8 +28,11 @@ public struct User: Mappable {
   /// Selected desk number
   public var desk: Int?
   
-  /// User role
+  /// User roles
   public var roles: Array<Role>?
+  
+  /// User pictures
+  public var picture: Array<Picture>?
   
   public init?(map: Map) {}
   
@@ -40,6 +43,7 @@ public struct User: Mappable {
     lastName <- map["lastName"]
     desk <- (map["desk"], transformFromStringToInt)
     roles <- map["roles"]
+    picture <- map["picture"]
   }
 }
 
@@ -58,7 +62,23 @@ public struct Role: Mappable {
     type <- map["type"]
     location <- map["location"]
   }
+}
+
+/// User image object
+public struct Picture: Mappable {
   
+  /// Picture size
+  public var size: String?
+  
+  /// Picture URL
+  public var url: String?
+  
+  public init?(map: Map) {}
+  
+  mutating public func mapping(map: Map) {
+    size <- map["size"]
+    url <- map["url"]
+  }
 }
 
 /// Users object
