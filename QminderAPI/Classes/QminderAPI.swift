@@ -275,7 +275,7 @@ open class QminderAPI {
     - Parameters:
       - userId: User ID
       - completionHandler: Callback block when user details are received
-      - details: User details object {id, email, firstName, lastName, desk, roles}
+      - details: User details object {id, email, firstName, lastName, desk, roles, image}
       - error: Error
   */
   public func getUserDetails(userId:Int, completionHandler: @escaping (_ details:Dictionary<String, Any>?, _ error:Error?) -> Void) {
