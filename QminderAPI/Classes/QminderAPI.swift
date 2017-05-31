@@ -278,10 +278,15 @@ open class QminderAPI {
       - details: User details object {id, email, firstName, lastName, desk, roles, image}
       - error: Error
   */
-  public func getUserDetails(userId:Int, completionHandler: @escaping (_ details:Dictionary<String, Any>?, _ error:Error?) -> Void) {
+  public func getUserDetails(userId:Int, completionHandler: @escaping (_ user:User?, _ error:Error?) -> Void) {
     makeRequest(url: "/users/\(userId)",
       callback: { json in
-        completionHandler(json.dictionaryObject, nil)
+        guard let user = User(JSON: json.dictionaryObject!) else {
+          completionHandler(nil, QminderError.unreadableObject)
+          return
+        }
+      
+        completionHandler(user, nil)
       },
       errorCallback: { error in
         completionHandler(nil, error)
