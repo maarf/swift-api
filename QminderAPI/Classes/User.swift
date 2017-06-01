@@ -41,7 +41,7 @@ public struct User: Mappable {
     email <- map["email"]
     firstName <- map["firstName"]
     lastName <- map["lastName"]
-    desk <- (map["desk"], transformFromStringToInt)
+    desk <- map["desk"]
     roles <- map["roles"]
     picture <- map["picture"]
   }
