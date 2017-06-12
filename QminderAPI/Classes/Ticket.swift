@@ -55,9 +55,6 @@ public struct Ticket: Mappable {
   /// Order after
   public var orderAfter: Date?
   
-  /// Dictionary for extra parameters for convenience
-  public var extraParams: Dictionary<String, Any> = [:]
-  
   public init?(map: Map) {}
   
   public mutating func mapping(map: Map) {
