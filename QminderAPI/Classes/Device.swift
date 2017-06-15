@@ -42,9 +42,13 @@ public struct Settings: Mappable {
   /// Selected line ID
   public var selectedLine: Int?
   
+  /// Selected lines ID array
+  public var lines: [Int]?
+  
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
     selectedLine <- map["selectedLine"]
+    lines <- map["lines"]
   }
 }
