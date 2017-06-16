@@ -76,9 +76,13 @@ public class QminderEvents : WebSocketDelegate {
   /// Is currently connection being opened (Boolean)
   private var openingConnection = false
   
+  /// Is connection closed
+  private var connectionClosed = false
+  
   /// Websocket object
   private var socket:WebSocket
   
+  /// Dispose bag
   private var disposeBag = DisposeBag()
   
   
@@ -113,6 +117,7 @@ public class QminderEvents : WebSocketDelegate {
     if !openingConnection {
       print("openSocket")
       openingConnection = true
+      connectionClosed = false
       self.socket.connect()
     }
   }
@@ -135,6 +140,7 @@ public class QminderEvents : WebSocketDelegate {
       messageHistory.removeAll()
       messageQueue.removeAll()
       
+      self.connectionClosed = true
       self.socket.disconnect(closeCode: websocketReservedCloseCode)
     }
   }
@@ -212,6 +218,7 @@ public class QminderEvents : WebSocketDelegate {
     openingConnection = false
     
     Observable<Int>.timer(RxTimeInterval(5), scheduler: MainScheduler.instance)
+      .skipWhile({_ in self.connectionClosed })
       .filter({_ in
         
         // if there is error at all
