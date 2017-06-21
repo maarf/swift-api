@@ -72,14 +72,8 @@ public struct Ticket: Mappable {
     created <- map["created"]
     called <- map["called"]
     served <- map["served"]
-    
-    // need to parse also miliseconds
-    
-    let formatter = DateFormatter()
-		formatter.locale = Locale(identifier: "en_US_POSIX")
-		formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    
-    orderAfter <- (map["orderAfter"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
+        
+    orderAfter <- (map["orderAfter"], ISO8601ExtendedDateTransform())
     
     labels <- map["labels"]
     extra <- map["extra"]
@@ -95,7 +89,8 @@ public struct Created: Mappable {
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
-    date <- (map["date"], ISO8601DateTransform())
+  
+    date <- (map["date"], ISO8601ExtendedDateTransform())
   }
 }
 
