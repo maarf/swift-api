@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   s.dependency 'SwiftyJSON', '~> 3.1'
   s.dependency 'Starscream', '~> 2.0'
   s.dependency 'ObjectMapper', '~> 2.2'
-  s.dependency 'RxSwift', '~> 3.4'
+  s.dependency 'RxSwift', '~> 3.5'
   
 end
