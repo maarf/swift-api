@@ -58,7 +58,7 @@ public struct Ticket: Mappable {
   public init?(map: Map) {}
   
   public mutating func mapping(map: Map) {
-    id <- (map["id"], transformFromStringToInt)
+    id <- (map["id"], StringOrIntToInt())
     number <- map["number"]
     line <- map["line"]
     

@@ -10,17 +10,50 @@ import Foundation
 
 import ObjectMapper
 
-/// Transform String to Int
-let transformFromStringToInt = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
-    // transform value from String? to Int?
-    return Int(value!)
-}, toJSON: { (value: Int?) -> String? in
-    // transform value from Int? to String?
-    if let value = value {
-        return String(value)
+/// Transform Int or String to Int
+class StringOrIntToInt: TransformType {
+	public typealias Object = Int
+	public typealias JSON = String
+	
+  /**
+    Transform from JSON
+    
+    - Parameters:
+      - value: Any? value type to transoform
+      
+    - Returns: Optional transformed to Int
+  */
+  func transformFromJSON(_ value: Any?) -> Int? {
+    // If is already Int
+    if let i = value as? Int {
+      return i
+      
+    // If is string
+    } else if let i = value as? String {
+      return Int(i)
     }
-    return nil
-})
+    
+    // It's not String nor Int
+		return nil
+	}
+	
+  /**
+    Transform from to JSON
+    
+    - Parameters:
+      - value: Int to transfer to string
+      
+    - Returns: Optional transformed string
+  */
+  func transformToJSON(_ value: Int?) -> String? {
+		if let value = value {
+			return String(value)
+		}
+		return nil
+	}
+}
+
+
 
 
 /// ISO 8601 extended date format transform which contains milliseconds.

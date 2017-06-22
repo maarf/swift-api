@@ -26,9 +26,9 @@ public struct Line: Mappable {
   public init?(map: Map) {}
   
   public mutating func mapping(map: Map) {
-    id <- map["id"]
+    id <- (map["id"], StringOrIntToInt())
     name <- map["name"]
-    location <- map["location"]
+    location <- (map["location"], StringOrIntToInt())
   }
 }
 

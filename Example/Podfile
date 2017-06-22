@@ -1,13 +1,15 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :tvos, '10.0'
 use_frameworks!
 
 target 'QminderTVApp' do
   pod 'QminderAPI', :path => '../'
+  
+  target 'QminderApiTests' do
+    inherit! :search_paths
+    
+    pod 'Nimble'
+    pod 'Quick'
+  end
 end
 
-target 'QminderApiTests' do
-  pod 'Quick'
-  pod 'Nimble'
-  pod 'QminderAPI', :path => '../'
-end
