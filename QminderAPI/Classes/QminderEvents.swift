@@ -273,7 +273,7 @@ public class QminderEvents : WebSocketDelegate {
   }
   
   func websocketDidReceivePong(socket: WebSocket, data: Data?) {
-    print("Got pong! Maybe some data: \(data)")
+    print("Got pong! Maybe some data: \(String(describing: data))")
   }
   
   

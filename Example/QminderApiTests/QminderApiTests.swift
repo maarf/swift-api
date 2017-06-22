@@ -6,8 +6,9 @@
 //  Copyright © 2016 Qminder. All rights reserved.
 //
 
-import Quick
+
 import Nimble
+import Quick
 import QminderAPI
 import ObjectMapper
 
@@ -490,6 +491,256 @@ class QminderApiTests : QuickSpec {
         })
         
         expect(error).toEventuallyNot(beNil())
+      }
+    }
+    
+    // MARK: - Test models
+    describe("Test models") {
+  
+      //MARK: Ticket model
+      describe("test ticket model") {
+      
+        var data: [String: Any] = [
+          "status" : "NEW",
+          "source" : "MANUAL",
+          "firstName" : "Name",
+          "id" : 999,
+          "created" : [
+            "date" : "2017-02-06T12:35:29Z"
+          ],
+          "line" : 333,
+          "lastName" : "Surname"
+        ]
+      
+        it("parse without milliseconds") {
+          let ticket = Ticket(JSON: data)
+        
+          expect(ticket?.id).to(equal(999))
+          expect(ticket?.source).to(equal("MANUAL"))
+          expect(ticket?.status).to(equal("NEW"))
+          expect(ticket?.firstName).to(equal("Name"))
+          expect(ticket?.lastName).to(equal("Surname"))
+          expect(ticket?.line).to(equal(333))
+          expect(ticket?.created?.date).toNot(beNil())
+        }
+        
+        it ("parse with milliseconds") {
+          
+          data["created"] = ["date" : "2017-02-06T12:35:29.123Z"]
+        
+          let ticket = Ticket(JSON: data)
+
+          expect(ticket?.created?.date).toNot(beNil())
+        }
+        
+        it ("should parse id from string") {
+          data["id"] = "999"
+          
+          let ticket = Ticket(JSON: data)
+          
+          expect(ticket?.id).to(equal(999))
+        }
+        
+        it ("should parse order after without milliseconds") {
+          data["orderAfter"] = "2017-02-06T12:35:29Z"
+        
+          let ticket = Ticket(JSON: data)
+
+          expect(ticket?.orderAfter).toNot(beNil())
+        }
+        
+        it ("should parse order after with milliseconds") {
+          data["orderAfter"] = "2017-02-06T12:35:29.123Z"
+        
+          let ticket = Ticket(JSON: data)
+
+          expect(ticket?.orderAfter).toNot(beNil())
+        }
+        
+        it ("should parse called date, user id, desk") {
+          data["called"] = ["date": "2017-02-06T12:35:29Z", "caller": 444, "desk": 3]
+        
+          let ticket = Ticket(JSON: data)
+
+          expect(ticket?.called?.date).toNot(beNil())
+          expect(ticket?.called?.caller).to(equal(444))
+          expect(ticket?.called?.desk).to(equal(3))
+        }
+        
+        it ("should parse served date") {
+          data["served"] = ["date": "2017-02-06T12:35:29Z"]
+        
+          let ticket = Ticket(JSON: data)
+
+          expect(ticket?.served?.date).toNot(beNil())
+        }
+        
+        it ("should parse labels") {
+          data["labels"] = [["color": "#000000", "value": "Test"]]
+        
+          let ticket = Ticket(JSON: data)
+          
+          expect(ticket?.labels).toNot(beNil())
+          
+          
+          expect(ticket?.labels).to(containElementSatisfying({label in
+            return label.color == "#000000" && label.value == "Test"
+          }))
+        }
+        
+        it ("should parse extra fields") {
+          data["extra"] = [["title": "Title", "value": "Test", "url": "http://www.google.com"]]
+        
+          let ticket = Ticket(JSON: data)
+          
+          expect(ticket?.extra).toNot(beNil())
+          
+          
+          expect(ticket?.extra).to(containElementSatisfying({extra in
+            return extra.title == "Title" //&& extra.value == "Test" && extra.url == "http://www.google.com"
+          }))
+          
+          expect(ticket?.extra).to(containElementSatisfying({extra in
+            return extra.value == "Test" && extra.url == "http://www.google.com"
+          }))
+        }
+      }
+      
+      
+      //MARK: Line model
+      describe ("Test line model") {
+        var data: [String: Any] = [
+          "id" : 999,
+          "name" : "Line name",
+          "location" : 333
+        ]
+        
+        it ("should parse normal data") {
+          let line = Line(JSON: data)
+          
+          expect(line?.id).to(equal(999))
+          expect(line?.name).to(equal("Line name"))
+          expect(line?.location).to(equal(333))
+        }
+        
+        it ("should parse id and location as string") {
+        
+          data["id"] = "999"
+          data["location"] = "333"
+        
+          let line = Line(JSON: data)
+          
+          expect(line?.id).to(equal(999))
+          expect(line?.location).to(equal(333))
+        }
+      }
+      
+      
+      // MARK: Location model
+      describe ("Test location model") {
+        let data: [String: Any] = [
+          "id": 999,
+          "name": "Location name",
+          "latitude": 25.5555,
+          "longitude": 24.666,
+          "timezoneOffset": 4
+        ]
+        
+        it ("should parse normal data") {
+          let location = Location(JSON: data)
+          
+          expect(location?.id).to(equal(999))
+          expect(location?.name).to(equal("Location name"))
+          expect(location?.timezoneOffset).to(equal(4))
+          expect(location?.latitude).to(equal(25.5555))
+          expect(location?.longitude).to(equal(24.666))
+        }
+      }
+      
+      
+      // MARK: TV device model
+      describe("Test TV device model") {
+        var data: [String: Any] = [
+          "id": 999,
+          "name": "Apple TV",
+          "settings": ["lines": [1, 2, 3]],
+          "theme": "Default"
+        ]
+        
+        it ("should parse normal data") {
+          let device = TVDevice(JSON: data)
+        
+          expect(device?.id).to(equal(999))
+          expect(device?.name).to(equal("Apple TV"))
+          expect(device?.theme).to(equal("Default"))
+          expect(device?.settings).toNot(beNil())
+          expect(device?.settings?.lines).toNot(beEmpty())
+          
+          expect(device?.settings?.lines).to(containElementSatisfying({line in
+            return line == 1
+          }))
+          
+          expect(device?.settings?.lines).to(containElementSatisfying({line in
+            return line == 2
+          }))
+          
+          expect(device?.settings?.lines).to(containElementSatisfying({line in
+            return line == 3
+          }))
+        }
+        
+        it ("should parse without settings") {
+          data["settings"] = nil
+          
+          let device = TVDevice(JSON: data)
+          
+          expect(device?.settings).to(beNil())
+          expect(device?.settings?.lines).to(beNil())
+        }
+      }
+      
+      
+      // MARK: User model
+      describe("Test User model") {
+        let data: [String: Any] = [
+          "id": 999,
+          "email": "john@example.com",
+          "firstName": "John",
+          "lastName": "Appleseed",
+          "desk": 1,
+          "roles": [["type": "MANAGER", "location": 3245], ["type": "USER", "location": 1265]],
+          "picture": [["size": "medium", "url": "http://www.google.com/"]]
+        ]
+        
+        it ("should parse normal data") {
+          let user = User(JSON: data)
+          
+          expect(user?.id).to(equal(999))
+          expect(user?.email).to(equal("john@example.com"))
+          expect(user?.firstName).to(equal("John"))
+          expect(user?.lastName).to(equal("Appleseed"))
+          expect(user?.desk).to(equal(1))
+          
+          expect(user?.roles).toNot(beEmpty())
+          
+          expect(user?.roles).to(containElementSatisfying({role in
+            return role.type == "MANAGER" && role.location == 3245
+          }))
+          
+          expect(user?.roles).to(containElementSatisfying({role in
+            return role.type == "USER" && role.location == 1265
+          }))
+          
+          expect(user?.picture).toNot(beEmpty())
+          
+          expect(user?.picture).to(containElementSatisfying({picture in
+            return picture.size == "medium"
+          }))
+          
+          expect(user?.picture).to(containElementSatisfying({picture in
+            return picture.url == "http://www.google.com/"
+          }))
+        }
       }
     }
   }

@@ -4,7 +4,6 @@
 [![Version](https://img.shields.io/cocoapods/v/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![License](https://img.shields.io/cocoapods/l/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![Platform](https://img.shields.io/cocoapods/p/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
-[![codecov](https://codecov.io/gh/Qminder/swift-api/branch/master/graph/badge.svg)](https://codecov.io/gh/Qminder/swift-api)
 
 ## Example
 
