@@ -229,11 +229,13 @@ class QminderApiTests : QuickSpec {
         var location: Location?
       
         waitUntil(action: {done in
-          qminderAPI.getLocationsList(completionHandler: {(l, error) in
-            locations = l
-            
-            location = locations?.first
-            
+          qminderAPI.getLocationsList(completion: {result in
+          
+            if result.isSuccess {
+              locations = result.value
+              location = locations?.first
+            }
+          
             done()
           })
         })
@@ -251,8 +253,11 @@ class QminderApiTests : QuickSpec {
         var details: Location?
         
         waitUntil(action: {done in
-          qminderAPI.getLocationDetails(locationId: locationId, completionHandler: {(d, error) in
-            details = d
+          qminderAPI.getLocationDetails(locationId: locationId, completion: {result in
+          
+            if result.isSuccess {
+              details = result.value
+            }
             
             done()
           })
@@ -270,11 +275,14 @@ class QminderApiTests : QuickSpec {
         var line: Line?
         
         waitUntil(action: {done in
-          qminderAPI.getLocationLines(locationId: locationId, completionHandler: {(l, error) in
+          qminderAPI.getLocationLines(locationId: locationId, completion: {result in
             
-            lines = l
+            if result.isSuccess {
             
-            line = lines?.first
+              lines = result.value
+            
+              line = lines?.first
+            }
             
             done()
           })
@@ -293,11 +301,14 @@ class QminderApiTests : QuickSpec {
         var user: User?
         
         waitUntil(action: {done in
-          qminderAPI.getLocationUsers(locationId: locationId, completionHandler: {(u, error) in
+          qminderAPI.getLocationUsers(locationId: locationId, completion: {result in
           
-            users = u
+            if result.isSuccess {
+          
+              users = result.value
             
-            user = users?.first
+              user = users?.first
+            }
           
             done()
           })
@@ -319,8 +330,11 @@ class QminderApiTests : QuickSpec {
         var details:Line?
         
         waitUntil(action: {done in
-          qminderAPI.getLineDetails(lineId: lineId, completionHandler: {(d, error) in
-            details = d
+          qminderAPI.getLineDetails(lineId: lineId, completion: {result in
+            
+            if result.isSuccess {
+              details = result.value
+            }
             
             done()
           })
@@ -335,14 +349,16 @@ class QminderApiTests : QuickSpec {
       })
       
       xit("Get estimated time of service", closure: {
-        var estimatedTimeOfService:String?
+        var estimatedTimeOfService:Date?
         var estimatedPeopleWaiting:Int?
         
         waitUntil(action: {done in
-          qminderAPI.getEstimatedTimeOfService(lineId: lineId, completionHandler: {(t, people, error) in
+          qminderAPI.getEstimatedTimeOfService(lineId: lineId, completion: {result in
           
-            estimatedTimeOfService = t
-            estimatedPeopleWaiting = people
+            if result.isSuccess {
+              estimatedTimeOfService = result.value?.estimatedTimeOfService
+              estimatedPeopleWaiting = result.value?.estimatedPeopleWaiting
+            }
             
             done()
           })
@@ -363,13 +379,16 @@ class QminderApiTests : QuickSpec {
         var ticket: Ticket?
         
         waitUntil(action: {done in
-          qminderAPI.searchTickets(locationId: locationId, limit: 10, completionHandler: {(t, error) in
-            tickets = t
+          qminderAPI.searchTickets(locationId: locationId, limit: 10, completion: {result in
             
-            // get first ticket id
-            ticket = tickets?.first
+            if result.isSuccess {
+              tickets = result.value
             
-            ticketId = ticket?.id
+              // get first ticket id
+              ticket = tickets?.first
+            
+              ticketId = ticket?.id
+            }
             
             done()
           })
@@ -388,8 +407,10 @@ class QminderApiTests : QuickSpec {
         var tickets:Array<Ticket>?
         
         waitUntil(action: {done in
-          qminderAPI.searchTickets(locationId: locationId, lineId: [lineId], limit: 10, completionHandler: {(t, error) in
-            tickets = t
+          qminderAPI.searchTickets(locationId: locationId, lineId: [lineId], limit: 10, completion: {result in
+            if result.isSuccess {
+              tickets = result.value
+            }
             
             done()
           })
@@ -403,8 +424,10 @@ class QminderApiTests : QuickSpec {
         var tickets:Array<Ticket>?
         
         waitUntil(action: {done in
-          qminderAPI.searchTickets(locationId: locationId, status: ["NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW", "SERVED"], limit: 10, completionHandler: {(t, error) in
-            tickets = t
+          qminderAPI.searchTickets(locationId: locationId, status: ["NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW", "SERVED"], limit: 10, completion: {result in
+            if result.isSuccess {
+              tickets = result.value
+            }
             
             done()
           })
@@ -421,8 +444,11 @@ class QminderApiTests : QuickSpec {
         var details:Ticket?
         
         waitUntil(action: {done in
-          qminderAPI.getTicketDetails(ticketId: ticketId, completionHandler: {(d, error) in
-            details = d
+          qminderAPI.getTicketDetails(ticketId: ticketId, completion: {result in
+            
+            if result.isSuccess {
+              details = result.value
+            }
             
             done()
           })
@@ -447,13 +473,16 @@ class QminderApiTests : QuickSpec {
         
         waitUntil(action: {
           done in
-            qminderAPI.getPairingCodeAndSecret(completionHandler: {
-              (c, s, e) in
-                code = c
-                secret = s
-                error = e as NSError?
+            qminderAPI.getPairingCodeAndSecret(completion: {result in
               
-                done()
+              if result.isSuccess {
+                code = result.value?.code
+                secret = result.value?.secret
+              } else {
+                error = result.error as? NSError
+              }
+              
+              done()
             })
         })
         
@@ -468,9 +497,12 @@ class QminderApiTests : QuickSpec {
         var error: NSError?
         
         waitUntil(action: {done in
-          qminderAPI.tvDetails(id: 666, completionHandler: {d, e in
-            device = d
-            error = e as? NSError
+          qminderAPI.tvDetails(id: 666, completion: {result in
+            if result.isSuccess {
+              device = result.value
+            } else {
+              error = result.error as? NSError
+            }
             
             done()
           })
@@ -483,8 +515,11 @@ class QminderApiTests : QuickSpec {
         var error: NSError?
         
         waitUntil(action: {done in
-          qminderAPI.tvHeartbeat(id: 666, metadata: ["foo": "bar"], completionHandler: {e in
-            error = e as? NSError
+          qminderAPI.tvHeartbeat(id: 666, metadata: ["foo": "bar"], completion: {result in
+            
+            if result.isFailure {
+              error = result.error as? NSError
+            }
             
             done()
           })

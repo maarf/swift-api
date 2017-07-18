@@ -54,8 +54,14 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       
       qminderAPI.setApiKey(key: key!)
 
-      qminderAPI.getLocationsList(completionHandler: {(locations, error) in
-        print(locations!)
+      qminderAPI.getLocationsList(completion: {result in
+        switch result {
+          case .failure(let error):
+            print("Can't get location list \(error)")
+          
+          case .success(let locations):
+            print(locations)
+        }
       })
     
       self.events = QminderEvents(apiKey: key!)
@@ -67,37 +73,48 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       setEvents(locationId: locationId)
       
     } else {
-      qminderAPI.getPairingCodeAndSecret(completionHandler: {
-        (code, secret, error) in
+      qminderAPI.getPairingCodeAndSecret(completion: {result in
+      
+        switch result {
+          case .failure(let error):
+            print("Can't get pairing code and secret \(error)")
+          
+          case .success(let pairingData):
+            self.pairingCode.text = pairingData.code
+    
+            self.timer.invalidate()
         
-          self.pairingCode.text = code
-        
-          self.timer.invalidate()
-        
-          self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
-            (timer) in
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
+              (timer) in
 
-              self.qminderAPI.pairTV(code: code!, secret: secret!, completionHandler: {
-                (status, id, apiKey, locationId, error) in
-                
-                  if status == "PAIRED" {
-                    timer.invalidate()
+                self.qminderAPI.pairTV(code: pairingData.code!, secret: pairingData.secret!, completion: {result in
+
+                  switch result {
+                    case .failure(let error):
+                      print("Can't pair TV \(error)")
                     
-                    UserDefaults.standard.set(apiKey, forKey: "API_KEY")
-                    UserDefaults.standard.set(id, forKey: "TV_ID")
-                    UserDefaults.standard.set(locationId, forKey: "LOCATION_ID")
-                    
-                    if let key = apiKey {
-                      self.events = QminderEvents(apiKey: key)
-                      self.events?.delegate = self
-                      self.events?.openSocket()
+                    case .success(let tvData):
+                  
+                      if tvData.status == "PAIRED" {
+                        timer.invalidate()
                       
-                      self.setEvents(locationId: locationId!)
-                    }
+                        UserDefaults.standard.set(tvData.apiKey, forKey: "API_KEY")
+                        UserDefaults.standard.set(tvData.id, forKey: "TV_ID")
+                        UserDefaults.standard.set(tvData.locationID, forKey: "LOCATION_ID")
+                      
+                        if let key = tvData.apiKey {
+                          self.events = QminderEvents(apiKey: key)
+                          self.events?.delegate = self
+                          self.events?.openSocket()
+                          
+                          self.setEvents(locationId: tvData.locationID!)
+                        }
+                      }
                   }
-              })
-            
-          })
+                })
+              
+            })
+        }
       })
     }
   }
