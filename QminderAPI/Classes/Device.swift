@@ -45,10 +45,14 @@ public struct Settings: Mappable {
   /// Selected lines ID array
   public var lines: [Int]?
   
+  /// Clear tickets afterCalling or afterServing
+  public var clearTickets: String?
+  
   public init?(map: Map) {}
   
   mutating public func mapping(map: Map) {
     selectedLine <- map["selectedLine"]
     lines <- map["lines"]
+    clearTickets <- map["clearTickets"]
   }
 }
