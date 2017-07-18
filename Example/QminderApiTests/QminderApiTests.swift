@@ -747,7 +747,7 @@ class QminderApiTests : QuickSpec {
           "picture": [["size": "medium", "url": "http://www.google.com/"]]
         ]
         
-        it ("should parse normal data") {
+        it("should parse normal data") {
           let user = User(JSON: data)
           
           expect(user?.id).to(equal(999))
@@ -775,6 +775,70 @@ class QminderApiTests : QuickSpec {
           expect(user?.picture).to(containElementSatisfying({picture in
             return picture.url == "http://www.google.com/"
           }))
+        }
+      }
+      
+      // MARK: Estimated time of service
+      describe("Test Estimated time of service model") {
+        let data: [String: Any] = [
+          "estimatedTimeOfService": "2013-07-03T16:27Z",
+          "estimatedPeopleWaiting": 3
+        ]
+        
+        it("should parse normal data") {
+          let estimatedTimeOfService = EstimatedTimeOfService(JSON: data)
+          
+          expect(estimatedTimeOfService?.estimatedTimeOfService).toNot(beNil())
+          expect(estimatedTimeOfService?.estimatedPeopleWaiting).to(equal(3))
+        }
+      }
+      
+      
+      // MARK: TV API data
+      describe("Test TV API data model") {
+        it("Should parse normal data PAIRED") {
+          let data: [String: Any] = [
+            "status": "PAIRED",
+            "id": 41078,
+            "apiKey": "804ef75ba9b6b5264c96150b457f8f30",
+            "location": 666
+          ]
+          
+          let tvAPIData = TVAPIData(JSON: data)
+          
+          expect(tvAPIData?.status).to(equal("PAIRED"))
+          expect(tvAPIData?.id).to(equal(41078))
+          expect(tvAPIData?.apiKey).to(equal("804ef75ba9b6b5264c96150b457f8f30"))
+          expect(tvAPIData?.locationID).to(equal(666))
+        }
+        
+        it("Should parse normal data NOT_PAIRED") {
+          let data: [String: Any] = [
+            "status": "NOT_PAIRED"
+          ]
+          
+          let tvAPIData = TVAPIData(JSON: data)
+          
+          expect(tvAPIData?.status).to(equal("NOT_PAIRED"))
+          expect(tvAPIData?.id).to(beNil())
+          expect(tvAPIData?.apiKey).to(beNil())
+          expect(tvAPIData?.locationID).to(beNil())
+        }
+      }
+      
+      
+      // MARK: TV Pairing code
+      describe("Test TV pairing code model") {
+        let data : [String: Any] = [
+          "code": "PW3R",
+          "secret": "75aa16d7923ac707cc302e1ce7c81e8a"
+        ]
+        
+        it("should parse normal data") {
+          let tvPairingCode = TVPairingCode(JSON: data)
+          
+          expect(tvPairingCode?.code).to(equal("PW3R"))
+          expect(tvPairingCode?.secret).to(equal("75aa16d7923ac707cc302e1ce7c81e8a"))
         }
       }
     }
