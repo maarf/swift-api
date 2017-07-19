@@ -381,7 +381,7 @@ open class QminderAPI {
     
       switch result {
         case .failure(let error):
-          return completion(QminderResult.failure(error))
+          return completion(QminderResult.failure(QminderError.alamofire(error)))
           
         case .success(let json):
           guard let device = TVDevice(JSON: json) else {
