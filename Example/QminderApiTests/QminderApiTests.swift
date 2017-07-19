@@ -663,7 +663,7 @@ class QminderApiTests : QuickSpec {
         var data: [String: Any] = [
           "id": 999,
           "name": "Apple TV",
-          "settings": ["lines": [1, 2, 3]],
+          "settings": ["lines": [1, 2, 3], "clearTickets": "afterCalling"],
           "theme": "Default"
         ]
         
@@ -675,6 +675,7 @@ class QminderApiTests : QuickSpec {
           expect(device?.theme).to(equal("Default"))
           expect(device?.settings).toNot(beNil())
           expect(device?.settings?.lines).toNot(beEmpty())
+          expect(device?.settings?.clearTickets.to(equal("afterCalling")))
           
           expect(device?.settings?.lines).to(containElementSatisfying({line in
             return line == 1
