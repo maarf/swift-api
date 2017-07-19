@@ -710,7 +710,7 @@ class QminderApiTests : QuickSpec {
           expect(device?.theme).to(equal("Default"))
           expect(device?.settings).toNot(beNil())
           expect(device?.settings?.lines).toNot(beEmpty())
-          expect(device?.settings?.clearTickets.to(equal("afterCalling")))
+          expect(device?.settings?.clearTickets).to(equal("afterCalling"))
           
           expect(device?.settings?.lines).to(containElementSatisfying({line in
             return line == 1
