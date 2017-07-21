@@ -17,9 +17,8 @@ class QminderApiTests : QuickSpec {
   override func spec() {
   
     /// Qminder API client
-    let qminderAPI:QminderAPI = QminderAPI()
-    
-    var events:QminderEvents?
+    let qminderAPI = QminderAPI.sharedInstance
+    let events = QminderEvents.sharedInstance
     
     
     /// Location ID
@@ -35,7 +34,7 @@ class QminderApiTests : QuickSpec {
     beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
         qminderAPI.setApiKey(key: apiKey)
-        events = QminderEvents(apiKey: apiKey, serverAddress: "ws://localhost:8889")
+        events.setup(apiKey: apiKey, serverAddress: "ws://localhost:8889")
       }
     }
     
@@ -45,7 +44,7 @@ class QminderApiTests : QuickSpec {
       var eventsResponses:Array<[String: Any?]> = []
     
       it("Subscribe to events") {
-        events?.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
+        events.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
           if error == nil {
             print(data)
             
@@ -53,7 +52,7 @@ class QminderApiTests : QuickSpec {
           }
         })
         
-        events?.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
+        events.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
           if error == nil {
             print(data)
             
@@ -61,7 +60,7 @@ class QminderApiTests : QuickSpec {
           }
         })
         
-        events?.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
+        events.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
           if error == nil {
             print(data)
             
@@ -69,7 +68,7 @@ class QminderApiTests : QuickSpec {
           }
         })
         
-        events?.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
+        events.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
           if error == nil {
             print(data)
             
@@ -77,7 +76,7 @@ class QminderApiTests : QuickSpec {
           }
         })
         
-        events?.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
+        events.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
           if error == nil {
             print(data)
             
@@ -85,7 +84,7 @@ class QminderApiTests : QuickSpec {
           }
         })
         
-        events?.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
+        events.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
           if error == nil {
             print(data)
             

@@ -35,6 +35,9 @@ public protocol QminderEventsDelegate {
 /// Qminder Events class to work with Websockets API
 public class QminderEvents : WebSocketDelegate {
 
+  /// Singleton shared instance
+  public static let sharedInstance = QminderEvents()
+
   /// Class delegate
   public var delegate:QminderEventsDelegate?
   
@@ -80,11 +83,16 @@ public class QminderEvents : WebSocketDelegate {
   private var connectionClosed = false
   
   /// Websocket object
-  private var socket:WebSocket
+  private var socket:WebSocket!
   
   /// Dispose bag
   private var disposeBag = DisposeBag()
   
+  
+  /**
+    Private init for singleton approach
+  */
+  private init() {}
   
   /**
     Initialization function. Initializes Websocket object and sets Websocket library delegate to self.
@@ -96,9 +104,9 @@ public class QminderEvents : WebSocketDelegate {
     - Returns: Creates Qminder Events client
    
   */
-  public init(apiKey:String, serverAddress:String="wss://api.qminder.com") {
+  public func setup(apiKey:String, serverAddress:String="wss://api.qminder.com") {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
-    self.socket.delegate = self
+    self.socket?.delegate = self
     
     // Ping server each 30 seconds
     Observable<Int>.interval(RxTimeInterval(3), scheduler: MainScheduler.instance)

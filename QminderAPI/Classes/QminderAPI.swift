@@ -16,6 +16,9 @@ import ObjectMapper
 /// Qminder API for iOS in Swift
 open class QminderAPI {
 
+  /// Singleton shared instance
+  public static let sharedInstance = QminderAPI()
+
   /// Qminder API key
   private var apiKey: String?
   
@@ -27,11 +30,9 @@ open class QminderAPI {
   
   
   /**
-    Public init function
-    
-    - Returns: Qminder API object
+    Private init for singleton approach
   */
-  public init() {}
+  private init() {}
   
   /**
     Set Qminder API key

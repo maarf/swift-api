@@ -25,10 +25,10 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   private var timer = Timer()
   
   /// Qminder API provider
-  private var qminderAPI: QminderAPI = QminderAPI()
+  private var qminderAPI = QminderAPI.sharedInstance
   
   /// Qminder Websockets provider
-  private var events:QminderEvents?
+  private var events = QminderEvents.sharedInstance
   
   /// Pairing code label
   @IBOutlet var pairingCode: UILabel!
@@ -64,9 +64,10 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
         }
       })
     
-      self.events = QminderEvents(apiKey: key!)
-      self.events?.delegate = self
-      self.events?.openSocket()
+      events.setup(apiKey: key!)
+//      self.events = QminderEvents(apiKey: key!)
+      events.delegate = self
+      events.openSocket()
       
       let locationId = UserDefaults.standard.integer(forKey: "LOCATION_ID")
       
@@ -103,9 +104,9 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
                         UserDefaults.standard.set(tvData.locationID, forKey: "LOCATION_ID")
                       
                         if let key = tvData.apiKey {
-                          self.events = QminderEvents(apiKey: key)
-                          self.events?.delegate = self
-                          self.events?.openSocket()
+                          self.events.setup(apiKey: key)
+                          self.events.delegate = self
+                          self.events.openSocket()
                           
                           self.setEvents(locationId: tvData.locationID!)
                         }
@@ -123,37 +124,37 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     
     let parameters = ["location": locationId]
   
-    self.events?.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
+    events.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
       if error == nil {
         self.messageReceived(event: "TICKET_CREATED", data: data!)
       }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
+    events.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
       if error == nil {
         self.messageReceived(event: "TICKET_CALLED", data: data!)
       }
     })
     
-    self.events?.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
+    events.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
       if error == nil {
         self.messageReceived(event: "TICKET_RECALLED", data: data!)
       }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
+    events.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
       if error == nil {
         self.messageReceived(event:"TICKET_CANCELLED", data: data!)
       }
     })
     
-    self.events?.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
+    events.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
       if error == nil {
         self.messageReceived(event:"TICKET_SERVED", data: data!)
       }
     })
     
-    self.events?.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
+    events.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
       if error == nil {
         self.messageReceived(event:"TICKET_CHANGED", data: data!)
       }
