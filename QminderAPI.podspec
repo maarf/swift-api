@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'QminderAPI'
-  s.version          = '0.1.40'
+  s.version          = '0.1.41'
   s.summary          = 'Qminder iOS API'
 
   s.description      = <<-DESC
@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
   s.author           = { 'Qminder Ltd.' => 'info@qminderapp.com' }
   s.social_media_url = 'https://www.facebook.com/QMinder/'
   s.source           = { :git => 'https://github.com/Qminder/swift-api.git', :tag => s.version.to_s }
-  
+
   s.source_files = "QminderAPI/Classes/*.swift"
-  
+
   s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'
   s.osx.deployment_target = '10.12'
@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
   s.dependency 'Starscream', '~> 2.1'
   s.dependency 'ObjectMapper', '~> 2.2'
   s.dependency 'RxSwift', '~> 3.6'
-  
+
 end
