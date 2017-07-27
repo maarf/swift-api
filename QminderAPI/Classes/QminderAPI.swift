@@ -425,18 +425,18 @@ open class QminderAPI {
       - message: Empty state message
       - error: Error
   */
-  public func tvEmptyState(id: Int, completion: @escaping (QminderResult<String>) -> Void) {
+  public func tvEmptyState(id: Int, completion: @escaping (QminderResult<EmptyState>) -> Void) {
     makeRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
           
         case .success(let json):
-          guard let message = json["message"] as? String else {
+          guard let emptyState = EmptyState(JSON: json) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
           
-          return completion(QminderResult.success(message))
+          return completion(QminderResult.success(emptyState))
       }
     })
       
