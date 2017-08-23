@@ -22,6 +22,9 @@ open class QminderAPI {
   /// Qminder API key
   private var apiKey: String?
   
+  /// Qminder API address
+  private var serverAddress: String?
+  
   /// Qminder request result
   enum QminderRequestResult<Value> {
     case success(Value)
@@ -39,8 +42,9 @@ open class QminderAPI {
     
     - Parameter key: API key
   */
-  open func setApiKey(key:String) {
-    apiKey = key
+  open func setup(apiKey:String, serverAddress:String="https://api.qminder.com/v1") {
+    self.apiKey = apiKey
+    self.serverAddress = serverAddress
   }
   
   // MARK: - Locations
@@ -466,7 +470,7 @@ open class QminderAPI {
       headers["X-Qminder-REST-API-Key"] = key
     }
     
-    Alamofire.request("https://api.qminder.com/v1\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON(completionHandler: { response in
+    Alamofire.request("\(serverAddress)\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON(completionHandler: { response in
       
       switch response.result {
         case .failure(let error):
