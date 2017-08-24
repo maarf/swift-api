@@ -23,7 +23,7 @@ open class QminderAPI {
   private var apiKey: String?
   
   /// Qminder API address
-  private var serverAddress: String?
+  private var serverAddress = "https://api.qminder.com/v1"
   
   /// Qminder request result
   enum QminderRequestResult<Value> {
@@ -42,9 +42,13 @@ open class QminderAPI {
     
     - Parameter key: API key
   */
-  open func setup(apiKey:String, serverAddress:String="https://api.qminder.com/v1") {
+  open func setup(apiKey:String, serverAddress:String?=nil) {
     self.apiKey = apiKey
-    self.serverAddress = serverAddress
+    
+    guard let address = serverAddress else {
+      return
+    }
+    self.serverAddress = address
   }
   
   // MARK: - Locations
