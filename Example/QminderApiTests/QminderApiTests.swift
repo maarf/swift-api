@@ -33,7 +33,7 @@ class QminderApiTests : QuickSpec {
     // Create Qminder API client
     beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
-        qminderAPI.setApiKey(key: apiKey)
+        qminderAPI.setup(apiKey: apiKey)
         events.setup(apiKey: apiKey, serverAddress: "ws://localhost:8889")
       }
     }
