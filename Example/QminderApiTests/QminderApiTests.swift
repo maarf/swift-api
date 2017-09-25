@@ -27,7 +27,46 @@ class QminderApiTests : QuickSpec {
     let lineId:Int = Int(ProcessInfo.processInfo.environment["QMINDER_LINE_ID"]!)!
     
     /// Ticket ID
-    var ticketId:Int!
+    var ticketId:String!
+    
+    let jsonDecoderWithMilliseconds: JSONDecoder = {
+      let jsonDecoder = JSONDecoder()
+      
+      let dateISO8601ShortFormatter = DateFormatter()
+      dateISO8601ShortFormatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+      
+      let dateISO8601Formatter = DateFormatter()
+      dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+      
+      let dateISO8601MillisecondsFormatter = DateFormatter()
+      dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+      
+      jsonDecoder.dateDecodingStrategy = .custom({decoder -> Date in
+        
+        let container = try decoder.singleValueContainer()
+        let dateStr = try container.decode(String.self)
+        
+        // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        var tmpDate: Date? = nil
+        
+        if dateStr.count == 17 {
+          tmpDate = dateISO8601ShortFormatter.date(from: dateStr)
+        } else if dateStr.count == 24 {
+          tmpDate = dateISO8601MillisecondsFormatter.date(from: dateStr)
+        } else {
+          tmpDate = dateISO8601Formatter.date(from: dateStr)
+        }
+        
+        guard let date = tmpDate else {
+          throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
+        }
+        
+        return date
+      })
+      
+      return jsonDecoder
+    }()
     
     // Create Qminder API client
     beforeSuite {
@@ -37,185 +76,184 @@ class QminderApiTests : QuickSpec {
       }
     }
     
-//    describe("Qminder Events tests") {
-//
-//      let parameters = ["location": locationId]
-//      var eventsResponses:Array<[String: Any?]> = []
-//
-//      it("Subscribe to events") {
-//        events.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
-//          if error == nil {
-//            print(data)
-//
-//            eventsResponses.append(data!)
-//          }
-//        })
-//
-//        events.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
-//          if error == nil {
-//            print(data)
-//
-//            eventsResponses.append(data!)
-//          }
-//        })
-//
-//        events.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
-//          if error == nil {
-//            print(data)
-//
-//            eventsResponses.append(data!)
-//          }
-//        })
-//
-//        events.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
-//          if error == nil {
-//            print(data)
-//
-//            eventsResponses.append(data!)
-//          }
-//        })
-//
-//        events.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
-//          if error == nil {
-//            print(data)
-//
-//            eventsResponses.append(data!)
-//          }
-//        })
-//
-//        events.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
-//          if error == nil {
-//            print(data)
-//
-//            eventsResponses.append(data!)
-//          }
-//        })
-//
-//
-//      }
-//
-//      it("Get response from Websockets"){
-//        // Test run #1
-//        // Ticket created
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          return ticket.id == 23853943 && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
-//
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket created")
-//
-//        // Ticket edited
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          return ticket.id == 23853943 && ticket.status == "NEW" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//        // Ticket deleted
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          return ticket.id == 23853943 && ticket.status == "CANCELLED_BY_CLERK" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//
-//        // Test run #2
-//        // Ticket created
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          return ticket.id == 23856820 && ticket.status == "NEW" && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//        // Ticket edited
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          return ticket.id == 23856820 && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//        // Ticket edited
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          return ticket.id == 23856820 && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//        // Ticket called
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          let formatter = DateFormatter()
-//          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//          guard let date = formatter.date(from: "2017-02-06T13:36:11Z") else {
-//            return false
-//          }
-//
-//          guard let calledDate = ticket.called?.date else {
-//            return false
-//          }
-//
-//          return ticket.id == 23856820 && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
-//
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//        // Ticket re-called
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          let formatter = DateFormatter()
-//          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//          guard let date = formatter.date(from: "2017-02-06T13:36:21Z") else {
-//            return false
-//          }
-//
-//          guard let calledDate = ticket.called?.date else {
-//            return false
-//          }
-//
-//          return ticket.id == 23856820 && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
-//
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//        // Ticket served
-//        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-//          guard let ticket = Ticket(JSON: data) else {
-//            return false
-//          }
-//
-//          let formatter = DateFormatter()
-//          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//          guard let date = formatter.date(from: "2017-02-06T13:36:36Z") else {
-//            return false
-//          }
-//
-//          guard let servedDate = ticket.served?.date else {
-//            return false
-//          }
-//
-//          return ticket.id == 23856820 && ticket.status == "SERVED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(servedDate) == ComparisonResult.orderedSame
-//
-//        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
-//
-//      }
-//    }
+    describe("Qminder Events tests") {
+
+      let parameters = ["location": locationId]
+      var eventsResponses:Array<[String: Any?]> = []
+
+      it("Subscribe to events") {
+        events.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+
+            eventsResponses.append(data!)
+          }
+        })
+
+        events.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+
+            eventsResponses.append(data!)
+          }
+        })
+
+        events.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+
+            eventsResponses.append(data!)
+          }
+        })
+
+        events.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+
+            eventsResponses.append(data!)
+          }
+        })
+
+        events.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+
+            eventsResponses.append(data!)
+          }
+        })
+
+        events.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
+          if error == nil {
+            print(data)
+
+            eventsResponses.append(data!)
+          }
+        })
+
+
+      }
+
+      it("Get response from Websockets"){
+        // Test run #1
+        // Ticket created
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+          
+          return ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket created")
+
+        // Ticket edited
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          return ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+        // Ticket deleted
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          return ticket.id == "23853943" && ticket.status == "CANCELLED_BY_CLERK" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+
+        // Test run #2
+        // Ticket created
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+        // Ticket edited
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+        // Ticket edited
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+        // Ticket called
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: "2017-02-06T13:36:11Z") else {
+            return false
+          }
+
+          guard let calledDate = ticket.called?.date else {
+            return false
+          }
+
+          return ticket.id == "23856820" && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
+
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+        // Ticket re-called
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: "2017-02-06T13:36:21Z") else {
+            return false
+          }
+
+          guard let calledDate = ticket.called?.date else {
+            return false
+          }
+
+          return ticket.id == "23856820" && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
+
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+        // Ticket served
+        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
+          
+          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
+          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
+
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: "2017-02-06T13:36:36Z") else {
+            return false
+          }
+
+          guard let servedDate = ticket.served?.date else {
+            return false
+          }
+
+          return ticket.id == "23856820" && ticket.status == "SERVED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(servedDate) == ComparisonResult.orderedSame
+
+        }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
+
+      }
+    }
     
     describe("Qminder API tests") {
       
@@ -529,45 +567,6 @@ class QminderApiTests : QuickSpec {
     
     // MARK: - Test models
     describe("Test models") {
-      
-      let jsonDecoderWithMilliseconds: JSONDecoder = {
-        let jsonDecoder = JSONDecoder()
-        
-        let dateISO8601ShortFormatter = DateFormatter()
-        dateISO8601ShortFormatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
-        
-        let dateISO8601Formatter = DateFormatter()
-        dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        let dateISO8601MillisecondsFormatter = DateFormatter()
-        dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        
-        jsonDecoder.dateDecodingStrategy = .custom({decoder -> Date in
-          
-          let container = try decoder.singleValueContainer()
-          let dateStr = try container.decode(String.self)
-          
-          // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-          
-          var tmpDate: Date? = nil
-          
-          if dateStr.count == 17 {
-            tmpDate = dateISO8601ShortFormatter.date(from: dateStr)
-          } else if dateStr.count == 24 {
-            tmpDate = dateISO8601MillisecondsFormatter.date(from: dateStr)
-          } else {
-            tmpDate = dateISO8601Formatter.date(from: dateStr)
-          }
-          
-          guard let date = tmpDate else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
-          }
-          
-          return date
-        })
-        
-        return jsonDecoder
-      }()
   
       //MARK: Ticket model
       describe("test ticket model") {
@@ -589,7 +588,7 @@ class QminderApiTests : QuickSpec {
         it("parse without milliseconds") {
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
         
-          expect(ticket?.id).to(equal(999))
+          expect(ticket?.id).to(equal("999"))
           expect(ticket?.source).to(equal("MANUAL"))
           expect(ticket?.status).to(equal("NEW"))
           expect(ticket?.firstName).to(equal("Name"))

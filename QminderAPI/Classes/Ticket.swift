@@ -12,7 +12,7 @@ import Foundation
 public struct Ticket: Codable {
   
   /// A unique ticket ID
-  public let ticketId: String
+  public let id: String
   
   /// Ticket number
   public let number: Int?
@@ -52,33 +52,6 @@ public struct Ticket: Codable {
   
   /// Order after
   public var orderAfter: Date?
-  
-  enum CodingKeys: String, CodingKey {
-    case ticketId = "id"
-    
-    case number
-    case line
-    case source
-    case status
-    case firstName
-    case lastName
-    case phoneNumber
-    case created
-    case called
-    case served
-    case labels
-    case extra
-    case orderAfter
-  }
-}
-
-// Hack to get ticket ID as int
-extension Ticket {
-  public var id: Int? {
-    guard let id = Int(self.ticketId) else { return nil }
-    
-    return id
-  }
 }
 
 /// Created data object

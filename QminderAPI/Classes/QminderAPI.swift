@@ -306,7 +306,7 @@ open class QminderAPI {
       - details: Ticket details object
       - error: Error
   */
-  public func getTicketDetails(ticketId:Int, completion: @escaping (QminderResult<Ticket>) -> Void) {
+  public func getTicketDetails(ticketId:String, completion: @escaping (QminderResult<Ticket>) -> Void) {
     
     makeRequest(url: "/tickets/\(ticketId)", completion: {result in
     
