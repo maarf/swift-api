@@ -8,24 +8,15 @@
 
 import Foundation
 
-import ObjectMapper
-
 /// Empty state object
-public struct EmptyState: Mappable {
-  // layout
-  // message
+public struct EmptyState: Codable {
+  
+  /// Status code
+  let statusCode: Int
   
   /// Empty state layout
-  public var layout: String?
+  public let layout: String
   
   /// Empty state message
-  public var message: String?
-  
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    layout <- map["layout"]
-    message <- map["message"]
-  }
-
+  public let message: String
 }

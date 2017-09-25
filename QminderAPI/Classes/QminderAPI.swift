@@ -10,7 +10,6 @@ import Foundation
 
 import Alamofire
 import SwiftyJSON
-import ObjectMapper
 
 
 /// Qminder API for iOS in Swift
@@ -24,6 +23,41 @@ open class QminderAPI {
   
   /// Qminder API address
   private var serverAddress = "https://api.qminder.com/v1"
+  
+  /// JSON decoder with milliseconds
+  private let jsonDecoderWithMilliseconds: JSONDecoder = {
+    let jsonDecoder = JSONDecoder()
+    
+    let dateISO8601Formatter = DateFormatter()
+    dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    
+    let dateISO8601MillisecondsFormatter = DateFormatter()
+    dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    jsonDecoder.dateDecodingStrategy = .custom({decoder -> Date in
+      
+      let container = try decoder.singleValueContainer()
+      let dateStr = try container.decode(String.self)
+      
+      // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+      
+      var tmpDate: Date? = nil
+      
+      if dateStr.count == 24 {
+        tmpDate = dateISO8601MillisecondsFormatter.date(from: dateStr)
+      } else {
+        tmpDate = dateISO8601Formatter.date(from: dateStr)
+      }
+      
+      guard let date = tmpDate else {
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
+      }
+      
+      return date
+    })
+    
+    return jsonDecoder
+  }()
   
   /// Qminder request result
   enum QminderRequestResult<Value> {
@@ -61,18 +95,19 @@ open class QminderAPI {
       - locations: Array data of locations {id, name, latitude, longitude}
       - error: Error
   */
-  open func getLocationsList(completion: @escaping (QminderResult<Array<Location>>) -> Void) {
+  open func getLocationsList(completion: @escaping (QminderResult<[Location]>) -> Void) {
   
-    makeRequest(url: "/locations/", completion: {result in
+    makeDataRequest(url: "/locations/", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
-          guard let locations = Locations(JSON: json)?.locations else {
+        case .success(let data):
+          
+          guard let locations = try? JSONDecoder().decode(Locations.self, from: data).data else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
-        
+          
           return completion(QminderResult.success(locations))
       }
     })
@@ -89,13 +124,14 @@ open class QminderAPI {
   */
   public func getLocationDetails(locationId:Int, completion: @escaping (QminderResult<Location>) -> Void) {
   
-    makeRequest(url: "/locations/\(locationId)", completion: {result in
+    makeDataRequest(url: "/locations/\(locationId)", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
-          guard let location = Location(JSON: json) else {
+        case .success(let data):
+          
+          guard let location = try? JSONDecoder().decode(Location.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
         
@@ -113,19 +149,19 @@ open class QminderAPI {
       - lines: Array of lines {id, name}
       - error: Error
   */
-  public func getLocationLines(locationId:Int, completion: @escaping (QminderResult<Array<Line>>) -> Void) {
+  public func getLocationLines(locationId:Int, completion: @escaping (QminderResult<[Line]>) -> Void) {
     
-    makeRequest(url: "/locations/\(locationId)/lines", completion: {result in
+    makeDataRequest(url: "/locations/\(locationId)/lines", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
+        case .success(let data):
       
-          guard let lines = Lines(JSON: json)?.lines else {
+          guard let lines = try? JSONDecoder().decode(Lines.self, from: data).data else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
-      
+          
           return completion(QminderResult.success(lines))
         }
       })
@@ -140,15 +176,16 @@ open class QminderAPI {
       - lines: Array of users {id, email, firstName, lastName}
       - error: Error
   */
-  public func getLocationUsers(locationId:Int, completion: @escaping (QminderResult<Array<User>>) -> Void) {
+  public func getLocationUsers(locationId:Int, completion: @escaping (QminderResult<[User]>) -> Void) {
     
-    makeRequest(url: "/locations/\(locationId)/users", completion: {result in
+    makeDataRequest(url: "/locations/\(locationId)/users", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
-          guard let users = Users(JSON: json)?.users else {
+        case .success(let data):
+          
+          guard let users = try? JSONDecoder().decode(Users.self, from: data).data else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
         
@@ -170,14 +207,14 @@ open class QminderAPI {
   */
   public func getLineDetails(lineId:Int, completion: @escaping (QminderResult<Line>) -> Void) {
     
-    makeRequest(url: "/lines/\(lineId)", completion: {result in
+    makeDataRequest(url: "/lines/\(lineId)", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
+        case .success(let data):
       
-          guard let line = Line(JSON: json) else {
+          guard let line = try? JSONDecoder().decode(Line.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
         
@@ -188,14 +225,17 @@ open class QminderAPI {
   
   public func getEstimatedTimeOfService(lineId:Int, completion: @escaping (QminderResult<EstimatedTimeOfService>) -> Void) {
     
-    makeRequest(url: "/lines/\(lineId)/estimated-time", completion: {result in
+    makeDataRequest(url: "/lines/\(lineId)/estimated-time", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
+        case .success(let data):
+          
+          let jsonDecoder = JSONDecoder()
+          jsonDecoder.dateDecodingStrategy = .iso8601
         
-          guard let estimatedTimeOfService = EstimatedTimeOfService(JSON: json) else {
+          guard let estimatedTimeOfService = try? jsonDecoder.decode(EstimatedTimeOfService.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
           
@@ -225,31 +265,30 @@ open class QminderAPI {
       - tickets: Tickets Array
       - error: Error
   */
-  public func searchTickets(locationId:Int? = nil, lineId:Array<Int>? = nil, status:Array<String>? = nil, callerId:Int? = nil, minCreatedTimestamp:Int? = nil, maxCreatedTimestamp:Int? = nil, minCalledTimestamp:Int? = nil, maxCalledTimestamp:Int? = nil, limit:Int? = nil, order:String? = nil, completion: @escaping (QminderResult<Array<Ticket>>) -> Void) {
+  public func searchTickets(locationId:Int? = nil, lineId:[Int]? = nil, status:[String]? = nil, callerId:Int? = nil, minCreatedTimestamp:Int? = nil, maxCreatedTimestamp:Int? = nil, minCalledTimestamp:Int? = nil, maxCalledTimestamp:Int? = nil, limit:Int? = nil, order:String? = nil, completion: @escaping (QminderResult<[Ticket]>) -> Void) {
   
-    var parameters:Parameters = Parameters()
+    var parameters = Parameters()
     
-    // check if parameters exist and add them to url
-    addParameter(value: locationId, name: "location", parameters: &parameters)
-    addParameter(value: lineId?.flatMap({ String($0) }).joined(separator: ","), name: "line", parameters: &parameters)
-    addParameter(value: status?.joined(separator: ","), name: "status", parameters: &parameters)
-    addParameter(value: callerId, name: "caller", parameters: &parameters)
-    addParameter(value: minCreatedTimestamp, name: "minCreated", parameters: &parameters)
-    addParameter(value: maxCreatedTimestamp, name: "maxCreated", parameters: &parameters)
-    addParameter(value: minCalledTimestamp, name: "minCalled", parameters: &parameters)
-    addParameter(value: maxCalledTimestamp, name: "maxCalled", parameters: &parameters)
-    addParameter(value: limit, name: "limit", parameters: &parameters)
-    addParameter(value: order, name: "order", parameters: &parameters)
+    parameters.set(value: locationId, forKey: "location")
+    parameters.set(value: lineId?.flatMap({ String($0) }).joined(separator: ","), forKey: "line")
+    parameters.set(value: status?.joined(separator: ","), forKey: "status")
+    parameters.set(value: callerId, forKey: "caller")
+    parameters.set(value: minCreatedTimestamp, forKey: "minCreated")
+    parameters.set(value: maxCreatedTimestamp, forKey: "maxCreated")
+    parameters.set(value: minCalledTimestamp, forKey: "minCalled")
+    parameters.set(value: maxCalledTimestamp, forKey: "maxCalled")
+    parameters.set(value: limit, forKey: "limit")
+    parameters.set(value: order, forKey: "order")
     
-    
-    makeRequest(url: "/tickets/search", parameters: parameters, completion: {result in
+    makeDataRequest(url: "/tickets/search", parameters: parameters, completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
-          guard let tickets = Tickets(JSON: json)?.tickets else {
+        case .success(let data):
+          
+          guard let tickets = try? self.jsonDecoderWithMilliseconds.decode(Tickets.self, from: data).data else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
         
@@ -269,14 +308,15 @@ open class QminderAPI {
   */
   public func getTicketDetails(ticketId:Int, completion: @escaping (QminderResult<Ticket>) -> Void) {
     
-    makeRequest(url: "/tickets/\(ticketId)", completion: {result in
+    makeDataRequest(url: "/tickets/\(ticketId)", completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
-          guard let ticket = Ticket(JSON: json) else {
+        case .success(let data):
+          
+          guard let ticket = try? self.jsonDecoderWithMilliseconds.decode(Ticket.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
       
@@ -298,14 +338,15 @@ open class QminderAPI {
       - error: Error
   */
   public func getUserDetails(userId:Int, completion: @escaping (QminderResult<User>) -> Void) {
-    makeRequest(url: "/users/\(userId)", completion: {result in
+    makeDataRequest(url: "/users/\(userId)", completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
         
-        case .success(let json):
-          guard let user = User(JSON: json) else {
+        case .success(let data):
+          
+          guard let user = try? JSONDecoder().decode(User.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
           
@@ -327,15 +368,15 @@ open class QminderAPI {
   */
   public func getPairingCodeAndSecret(completion: @escaping (QminderResult<TVPairingCode>) -> Void) {
   
-    makeRequest(url: "/tv/code", apiKeyNeeded: false, completion: {result in
+    makeDataRequest(url: "/tv/code", apiKeyNeeded: false, completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
           
-        case .success(let json):
+        case .success(let data):
         
-          guard let pairingData = TVPairingCode(JSON: json) else {
+          guard let pairingData = try? JSONDecoder().decode(TVPairingCode.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
         
@@ -359,16 +400,16 @@ open class QminderAPI {
   */
   public func pairTV(code:String, secret:String, completion: @escaping (QminderResult<TVAPIData>) -> Void) {
     
-    makeRequest(url: "/tv/code/\(code)",
+    makeDataRequest(url: "/tv/code/\(code)",
       parameters: ["secret": secret], apiKeyNeeded: false, completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
           
-        case .success(let json):
+        case .success(let data):
         
-          guard let tvAPIData = TVAPIData(JSON: json) else {
+          guard let tvAPIData = try? JSONDecoder().decode(TVAPIData.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
           
@@ -386,14 +427,17 @@ open class QminderAPI {
       - error: Error
   */
   public func tvDetails(id:Int, completion: @escaping (QminderResult<TVDevice>) -> Void) {
-    makeRequest(url: "/tv/\(id)", completion: {result in
+    makeDataRequest(url: "/tv/\(id)", completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(QminderError.alamofire(error)))
           
-        case .success(let json):
-          guard let device = TVDevice(JSON: json) else {
+        case .success(let data):
+          
+          let str = String(data: data, encoding: String.Encoding.utf8)
+          
+          guard let device = try? JSONDecoder().decode(TVDevice.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
       
@@ -410,16 +454,16 @@ open class QminderAPI {
       - metadata: Dictionary of metadata to send with heartbeat
       - error: Error
   */
-  public func tvHeartbeat(id:Int, metadata:Dictionary<String, Any>, completion: @escaping (QminderResult<Void>) -> Void) {
+  public func tvHeartbeat(id:Int, metadata:Dictionary<String, Any>, completion: @escaping (QminderResult<Void?>) -> Void) {
     let parameters: Parameters = metadata
     
-    makeRequest(url: "/tv/\(id)/heartbeat", method: .post, parameters: parameters, encoding: JSONEncoding.default, completion: {result in
+    makeDataRequest(url: "/tv/\(id)/heartbeat", method: .post, parameters: parameters, encoding: JSONEncoding.default, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
       
         case .success:
-          return completion(QminderResult.success())
+          return completion(QminderResult.success(nil))
       }
     })
     
@@ -434,13 +478,14 @@ open class QminderAPI {
       - error: Error
   */
   public func tvEmptyState(id: Int, completion: @escaping (QminderResult<EmptyState>) -> Void) {
-    makeRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
+    makeDataRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
           
-        case .success(let json):
-          guard let emptyState = EmptyState(JSON: json) else {
+        case .success(let data):
+          
+          guard let emptyState = try? JSONDecoder().decode(EmptyState.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
           }
           
@@ -492,19 +537,41 @@ open class QminderAPI {
     })
   }
   
-  /**
-    Add URL parameter and check if it exists (?parameterName=parameter
+  private func makeDataRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<Data>) -> Void) {
     
-    - Parameters:
-      - parameterValue: Parameter value object
-      - parameterName: Parameter name
-  */
-  private func addParameter(value:Any?, name:String, parameters: inout Dictionary<String, Any>) {
-    guard let val = value else {
-      return
+    var headers: HTTPHeaders = [:]
+    
+    if apiKeyNeeded {
+      guard let key = self.apiKey else {
+        return completion(QminderRequestResult.failure(QminderError.apiKeyNotSet))
+      }
+      
+      headers["X-Qminder-REST-API-Key"] = key
     }
     
-    parameters[name] = val
+    Alamofire.request("\(serverAddress)\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseData(completionHandler: { response in
+      
+      let statusCode = response.response?.statusCode
+      
+      if statusCode != 200 {
+        return completion(QminderRequestResult.failure(QminderError.error(statusCode!)))
+      }
+      
+      switch response.result {
+        case .failure(let error):
+          return completion(QminderRequestResult.failure(QminderError.alamofire(error)))
+        
+        case .success(let value):
+          return completion(QminderRequestResult.success(value))
+      }
+    })
   }
-  
+}
+
+extension Dictionary where Key == String, Value == Any {
+  mutating func set(value optionalValue: Any?, forKey key: String) {
+    guard let value = optionalValue else { return }
+    
+    self[key] = value
+  }
 }

@@ -8,22 +8,15 @@
 
 import Foundation
 
-import ObjectMapper
-
 /// TV pairing code data
-public struct TVPairingCode: Mappable {
+public struct TVPairingCode: Codable {
+  
+  /// Status code
+  let statusCode: Int
   
   /// 4-character code for enduser to enter to the Dashboard
-  public var code: String?
+  public let code: String
   
   /// Secret to use for checking the status of the pairing process
-  public var secret: String?
-  
-  
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    code <- map["code"]
-    secret <- map["secret"]
-  }
+  public let secret: String
 }

@@ -10,7 +10,6 @@ import Foundation
 
 import SwiftyJSON
 import Starscream
-import RxSwift
 
 
 /**
@@ -85,9 +84,6 @@ public class QminderEvents : WebSocketDelegate {
   /// Websocket object
   private var socket:WebSocket!
   
-  /// Dispose bag
-  private var disposeBag = DisposeBag()
-  
   
   /**
     Private init for singleton approach
@@ -109,13 +105,11 @@ public class QminderEvents : WebSocketDelegate {
     self.socket?.delegate = self
     
     // Ping server each 30 seconds
-    Observable<Int>.interval(RxTimeInterval(3), scheduler: MainScheduler.instance)
-      .startWith(-1)
-      .filter({_ in self.socket.isConnected })
-      .subscribe(onNext: {sec in
+    Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true, block: {timer in
+      if self.socket.isConnected {
         self.socket.write(ping: "PING".data(using: .utf8)!)
-      })
-      .addDisposableTo(disposeBag)
+      }
+    })
   }
   
   /**
@@ -225,26 +219,30 @@ public class QminderEvents : WebSocketDelegate {
   
     openingConnection = false
     
-    Observable<Int>.timer(RxTimeInterval(5), scheduler: MainScheduler.instance)
-      .skipWhile({_ in self.connectionClosed })
-      .filter({_ in
+    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: {timer in
         
-        // if there is error at all
-        guard let err = error else {
-          return true
-        }
-        
-        // don't reopen if going away normally
-        return UInt16(err.code) != self.websocketReservedCloseCode
-      })
-      // do it onlu if disconnected
-      .filter({ _ in !self.socket.isConnected })
-      .subscribe(onNext: {_ in
-        print("Auto reopen Socket")
-        self.openSocket()
-      })
-      .addDisposableTo(disposeBag)
-  
+      // If is disconnected
+      if self.connectionClosed || self.socket.isConnected {
+        timer.invalidate()
+        return
+      }
+      
+      // Check if there is an error
+      guard let err = error else {
+        timer.invalidate()
+        return
+      }
+      
+      // Don't reopen if going away normally
+      if UInt16(err.code) == self.websocketReservedCloseCode {
+        timer.invalidate()
+        return
+      }
+      
+      // Reopen socket
+      self.openSocket()
+    })
+    
     delegate?.onDisconnected(error: error)
   }
   

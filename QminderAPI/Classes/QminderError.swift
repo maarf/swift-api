@@ -19,4 +19,6 @@ public enum QminderError : Error {
   
   // Cant read object with ObjectMapper
   case unreadableObject
+  
+  case error(Int)
 }

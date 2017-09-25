@@ -8,30 +8,22 @@
 
 import Foundation
 
-import ObjectMapper
-
 /// TV device API data
-public struct TVAPIData: Mappable {
+public struct TVAPIData: Codable {
+  
+  /// Status code
+  let statusCode: Int
   
   /// "NOT_PAIRED" or "PAIRED"
-  public var status: String?
+  public let status: String
   
   /// TV ID. Omitted when status is "NOT_PAIRED"
-  public var id: Int?
+  public let id: Int?
   
   /// API key. Omitted when status is "NOT_PAIRED"
-  public var apiKey: String?
+  public let apiKey: String?
   
   // Location ID. Omitted when status is "NOT_PAIRED"
-  public var locationID: Int?
-  
-  
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    status <- map["status"]
-    id <- map["id"]
-    apiKey <- map["apiKey"]
-    locationID <- map["location"]
-  }
+  public let location: Int?
+
 }

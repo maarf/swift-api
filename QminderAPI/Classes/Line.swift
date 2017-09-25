@@ -8,40 +8,27 @@
 
 import Foundation
 
-import ObjectMapper
-
-
 /// Line Object
-public struct Line: Mappable {
+public struct Line: Codable {
   
   /// ID of a line
-  public var id: Int?
+  public let id: Int
   
   /// Name of a line
-  public var name: String?
+  public let name: String
   
   /// ID of the location this line belongs to
-  public var location: Int?
-  
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    id <- (map["id"], StringOrIntToInt())
-    name <- map["name"]
-    location <- (map["location"], StringOrIntToInt())
-  }
+  public let location: Int?
 }
 
 
 /// Lines object
-struct Lines: Mappable {
+struct Lines: Codable {
 
+  /// Status code
+  let statusCode: Int
+  
   /// Lines array
-  var lines: Array<Line>?
+  var data: [Line]
   
-  init?(map: Map) {}
-  
-  mutating func mapping(map: Map) {
-    lines <- map["data"]
-  }
 }

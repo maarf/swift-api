@@ -8,21 +8,15 @@
 
 import Foundation
 
-import ObjectMapper
-
 /// Estimated time of service data
-public struct EstimatedTimeOfService: Mappable {
+public struct EstimatedTimeOfService: Codable {
+  
+  /// Status code
+  let statusCode: Int
   
   /// Estimated time of service
-  public var estimatedTimeOfService: Date?
+  public let estimatedTimeOfService: Date
   
   /// Estimated people waiting
-  public var estimatedPeopleWaiting: Int?
-  
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    estimatedTimeOfService <- (map["estimatedTimeOfService"], ISO8601DateTransform())
-    estimatedPeopleWaiting <- map["estimatedPeopleWaiting"]
-  }
+  public let estimatedPeopleWaiting: Int
 }

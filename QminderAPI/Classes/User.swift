@@ -8,88 +8,57 @@
 
 import Foundation
 
-import ObjectMapper
-
 /// User object
-public struct User: Mappable {
+public struct User: Codable {
   
   /// User ID
-  public var id: Int?
+  public let id: Int
   
   /// Email address
-  public var email: String?
+  public let email: String
   
   /// 	First name
-  public var firstName: String?
+  public let firstName: String
   
   /// Last name
-  public var lastName: String?
+  public let lastName: String
   
   /// Selected desk number
-  public var desk: Int?
+  public let desk: Int?
   
   /// User roles
-  public var roles: Array<Role>?
+  public let roles: Array<Role>?
   
   /// User pictures
-  public var picture: Array<Picture>?
-  
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    id <- map["id"]
-    email <- map["email"]
-    firstName <- map["firstName"]
-    lastName <- map["lastName"]
-    desk <- map["desk"]
-    roles <- map["roles"]
-    picture <- map["picture"]
-  }
+  public let picture: Array<Picture>?
 }
 
 /// User role object
-public struct Role: Mappable {
+public struct Role: Codable {
   
   /// User's role
-  public var type: String?
+  public let type: String?
   
   /// The identifier of the location where given role is applicable. Not applicable to all roles
-  public var location: Int?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-    type <- map["type"]
-    location <- map["location"]
-  }
+  public let location: Int?
 }
 
 /// User image object
-public struct Picture: Mappable {
+public struct Picture: Codable {
   
   /// Picture size
-  public var size: String?
+  public let size: String?
   
   /// Picture URL
-  public var url: String?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-    size <- map["size"]
-    url <- map["url"]
-  }
+  public let url: String?
 }
 
 /// Users object
-struct Users: Mappable {
+struct Users: Codable {
 
+  /// Status code
+  let statusCode: Int
+  
   /// Users array
-  var users: Array<User>?
-  
-  init?(map: Map) {}
-  
-  mutating func mapping(map: Map) {
-    users <- map["data"]
-  }
+  let data: [User]
 }

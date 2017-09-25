@@ -1,16 +1,12 @@
 PODS:
-  - Alamofire (4.5.0)
+  - Alamofire (4.5.1)
   - Nimble (7.0.1)
-  - ObjectMapper (2.2.8)
-  - QminderAPI (0.1.42):
+  - QminderAPI (0.1.45):
     - Alamofire (~> 4.5)
-    - ObjectMapper (~> 2.2)
-    - RxSwift (~> 3.6)
     - Starscream (~> 2.1)
     - SwiftyJSON (~> 3.1)
   - Quick (1.1.0)
-  - RxSwift (3.6.0)
-  - Starscream (2.1.0)
+  - Starscream (2.1.1)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -23,13 +19,11 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
-  ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
-  QminderAPI: 556f637dda008bfbe8c72b3ac76ff9dad21d4078
+  QminderAPI: 00af64b7e10ced2b9760aa1d83afc3d0cf506bed
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  RxSwift: a0925c7fb11fbe60055285f6f2062241aa37a175
-  Starscream: 168fd64c345fb2dea71b0a869c482aeffcf866e4
+  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
 PODFILE CHECKSUM: 53abf4f04a1ddfcadd84758efc4b3281ed882953

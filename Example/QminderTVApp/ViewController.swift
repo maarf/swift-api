@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import QminderAPI
 
 struct EventInfo {
@@ -29,6 +28,41 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   
   /// Qminder Websockets provider
   private var events = QminderEvents.sharedInstance
+  
+  /// JSON decoder with milliseconds
+  private let jsonDecoderWithMilliseconds: JSONDecoder = {
+    let jsonDecoder = JSONDecoder()
+    
+    let dateISO8601Formatter = DateFormatter()
+    dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    
+    let dateISO8601MillisecondsFormatter = DateFormatter()
+    dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    jsonDecoder.dateDecodingStrategy = .custom({decoder -> Date in
+      
+      let container = try decoder.singleValueContainer()
+      let dateStr = try container.decode(String.self)
+      
+      // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+      
+      var tmpDate: Date? = nil
+      
+      if dateStr.count == 24 {
+        tmpDate = dateISO8601MillisecondsFormatter.date(from: dateStr)
+      } else {
+        tmpDate = dateISO8601Formatter.date(from: dateStr)
+      }
+      
+      guard let date = tmpDate else {
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
+      }
+      
+      return date
+    })
+    
+    return jsonDecoder
+  }()
   
   /// Pairing code label
   @IBOutlet var pairingCode: UILabel!
@@ -88,7 +122,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
             self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
               (timer) in
 
-                self.qminderAPI.pairTV(code: pairingData.code!, secret: pairingData.secret!, completion: {result in
+                self.qminderAPI.pairTV(code: pairingData.code, secret: pairingData.secret, completion: {result in
 
                   switch result {
                     case .failure(let error):
@@ -101,14 +135,14 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
                       
                         UserDefaults.standard.set(tvData.apiKey, forKey: "API_KEY")
                         UserDefaults.standard.set(tvData.id, forKey: "TV_ID")
-                        UserDefaults.standard.set(tvData.locationID, forKey: "LOCATION_ID")
+                        UserDefaults.standard.set(tvData.location, forKey: "LOCATION_ID")
                       
                         if let key = tvData.apiKey {
                           self.events.setup(apiKey: key)
                           self.events.delegate = self
                           self.events.openSocket()
                           
-                          self.setEvents(locationId: tvData.locationID!)
+                          self.setEvents(locationId: tvData.location!)
                         }
                       }
                   }
@@ -187,12 +221,10 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   }
   
 
-  public func onTicketCreated(ticket: JSON) {
+  public func onTicketCreated(ticket: Ticket) {
     print(ticket)
   }
   
-  
-
   public func onDisconnected(error: NSError?) {
     print("disconnected")
     
@@ -211,9 +243,8 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   }
   
   func messageReceived(event:String, data:Dictionary<String, Any>) {
-    guard let ticket = Ticket(JSON: data) else {
-      return
-    }
+    
+    guard let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: NSKeyedArchiver.archivedData(withRootObject: data)) else { return }
   
     print(ticket)
     

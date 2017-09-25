@@ -8,25 +8,23 @@
 
 import Foundation
 
-import ObjectMapper
-
 /// Ticket mapping object
-public struct Ticket: Mappable {
+public struct Ticket: Codable {
   
   /// A unique ticket ID
-  public var id: Int?
+  public let ticketId: String
   
   /// Ticket number
-  public var number: Int?
+  public let number: Int?
   
   /// Line ID
-  public var line: Int?
+  public var line: Int
   
   /// Source of the ticket. "MANUAL", "NAME" or "PRINTER". This field will not be present if no source has been specified when creating a ticket.
-  public var source: String?
+  public let source: String?
   
   /// Ticket status. "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
-  public var status: String?
+  public var status: String
   
   /// First name
   public var firstName: String?
@@ -55,47 +53,43 @@ public struct Ticket: Mappable {
   /// Order after
   public var orderAfter: Date?
   
-  public init?(map: Map) {}
-  
-  public mutating func mapping(map: Map) {
-    id <- (map["id"], StringOrIntToInt())
-    number <- map["number"]
-    line <- map["line"]
+  enum CodingKeys: String, CodingKey {
+    case ticketId = "id"
     
-    source <- map["source"]
-    status <- map["status"]
+    case number
+    case line
+    case source
+    case status
+    case firstName
+    case lastName
+    case phoneNumber
+    case created
+    case called
+    case served
+    case labels
+    case extra
+    case orderAfter
+  }
+}
+
+// Hack to get ticket ID as int
+extension Ticket {
+  public var id: Int? {
+    guard let id = Int(self.ticketId) else { return nil }
     
-    firstName <- map["firstName"]
-    lastName <- map["lastName"]
-    phoneNumber <- map["phoneNumber"]
-    
-    created <- map["created"]
-    called <- map["called"]
-    served <- map["served"]
-        
-    orderAfter <- (map["orderAfter"], ISO8601ExtendedDateTransform())
-    
-    labels <- map["labels"]
-    extra <- map["extra"]
+    return id
   }
 }
 
 /// Created data object
-public struct Created: Mappable {
+public struct Created: Codable {
 
   /// Time when ticket was created
   public var date: Date?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-  
-    date <- (map["date"], ISO8601ExtendedDateTransform())
-  }
 }
 
 /// Called data
-public struct Called: Mappable {
+public struct Called: Codable {
 
   /// Call date
   public var date: Date?
@@ -105,77 +99,45 @@ public struct Called: Mappable {
   
   /// User ID of a clerk who called the ticket
   public var caller: Int?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-    date <- (map["date"], ISO8601DateTransform())
-    desk <- map["desk"]
-    caller <- map["caller"]
-  }
 }
 
 /// Served object
-public struct Served: Mappable {
+public struct Served: Codable {
 
   /// Date of the end of the service
-  public var date: Date?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-    date <- (map["date"], ISO8601DateTransform())
-  }
+  public let date: Date?
 }
 
 /// Label object
-public struct Label: Mappable {
+public struct Label: Codable {
 
   /// Label hex color code
-  public var color: String?
+  public let color: String
   
   /// Value
-  public var value: String?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-    color <- map["color"]
-    value <- map["value"]
-  }
+  public let value: String
 }
 
 /// Extra object
-public struct Extra: Mappable {
+public struct Extra: Codable {
 
   /// Title
-  public var title: String?
+  public let title: String?
   
   /// Value
-  public var value: String?
+  public let value: String?
   
   /// URL if there is
-  public var url: String?
-  
-  public init?(map: Map) {}
-  
-  mutating public func mapping(map: Map) {
-    title <- map["title"]
-    value <- map["value"]
-    url <- map["url"]
-  }
+  public let url: String?
 }
 
 
 /// Tickets object
-struct Tickets: Mappable {
+struct Tickets: Codable {
+  
+  /// Status code
+  let statusCode: Int
   
   /// Tickets array
-  var tickets: Array<Ticket>?
-  
-  init?(map: Map) {}
-  
-  mutating func mapping(map: Map) {
-    tickets <- map["data"]
-  }
+  let data: [Ticket]
 }
