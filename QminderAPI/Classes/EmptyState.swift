@@ -9,9 +9,8 @@
 import Foundation
 
 /// Empty state object
-public struct EmptyState: Codable {
+public struct EmptyState: CodableResponsable {
   
-  /// Status code
   let statusCode: Int
   
   /// Empty state layout

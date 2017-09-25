@@ -8,49 +8,96 @@
 
 import Foundation
 
-/// Ticket mapping object
-public struct Ticket: Codable {
+//MARK: - Protocols
+
+/// Protocl for API Response
+protocol Responsable {
+  /// Status code
+  var statusCode: Int { get }
+}
+
+/// Protocol to describe API response
+protocol ResponsableWithData: Responsable {
+  
+  /// Data with API request
+  associatedtype Data
+  
+  /// Data from API
+  var data: [Data] { get }
+}
+
+/// Type for Codable & Responsable
+typealias CodableResponsable = (Codable & Responsable)
+
+/// Type for Codable and Responsable With Data
+typealias CodableResponsableWithData = (Codable & ResponsableWithData)
+
+/// Ticket describing protocol
+public protocol Ticketable {
   
   /// A unique ticket ID
-  public let id: String
+  var id: String { get }
   
   /// Ticket number
-  public let number: Int?
+  var number: Int? { get }
   
   /// Line ID
-  public var line: Int
+  var line: Int { get set }
   
   /// Source of the ticket. "MANUAL", "NAME" or "PRINTER". This field will not be present if no source has been specified when creating a ticket.
-  public let source: String?
+  var source: String? { get }
   
   /// Ticket status. "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
-  public var status: String
+  var status: String { get set }
   
   /// First name
-  public var firstName: String?
+  var firstName: String? { get set }
   
-  /// 	Last name
-  public var lastName: String?
+  ///   Last name
+  var lastName: String? { get set }
   
   /// Phone number
-  public var phoneNumber: Int?
+  var phoneNumber: Int? { get set }
   
   /// Created data
-  public var created: Created?
+  var created: Created? { get }
   
   /// Called data
-  public var called: Called?
+  var called: Called? { get set }
   
   /// Served data
-  public var served: Served?
+  var served: Served? { get set }
   
   /// Labels
-  public var labels: Array<Label>?
+  var labels: Array<Label>? { get set }
   
   /// Extra info
-  public var extra: Array<Extra>?
+  var extra: Array<Extra>? { get set }
   
   /// Order after
+  var orderAfter: Date? { get set }
+}
+
+/// Type for Codable and Ticketable conformance
+typealias CodableTicket = (Codable & Ticketable)
+
+
+//MARK: - Structs
+/// Ticket mapping object
+public struct Ticket: CodableTicket {
+  public let id: String
+  public let number: Int?
+  public var line: Int
+  public let source: String?
+  public var status: String
+  public var firstName: String?
+  public var lastName: String?
+  public var phoneNumber: Int?
+  public var created: Created?
+  public var called: Called?
+  public var served: Served?
+  public var labels: Array<Label>?
+  public var extra: Array<Extra>?
   public var orderAfter: Date?
 }
 
@@ -104,13 +151,11 @@ public struct Extra: Codable {
   public let url: String?
 }
 
-
 /// Tickets object
-struct Tickets: Codable {
+struct Tickets: CodableResponsableWithData {
   
-  /// Status code
+  typealias Data = Ticket
+  
   let statusCode: Int
-  
-  /// Tickets array
-  let data: [Ticket]
+  let data: [Data]
 }

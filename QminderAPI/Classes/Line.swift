@@ -23,12 +23,14 @@ public struct Line: Codable {
 
 
 /// Lines object
-struct Lines: Codable {
+struct Lines: CodableResponsableWithData {
+  
+  typealias Data = Line
 
   /// Status code
   let statusCode: Int
   
   /// Lines array
-  var data: [Line]
+  var data: [Data]
   
 }

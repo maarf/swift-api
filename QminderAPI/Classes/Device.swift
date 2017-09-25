@@ -9,9 +9,8 @@
 import Foundation
 
 /// User object
-public struct TVDevice: Codable {
+public struct TVDevice: CodableResponsable {
   
-  /// Status code
   let statusCode: Int
 
   /// Device ID

@@ -9,9 +9,8 @@
 import Foundation
 
 /// Estimated time of service data
-public struct EstimatedTimeOfService: Codable {
+public struct EstimatedTimeOfService: CodableResponsable {
   
-  /// Status code
   let statusCode: Int
   
   /// Estimated time of service

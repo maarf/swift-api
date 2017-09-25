@@ -53,12 +53,10 @@ public struct Picture: Codable {
   public let url: String?
 }
 
-/// Users object
-struct Users: Codable {
-
-  /// Status code
-  let statusCode: Int
+/// Tickets object
+struct Users: CodableResponsableWithData {
+  typealias Data = User
   
-  /// Users array
-  let data: [User]
+  let statusCode: Int
+  let data: [Data]
 }

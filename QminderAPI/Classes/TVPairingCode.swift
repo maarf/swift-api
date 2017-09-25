@@ -8,10 +8,10 @@
 
 import Foundation
 
+
 /// TV pairing code data
-public struct TVPairingCode: Codable {
+public struct TVPairingCode: CodableResponsable {
   
-  /// Status code
   let statusCode: Int
   
   /// 4-character code for enduser to enter to the Dashboard

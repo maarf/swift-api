@@ -30,11 +30,11 @@ public struct Location: Codable {
 
 
 /// Locations object
-struct Locations: Codable {
+struct Locations: CodableResponsableWithData {
 
-  /// Status code
+  typealias Data = Location
+  
   let statusCode: Int
 
-  /// Locations array
-  let data: [Location]
+  let data: [Data]
 }
