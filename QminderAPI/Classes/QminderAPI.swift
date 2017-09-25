@@ -97,7 +97,7 @@ open class QminderAPI {
   */
   open func getLocationsList(completion: @escaping (QminderResult<[Location]>) -> Void) {
   
-    makeDataRequest(url: "/locations/", completion: {result in
+    makeRequest(url: "/locations/", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -124,7 +124,7 @@ open class QminderAPI {
   */
   public func getLocationDetails(locationId:Int, completion: @escaping (QminderResult<Location>) -> Void) {
   
-    makeDataRequest(url: "/locations/\(locationId)", completion: {result in
+    makeRequest(url: "/locations/\(locationId)", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -151,7 +151,7 @@ open class QminderAPI {
   */
   public func getLocationLines(locationId:Int, completion: @escaping (QminderResult<[Line]>) -> Void) {
     
-    makeDataRequest(url: "/locations/\(locationId)/lines", completion: {result in
+    makeRequest(url: "/locations/\(locationId)/lines", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -178,7 +178,7 @@ open class QminderAPI {
   */
   public func getLocationUsers(locationId:Int, completion: @escaping (QminderResult<[User]>) -> Void) {
     
-    makeDataRequest(url: "/locations/\(locationId)/users", completion: {result in
+    makeRequest(url: "/locations/\(locationId)/users", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -207,7 +207,7 @@ open class QminderAPI {
   */
   public func getLineDetails(lineId:Int, completion: @escaping (QminderResult<Line>) -> Void) {
     
-    makeDataRequest(url: "/lines/\(lineId)", completion: {result in
+    makeRequest(url: "/lines/\(lineId)", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -225,7 +225,7 @@ open class QminderAPI {
   
   public func getEstimatedTimeOfService(lineId:Int, completion: @escaping (QminderResult<EstimatedTimeOfService>) -> Void) {
     
-    makeDataRequest(url: "/lines/\(lineId)/estimated-time", completion: {result in
+    makeRequest(url: "/lines/\(lineId)/estimated-time", completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -280,7 +280,7 @@ open class QminderAPI {
     parameters.set(value: limit, forKey: "limit")
     parameters.set(value: order, forKey: "order")
     
-    makeDataRequest(url: "/tickets/search", parameters: parameters, completion: {result in
+    makeRequest(url: "/tickets/search", parameters: parameters, completion: {result in
     
       switch result {
         case .failure(let error):
@@ -308,7 +308,7 @@ open class QminderAPI {
   */
   public func getTicketDetails(ticketId:Int, completion: @escaping (QminderResult<Ticket>) -> Void) {
     
-    makeDataRequest(url: "/tickets/\(ticketId)", completion: {result in
+    makeRequest(url: "/tickets/\(ticketId)", completion: {result in
     
       switch result {
         case .failure(let error):
@@ -338,7 +338,7 @@ open class QminderAPI {
       - error: Error
   */
   public func getUserDetails(userId:Int, completion: @escaping (QminderResult<User>) -> Void) {
-    makeDataRequest(url: "/users/\(userId)", completion: {result in
+    makeRequest(url: "/users/\(userId)", completion: {result in
     
       switch result {
         case .failure(let error):
@@ -368,7 +368,7 @@ open class QminderAPI {
   */
   public func getPairingCodeAndSecret(completion: @escaping (QminderResult<TVPairingCode>) -> Void) {
   
-    makeDataRequest(url: "/tv/code", apiKeyNeeded: false, completion: {result in
+    makeRequest(url: "/tv/code", apiKeyNeeded: false, completion: {result in
     
       switch result {
         case .failure(let error):
@@ -400,7 +400,7 @@ open class QminderAPI {
   */
   public func pairTV(code:String, secret:String, completion: @escaping (QminderResult<TVAPIData>) -> Void) {
     
-    makeDataRequest(url: "/tv/code/\(code)",
+    makeRequest(url: "/tv/code/\(code)",
       parameters: ["secret": secret], apiKeyNeeded: false, completion: {result in
     
       switch result {
@@ -427,15 +427,13 @@ open class QminderAPI {
       - error: Error
   */
   public func tvDetails(id:Int, completion: @escaping (QminderResult<TVDevice>) -> Void) {
-    makeDataRequest(url: "/tv/\(id)", completion: {result in
+    makeRequest(url: "/tv/\(id)", completion: {result in
     
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(QminderError.alamofire(error)))
           
         case .success(let data):
-          
-          let str = String(data: data, encoding: String.Encoding.utf8)
           
           guard let device = try? JSONDecoder().decode(TVDevice.self, from: data) else {
             return completion(QminderResult.failure(QminderError.unreadableObject))
@@ -457,7 +455,7 @@ open class QminderAPI {
   public func tvHeartbeat(id:Int, metadata:Dictionary<String, Any>, completion: @escaping (QminderResult<Void?>) -> Void) {
     let parameters: Parameters = metadata
     
-    makeDataRequest(url: "/tv/\(id)/heartbeat", method: .post, parameters: parameters, encoding: JSONEncoding.default, completion: {result in
+    makeRequest(url: "/tv/\(id)/heartbeat", method: .post, parameters: parameters, encoding: JSONEncoding.default, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -478,7 +476,7 @@ open class QminderAPI {
       - error: Error
   */
   public func tvEmptyState(id: Int, completion: @escaping (QminderResult<EmptyState>) -> Void) {
-    makeDataRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
+    makeRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
@@ -507,37 +505,7 @@ open class QminderAPI {
       - errorCallback: Error callback
         - error: Error
   */
-  private func makeRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<[String: Any]>) -> Void) {
-  
-    var headers: HTTPHeaders = [:]
-  
-    if apiKeyNeeded {
-      guard let key = self.apiKey else {
-        return completion(QminderRequestResult.failure(QminderError.apiKeyNotSet))
-      }
-      
-      headers["X-Qminder-REST-API-Key"] = key
-    }
-    
-    Alamofire.request("\(serverAddress)\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON(completionHandler: { response in
-      
-      switch response.result {
-        case .failure(let error):
-          return completion(QminderRequestResult.failure(QminderError.alamofire(error)))
-        
-        case .success(let value):
-          let json = JSON(value)
-          
-          guard json["statusCode"].intValue == 200, let dictionary = json.dictionaryObject else {
-            return completion(QminderRequestResult.failure(NSError(domain: "qminder", code: json["statusCode"].intValue, userInfo: nil)))
-          }
-          
-          return completion(QminderRequestResult.success(dictionary))
-      }
-    })
-  }
-  
-  private func makeDataRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<Data>) -> Void) {
+  private func makeRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<Data>) -> Void) {
     
     var headers: HTTPHeaders = [:]
     
