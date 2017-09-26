@@ -8,8 +8,8 @@
 import Foundation
 
 public extension JSONDecoder {
-  convenience init(withMilliseconds: Bool = true) {
-    self.init()
+  static func decoderWithMilliseconds() -> JSONDecoder {
+    let decoder = JSONDecoder()
     
     let dateISO8601Formatter = DateFormatter()
     dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -17,13 +17,12 @@ public extension JSONDecoder {
     let dateISO8601MillisecondsFormatter = DateFormatter()
     dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
-    self.dateDecodingStrategy = .custom({decoder -> Date in
+    decoder.dateDecodingStrategy = .custom({decoder -> Date in
       
       let container = try decoder.singleValueContainer()
       let dateStr = try container.decode(String.self)
       
       // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-      
       var tmpDate: Date? = nil
       
       if dateStr.count == 24 {
@@ -38,6 +37,8 @@ public extension JSONDecoder {
       
       return date
     })
+    
+    return decoder
   }
 }
 

@@ -24,7 +24,7 @@ open class QminderAPI {
   private var serverAddress = "https://api.qminder.com/v1"
   
   /// JSON decoder with milliseconds
-  private let jsonDecoderWithMilliseconds = JSONDecoder(withMilliseconds: true)
+  private let jsonDecoderWithMilliseconds = JSONDecoder.decoderWithMilliseconds()
   
   /// Qminder request result
   enum QminderRequestResult<Value> {

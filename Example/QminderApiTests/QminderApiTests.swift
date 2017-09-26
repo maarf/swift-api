@@ -496,7 +496,7 @@ class QminderApiTests : QuickSpec {
                 code = result.value?.code
                 secret = result.value?.secret
               } else {
-                error = result.error as? NSError
+                error = result.error as NSError?
               }
               
               done()
@@ -518,7 +518,7 @@ class QminderApiTests : QuickSpec {
             if result.isSuccess {
               device = result.value
             } else {
-              error = result.error as? NSError
+              error = result.error as NSError?
             }
             
             done()
@@ -526,6 +526,7 @@ class QminderApiTests : QuickSpec {
         })
         
         expect(error).toEventuallyNot(beNil())
+        expect(device).toEventually(beNil())
       }
       
       it("Send TV heartbeat even if it doesn't exist") {
@@ -535,7 +536,7 @@ class QminderApiTests : QuickSpec {
           qminderAPI.tvHeartbeat(id: 666, metadata: ["foo": "bar"], completion: {result in
             
             if result.isFailure {
-              error = result.error as? NSError
+              error = result.error as NSError?
             }
             
             done()
