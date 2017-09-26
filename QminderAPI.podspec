@@ -22,7 +22,6 @@ Pod::Spec.new do |s|
   s.source_files = 'QminderAPI/Classes/**/*'
 
   s.dependency 'Alamofire', '~> 4.5'
-  s.dependency 'SwiftyJSON', '~> 3.1'
-  s.dependency 'Starscream', '~> 2.1'
+  s.dependency 'Starscream', '~> 3.0'
 
 end

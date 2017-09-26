@@ -3,11 +3,9 @@ PODS:
   - Nimble (7.0.1)
   - QminderAPI (0.1.45):
     - Alamofire (~> 4.5)
-    - Starscream (~> 2.1)
-    - SwiftyJSON (~> 3.1)
+    - Starscream (~> 3.0)
   - Quick (1.1.0)
-  - Starscream (2.1.1)
-  - SwiftyJSON (3.1.4)
+  - Starscream (3.0.0)
 
 DEPENDENCIES:
   - Nimble
@@ -21,10 +19,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
-  QminderAPI: 00af64b7e10ced2b9760aa1d83afc3d0cf506bed
+  QminderAPI: bba2c283fb7d53c34097164eaab821ced156639e
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  Starscream: 877369259cafa975ceaf2ce11eb9ef54ac51e195
 
 PODFILE CHECKSUM: 18b7537e0a3784d01c38580b73984bce368ce962
 

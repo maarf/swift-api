@@ -10,8 +10,8 @@ import UIKit
 import QminderAPI
 
 struct EventInfo {
-  var eventName:String
-  var data:Dictionary<String, Any>
+  var type: QminderEvent
+  var ticket: Ticket
 }
 
 /// Demonstrates Qminder iOS API usage in Apple TV
@@ -157,41 +157,29 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   func setEvents(locationId:Int) {
     
     let parameters = ["location": locationId]
-  
-    events.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
-      if error == nil {
-        self.messageReceived(event: "TICKET_CREATED", data: data!)
-      }
+    
+    events.subscribe(event: .ticketCreated, parameters: parameters, callback: {result in
+      self.messageReceived(eventType: .ticketCreated, result: result)
     })
     
-    events.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
-      if error == nil {
-        self.messageReceived(event: "TICKET_CALLED", data: data!)
-      }
+    events.subscribe(event: .ticketCancelled, parameters: parameters, callback: {result in
+      self.messageReceived(eventType: .ticketCancelled, result: result)
     })
     
-    events.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
-      if error == nil {
-        self.messageReceived(event: "TICKET_RECALLED", data: data!)
-      }
+    events.subscribe(event: .ticketChanged, parameters: parameters, callback: {result in
+      self.messageReceived(eventType: .ticketChanged, result: result)
     })
     
-    events.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
-      if error == nil {
-        self.messageReceived(event:"TICKET_CANCELLED", data: data!)
-      }
+    events.subscribe(event: .ticketCalled, parameters: parameters, callback: {result in
+      self.messageReceived(eventType: .ticketCalled, result: result)
     })
     
-    events.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
-      if error == nil {
-        self.messageReceived(event:"TICKET_SERVED", data: data!)
-      }
+    events.subscribe(event: .ticketRecalled, parameters: parameters, callback: {result in
+      self.messageReceived(eventType: .ticketRecalled, result: result)
     })
     
-    events.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
-      if error == nil {
-        self.messageReceived(event:"TICKET_CHANGED", data: data!)
-      }
+    events.subscribe(event: .ticketServed, parameters: parameters, callback: {result in
+      self.messageReceived(eventType: .ticketServed, result: result)
     })
   }
   
@@ -200,16 +188,13 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     
     let eventInfo:EventInfo = eventsArray[indexPath.row]
     
-    var cell = tableView.dequeueReusableCell(withIdentifier: eventInfo.eventName)
+    var cell = tableView.dequeueReusableCell(withIdentifier: eventInfo.type.rawValue)
     
     if cell == nil {
       cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")
     }
     
-    
-    if let status = eventInfo.data["status"] {
-      cell?.textLabel?.text = "\(eventInfo.eventName) : \(status)"
-    }
+    cell?.textLabel?.text = "\(eventInfo.type.rawValue) : \(eventInfo.ticket.status)"
     
     return cell!
   }
@@ -225,7 +210,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     print(ticket)
   }
   
-  public func onDisconnected(error: NSError?) {
+  public func onDisconnected(error: Error?) {
     print("disconnected")
     
     onlineLabel.isHidden = true
@@ -242,14 +227,19 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     pairingCode.isHidden = true
   }
   
-  func messageReceived(event:String, data:Dictionary<String, Any>) {
-    
-    guard let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: NSKeyedArchiver.archivedData(withRootObject: data)) else { return }
-  
-    print(ticket)
-    
-    self.eventsArray.insert(EventInfo(eventName: event, data: data), at: 0)
-    self.tableView?.reloadData()
+  func messageReceived(eventType: QminderEvent, result: QminderEventResult) {
+    switch result {
+      case .ticket(let ticket):
+        print("\(eventType.rawValue) \(ticket)")
+      
+        self.eventsArray.insert(EventInfo(type: eventType, ticket: ticket), at: 0)
+        self.tableView?.reloadData()
+      
+      case .failure(let error):
+        print("\(error)")
+      default:
+        print("Default")
+    }
   }
 
 }

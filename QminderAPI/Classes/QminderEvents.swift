@@ -8,9 +8,65 @@
 
 import Foundation
 
-import SwiftyJSON
 import Starscream
 
+/// Qminder Event type
+public enum QminderEvent: String {
+  case ticketCreated = "TICKET_CREATED"
+  case ticketCalled = "TICKET_CALLED"
+  case ticketRecalled = "TICKET_RECALLED"
+  case ticketCancelled = "TICKET_CANCELLED"
+  case ticketServed = "TICKET_SERVED"
+  case ticketChanged = "TICKET_CHANGED"
+  
+  case overviewMonitorChange = "OVERVIEW_MONITOR_CHANGE"
+}
+
+/// Qminder Event error
+public enum QminderEventError {
+  case error(Error)
+  case unknown
+  case parse
+}
+
+/// Qminder Event result
+public enum QminderEventResult {
+  case ticket(Ticket)
+  case device(TVDevice)
+  case failure(QminderEventError)
+}
+
+/// Protocol to conform to event response
+public protocol EventResponsable {
+  associatedtype Data
+  
+  /// Subscription ID
+  var subscriptionId: String { get }
+  
+  /// Message ID
+  var messageId: Int { get }
+  
+  /// Cata event containts
+  var data: Data { get }
+}
+
+/// Ticket response container
+struct TicketResponse: EventResponsable, Codable {
+  typealias Data = Ticket
+  
+  var subscriptionId: String
+  var messageId: Int
+  var data: Data
+}
+
+/// TV device response container
+struct DeviceResponse: EventResponsable, Codable {
+  typealias Data = TVDevice
+  
+  var subscriptionId: String
+  var messageId: Int
+  var data: Data
+}
 
 /**
   QminderEvents delagate methods
@@ -27,13 +83,13 @@ public protocol QminderEventsDelegate {
     
     - Parameter error: Error why it got disconnected
   */
-  func onDisconnected(error:NSError?)
+  func onDisconnected(error:Error?)
   
 }
 
 /// Qminder Events class to work with Websockets API
 public class QminderEvents : WebSocketDelegate {
-
+  
   /// Singleton shared instance
   public static let sharedInstance = QminderEvents()
 
@@ -41,8 +97,10 @@ public class QminderEvents : WebSocketDelegate {
   public var delegate:QminderEventsDelegate?
   
   /// Qminder close code
-  private let websocketReservedCloseCode = UInt16(1099)
+  fileprivate let websocketReservedCloseCode = UInt16(1099)
   
+  /// JSON decoder with milliseconds
+  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder(withMilliseconds: true)
   
   /**
     Callback type when subscrubing to evenets
@@ -51,38 +109,43 @@ public class QminderEvents : WebSocketDelegate {
       - data: JSON data
       - error: Error if exists
   */
-  public typealias CallbackType = (_ data:[String: Any]?, _ error:NSError?) -> Void
+  public typealias CallbackType = (QminderEventResult) -> Void
   
   /// Websocket message
-  struct WebsocketMessage {
+  fileprivate struct WebsocketMessage {
   
     /// Unique subscribtion ID
-    var subscriptionId:String
+    var subscriptionId: String
+    
+    var eventType: QminderEvent
     
     /// String message what should be sent to Websocket
-    var messageToSend:String
+    var messageToSend: String
     
     /// Callback block
-    var callback:CallbackType
+    var callback: CallbackType
   }
   
   /// Message history to hold sent messages to Websocket
-  var messageHistory = [String]()
+  fileprivate var messageHistory = [String]()
   
   /// Message queue to hold not sent messages to Websocket
-  var messageQueue = [WebsocketMessage]()
+  fileprivate var messageQueue = [WebsocketMessage]()
   
+  /// Callback map type
+  fileprivate typealias CallbackMap = (callback: CallbackType, eventType: QminderEvent)
+    
   /// Callback map to call specific block when data is received from Websocket
-  public var callbackMap = [String:CallbackType]()
+  fileprivate var callbackMap = [String:CallbackMap]()
   
   /// Is currently connection being opened (Boolean)
-  private var openingConnection = false
+  fileprivate var openingConnection = false
   
   /// Is connection closed
-  private var connectionClosed = false
+  fileprivate var connectionClosed = false
   
   /// Websocket object
-  private var socket:WebSocket!
+  fileprivate var socket:WebSocket!
   
   
   /**
@@ -155,29 +218,36 @@ public class QminderEvents : WebSocketDelegate {
       - parameters: Dictionary of parameters
       - callback: Callback executed when response got from Websocket
   */
-  public func subscribe(eventName:String, parameters:Dictionary<String, Any>, callback:@escaping CallbackType) {
+  public func subscribe(event eventType: QminderEvent, parameters: [String: Any], callback: @escaping CallbackType) {
     
     var parameters = parameters
-    let subscriptionId = self.createRandomId()
+    let subscriptionId = String.random(length: 30)
     
     parameters["id"] = subscriptionId
-    parameters["subscribe"] = eventName
+    parameters["subscribe"] = eventType.rawValue
     
-    let json = JSON(parameters)
-    
-    if let messageToSend = json.rawString() {
+    do {
+      let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+      
+      guard let message = String(data: jsonData, encoding: .utf8) else {
+        callback(QminderEventResult.failure(QminderEventError.parse))
+        return
+      }
       
       if self.socket.isConnected {
-        sendMessage(subscriptionId: subscriptionId, messageToSend: messageToSend, callback: callback);
+        sendMessage(subscriptionId: subscriptionId, eventType: eventType, messageToSend: message, callback: callback);
         
-        messageHistory.append(messageToSend);
+        messageHistory.append(message)
       } else {
-        messageQueue.append(WebsocketMessage(subscriptionId:subscriptionId, messageToSend: messageToSend, callback: callback))
+        messageQueue.append(WebsocketMessage(subscriptionId:subscriptionId, eventType: eventType, messageToSend: message, callback: callback))
         
         if !openingConnection {
           openSocket()
         }
       }
+      
+    } catch {
+      callback(QminderEventResult.failure(QminderEventError.parse))
     }
   }
   
@@ -188,7 +258,7 @@ public class QminderEvents : WebSocketDelegate {
     
     - Parameter socket: Websocket object
   */
-  public func websocketDidConnect(socket: WebSocket) {
+  public func websocketDidConnect(socket: WebSocketClient) {
     print("Connection opened")
 
     openingConnection = false
@@ -201,7 +271,7 @@ public class QminderEvents : WebSocketDelegate {
     while messageQueue.count > 0 {
       let queueItem:WebsocketMessage = messageQueue.removeFirst()
       
-      sendMessage(subscriptionId: queueItem.subscriptionId, messageToSend: queueItem.messageToSend, callback: queueItem.callback)
+      sendMessage(subscriptionId: queueItem.subscriptionId, eventType: queueItem.eventType, messageToSend: queueItem.messageToSend, callback: queueItem.callback)
       messageHistory.append(queueItem.messageToSend)
     }
     
@@ -215,8 +285,8 @@ public class QminderEvents : WebSocketDelegate {
       - socket: Websocket object
       - error: Error why Websocket disconnected
   */
-  public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-  
+  public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+    
     openingConnection = false
     
     Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: {timer in
@@ -228,13 +298,14 @@ public class QminderEvents : WebSocketDelegate {
       }
       
       // Check if there is an error
-      guard let err = error else {
+      guard let error = error as NSError? else {
         timer.invalidate()
         return
       }
       
+      
       // Don't reopen if going away normally
-      if UInt16(err.code) == self.websocketReservedCloseCode {
+      if UInt16(error.code) == self.websocketReservedCloseCode {
         timer.invalidate()
         return
       }
@@ -253,17 +324,35 @@ public class QminderEvents : WebSocketDelegate {
       - socket: Websocket object
       - text: Received text
   */
-  public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-    guard let dataFromString = text.data(using: .utf8) else {
-      print("Can't parse to data \(text)")
-      return
-    }
-    let json = JSON(data: dataFromString)
+  public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     
-    print(json)
+    guard let data = text.data(using: .utf8) else { return }
     
-    if let callback:CallbackType = callbackMap[json["subscriptionId"].stringValue] {
-      callback(json["data"].dictionaryObject, nil)
+    do {
+      guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+      
+      guard let subscriptionId = json["subscriptionId"] as? String else { return }
+      
+      guard let callbackMap = callbackMap[subscriptionId] else { return }
+      
+      switch callbackMap.eventType {
+        case .ticketCalled, .ticketCancelled, .ticketCreated, .ticketServed, .ticketChanged, .ticketRecalled:
+
+          guard let ticket = try? self.jsonDecoderWithMilliseconds.decode(TicketResponse.self, from: data).data else {
+            return
+          }
+        
+          callbackMap.callback(QminderEventResult.ticket(ticket))
+        
+        case .overviewMonitorChange:
+          guard let device = try? self.jsonDecoderWithMilliseconds.decode(DeviceResponse.self, from: data).data else {
+            return
+          }
+          
+          callbackMap.callback(QminderEventResult.device(device))
+      }
+    } catch {
+      print("Error deserializing JSON")
     }
   }
 
@@ -274,11 +363,11 @@ public class QminderEvents : WebSocketDelegate {
       - socket: Websocket object
       - data: Received data
   */
-  public func websocketDidReceiveData(socket: WebSocket, data: Data) {
+  public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
     print(data)
   }
   
-  func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+  public func websocketDidReceivePong(socket: WebSocket, data: Data?) {
     print("Got pong! Maybe some data: \(String(describing: data))")
   }
   
@@ -292,28 +381,9 @@ public class QminderEvents : WebSocketDelegate {
       - messageToSend: Message to send to Websocket
       - callback: Callback block when response is received
   */
-  func sendMessage(subscriptionId:String, messageToSend:String, callback:@escaping CallbackType) {
-    self.callbackMap[subscriptionId] = callback
+  private func sendMessage(subscriptionId:String, eventType: QminderEvent, messageToSend:String, callback:@escaping CallbackType) {
+    self.callbackMap[subscriptionId] = CallbackMap(callback: callback, eventType: eventType)
     self.socket.write(string: messageToSend)
-  }
-
-  /**
-    Create random string for subscription ID
-   
-    - Returns: String random ID
-  */
-  private func createRandomId() -> String {
-    let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-    let randomString : NSMutableString = NSMutableString(capacity: 30)
-
-    for _ in 0..<30 {
-      let length = UInt32 (letters.length)
-      let rand = arc4random_uniform(length)
-      randomString.appendFormat("%C", letters.character(at: Int(rand)))
-    }
-
-    return randomString as String
   }
   
 }

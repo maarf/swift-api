@@ -79,125 +79,114 @@ class QminderApiTests : QuickSpec {
     describe("Qminder Events tests") {
 
       let parameters = ["location": locationId]
-      var eventsResponses:Array<[String: Any?]> = []
+      var eventsResponses: [Ticket] = []
 
       it("Subscribe to events") {
-        events.subscribe(eventName: "TICKET_CREATED", parameters: parameters, callback: {(data, error) in
-          if error == nil {
-            print(data)
-
-            eventsResponses.append(data!)
+        events.subscribe(event: .ticketCreated, parameters: parameters, callback: {result in
+          switch result {
+            case .ticket(let ticket):
+              print(ticket)
+              
+              eventsResponses.append(ticket)
+            default:
+              break
+          }
+        })
+        
+        events.subscribe(event: .ticketCalled, parameters: parameters, callback: {result in
+          switch result {
+          case .ticket(let ticket):
+            print(ticket)
+            
+            eventsResponses.append(ticket)
+          default:
+            break
+          }
+        })
+        
+        events.subscribe(event: .ticketRecalled, parameters: parameters, callback: {result in
+          switch result {
+          case .ticket(let ticket):
+            print(ticket)
+            
+            eventsResponses.append(ticket)
+          default:
+            break
           }
         })
 
-        events.subscribe(eventName: "TICKET_CALLED", parameters: parameters, callback: {(data, error) in
-          if error == nil {
-            print(data)
-
-            eventsResponses.append(data!)
+        events.subscribe(event: .ticketCancelled, parameters: parameters, callback: {result in
+          switch result {
+          case .ticket(let ticket):
+            print(ticket)
+            
+            eventsResponses.append(ticket)
+          default:
+            break
           }
         })
 
-        events.subscribe(eventName: "TICKET_RECALLED", parameters: parameters, callback: {(data, error) in
-          if error == nil {
-            print(data)
-
-            eventsResponses.append(data!)
+        events.subscribe(event: .ticketServed, parameters: parameters, callback: {result in
+          switch result {
+          case .ticket(let ticket):
+            print(ticket)
+            
+            eventsResponses.append(ticket)
+          default:
+            break
           }
         })
 
-        events.subscribe(eventName: "TICKET_CANCELLED", parameters: parameters, callback: {(data, error) in
-          if error == nil {
-            print(data)
-
-            eventsResponses.append(data!)
+        events.subscribe(event: .ticketChanged, parameters: parameters, callback: {result in
+          switch result {
+          case .ticket(let ticket):
+            print(ticket)
+            
+            eventsResponses.append(ticket)
+          default:
+            break
           }
         })
-
-        events.subscribe(eventName: "TICKET_SERVED", parameters: parameters, callback: {(data, error) in
-          if error == nil {
-            print(data)
-
-            eventsResponses.append(data!)
-          }
-        })
-
-        events.subscribe(eventName: "TICKET_CHANGED", parameters: parameters, callback: {(data, error) in
-          if error == nil {
-            print(data)
-
-            eventsResponses.append(data!)
-          }
-        })
-
-
       }
 
       it("Get response from Websockets"){
         // Test run #1
         // Ticket created
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-          
-          return ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
-
+        
+        
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
+          ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket created")
 
         // Ticket edited
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           return ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket deleted
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           return ticket.id == "23853943" && ticket.status == "CANCELLED_BY_CLERK" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
 
         // Test run #2
         // Ticket created
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket edited
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket edited
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket called
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           let formatter = DateFormatter()
           formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
           guard let date = formatter.date(from: "2017-02-06T13:36:11Z") else {
@@ -213,11 +202,7 @@ class QminderApiTests : QuickSpec {
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket re-called
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           let formatter = DateFormatter()
           formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
           guard let date = formatter.date(from: "2017-02-06T13:36:21Z") else {
@@ -233,11 +218,7 @@ class QminderApiTests : QuickSpec {
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket served
-        expect(eventsResponses).toEventually(containElementSatisfying({data -> Bool in
-          
-          let tmp = try! JSONSerialization.data(withJSONObject: data, options: [])
-          let ticket = try! jsonDecoderWithMilliseconds.decode(Ticket.self, from: tmp)
-
+        expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           let formatter = DateFormatter()
           formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
           guard let date = formatter.date(from: "2017-02-06T13:36:36Z") else {
