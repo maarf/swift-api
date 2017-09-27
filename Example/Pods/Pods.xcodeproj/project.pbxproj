@@ -71,7 +71,7 @@
 		62F5A70F9FA3139F8EBBF93422916C96 /* ContainElementSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F88EB1170D75AD80C57C390ABA26739 /* ContainElementSatisfying.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A8CDBBD6032EFCEFB2FD549B6671E8 /* ServerTrustPolicy.swift */; };
 		62F79170FFC39B71DF121255D2F0A99F /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE115C36C8BFBFE239B1817D1DAF930 /* Equal.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		63FB78041F7A957500DB1DB6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FB78031F7A957500DB1DB6 /* Extensions.swift */; };
+		635296121F7BE3F100882257 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FB78031F7A957500DB1DB6 /* Extensions.swift */; };
 		67845D28AC79AE6E0FE89E326F3005F8 /* NSBundle+CurrentTestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC0E46A767C87A52F0F148A100D42A1 /* NSBundle+CurrentTestBundle.swift */; };
 		680B54AE290A730852738CF912E81A09 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9383310517110E71D90B8079C356D3 /* ThrowAssertion.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		6B6E9937A7762DA5EB118526623452E9 /* QuickSpecBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 874C0E220E73175738AC4A08026BA79D /* QuickSpecBase.m */; };
@@ -1081,7 +1081,6 @@
 				B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */,
 				A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */,
 				EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */,
-				63FB78041F7A957500DB1DB6 /* Extensions.swift in Sources */,
 				BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */,
 				5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */,
 				CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */,
@@ -1169,6 +1168,7 @@
 				090048744139A6FEBBAC3E91B72CE733 /* QminderError.swift in Sources */,
 				BCA57BC2F7390F305CB4559CEFD7E20A /* QminderEvents.swift in Sources */,
 				0DD8C9CAF6D767EC540768E4DB28B5B7 /* ResultType.swift in Sources */,
+				635296121F7BE3F100882257 /* Extensions.swift in Sources */,
 				DCECFAC4DEAF5FE92769EEB8BE36B381 /* Ticket.swift in Sources */,
 				CC067BE278252D9350343E4D9E52CCF3 /* TVAPIData.swift in Sources */,
 				9803A8E51F3094A314365062F57BAFF5 /* TVPairingCode.swift in Sources */,
