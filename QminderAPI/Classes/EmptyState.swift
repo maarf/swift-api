@@ -11,6 +11,7 @@ import Foundation
 /// Empty state object
 public struct EmptyState: CodableResponsable {
   
+  /// Status code from API
   let statusCode: Int
   
   /// Empty state layout

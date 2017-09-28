@@ -27,7 +27,7 @@ struct Lines: CodableResponsableWithData {
   
   typealias Data = Line
 
-  /// Status code
+  /// Status code from API
   let statusCode: Int
   
   /// Lines array

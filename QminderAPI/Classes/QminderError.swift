@@ -17,8 +17,9 @@ public enum QminderError : Error {
   /// Alamofire error
   case alamofire(Error)
   
-  // Cant read object with ObjectMapper
+  /// Cant read object with ObjectMapper
   case unreadableObject
   
-  case error(Int)
+  /// Status code error
+  case statusCode(Int)
 }

@@ -24,7 +24,7 @@ open class QminderAPI {
   private var serverAddress = "https://api.qminder.com/v1"
   
   /// JSON decoder with milliseconds
-  private let jsonDecoderWithMilliseconds = JSONDecoder.decoderWithMilliseconds()
+  private let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
   
   /// Qminder request result
   enum QminderRequestResult<Value> {
@@ -58,9 +58,7 @@ open class QminderAPI {
     Get location list
     
     - Parameters:
-      - completionHandler: Callback block what is executed when location list is received
-      - locations: Array data of locations {id, name, latitude, longitude}
-      - error: Error
+      - completion: Callback block what is executed when location list is received
   */
   open func getLocationsList(completion: @escaping (QminderResult<[Location]>) -> Void) {
   
@@ -85,9 +83,7 @@ open class QminderAPI {
     
     - Parameters:
       - locationId: Location ID
-      - completionHandler: Callback block what is executed when location data is received
-      - details: Location details in Dictionary object {id, name, timezoneOffset}
-      - error: Error
+      - completion: Callback block what is executed when location data is received
   */
   public func getLocationDetails(locationId:Int, completion: @escaping (QminderResult<Location>) -> Void) {
   
@@ -112,9 +108,7 @@ open class QminderAPI {
     
     - Parameters:
       - locationId: Location ID
-      - completionHandler: Callback block what is executed when location lines is received
-      - lines: Array of lines {id, name}
-      - error: Error
+      - completion: Callback block what is executed when location lines is received
   */
   public func getLocationLines(locationId:Int, completion: @escaping (QminderResult<[Line]>) -> Void) {
     
@@ -139,9 +133,7 @@ open class QminderAPI {
     
     - Parameters:
       - locationId: Location ID
-      - completionHandler: Callback block what is executed when location users is received
-      - lines: Array of users {id, email, firstName, lastName}
-      - error: Error
+      - completion: Callback block what is executed when location users is received
   */
   public func getLocationUsers(locationId:Int, completion: @escaping (QminderResult<[User]>) -> Void) {
     
@@ -168,9 +160,7 @@ open class QminderAPI {
     
     - Parameters:
       - lineId: Line ID
-      - completionHandler: Callback block what is executed when line data is received
-      - details: Location details in Dictionary object {id, name, location id}
-      - error: Error
+      - completion: Callback block what is executed when line data is received
   */
   public func getLineDetails(lineId:Int, completion: @escaping (QminderResult<Line>) -> Void) {
     
@@ -190,7 +180,14 @@ open class QminderAPI {
     })
   }
   
-  public func getEstimatedTimeOfService(lineId:Int, completion: @escaping (QminderResult<EstimatedTimeOfService>) -> Void) {
+  /**
+   Get estimated time of service
+   
+   - Parameters:
+     - lineId:  line ID
+     - completion: Callback block what is executed when estimated time of service is received
+  */
+  public func getEstimatedTimeOfService(lineId: Int, completion: @escaping (QminderResult<EstimatedTimeOfService>) -> Void) {
     
     makeRequest(url: "/lines/\(lineId)/estimated-time", completion: {result in
       switch result {
@@ -228,9 +225,7 @@ open class QminderAPI {
       - maxCalledTimestamp: Optional parameter for searching tickets which are called before specified time. UTF Unix timestamp or ISO 8601
       - limit: Optional parameter for limiting number of search results. Value has to be between 1 and 10000. If no limit is specified, 1000 will be used
       - order: Optional parameter for ordering results. Valid values are "id", "number", "created" and "called". It's allowed to specify asc or desc ordering. Eg. "id ASC", "created DESC"
-      - completionHandler: Callback block executed when tickets are received back
-      - tickets: Tickets Array
-      - error: Error
+      - completion: Callback block executed when tickets are received back
   */
   public func searchTickets(locationId:Int? = nil, lineId:[Int]? = nil, status:[String]? = nil, callerId:Int? = nil, minCreatedTimestamp:Int? = nil, maxCreatedTimestamp:Int? = nil, minCalledTimestamp:Int? = nil, maxCalledTimestamp:Int? = nil, limit:Int? = nil, order:String? = nil, completion: @escaping (QminderResult<[Ticket]>) -> Void) {
   
@@ -269,9 +264,7 @@ open class QminderAPI {
     
     - Parameters:
       - ticketId: Ticket ID
-      - completionHandler: Callback block when ticket details are received
-      - details: Ticket details object
-      - error: Error
+      - completion: Callback block when ticket details are received
   */
   public func getTicketDetails(ticketId:String, completion: @escaping (QminderResult<Ticket>) -> Void) {
     
@@ -300,9 +293,7 @@ open class QminderAPI {
     
     - Parameters:
       - userId: User ID
-      - completionHandler: Callback block when user details are received
-      - details: User details object {id, email, firstName, lastName, desk, roles, image}
-      - error: Error
+      - completion: Callback block when user details are received
   */
   public func getUserDetails(userId:Int, completion: @escaping (QminderResult<User>) -> Void) {
     makeRequest(url: "/users/\(userId)", completion: {result in
@@ -328,10 +319,7 @@ open class QminderAPI {
     Gets pairing code and secred key
     
     - Parameters:
-      - completionHandler: Callback block what is executed when pairing code and secret key is received from server
-      - code: Pairing code
-      - secret: Secret key
-      - error: Error
+      - completion: Callback block what is executed when pairing code and secret key is received from server
   */
   public func getPairingCodeAndSecret(completion: @escaping (QminderResult<TVPairingCode>) -> Void) {
   
@@ -358,12 +346,7 @@ open class QminderAPI {
     - Parameters:
       - code: Pairing code
       - secret: Secret key
-      - completionHandler: Callback block when pairing is done on server:
-      - status: Status if TV is paired
-      - id: TV ID
-      - apiKey: Qminder API key
-      - error: Error with pairing process
-   
+      - completion: Callback block when pairing is done on server:
   */
   public func pairTV(code:String, secret:String, completion: @escaping (QminderResult<TVAPIData>) -> Void) {
     
@@ -390,8 +373,7 @@ open class QminderAPI {
    
     - Parameters:
       - tvID: TV ID
-      - name: Name of a TV
-      - error: Error
+      - completion: Callback block when TV details are received
   */
   public func tvDetails(id:Int, completion: @escaping (QminderResult<TVDevice>) -> Void) {
     makeRequest(url: "/tv/\(id)", completion: {result in
@@ -399,7 +381,7 @@ open class QminderAPI {
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(QminderError.alamofire(error)))
-          
+        
         case .success(let data):
           
           guard let device = try? JSONDecoder().decode(TVDevice.self, from: data) else {
@@ -417,7 +399,7 @@ open class QminderAPI {
     - Parameters:
       - id: TV ID
       - metadata: Dictionary of metadata to send with heartbeat
-      - error: Error
+      - completion: Callback block when TV heartbeat is received
   */
   public func tvHeartbeat(id:Int, metadata:Dictionary<String, Any>, completion: @escaping (QminderResult<Void?>) -> Void) {
     let parameters: Parameters = metadata
@@ -439,8 +421,7 @@ open class QminderAPI {
     
     - Parameters:
       - id: TV ID
-      - message: Empty state message
-      - error: Error
+      - completion: Callback block when empty state is received
   */
   public func tvEmptyState(id: Int, completion: @escaping (QminderResult<EmptyState>) -> Void) {
     makeRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
@@ -467,17 +448,14 @@ open class QminderAPI {
     
     - Parameters:
       - url: URL
-      - callback: Callback when everything is OK
-        - json: JSON object
-      - errorCallback: Error callback
-        - error: Error
+      - completion: Callback block with result
   */
-  private func makeRequest(url:String, method:HTTPMethod = .get, parameters:Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<Data>) -> Void) {
+  fileprivate func makeRequest(url:String, method:HTTPMethod = .get, parameters: Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<Data>) -> Void) {
     
     var headers: HTTPHeaders = [:]
     
     if apiKeyNeeded {
-      guard let key = self.apiKey else {
+      guard let key = apiKey else {
         return completion(QminderRequestResult.failure(QminderError.apiKeyNotSet))
       }
       
@@ -487,9 +465,8 @@ open class QminderAPI {
     Alamofire.request("\(serverAddress)\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseData(completionHandler: { response in
       
       let statusCode = response.response?.statusCode
-      
       if statusCode != 200 {
-        return completion(QminderRequestResult.failure(QminderError.error(statusCode!)))
+        return completion(QminderRequestResult.failure(QminderError.statusCode(statusCode!)))
       }
       
       switch response.result {
@@ -500,13 +477,5 @@ open class QminderAPI {
           return completion(QminderRequestResult.success(value))
       }
     })
-  }
-}
-
-extension Dictionary where Key == String, Value == Any {
-  mutating func set(value optionalValue: Any?, forKey key: String) {
-    guard let value = optionalValue else { return }
-    
-    self[key] = value
   }
 }

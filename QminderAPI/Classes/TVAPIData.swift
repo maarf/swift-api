@@ -22,7 +22,7 @@ public struct TVAPIData: CodableResponsable {
   /// API key. Omitted when status is "NOT_PAIRED"
   public let apiKey: String?
   
-  // Location ID. Omitted when status is "NOT_PAIRED"
+  /// Location ID. Omitted when status is "NOT_PAIRED"
   public let location: Int?
 
 }

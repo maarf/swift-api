@@ -34,7 +34,9 @@ struct Locations: CodableResponsableWithData {
 
   typealias Data = Location
   
+  /// Status code from API
   let statusCode: Int
 
+  /// Locations data from API
   let data: [Data]
 }

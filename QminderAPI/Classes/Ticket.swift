@@ -12,6 +12,7 @@ import Foundation
 
 /// Protocl for API Response
 protocol Responsable {
+  
   /// Status code
   var statusCode: Int { get }
 }

@@ -12,27 +12,47 @@ import Starscream
 
 /// Qminder Event type
 public enum QminderEvent: String {
+  /// Ticket created
   case ticketCreated = "TICKET_CREATED"
+  
+  /// Ticket called
   case ticketCalled = "TICKET_CALLED"
+  
+  /// Ticke recalled
   case ticketRecalled = "TICKET_RECALLED"
+  
+  /// Ticket cancelled
   case ticketCancelled = "TICKET_CANCELLED"
+  
+  /// Ticket served
   case ticketServed = "TICKET_SERVED"
+  
+  /// Ticket changed
   case ticketChanged = "TICKET_CHANGED"
   
+  /// Overview monitor change
   case overviewMonitorChange = "OVERVIEW_MONITOR_CHANGE"
 }
 
 /// Qminder Event error
-public enum QminderEventError {
+public enum QminderEventError: Error {
+  
+  /// Simple error
   case error(Error)
-  case unknown
+  
+  /// Parsing error
   case parse
 }
 
 /// Qminder Event result
 public enum QminderEventResult {
+  /// Ticket response
   case ticket(Ticket)
+  
+  /// Device response
   case device(TVDevice)
+  
+  /// Error
   case failure(QminderEventError)
 }
 
@@ -87,7 +107,7 @@ public protocol QminderEventsDelegate {
   
 }
 
-/// Qminder Events class to work with Websockets API
+/// Qminder Events works with Qminder Websockets
 public class QminderEvents : WebSocketDelegate {
   
   /// Singleton shared instance
@@ -100,7 +120,7 @@ public class QminderEvents : WebSocketDelegate {
   fileprivate let websocketReservedCloseCode = UInt16(1099)
   
   /// JSON decoder with milliseconds
-  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.decoderWithMilliseconds()
+  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
   
   /**
     Callback type when subscrubing to evenets
@@ -367,7 +387,14 @@ public class QminderEvents : WebSocketDelegate {
     print(data)
   }
   
-  public func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+  /**
+    Did receive PONG
+   
+    - Parameters:
+      - socket: Websocket
+      - data: Data received
+  */
+  public func websocketDidReceivePong(socket: WebSocketClient, data: Data?) {
     print("Got pong! Maybe some data: \(String(describing: data))")
   }
   

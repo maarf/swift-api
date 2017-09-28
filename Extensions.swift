@@ -8,7 +8,12 @@
 import Foundation
 
 public extension JSONDecoder {
-  static func decoderWithMilliseconds() -> JSONDecoder {
+  /**
+    Create JSON decoder with milliseconds parsing format
+   
+    - Returns: JSONDecoder object with milliseconds parsing date strategy
+  */
+  static func withMilliseconds() -> JSONDecoder {
     let decoder = JSONDecoder()
     
     let dateISO8601Formatter = DateFormatter()
@@ -60,5 +65,21 @@ public extension String {
     }
     
     return randomString
+  }
+}
+
+
+extension Dictionary where Key == String, Value == Any {
+  /**
+    Mutating Dictonary function to update/add value if it isn't nil
+   
+    - Parameters:
+      - value: Value to set
+      - key: Key to set to
+  */
+  mutating func set(value optionalValue: Any?, forKey key: String) {
+    guard let value = optionalValue else { return }
+    
+    self[key] = value
   }
 }

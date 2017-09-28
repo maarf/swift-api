@@ -11,6 +11,7 @@ import Foundation
 /// Estimated time of service data
 public struct EstimatedTimeOfService: CodableResponsable {
   
+  /// Status code from API
   let statusCode: Int
   
   /// Estimated time of service

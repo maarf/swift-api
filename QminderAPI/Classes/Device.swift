@@ -11,6 +11,7 @@ import Foundation
 /// User object
 public struct TVDevice: CodableResponsable {
   
+  /// Status code from API
   let statusCode: Int
 
   /// Device ID

@@ -8,8 +8,13 @@
 
 import Foundation
 
+/// Qminder result
 public enum QminderResult<Value> {
+  
+  /// Success
   case success(Value)
+  
+  /// Failure with Error
   case failure(Error)
 
   /// Returns `true` if the result is a success, `false` otherwise.
