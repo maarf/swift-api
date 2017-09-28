@@ -9,10 +9,10 @@ import Foundation
 
 public extension JSONDecoder {
   /**
-    Create JSON decoder with milliseconds parsing format
+   Create JSON decoder with milliseconds parsing format
    
-    - Returns: JSONDecoder object with milliseconds parsing date strategy
-  */
+   - Returns: JSONDecoder object with milliseconds parsing date strategy
+   */
   static func withMilliseconds() -> JSONDecoder {
     let decoder = JSONDecoder()
     
@@ -47,7 +47,8 @@ public extension JSONDecoder {
   }
 }
 
-public extension String {
+
+extension String {
   
   /**
    Create random string for subscription ID
@@ -69,7 +70,7 @@ public extension String {
 }
 
 
-extension Dictionary where Key == String, Value == Any {
+public extension Dictionary where Key == String, Value == Any {
   /**
     Mutating Dictonary function to update/add value if it isn't nil
    
