@@ -6,7 +6,12 @@ before_install:
   - pod install --repo-update --project-directory=Example
   - instruments -s devices
   - xcodebuild -showsdks
+  - brew tap vapor/homebrew-tap
+  - brew update
+  - brew install vapor
 script:
-  - ./build.sh
+  - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV 1080p' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty
+  - pod lib lint --verbose
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - killall vapor
