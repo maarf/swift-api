@@ -2,10 +2,8 @@ osx_image: xcode9
 language: objective-c
 before_install:
   - brew tap vapor/homebrew-tap
-  # - brew update
   - brew install vapor
   - ./start-server.sh
-  - pod repo update --silent
   - gem install cocoapods
   - pod install --repo-update --project-directory=Example
   - instruments -s devices
