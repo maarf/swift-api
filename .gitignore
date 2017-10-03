@@ -44,7 +44,7 @@ Config/secrets
 Packages
 .build
 xcuserdata
-*.xcodeproj
+.xcodeproj
 DerivedData/
 .DS_Store
 
