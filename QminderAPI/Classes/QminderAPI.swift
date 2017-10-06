@@ -463,17 +463,18 @@ open class QminderAPI {
     }
     
     Alamofire.request("\(serverAddress)\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseData(completionHandler: { response in
-      
-      let statusCode = response.response?.statusCode
-      if statusCode != 200 {
-        return completion(QminderRequestResult.failure(QminderError.statusCode(statusCode!)))
-      }
-      
       switch response.result {
         case .failure(let error):
           return completion(QminderRequestResult.failure(QminderError.alamofire(error)))
         
         case .success(let value):
+          
+          guard let statusCode = response.response?.statusCode else { return }
+          
+          if statusCode != 200 {
+            return completion(QminderRequestResult.failure(QminderError.statusCode(statusCode)))
+          }
+          
           return completion(QminderRequestResult.success(value))
       }
     })

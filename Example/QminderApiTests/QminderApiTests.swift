@@ -82,78 +82,85 @@ class QminderApiTests : QuickSpec {
       var eventsResponses: [Ticket] = []
 
       it("Subscribe to events") {
-        events.subscribe(event: .ticketCreated, parameters: parameters, callback: {result in
-          switch result {
-            case .ticket(let ticket):
-              print(ticket)
-              
-              eventsResponses.append(ticket)
-            default:
-              break
-          }
-        })
         
-        events.subscribe(event: .ticketCalled, parameters: parameters, callback: {result in
+        let ticketCreated: EventsCallbackType<Ticket> = {result in
           switch result {
-          case .ticket(let ticket):
+          case .success(let ticket):
             print(ticket)
             
             eventsResponses.append(ticket)
           default:
             break
           }
-        })
+        }
         
-        events.subscribe(event: .ticketRecalled, parameters: parameters, callback: {result in
+        let ticketCalled: EventsCallbackType<Ticket> = {result in
           switch result {
-          case .ticket(let ticket):
+          case .success(let ticket):
             print(ticket)
             
             eventsResponses.append(ticket)
           default:
             break
           }
-        })
-
-        events.subscribe(event: .ticketCancelled, parameters: parameters, callback: {result in
+        }
+        
+        let ticketRecalled: EventsCallbackType<Ticket> = {result in
           switch result {
-          case .ticket(let ticket):
+          case .success(let ticket):
             print(ticket)
             
             eventsResponses.append(ticket)
           default:
             break
           }
-        })
-
-        events.subscribe(event: .ticketServed, parameters: parameters, callback: {result in
+        }
+        
+        let ticketCancelled: EventsCallbackType<Ticket> = {result in
           switch result {
-          case .ticket(let ticket):
+          case .success(let ticket):
             print(ticket)
             
             eventsResponses.append(ticket)
           default:
             break
           }
-        })
-
-        events.subscribe(event: .ticketChanged, parameters: parameters, callback: {result in
+        }
+        
+        let ticketServed: EventsCallbackType<Ticket> = {result in
           switch result {
-          case .ticket(let ticket):
+          case .success(let ticket):
             print(ticket)
             
             eventsResponses.append(ticket)
           default:
             break
           }
-        })
+        }
+        
+        let ticketChanged: EventsCallbackType<Ticket> = {result in
+          switch result {
+          case .success(let ticket):
+            print(ticket)
+            
+            eventsResponses.append(ticket)
+          default:
+            break
+          }
+        }
+        
+        events.subscribe(event: .ticketCreated, parameters: parameters, callback: ticketCreated)
+        events.subscribe(event: .ticketCalled, parameters: parameters, callback: ticketCalled)
+        events.subscribe(event: .ticketRecalled, parameters: parameters, callback: ticketRecalled)
+        events.subscribe(event: .ticketCancelled, parameters: parameters, callback: ticketCancelled)
+        events.subscribe(event: .ticketServed, parameters: parameters, callback: ticketServed)
+        events.subscribe(event: .ticketChanged, parameters: parameters, callback: ticketChanged)
       }
 
       it("Get response from Websockets"){
         // Test run #1
         // Ticket created
-        
-        
+
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
           ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket created")
