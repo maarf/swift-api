@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.12'
   s.watchos.deployment_target = '3.0'
 
-  s.source_files = 'QminderAPI/Classes/**/*',
+  s.source_files = 'QminderAPI/Classes/**/*'
 
   s.dependency 'Alamofire', '~> 4.5'
   s.dependency 'Starscream', '~> 3.0'
