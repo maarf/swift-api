@@ -83,7 +83,7 @@ class QminderApiTests : QuickSpec {
 
       it("Subscribe to events") {
         
-        let ticketCreated: EventsCallbackType<Ticket> = {result in
+        events.subscribe(toTicketEvent: .ticketCreated, parameters: parameters, callback: { result in
           switch result {
           case .success(let ticket):
             print(ticket)
@@ -92,9 +92,9 @@ class QminderApiTests : QuickSpec {
           default:
             break
           }
-        }
+        })
         
-        let ticketCalled: EventsCallbackType<Ticket> = {result in
+        events.subscribe(toTicketEvent: .ticketCalled, parameters: parameters, callback: { result in
           switch result {
           case .success(let ticket):
             print(ticket)
@@ -103,9 +103,9 @@ class QminderApiTests : QuickSpec {
           default:
             break
           }
-        }
+        })
         
-        let ticketRecalled: EventsCallbackType<Ticket> = {result in
+        events.subscribe(toTicketEvent: .ticketRecalled, parameters: parameters, callback: { result in
           switch result {
           case .success(let ticket):
             print(ticket)
@@ -114,9 +114,9 @@ class QminderApiTests : QuickSpec {
           default:
             break
           }
-        }
+        })
         
-        let ticketCancelled: EventsCallbackType<Ticket> = {result in
+        events.subscribe(toTicketEvent: .ticketCancelled, parameters: parameters, callback: { result in
           switch result {
           case .success(let ticket):
             print(ticket)
@@ -125,9 +125,9 @@ class QminderApiTests : QuickSpec {
           default:
             break
           }
-        }
+        })
         
-        let ticketServed: EventsCallbackType<Ticket> = {result in
+        events.subscribe(toTicketEvent: .ticketServed, parameters: parameters, callback: { result in
           switch result {
           case .success(let ticket):
             print(ticket)
@@ -136,9 +136,9 @@ class QminderApiTests : QuickSpec {
           default:
             break
           }
-        }
+        })
         
-        let ticketChanged: EventsCallbackType<Ticket> = {result in
+        events.subscribe(toTicketEvent: .ticketChanged, parameters: parameters, callback: { result in
           switch result {
           case .success(let ticket):
             print(ticket)
@@ -147,14 +147,7 @@ class QminderApiTests : QuickSpec {
           default:
             break
           }
-        }
-        
-        events.subscribe(event: .ticketCreated, parameters: parameters, callback: ticketCreated)
-        events.subscribe(event: .ticketCalled, parameters: parameters, callback: ticketCalled)
-        events.subscribe(event: .ticketRecalled, parameters: parameters, callback: ticketRecalled)
-        events.subscribe(event: .ticketCancelled, parameters: parameters, callback: ticketCancelled)
-        events.subscribe(event: .ticketServed, parameters: parameters, callback: ticketServed)
-        events.subscribe(event: .ticketChanged, parameters: parameters, callback: ticketChanged)
+        })
       }
 
       it("Get response from Websockets"){

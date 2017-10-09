@@ -158,15 +158,14 @@ public class QminderEvents : WebSocketDelegate {
   }
   
   /**
-    Subscribe to event
+    Subscribe to ticket event
     
     - Parameters:
-      - eventName: Event name to subscribe
+      - eventType: Event type to subscribe
       - parameters: Dictionary of parameters
       - callback: Callback executed when response got from Websocket
   */
-    
-  public func subscribe(event eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
+  public func subscribe(toTicketEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(QminderResult.failure(QminderEventError.parse))
       return
@@ -175,7 +174,15 @@ public class QminderEvents : WebSocketDelegate {
     sendMessageToWebsocket(subscriptionId: subscriptionId, eventType: eventType, message: message, callback: callback)
   }
   
-  public func subscribe(event eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice>) {
+  /**
+   Subscribe to device event
+   
+   - Parameters:
+   - eventType: Event type to subscribe
+   - parameters: Dictionary of parameters
+   - callback: Callback executed when response got from Websocket
+   */
+  public func subscribe(toDeviceEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(QminderResult.failure(QminderEventError.parse))
@@ -185,7 +192,15 @@ public class QminderEvents : WebSocketDelegate {
     sendMessageToWebsocket(subscriptionId: subscriptionId, eventType: eventType, message: message, callback: callback)
   }
   
-  public func subscribe(event eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
+  /**
+   Subscribe to lines event
+   
+   - Parameters:
+   - eventType: Event type to subscribe
+   - parameters: Dictionary of parameters
+   - callback: Callback executed when response got from Websocket
+   */
+  public func subscribe(toLineEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(QminderResult.failure(QminderEventError.parse))
@@ -380,7 +395,6 @@ public class QminderEvents : WebSocketDelegate {
   */
   private func sendMessage(subscriptionId:String, eventType: QminderEvent, messageToSend:String, callback:Any) {
     self.callbackMap[subscriptionId] = CallbackMap(callback: callback, eventType: eventType)
-    print(messageToSend)
     self.socket.write(string: messageToSend)
   }
   

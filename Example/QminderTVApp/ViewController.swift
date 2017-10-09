@@ -158,27 +158,28 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     
     let parameters = ["location": locationId]
     
-    events.subscribe(event: .ticketCreated, parameters: parameters, callback: {result in
+    
+    events.subscribe(toTicketEvent: .ticketCreated, parameters: parameters, callback: { result in
       self.messageReceived(eventType: .ticketCreated, result: result)
     })
     
-    events.subscribe(event: .ticketCancelled, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketCancelled, parameters: parameters, callback: {result in
       self.messageReceived(eventType: .ticketCancelled, result: result)
     })
     
-    events.subscribe(event: .ticketChanged, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketChanged, parameters: parameters, callback: {result in
       self.messageReceived(eventType: .ticketChanged, result: result)
     })
     
-    events.subscribe(event: .ticketCalled, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketCalled, parameters: parameters, callback: {result in
       self.messageReceived(eventType: .ticketCalled, result: result)
     })
     
-    events.subscribe(event: .ticketRecalled, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketRecalled, parameters: parameters, callback: {result in
       self.messageReceived(eventType: .ticketRecalled, result: result)
     })
     
-    events.subscribe(event: .ticketServed, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketServed, parameters: parameters, callback: {result in
       self.messageReceived(eventType: .ticketServed, result: result)
     })
   }
