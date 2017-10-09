@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'QminderAPI'
-  s.version          = '0.1.45'
+  s.version          = '1.0.0'
   s.summary          = 'Qminder iOS API'
 
   s.description      = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.12'
   s.watchos.deployment_target = '3.0'
 
-  s.source_files = 'QminderAPI/Classes/**/*'
+  s.source_files = 'QminderAPI/Classes/**/*',
 
   s.dependency 'Alamofire', '~> 4.5'
   s.dependency 'Starscream', '~> 3.0'
