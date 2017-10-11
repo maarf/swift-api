@@ -114,11 +114,8 @@ public class QminderEvents : WebSocketDelegate {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket?.delegate = self
     
-    // Ping server each 30 seconds
-    Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true, block: {timer in
-      if self.socket.isConnected {
-        self.socket.write(ping: "PING".data(using: .utf8)!)
-      }
+    Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: {timer in
+      self.socket.write(ping: "PING".data(using: .utf8)!)
     })
   }
   
