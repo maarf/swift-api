@@ -46,6 +46,7 @@ struct LinesResponse: EventResponsable, Codable {
   var messageId: Int
   var data: Data
   
+  /// Lines array
   var lines: [Line] {
     guard let lines = data["lines"] else { return [] }
     

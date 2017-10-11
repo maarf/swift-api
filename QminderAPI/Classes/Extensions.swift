@@ -52,10 +52,8 @@ extension String {
   
   /**
    Create random string for subscription ID
-   
-   - Returns: String random ID
    */
-  static func random(length: Int) -> String {
+  init (withRandomLenght length: Int) {
     let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     let randomLength = UInt32(letters.count)
     
@@ -65,7 +63,7 @@ extension String {
       return accum.appending(String(letters[randomIndex]))
     }
     
-    return randomString
+    self = randomString
   }
 }
 

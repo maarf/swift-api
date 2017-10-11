@@ -26,12 +26,6 @@ open class QminderAPI {
   /// JSON decoder with milliseconds
   private let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
   
-  /// Qminder request result
-  enum QminderRequestResult<Value> {
-    case success(Value)
-    case failure(Error)
-  }
-  
   
   /**
     Private init for singleton approach
@@ -450,13 +444,13 @@ open class QminderAPI {
       - url: URL
       - completion: Callback block with result
   */
-  fileprivate func makeRequest(url:String, method:HTTPMethod = .get, parameters: Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderRequestResult<Data>) -> Void) {
+  fileprivate func makeRequest(url:String, method:HTTPMethod = .get, parameters: Parameters? = nil, encoding:ParameterEncoding = URLEncoding.default, apiKeyNeeded:Bool = true, completion: @escaping (QminderResult<Data>) -> Void) {
     
     var headers: HTTPHeaders = [:]
     
     if apiKeyNeeded {
       guard let key = apiKey else {
-        return completion(QminderRequestResult.failure(QminderError.apiKeyNotSet))
+        return completion(QminderResult.failure(QminderError.apiKeyNotSet))
       }
       
       headers["X-Qminder-REST-API-Key"] = key
@@ -465,17 +459,17 @@ open class QminderAPI {
     Alamofire.request("\(serverAddress)\(url)", method: method, parameters: parameters, encoding: encoding, headers: headers).responseData(completionHandler: { response in
       switch response.result {
         case .failure(let error):
-          return completion(QminderRequestResult.failure(QminderError.alamofire(error)))
+          return completion(QminderResult.failure(QminderError.alamofire(error)))
         
         case .success(let value):
           
           guard let statusCode = response.response?.statusCode else { return }
           
           if statusCode != 200 {
-            return completion(QminderRequestResult.failure(QminderError.statusCode(statusCode)))
+            return completion(QminderResult.failure(QminderError.statusCode(statusCode)))
           }
           
-          return completion(QminderRequestResult.success(value))
+          return completion(QminderResult.success(value))
       }
     })
   }

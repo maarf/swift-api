@@ -223,7 +223,7 @@ public class QminderEvents : WebSocketDelegate {
   
   private func parseParameters(eventType: QminderEvent, parameters: [String: Any]) -> (message: String, subscriptionId: String)? {
     var parameters = parameters
-    let subscriptionId = String.random(length: 30)
+    let subscriptionId = String(withRandomLenght: 30)
     
     parameters["id"] = subscriptionId
     parameters["subscribe"] = eventType.rawValue

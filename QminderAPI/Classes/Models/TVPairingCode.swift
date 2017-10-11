@@ -14,7 +14,7 @@ public struct TVPairingCode: CodableResponsable {
   
   let statusCode: Int
   
-  /// 4-character code for enduser to enter to the Dashboard
+  /// Pairing code for enduser to enter to the Dashboard
   public let code: String
   
   /// Secret to use for checking the status of the pairing process
