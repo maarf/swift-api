@@ -8,7 +8,8 @@ before_install:
   - instruments -s devices
   - xcodebuild -showsdks
 script:
-  - cd test-server
+  - | 
+    cd test-server
     vapor build --verbose
     screen -S vapor-testserver -d -m bash -c "vapor run &"
   - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty
