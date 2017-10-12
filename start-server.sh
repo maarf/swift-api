@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd test-server
-vapor build --run --verbose &
+vapor build
+vapor run &
