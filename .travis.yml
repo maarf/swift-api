@@ -10,13 +10,10 @@ before_install:
 script:
   - cd test-server
     vapor build --verbose
-    vapor run &
-    bg_pid=$!
-  - echo $bg_pid
+    screen -S vapor-testserver -d -m bash -c "vapor run &"
   - sleep 30
   # - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty
   # - pod lib lint --allow-warnings
-  - kill -9 $bg_pid
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   # - killall vapor
