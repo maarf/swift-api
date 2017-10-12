@@ -1,16 +1,19 @@
 osx_image: xcode9.1
 language: objective-c
 before_install:
-  - brew tap vapor/homebrew-tap
-  - brew install vapor
-  - ./start-server.sh
-  - bg_pid=$!
-  - gem install cocoapods
-  - pod install --repo-update --project-directory=Example
-  - instruments -s devices
-  - xcodebuild -showsdks
+  # - brew tap vapor/homebrew-tap
+  # - brew install vapor
+  # - gem install cocoapods
+  # - pod install --repo-update --project-directory=Example
+  # - instruments -s devices
+  # - xcodebuild -showsdks
 script:
-  - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty
+  - cd test-server
+    vapor build --verbose
+    vapor run &
+    bg_pid=$!
+  - sleep 30
+  # - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty
   # - pod lib lint --allow-warnings
   - kill $bg_pid
 after_success:
