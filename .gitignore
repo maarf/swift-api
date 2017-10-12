@@ -26,7 +26,7 @@ Carthage
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
-# 
+#
 # Note: if you ignore the Pods directory, make sure to uncomment
 # `pod install` in .travis.yml
 #
@@ -34,3 +34,18 @@ Carthage
 test.sh
 
 *.coverage.txt
+
+# Created by https://www.gitignore.io/api/vapor
+
+### Vapor ###
+Config/secrets
+
+### Vapor Patch ###
+Packages
+.build
+xcuserdata
+.xcodeproj
+DerivedData/
+.DS_Store
+
+# End of https://www.gitignore.io/api/vapor

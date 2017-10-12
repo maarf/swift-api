@@ -1,7 +1,13 @@
 ignore:
   - "Example/*"
-  - "test-websockets"
+  - "test-server"
+  - "test-server/.*"
   - "Example"
+  - "Example/.*"
+  - "docs"
+  - "Pods"
+  - "Pods/*"
+  - "Pods/.*"
 comment:
   layout: "header, diff"
   behavior: default
