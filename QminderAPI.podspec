@@ -1,15 +1,15 @@
 Pod::Spec.new do |s|
   s.name             = 'QminderAPI'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Qminder iOS API'
 
   s.description      = <<-DESC
   iOS wrapper for Qminder API.
                        DESC
 
-  s.homepage         = 'https://www.qminderapp.com/'
+  s.homepage         = 'https://www.qminder.com/'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Qminder Ltd.' => 'info@qminderapp.com' }
+  s.author           = { 'Qminder Ltd.' => 'info@qminder.com' }
   s.social_media_url = 'https://www.facebook.com/QMinder/'
   s.source           = { :git => 'https://github.com/Qminder/swift-api.git', :tag => s.version.to_s }
 

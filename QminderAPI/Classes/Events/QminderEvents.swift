@@ -179,7 +179,7 @@ public class QminderEvents : WebSocketDelegate {
    - parameters: Dictionary of parameters
    - callback: Callback executed when response got from Websocket
    */
-  public func subscribe(toDeviceEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice>) {
+  public func subscribe(toDeviceEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(QminderResult.failure(QminderEventError.parse))
@@ -337,13 +337,11 @@ public class QminderEvents : WebSocketDelegate {
         callback(QminderResult<Ticket>.success(ticket))
         
       case .overviewMonitorChange:
-        guard let device = try? self.jsonDecoderWithMilliseconds.decode(DeviceResponse.self, from: data).data else {
-          return
-        }
+        let device = try? self.jsonDecoderWithMilliseconds.decode(DeviceResponse.self, from: data).data
       
-        guard let callback = callbackMap.callback as? ((QminderResult<TVDevice>) -> Void) else { return }
+        guard let callback = callbackMap.callback as? ((QminderResult<TVDevice?>) -> Void) else { return }
         
-        callback(QminderResult<TVDevice>.success(device))
+        callback(QminderResult<TVDevice?>.success(device))
       case .linesChanged:
         guard let lines = try? self.jsonDecoderWithMilliseconds.decode(LinesResponse.self, from: data).lines else {
           return
