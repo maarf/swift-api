@@ -1,20 +1,20 @@
 {
   "name": "QminderAPI",
-  "version": "0.1.45",
+  "version": "1.0.0",
   "summary": "Qminder iOS API",
   "description": "iOS wrapper for Qminder API.",
-  "homepage": "https://www.qminderapp.com/",
+  "homepage": "https://www.qminder.com/",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Qminder Ltd.": "info@qminderapp.com"
+    "Qminder Ltd.": "info@qminder.com"
   },
   "social_media_url": "https://www.facebook.com/QMinder/",
   "source": {
     "git": "https://github.com/Qminder/swift-api.git",
-    "tag": "0.1.45"
+    "tag": "1.0.0"
   },
   "source_files": "QminderAPI/Classes/**/*",
   "platforms": {

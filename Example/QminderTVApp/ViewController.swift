@@ -163,24 +163,32 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       self.messageReceived(eventType: .ticketCreated, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketCancelled, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketCancelled, parameters: parameters, callback: { result in
       self.messageReceived(eventType: .ticketCancelled, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketChanged, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketChanged, parameters: parameters, callback: { result in
       self.messageReceived(eventType: .ticketChanged, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketCalled, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketCalled, parameters: parameters, callback: { result in
       self.messageReceived(eventType: .ticketCalled, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketRecalled, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketRecalled, parameters: parameters, callback: { result in
       self.messageReceived(eventType: .ticketRecalled, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketServed, parameters: parameters, callback: {result in
+    events.subscribe(toTicketEvent: .ticketServed, parameters: parameters, callback: { result in
       self.messageReceived(eventType: .ticketServed, result: result)
+    })
+    
+    events.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["parameters": ["id": UserDefaults.standard.integer(forKey: "TV_ID")]], callback: { result in
+      print("TV changed")
+    })
+    
+    events.subscribe(toLineEvent: .linesChanged, parameters: ["parameters": ["id": UserDefaults.standard.integer(forKey: "LOCATION_ID")]], callback: { result in
+      print("Lines changed")
     })
   }
   
