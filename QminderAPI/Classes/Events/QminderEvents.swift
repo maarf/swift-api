@@ -94,6 +94,16 @@ public class QminderEvents : WebSocketDelegate {
   /// Websocket object
   fileprivate var socket:WebSocket!
   
+  /// Ping queue
+  fileprivate let pingQueue = DispatchQueue(label: "com.qminder.pingQueue")
+  
+  /// Ping interval
+  fileprivate let pingInterval = 10
+  
+  /// Reconnect queue
+  fileprivate let reconnectQueue = DispatchQueue(label: "com.qminder.reconnectQueue")
+  
+  fileprivate let reconnectInterval = 5
   
   /**
     Private init for singleton approach
@@ -113,10 +123,6 @@ public class QminderEvents : WebSocketDelegate {
   public func setup(apiKey:String, serverAddress:String="wss://api.qminder.com") {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket?.delegate = self
-    
-    Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: {timer in
-      self.socket.write(ping: "PING".data(using: .utf8)!)
-    })
   }
   
   /**
@@ -241,6 +247,19 @@ public class QminderEvents : WebSocketDelegate {
     }
   }
   
+  /**
+    Send ping
+  */
+  private func sendPing() {
+    guard socket.isConnected else { return }
+    
+    socket.write(ping: "PING".data(using: .utf8)!)
+    
+    pingQueue.asyncAfter(deadline: .now() + .seconds(pingInterval)) {[weak self] in
+      self?.sendPing()
+    }
+  }
+  
   
   // MARK: - Websocket delegate methods
   /**
@@ -266,6 +285,8 @@ public class QminderEvents : WebSocketDelegate {
     }
     
     delegate?.onConnected()
+    
+    sendPing()
   }
   
   /**
@@ -276,35 +297,42 @@ public class QminderEvents : WebSocketDelegate {
       - error: Error why Websocket disconnected
   */
   public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-    
     openingConnection = false
     
-    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: {timer in
-        
-      // If is disconnected
-      if self.connectionClosed || self.socket.isConnected {
-        timer.invalidate()
-        return
-      }
-      
-      // Check if there is an error
-      guard let error = error as NSError? else {
-        timer.invalidate()
-        return
-      }
-      
-      
-      // Don't reopen if going away normally
-      if UInt16(error.code) == self.websocketReservedCloseCode {
-        timer.invalidate()
-        return
-      }
-      
-      // Reopen socket
-      self.openSocket()
-    })
-    
     delegate?.onDisconnected(error: error)
+    
+    reconnectQueue.asyncAfter(deadline: DispatchTime.now() + .seconds(reconnectInterval), execute: {
+      self.reconnect(error: error)
+    })
+  }
+  
+  /**
+    Reconnect to Websocket
+   
+    - Parameters:
+      - error: Error
+  */
+  private func reconnect(error: Error?) {
+    
+    // If Websocket is closed normally or is connected already
+    if connectionClosed || socket.isConnected {
+      return
+    }
+    
+    guard let error = error as NSError? else {
+      return
+    }
+    
+    // Don't reconect if going away normally
+    if UInt16(error.code) == websocketReservedCloseCode {
+      return
+    }
+    
+    openSocket()
+    
+    reconnectQueue.asyncAfter(deadline: DispatchTime.now() + .seconds(reconnectInterval), execute: {
+      self.reconnect(error: error)
+    })
   }
   
   /**
