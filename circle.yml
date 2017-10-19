@@ -1,15 +1,16 @@
 machine:
   xcode:
     version: 9.0
-
-dependencies:
-  override:
-    - brew tap vapor/homebrew-tap
-    - brew install vapor
-    - gem install cocoapods
-    - pod install --project-directory=Example
+  post:
     - instruments -s devices
     - xcodebuild -showsdks
+
+dependencies:
+  pre:
+    - brew tap vapor/homebrew-tap
+    - brew install vapor
+    # - gem install cocoapods
+    # - pod install --project-directory=Example
 
 test:
   pre:
