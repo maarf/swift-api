@@ -9,18 +9,17 @@ dependencies:
   pre:
     - brew tap vapor/homebrew-tap
     - brew install vapor
-    # - gem install cocoapods
-    # - pod install --project-directory=Example
 
 test:
-  pre:
+  override:
     - |
       cd test-server
       vapor build --verbose
       screen -S vapor-testserver -d -m bash -c "vapor run"
       echo "Vapor started"
-  override:
-    - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
+    - |
+      cd ..
+      set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
     - pod lib lint --allow-warnings
   post:
     - bash <(curl -s https://codecov.io/bash)
