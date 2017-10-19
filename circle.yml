@@ -9,12 +9,10 @@ dependencies:
     - |
       cd test-server
       vapor build --verbose
-  post:
-    - ./start-vapor.sh
-    background: true
 
 test:
   override:
+    - ./start-vapor.sh &
     - set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
     - pod lib lint --allow-warnings
   post:
