@@ -98,7 +98,7 @@ public class QminderEvents : WebSocketDelegate {
   fileprivate let pingQueue = DispatchQueue(label: "com.qminder.pingQueue")
   
   /// Ping interval
-  fileprivate let pingInterval = 10
+  fileprivate let pingInterval = 1
   
   /// Reconnect queue
   fileprivate let reconnectQueue = DispatchQueue(label: "com.qminder.reconnectQueue")
@@ -253,7 +253,7 @@ public class QminderEvents : WebSocketDelegate {
   private func sendPing() {
     guard socket.isConnected else { return }
     
-    socket.write(ping: "PING".data(using: .utf8)!)
+    socket.write(string: "PING")
     
     pingQueue.asyncAfter(deadline: .now() + .seconds(pingInterval)) {[weak self] in
       self?.sendPing()
