@@ -319,13 +319,11 @@ public class QminderEvents : WebSocketDelegate {
       return
     }
     
-    guard let error = error as NSError? else {
-      return
-    }
-    
-    // Don't reconect if going away normally
-    if UInt16(error.code) == websocketReservedCloseCode {
-      return
+    if let error = error as NSError? {
+      // Don't reconect if going away normally
+      if UInt16(error.code) == websocketReservedCloseCode {
+        return
+      }
     }
     
     openSocket()

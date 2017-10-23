@@ -30,6 +30,9 @@ public enum QminderEvent: String {
   
   /// Overview monitor change
   case overviewMonitorChange = "OVERVIEW_MONITOR_CHANGE"
+  
+  /// Lines changed
+  case linesChanged = "LINES_CHANGED"
 }
 
 /// Websocket message model
