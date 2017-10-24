@@ -374,7 +374,7 @@ open class QminderAPI {
     
       switch result {
         case .failure(let error):
-          return completion(QminderResult.failure(QminderError.alamofire(error)))
+          return completion(QminderResult.failure(error))
         
         case .success(let data):
           
