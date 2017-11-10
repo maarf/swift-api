@@ -78,31 +78,16 @@
          <EnvironmentVariable
             key = "QMINDER_LOCATION_ID"
             value = "$(QMINDER_LOCATION_ID)"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QMINDER_LOCATION_ID"
-            value = "7701"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "QMINDER_API_KEY"
-            value = "$(QMINDER_API_KEY"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QMINDER_API_KEY"
-            value = "eKsenRpCbpkrpcAkia6nzwzPYkzkNQMOnAYEXSr5"
+            value = "$(QMINDER_API_KEY)"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "QMINDER_LINE_ID"
             value = "$(QMINDER_LINE_ID)"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QMINDER_LINE_ID"
-            value = "47466"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

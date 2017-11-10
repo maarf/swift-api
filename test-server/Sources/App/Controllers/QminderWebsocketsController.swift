@@ -48,7 +48,12 @@ public class QminderWebsocketController {
     
     ws.onText = { ws, text in
       
+      print("RECIVED: \(text)")
+      
+      guard text != "PING" else { return }
+      
       guard let data = text.data(using: .utf8) else { return }
+      
       let message = try JSONDecoder().decode(WebsocketMessage.self, from: data)
       
       // Let's add to needed subscriptions dictionary

@@ -29,13 +29,54 @@ protocol ResponsableWithData: Responsable {
 
 /// Ticket status. "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
 public enum Status: String, Codable {
+  /// New
   case new = "NEW"
+  
+  /// Called
   case called = "CALLED"
+  
+  /// Cancelled
   case cancelled = "CANCELLED"
+  
+  /// Cancelled by clerk
   case cancelledByClerk = "CANCELLED_BY_CLERK"
+  
+  /// No Show
   case noShow = "NOSHOW"
+  
+  /// Served
   case served = "SERVED"
 }
+
+/// Ticket source
+public enum Source: String, Codable {
+  
+  /// Manual
+  case manual = "MANUAL"
+  
+  /// Name
+  case name = "NAME"
+  
+  /// Printer
+  case printer = "PRINTER"
+  
+  /// Other (not specified)
+  case other
+  
+  public init?(rawValue: String) {
+    switch rawValue.lowercased() {
+    case "manual":
+      self = .manual
+    case "name":
+      self = .name
+    case "printer":
+      self = .printer
+    default:
+      self = .other
+    }
+  }
+}
+
 
 /// Type for Codable & Responsable
 typealias CodableResponsable = (Codable & Responsable)
@@ -56,7 +97,7 @@ public protocol Ticketable {
   var line: Int { get set }
   
   /// Source of the ticket. "MANUAL", "NAME" or "PRINTER". This field will not be present if no source has been specified when creating a ticket.
-  var source: String? { get }
+  var source: Source? { get }
   
   /// Ticekt status
   var status: Status { get set }
@@ -98,7 +139,7 @@ public struct Ticket: CodableTicket {
   public let id: String
   public let number: Int?
   public var line: Int
-  public let source: String?
+  public let source: Source?
   public var status: Status
   public var firstName: String?
   public var lastName: String?
