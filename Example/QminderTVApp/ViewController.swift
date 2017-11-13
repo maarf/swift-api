@@ -203,7 +203,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")
     }
     
-    cell?.textLabel?.text = "\(eventInfo.type.rawValue) : \(eventInfo.ticket.status)"
+    cell?.textLabel?.text = "\(eventInfo.type.rawValue) : \(eventInfo.ticket.status.rawValue)"
     
     return cell!
   }

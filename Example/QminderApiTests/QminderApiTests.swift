@@ -155,34 +155,46 @@ class QminderApiTests : QuickSpec {
         // Ticket created
 
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
-          ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+          guard ticket.status == .new else { return false }
+          
+          return ticket.id == "23853943"  && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket created")
 
         // Ticket edited
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
-          return ticket.id == "23853943" && ticket.status == "NEW" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+          guard ticket.status == .new else { return false }
+          
+          return ticket.id == "23853943"  && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket deleted
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
-          return ticket.id == "23853943" && ticket.status == "CANCELLED_BY_CLERK" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+          guard ticket.status == .cancelledByClerk else { return false }
+          
+          return ticket.id == "23853943" && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
 
         // Test run #2
         // Ticket created
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
-          return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
+          guard ticket.status == .new else { return false }
+          
+          return ticket.id == "23856820"  && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket edited
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
-          return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+          guard ticket.status == .new else { return false }
+          
+          return ticket.id == "23856820" && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket edited
         expect(eventsResponses).toEventually(containElementSatisfying({ticket -> Bool in
-          return ticket.id == "23856820" && ticket.status == "NEW" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+          guard ticket.status == .new else { return false }
+          
+          return ticket.id == "23856820" && ticket.firstName == "Name" && ticket.lastName == "Surname"
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
         // Ticket called
@@ -197,7 +209,7 @@ class QminderApiTests : QuickSpec {
             return false
           }
 
-          return ticket.id == "23856820" && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
+          return ticket.id == "23856820" && ticket.status == .called && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
 
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
@@ -213,7 +225,7 @@ class QminderApiTests : QuickSpec {
             return false
           }
 
-          return ticket.id == "23856820" && ticket.status == "CALLED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
+          return ticket.id == "23856820" && ticket.status == .called && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(calledDate) == ComparisonResult.orderedSame
 
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
@@ -229,7 +241,7 @@ class QminderApiTests : QuickSpec {
             return false
           }
 
-          return ticket.id == "23856820" && ticket.status == "SERVED" && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(servedDate) == ComparisonResult.orderedSame
+          return ticket.id == "23856820" && ticket.status == .served && ticket.firstName == "Name" && ticket.lastName == "Surname" && date.compare(servedDate) == ComparisonResult.orderedSame
 
         }), timeout: 30.0, pollInterval: 3.0, description: "Ticket edited")
 
@@ -416,7 +428,6 @@ class QminderApiTests : QuickSpec {
         
         expect(ticket?.line).toEventuallyNot(beNil())
         expect(ticket?.source).toEventuallyNot(beNil())
-        expect(ticket?.status).toEventuallyNot(beEmpty())
       })
       
       it("Search tickets with line ID", closure: {
@@ -571,8 +582,8 @@ class QminderApiTests : QuickSpec {
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
         
           expect(ticket?.id).to(equal("999"))
-          expect(ticket?.source).to(equal("MANUAL"))
-          expect(ticket?.status).to(equal("NEW"))
+          expect(ticket?.source).to(equal(.manual))
+          expect(ticket?.status).to(equal(.new))
           expect(ticket?.firstName).to(equal("Name"))
           expect(ticket?.lastName).to(equal("Surname"))
           expect(ticket?.line).to(equal(333))
