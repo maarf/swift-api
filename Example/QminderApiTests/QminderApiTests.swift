@@ -560,17 +560,25 @@ class QminderApiTests : QuickSpec {
     
     // MARK: - Test models
     describe("Test models") {
+      
+      let dateISO8601Formatter = DateFormatter()
+      dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+      
+      let dateISO8601MillisecondsFormatter = DateFormatter()
+      dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
   
       //MARK: Ticket model
       describe("test ticket model") {
       
+        let createdDateString = "2017-02-06T12:35:29Z"
+        
         var data: [String: Any] = [
           "status" : "NEW",
           "source" : "MANUAL",
           "firstName" : "Name",
           "id" : "999",
           "created" : [
-            "date" : "2017-02-06T12:35:29Z"
+            "date" : createdDateString
           ],
           "line" : 333,
           "lastName" : "Surname"
@@ -587,60 +595,72 @@ class QminderApiTests : QuickSpec {
           expect(ticket?.firstName).to(equal("Name"))
           expect(ticket?.lastName).to(equal("Surname"))
           expect(ticket?.line).to(equal(333))
-          expect(ticket?.created?.date).toNot(beNil())
+          expect(ticket?.createdDate).to(equal(dateISO8601Formatter.date(from: createdDateString)))
         }
         
         it ("parse with milliseconds") {
           
-          data["created"] = ["date" : "2017-02-06T12:35:29.123Z"]
+          let createdDateString = "2017-02-06T12:35:29.123Z"
+          data["created"] = ["date" : createdDateString]
           
           let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
         
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
 
-          expect(ticket?.created?.date).toNot(beNil())
+          let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          
+          expect(ticket?.createdDate).to(equal(dateISO8601MillisecondsFormatter.date(from: createdDateString)))
         }
         
         it ("should parse order after without milliseconds") {
-          data["orderAfter"] = "2017-02-06T12:35:29Z"
+          let orderAfterDateString = "2017-02-06T12:35:29Z"
+          data["orderAfter"] = orderAfterDateString
         
           let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
           
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
 
           expect(ticket?.orderAfter).toNot(beNil())
+          expect(ticket?.orderAfter).to(equal(dateISO8601Formatter.date(from: orderAfterDateString)))
         }
         
         it ("should parse order after with milliseconds") {
-          data["orderAfter"] = "2017-02-06T12:35:29.123Z"
+          let orderAfterDateString = "2017-02-06T12:35:29.123Z"
+          data["orderAfter"] = orderAfterDateString
         
           let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
           
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
 
           expect(ticket?.orderAfter).toNot(beNil())
+          expect(ticket?.orderAfter).to(equal(dateISO8601MillisecondsFormatter.date(from: orderAfterDateString)))
         }
         
         it ("should parse called date, user id, desk") {
-          data["called"] = ["date": "2017-02-06T12:35:29Z", "caller": 444, "desk": 3]
+          let calledDateString = "2017-02-06T12:35:29Z"
+          data["called"] = ["date": calledDateString, "caller": 444, "desk": 3]
         
           let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
           
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
 
-          expect(ticket?.called?.date).toNot(beNil())
+          expect(ticket?.calledDate).toNot(beNil())
+          expect(ticket?.calledDate).to(equal(dateISO8601Formatter.date(from: calledDateString)))
           expect(ticket?.called?.caller).to(equal(444))
           expect(ticket?.called?.desk).to(equal(3))
         }
         
         it ("should parse served date") {
-          data["served"] = ["date": "2017-02-06T12:35:29Z"]
+          let servedDateString = "2017-02-06T12:35:29Z"
+          data["served"] = ["date": servedDateString]
         
           let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
           
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
 
-          expect(ticket?.served?.date).toNot(beNil())
+          expect(ticket?.servedDate).toNot(beNil())
+          expect(ticket?.servedDate).to(equal(dateISO8601Formatter.date(from: servedDateString)))
         }
         
         it ("should parse labels") {
@@ -651,7 +671,6 @@ class QminderApiTests : QuickSpec {
           let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
           
           expect(ticket?.labels).toNot(beNil())
-          
           
           expect(ticket?.labels).to(containElementSatisfying({label in
             return label.color == "#000000" && label.value == "Test"
