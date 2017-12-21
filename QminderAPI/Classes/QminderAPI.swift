@@ -14,36 +14,35 @@ import Alamofire
 /// Qminder API for iOS in Swift
 open class QminderAPI {
 
-  /// Singleton shared instance
-  public static let sharedInstance = QminderAPI()
-
   /// Qminder API key
-  private var apiKey: String?
+  fileprivate var apiKey: String?
   
   /// Qminder API address
-  private var serverAddress = "https://api.qminder.com/v1"
+  fileprivate var serverAddress: String
   
   /// JSON decoder with milliseconds
-  private let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
-  
-  
-  /**
-    Private init for singleton approach
-  */
-  private init() {}
+  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
   
   /**
-    Set Qminder API key
-    
-    - Parameter key: API key
+    Initialize Qminder API without API key
+   
+    - Parameters:
+      - serverAddress: Optional server address (used for tests)
   */
-  open func setup(apiKey:String, serverAddress:String?=nil) {
+  public init(serverAddress: String = "https://api.qminder.com/v1") {
+    self.serverAddress = serverAddress
+  }
+  
+  /**
+    Intialize Qminder API
+   
+    - Parameters:
+      - apiKey: Qminder API key
+      - serverAddress: Optional server address (used for tests)
+  */
+  public init(apiKey:String, serverAddress: String = "https://api.qminder.com/v1") {
     self.apiKey = apiKey
-    
-    guard let address = serverAddress else {
-      return
-    }
-    self.serverAddress = address
+    self.serverAddress = serverAddress
   }
   
   // MARK: - Locations
@@ -54,7 +53,7 @@ open class QminderAPI {
     - Parameters:
       - completion: Callback block what is executed when location list is received
   */
-  open func getLocationsList(completion: @escaping (QminderResult<[Location]>) -> Void) {
+  public func getLocationsList(completion: @escaping (QminderResult<[Location]>) -> Void) {
   
     makeRequest(url: "/locations/", completion: {result in
       switch result {

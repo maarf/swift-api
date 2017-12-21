@@ -16,8 +16,8 @@ class QminderApiTests : QuickSpec {
   override func spec() {
   
     /// Qminder API client
-    let qminderAPI = QminderAPI.sharedInstance
-    let events = QminderEvents.sharedInstance
+    var qminderAPI: QminderAPI!
+    var events: QminderEvents!
     
     
     /// Location ID
@@ -71,8 +71,8 @@ class QminderApiTests : QuickSpec {
     // Create Qminder API client
     beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
-        qminderAPI.setup(apiKey: apiKey)
-        events.setup(apiKey: apiKey, serverAddress: "ws://localhost:8889")
+        qminderAPI = QminderAPI(apiKey: apiKey)
+        events = QminderEvents(apiKey: apiKey, serverAddress: "ws://localhost:8889")
       }
     }
     
