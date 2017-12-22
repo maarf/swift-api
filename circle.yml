@@ -5,6 +5,7 @@ machine:
 
 dependencies:
   pre:
+    - cd Example && pod update
     - brew tap vapor/homebrew-tap
     - brew install vapor
     - |
