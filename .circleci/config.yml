@@ -1,8 +1,8 @@
 version: 2
 jobs:
-    build-and-test:
+  build-and-test:
     macos:
-        xcode: "9.2"
+      xcode: "9.2"
 
     steps:
       - checkout
@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Build vapor
           command: cd test-server && vapor build --verbose
-          
+
       - run:
           name: Start vapor
           command: ./start-vapor.sh
@@ -40,7 +40,7 @@ jobs:
           command: bash <(curl -s https://codecov.io/bash)
 
 workflows:
-    version: 2
+  version: 2
     build-and-test:
-        jobs:
-          - build-and-test
+      jobs:
+        - build-and-test
