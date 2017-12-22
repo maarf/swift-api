@@ -20,10 +20,8 @@ jobs:
 
       - run:
           name: Build vapor
-          command: |
-            cd test-server
-            vapor build --verbose
-
+          command: cd test-server && vapor build --verbose
+          
       - run:
           name: Start vapor
           command: ./start-vapor.sh
