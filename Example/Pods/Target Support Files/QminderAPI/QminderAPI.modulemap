@@ -1,6 +1,0 @@
-framework module QminderAPI {
-  umbrella header "QminderAPI-umbrella.h"
-
-  export *
-  module * { export * }
-}

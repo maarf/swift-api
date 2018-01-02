@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode: "9.2.0"
+
+    steps:
+      - checkout
+      - run:
+          name: Update cocoapods
+          command: cd Example && pod update
+
+      - run:
+          name: Add vapor to homebrew
+          command: brew tap vapor/homebrew-tap
+
+      - run:
+          name: Install vapor
+          command: brew install vapor
+
+      - run:
+          name: Build vapor
+          command: |
+            cd test-server
+            vapor build --verbose
+
+      - run:
+          name: Start vapor and test
+          command: |
+            cd test-server
+            vapor run&
+            cd ..
+            set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
+
+      - run:
+          name: Pod lib lint
+          command: pod lib lint --allow-warnings
+
+      - run:
+          name: Codeconv
+          command: bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build-and-test

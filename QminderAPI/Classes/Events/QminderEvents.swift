@@ -44,9 +44,6 @@ public typealias EventsCallbackType<T> = (QminderResult<T>) -> Void
 
 /// Qminder Events works with Qminder Websockets
 public class QminderEvents : WebSocketDelegate {
-  
-  /// Singleton shared instance
-  public static let sharedInstance = QminderEvents()
 
   /// Class delegate
   public var delegate: QminderEventsDelegate?
@@ -106,21 +103,15 @@ public class QminderEvents : WebSocketDelegate {
   fileprivate let reconnectInterval = 5
   
   /**
-    Private init for singleton approach
-  */
-  private init() {}
-  
-  /**
     Initialization function. Initializes Websocket object and sets Websocket library delegate to self.
-    
+   
     - Parameters:
       - apiKey: Qminder API key
       - serverAddress: Optional server address (used for tests)
-    
+
     - Returns: Creates Qminder Events client
-   
   */
-  public func setup(apiKey:String, serverAddress:String="wss://api.qminder.com") {
+  public init(apiKey:String, serverAddress: String = "wss://api.qminder.com") {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket?.delegate = self
   }

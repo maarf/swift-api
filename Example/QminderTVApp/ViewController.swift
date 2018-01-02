@@ -24,10 +24,10 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   private var timer = Timer()
   
   /// Qminder API provider
-  private var qminderAPI = QminderAPI.sharedInstance
+  private var qminderAPI: QminderAPI!
   
   /// Qminder Websockets provider
-  private var events = QminderEvents.sharedInstance
+  private var events: QminderEvents!
   
   /// JSON decoder with milliseconds
   private let jsonDecoderWithMilliseconds: JSONDecoder = {
@@ -86,7 +86,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     
       print("API key loaded from UserDefaults")
       
-      qminderAPI.setup(apiKey: key!)
+      qminderAPI = QminderAPI(apiKey: key!)
 
       qminderAPI.getLocationsList(completion: {result in
         switch result {
@@ -98,8 +98,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
         }
       })
     
-      events.setup(apiKey: key!)
-//      self.events = QminderEvents(apiKey: key!)
+      events = QminderEvents(apiKey: key!)
       events.delegate = self
       events.openSocket()
       
@@ -108,6 +107,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
       setEvents(locationId: locationId)
       
     } else {
+      qminderAPI = QminderAPI()
       qminderAPI.getPairingCodeAndSecret(completion: {result in
       
         switch result {
@@ -138,7 +138,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
                         UserDefaults.standard.set(tvData.location, forKey: "LOCATION_ID")
                       
                         if let key = tvData.apiKey {
-                          self.events.setup(apiKey: key)
+                          self.events = QminderEvents(apiKey: key)
                           self.events.delegate = self
                           self.events.openSocket()
                           
