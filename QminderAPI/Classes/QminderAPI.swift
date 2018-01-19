@@ -416,8 +416,12 @@ open class QminderAPI {
       - id: TV ID
       - completion: Callback block when empty state is received
   */
-  public func tvEmptyState(id: Int, completion: @escaping (QminderResult<EmptyState>) -> Void) {
-    makeRequest(url: "/tv/\(id)/emptystate", method: .get, encoding: JSONEncoding.default, completion: {result in
+  public func tvEmptyState(id: Int, language: String, completion: @escaping (QminderResult<EmptyState>) -> Void) {
+    
+    var parameters = Parameters()
+    parameters.set(value: language, forKey: "language")
+    
+    makeRequest(url: "/tv/\(id)/emptystate", method: .get, parameters: parameters, encoding: JSONEncoding.default, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
