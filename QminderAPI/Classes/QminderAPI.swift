@@ -421,7 +421,7 @@ open class QminderAPI {
     var parameters = Parameters()
     parameters.set(value: language, forKey: "language")
     
-    makeRequest(url: "/tv/\(id)/emptystate", method: .get, parameters: parameters, encoding: JSONEncoding.default, completion: {result in
+    makeRequest(url: "/tv/\(id)/emptystate", method: .get, parameters: parameters, completion: {result in
       switch result {
         case .failure(let error):
           return completion(QminderResult.failure(error))
