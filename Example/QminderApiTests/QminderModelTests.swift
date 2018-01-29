@@ -221,6 +221,30 @@ class QminderModelTests : QuickSpec {
             return extra.value == "Test" && extra.url == "http://www.google.com"
           }))
         }
+        
+        it ("Ticket with interactions data") {
+          data["interactions"] = [
+            ["start": "2018-01-29T12:55:46Z",
+             "end": "2018-01-29T12:55:51Z",
+             "line": 62633,
+             "desk": 6202,
+             "user": 891
+            ]
+          ]
+          
+          let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
+          
+          let ticket = try? jsonDecoderWithMilliseconds.decode(Ticket.self, from: jsonData!)
+          
+          expect(ticket?.interactions).toNot(beNil())
+          
+          let interaction = ticket?.interactions?.first
+          expect(interaction?.start).to(equal(dateISO8601Formatter.date(from: "2018-01-29T12:55:46Z")))
+          expect(interaction?.end).to(equal(dateISO8601Formatter.date(from: "2018-01-29T12:55:51Z")))
+          expect(interaction?.line).to(equal(62633))
+          expect(interaction?.desk).to(equal(6202))
+          expect(interaction?.user).to(equal(891))
+        }
       }
       
       
