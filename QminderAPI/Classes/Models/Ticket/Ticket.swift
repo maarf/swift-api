@@ -47,13 +47,16 @@ public protocol Ticketable: Codable {
   var served: Served? { get set }
   
   /// Labels
-  var labels: Array<Label>? { get set }
+  var labels: [Label]? { get set }
   
   /// Extra info
-  var extra: Array<Extra>? { get set }
+  var extra: [Extra]? { get set }
   
   /// Order after
   var orderAfter: Date? { get set }
+  
+  /// Ticket interactions
+  var interactions: [Interaction]? { get set }
 }
 
 public extension Ticketable {
@@ -72,6 +75,11 @@ public extension Ticketable {
   public var servedDate: Date? {
     return served?.date
   }
+  
+  /// Desk ID
+  public var deskID: Int? {
+    return interactions?.first?.desk
+  }
 }
 
 //MARK: - Structs
@@ -88,7 +96,8 @@ public struct Ticket: Ticketable {
   public var created: Created
   public var called: Called?
   public var served: Served?
-  public var labels: Array<Label>?
-  public var extra: Array<Extra>?
+  public var labels: [Label]?
+  public var extra: [Extra]?
   public var orderAfter: Date?
+  public var interactions: [Interaction]?
 }
