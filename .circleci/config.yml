@@ -6,6 +6,10 @@ jobs:
 
     steps:
       - checkout
+
+      - restore_cache:
+          key: cocoapods
+
       - run:
           name: Update cocoapods
           command: cd Example && pod update
@@ -39,6 +43,11 @@ jobs:
       - run:
           name: Codeconv
           command: bash <(curl -s https://codecov.io/bash)
+
+      - save_cache:
+         key: cocoapods
+         paths:
+           - ~/.cocoapods
 
 workflows:
   version: 2

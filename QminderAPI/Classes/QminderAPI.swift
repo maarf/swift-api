@@ -160,7 +160,7 @@ open class QminderAPI {
         return completion(QminderResult.failure(error))
         
       case .success(let data):
-        guard let desks = try? JSONDecoder().decode(Desks.self, from: data).data else {
+        guard let desks = try? JSONDecoder().decode(Desks.self, from: data).desks else {
           return completion(QminderResult.failure(QminderError.unreadableObject))
         }
         

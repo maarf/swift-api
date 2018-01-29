@@ -18,9 +18,7 @@ public struct Desk: Codable {
 }
 
 /// Tickets object
-struct Desks: CodableResponsableWithData {
-  typealias Data = Desk
-  
+struct Desks: CodableResponsable {
   let statusCode: Int
-  let data: [Desk]
+  let desks: [Desk]
 }
