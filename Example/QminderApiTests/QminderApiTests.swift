@@ -352,6 +352,27 @@ class QminderApiTests : QuickSpec {
         expect(user?.email).toEventuallyNot(beEmpty())
       })
       
+      it("Get location desks") {
+        var desks: [Desk]?
+        var desk: Desk?
+        
+        waitUntil(action: { done in
+          qminderAPI.getLocationDesks(locationId: locationId, completion: { result in
+            if result.isSuccess {
+              desks = result.value
+              desk = desks?.first
+            }
+            
+            done()
+          })
+        })
+        
+        expect(desks).toEventuallyNot(beEmpty())
+        expect(desk).toEventuallyNot(beNil())
+        expect(desk?.id).toEventuallyNot(beNil())
+        expect(desk?.name).toEventuallyNot(beNil())
+      }
+      
       // MARK: - Lines
       
       it("Get line details", closure: {
