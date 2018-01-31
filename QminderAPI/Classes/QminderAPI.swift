@@ -128,7 +128,7 @@ open class QminderAPI {
       - locationId: Location ID
       - completion: Callback block what is executed when location users is received
   */
-  public func getLocationUsers(locationId:Int, completion: @escaping (QminderResult<[User]>) -> Void) {
+  public func getLocationUsers(locationId: Int, completion: @escaping (QminderResult<[User]>) -> Void) {
     
     makeRequest(url: "/locations/\(locationId)/users", completion: {result in
       switch result {
@@ -144,6 +144,29 @@ open class QminderAPI {
           return completion(QminderResult.success(users))
       }
     })
+  }
+  
+  /**
+   Get location desks
+   
+   - Parameters:
+     - locationId: Location ID
+     - completion: Callback block what is executed when location users is received
+  */
+  public func getLocationDesks(locationId: Int, completion: @escaping (QminderResult<[Desk]>) -> Void) {
+    makeRequest(url: "/locations/\(locationId)/desks") { result in
+      switch result {
+      case .failure(let error):
+        return completion(QminderResult.failure(error))
+        
+      case .success(let data):
+        guard let desks = try? JSONDecoder().decode(Desks.self, from: data).desks else {
+          return completion(QminderResult.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(QminderResult.success(desks))
+      }
+    }
   }
   
   // MARK: - Lines
