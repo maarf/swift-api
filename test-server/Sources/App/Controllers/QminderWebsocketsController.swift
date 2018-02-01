@@ -48,7 +48,7 @@ public class QminderWebsocketController {
     
     ws.onText = { ws, text in
       
-      print("RECIVED: \(text)")
+      print("RECEIVED: \(text)")
       
       guard text != "PING" else { return }
       
