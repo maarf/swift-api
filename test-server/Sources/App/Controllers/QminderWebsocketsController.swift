@@ -187,10 +187,12 @@ public class QminderWebsocketController {
           "created" : {
           "date" : "2017-02-06T13:35:31Z"
           },
-          "called": {
-          "date": "2017-02-06T13:36:11Z",
-          "caller": 891
-          }
+          "interactions": [{
+            "start": "2017-02-06T13:36:11Z",
+            "line": 62633,
+            "desk": 1,
+            "user": 891
+          }]
           }
           }
           """, {callback(7)})
@@ -210,10 +212,12 @@ public class QminderWebsocketController {
               "created" : {
                 "date" : "2017-02-06T13:35:31Z"
               },
-              "called" : {
-                "date" : "2017-02-06T13:36:21Z",
-                "caller" : 891
-              }
+              "interactions": [{
+                "start": "2017-02-06T13:36:11Z",
+                "line": 62633,
+                "desk": 1,
+                "user": 891
+              }]
             }
           }
           """, {callback(8)})
@@ -233,10 +237,12 @@ public class QminderWebsocketController {
           "created" : {
           "date" : "2017-02-06T13:35:31Z"
           },
-          "called" : {
-          "date" : "2017-02-06T13:36:21Z",
-          "caller" : 891
-          },
+          "interactions": [{
+            "start": "2017-02-06T13:36:11Z",
+            "line": 62633,
+            "desk": 1,
+            "user": 891
+          }],
           "served" : {
           "date" : "2017-02-06T13:36:36Z"
           }

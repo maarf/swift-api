@@ -159,7 +159,7 @@ class QminderWebsocketTests : QuickSpec {
             return false
           }
           
-          guard let calledDate = ticket.called?.date else {
+          guard let calledDate = ticket.calledDate else {
             return false
           }
           
@@ -175,7 +175,7 @@ class QminderWebsocketTests : QuickSpec {
             return false
           }
           
-          guard let calledDate = ticket.called?.date else {
+          guard let calledDate = ticket.calledDate else {
             return false
           }
           
