@@ -213,7 +213,7 @@ public class QminderWebsocketController {
                 "date" : "2017-02-06T13:35:31Z"
               },
               "interactions": [{
-                "start": "2017-02-06T13:36:11Z",
+                "start": "2017-02-06T13:36:21Z",
                 "line": 62633,
                 "desk": 1,
                 "user": 891
