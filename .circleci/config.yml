@@ -8,7 +8,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: cocoapods
+          key: cocoapods-{{ checksum "QminderAPI.podspec" }}
 
       - run:
           name: Update cocoapods
@@ -45,7 +45,7 @@ jobs:
           command: bash <(curl -s https://codecov.io/bash)
 
       - save_cache:
-         key: cocoapods
+         key: cocoapods-{{ checksum "QminderAPI.podspec" }}
          paths:
            - ~/.cocoapods
 
