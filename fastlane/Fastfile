@@ -2,10 +2,6 @@ update_fastlane
 
 default_platform :ios
 
-before_all do
-  ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-end
-
 platform :ios do
   desc "Depoy new Swift API version"
   lane :release do
