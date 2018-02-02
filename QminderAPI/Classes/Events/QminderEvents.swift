@@ -60,7 +60,7 @@ public class QminderEvents : WebSocketDelegate {
     /// Unique subscribtion ID
     var subscriptionId: String
     
-    /// Qmidner event
+    /// Qminder event
     var eventType: QminderEvent
     
     /// String message what should be sent to Websocket
