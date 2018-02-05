@@ -21,7 +21,7 @@ open class QminderAPI {
   fileprivate var serverAddress: String
   
   /// JSON decoder with milliseconds
-  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
+  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds
   
   /**
     Initialize Qminder API without API key

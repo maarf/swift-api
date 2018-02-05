@@ -8,32 +8,24 @@
 import Foundation
 
 public extension JSONDecoder {
-  /**
-   Create JSON decoder with milliseconds parsing format
-   
-   - Returns: JSONDecoder object with milliseconds parsing date strategy
-   */
-  static func withMilliseconds() -> JSONDecoder {
+  
+  /// JSON decoder with milliseconds
+  static let withMilliseconds: JSONDecoder = {
     let decoder = JSONDecoder()
-    
-    let dateISO8601Formatter = DateFormatter()
-    dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    
-    let dateISO8601MillisecondsFormatter = DateFormatter()
-    dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
     decoder.dateDecodingStrategy = .custom({decoder -> Date in
       
       let container = try decoder.singleValueContainer()
       let dateStr = try container.decode(String.self)
       
-      // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
       var tmpDate: Date? = nil
       
-      if dateStr.count == 24 {
-        tmpDate = dateISO8601MillisecondsFormatter.date(from: dateStr)
+      if dateStr.count == 17 {
+        tmpDate = DateFormatter.ISO8601short.date(from: dateStr)
+      } else if dateStr.count == 24 {
+        tmpDate = DateFormatter.ISO8601Milliseconds.date(from: dateStr)
       } else {
-        tmpDate = dateISO8601Formatter.date(from: dateStr)
+        tmpDate = DateFormatter.ISO8601.date(from: dateStr)
       }
       
       guard let date = tmpDate else {
@@ -44,7 +36,34 @@ public extension JSONDecoder {
     })
     
     return decoder
-  }
+  }()
+}
+
+public extension DateFormatter {
+  
+  /// ISO-8601 date formatter without seconds
+  static let ISO8601short: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+  
+    return formatter
+  }()
+  
+  /// ISO-8601 date formatter
+  static let ISO8601: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    
+    return formatter
+  }()
+  
+  /// ISO-8601 with milliseconds date formatter
+  static let ISO8601Milliseconds: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    return formatter
+  }()
 }
 
 
