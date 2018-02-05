@@ -241,9 +241,10 @@ open class QminderAPI {
       - maxCalledTimestamp: Optional parameter for searching tickets which are called before specified time. UTF Unix timestamp or ISO 8601
       - limit: Optional parameter for limiting number of search results. Value has to be between 1 and 10000. If no limit is specified, 1000 will be used
       - order: Optional parameter for ordering results. Valid values are "id", "number", "created" and "called". It's allowed to specify asc or desc ordering. Eg. "id ASC", "created DESC"
+      - responseScope: Optional parameter for additional details about the found tickets. Value "MESSAGES" will also include ticket messages with response. Value "INTERACTIONS" will also include ticket interactions with response.
       - completion: Callback block executed when tickets are received back
   */
-  public func searchTickets(locationId:Int? = nil, lineId:[Int]? = nil, status:[String]? = nil, callerId:Int? = nil, minCreatedTimestamp:Int? = nil, maxCreatedTimestamp:Int? = nil, minCalledTimestamp:Int? = nil, maxCalledTimestamp:Int? = nil, limit:Int? = nil, order:String? = nil, completion: @escaping (QminderResult<[Ticket]>) -> Void) {
+  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [String]? = nil, callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil, minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil, limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil, completion: @escaping (QminderResult<[Ticket]>) -> Void) {
   
     var parameters = Parameters()
     
@@ -257,6 +258,7 @@ open class QminderAPI {
     parameters.set(value: maxCalledTimestamp, forKey: "maxCalled")
     parameters.set(value: limit, forKey: "limit")
     parameters.set(value: order, forKey: "order")
+    parameters.set(value: responseScope?.flatMap({ String($0) }).joined(separator: ","), forKey: "responseScope")
     
     makeRequest(url: "/tickets/search", parameters: parameters, completion: {result in
     

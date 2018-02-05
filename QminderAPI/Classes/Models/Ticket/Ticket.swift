@@ -40,9 +40,6 @@ public protocol Ticketable: Codable {
   /// Created date
   var created: Created { get }
   
-  /// Called date
-  var called: Called? { get set }
-  
   /// Served date
   var served: Served? { get set }
   
@@ -68,7 +65,7 @@ public extension Ticketable {
   
   /// Called date
   public var calledDate: Date? {
-    return called?.date
+    return calledInteraction?.start
   }
   
   /// Served date
@@ -76,9 +73,19 @@ public extension Ticketable {
     return served?.date
   }
   
-  /// Desk ID
-  public var deskID: Int? {
-    return interactions?.first?.desk
+  /// Called user ID
+  public var calledUserID: Int? {
+    return calledInteraction?.user
+  }
+  
+  /// Called Desk ID
+  public var calledDeskID: Int? {
+    return calledInteraction?.desk
+  }
+  
+  /// Called interaction
+  private var calledInteraction: Interaction? {
+    return interactions?.first(where: { $0.end == nil })
   }
 }
 
@@ -94,7 +101,6 @@ public struct Ticket: Ticketable {
   public var lastName: String?
   public var phoneNumber: Int?
   public var created: Created
-  public var called: Called?
   public var served: Served?
   public var labels: [Label]?
   public var extra: [Extra]?

@@ -165,7 +165,13 @@ class QminderModelTests : QuickSpec {
         
         it ("should parse called date, user id, desk") {
           let calledDateString = "2017-02-06T12:35:29Z"
-          data["called"] = ["date": calledDateString, "caller": 444, "desk": 3]
+          data["interactions"] = [
+            ["start": calledDateString,
+             "line": 62633,
+             "desk": 1,
+             "user": 444
+            ]
+          ]
           
           let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
           
@@ -173,8 +179,8 @@ class QminderModelTests : QuickSpec {
           
           expect(ticket?.calledDate).toNot(beNil())
           expect(ticket?.calledDate).to(equal(dateISO8601Formatter.date(from: calledDateString)))
-          expect(ticket?.called?.caller).to(equal(444))
-          expect(ticket?.called?.desk).to(equal(3))
+          expect(ticket?.calledUserID).to(equal(444))
+          expect(ticket?.calledDeskID).to(equal(1))
         }
         
         it ("should parse served date") {

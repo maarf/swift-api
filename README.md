@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 [![Platform](https://img.shields.io/cocoapods/p/QminderAPI.svg?style=flat)](http://cocoapods.org/pods/QminderAPI)
 ![Swift](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
+[![codecov](https://codecov.io/gh/Qminder/swift-api/branch/master/graph/badge.svg)](https://codecov.io/gh/Qminder/swift-api)
 
 ## Example
 

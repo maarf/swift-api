@@ -18,6 +18,17 @@ platform :ios do
     )
     sh("git fetch --tags")
     pod_push(allow_warnings: true, verbose: true)
+
+    if ENV["SLACK_URL"]
+      slack(
+        message: "QminderAPI successfully released!",
+        channel: "#apple-dev-ops",
+        payload: {
+          "Version": version,
+          "Changelog": changelog
+        }
+      )
+    end
   end
 
 end
