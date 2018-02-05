@@ -52,7 +52,7 @@ public class QminderEvents : WebSocketDelegate {
   fileprivate let websocketReservedCloseCode = UInt16(1099)
   
   /// JSON decoder with milliseconds
-  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds()
+  fileprivate let jsonDecoderWithMilliseconds = JSONDecoder.withMilliseconds
   
   /// Websocket message
   fileprivate struct WebsocketMessage {

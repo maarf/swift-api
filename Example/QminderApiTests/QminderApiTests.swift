@@ -29,45 +29,6 @@ class QminderApiTests : QuickSpec {
     /// Ticket ID
     var ticketId:String!
     
-    let jsonDecoderWithMilliseconds: JSONDecoder = {
-      let jsonDecoder = JSONDecoder()
-      
-      let dateISO8601ShortFormatter = DateFormatter()
-      dateISO8601ShortFormatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
-      
-      let dateISO8601Formatter = DateFormatter()
-      dateISO8601Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-      
-      let dateISO8601MillisecondsFormatter = DateFormatter()
-      dateISO8601MillisecondsFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-      
-      jsonDecoder.dateDecodingStrategy = .custom({decoder -> Date in
-        
-        let container = try decoder.singleValueContainer()
-        let dateStr = try container.decode(String.self)
-        
-        // possible date strings: "yyyy-MM-dd'T'HH:mm:ssZ" or "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        
-        var tmpDate: Date? = nil
-        
-        if dateStr.count == 17 {
-          tmpDate = dateISO8601ShortFormatter.date(from: dateStr)
-        } else if dateStr.count == 24 {
-          tmpDate = dateISO8601MillisecondsFormatter.date(from: dateStr)
-        } else {
-          tmpDate = dateISO8601Formatter.date(from: dateStr)
-        }
-        
-        guard let date = tmpDate else {
-          throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
-        }
-        
-        return date
-      })
-      
-      return jsonDecoder
-    }()
-    
     // Create Qminder API client
     beforeSuite {
       if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
