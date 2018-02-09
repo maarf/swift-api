@@ -20,11 +20,14 @@ public struct TVDevice: CodableResponsable {
   /// Device name
   public let name: String
   
-  /// Created data
-  public let settings: Settings?
-  
-  /// Theme
+  /// Name of TV theme
   public let theme: String
+  
+  /// Name of TV layout
+  public let layout: String
+  
+  /// Settings of the TV, only included when applicable
+  public let settings: Settings?
 }
 
 /// Created data object
