@@ -281,7 +281,8 @@ class QminderModelTests : QuickSpec {
           "id": 999,
           "name": "Apple TV",
           "settings": ["lines": [1, 2, 3], "clearTickets": "afterCalling"],
-          "theme": "Default"
+          "theme": "Default",
+          "layout": "standard"
         ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
