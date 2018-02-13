@@ -9,7 +9,7 @@
 import Foundation
 
 /// Qminder result
-public enum QminderResult<Value> {
+public enum Result<Value> {
   
   /// Success
   case success(Value)

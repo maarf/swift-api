@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.6.0)
   - Nimble (7.0.3)
-  - QminderAPI (1.4.0):
+  - QminderAPI (1.4.2):
     - Alamofire (~> 4.6)
     - Starscream (~> 3.0)
   - Quick (1.2.0)
@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  QminderAPI: 8aa064200dbb71c1b702fbc538074a17310cbe79
+  QminderAPI: 85c06ad07ebe77b9a2b4a51596657ba4a3dd1743
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
 

@@ -9,17 +9,20 @@
 import Foundation
 
 /// Qminder API errors
-public enum QminderError : Error {
+public enum QminderError: Error {
 
   /// API key is not set
   case apiKeyNotSet
   
-  /// Alamofire error
-  case alamofire(Error)
+  /// Request error
+  case request(Error)
   
-  /// Cant read object with ObjectMapper
+  /// Cant parse object
   case unreadableObject
   
   /// Status code error
   case statusCode(Int)
+  
+  /// Can't parse to response
+  case parseRequest
 }
