@@ -231,7 +231,7 @@ open class QminderAPI {
     - Parameters:
       - locationId: Optional parameter for searching tickets in specified location
       - lineId: Optional array of line ID's
-      - status: Optional array of statuses "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
+      - status: Optional array of enum statuses "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
       - callerId: Optional parameter for searching tickets which were called by specified user ID
       - minCreatedTimestamp: Optional parameter for searching tickets which are created after specified time. UTF Unix timestamp or ISO 8601
       - maxCreatedTimestamp: Optional parameter for searching tickets which are created before specified time. UTF Unix timestamp or ISO 8601
@@ -242,13 +242,13 @@ open class QminderAPI {
       - responseScope: Optional parameter for additional details about the found tickets. Value "MESSAGES" will also include ticket messages with response. Value "INTERACTIONS" will also include ticket interactions with response.
       - completion: Callback block executed when tickets are received back
   */
-  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [String]? = nil, callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil, minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil, limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil, completion: @escaping (Result<[Ticket]>) -> Void) {
+  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [Status]? = nil, callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil, minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil, limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil, completion: @escaping (Result<[Ticket]>) -> Void) {
   
     var parameters = [String: Any]()
     
     parameters.set(value: locationId, forKey: "location")
     parameters.set(value: lineId?.flatMap({ String($0) }).joined(separator: ","), forKey: "line")
-    parameters.set(value: status?.joined(separator: ","), forKey: "status")
+    parameters.set(value: status?.flatMap({ $0.rawValue }).joined(separator: ","), forKey: "status")
     parameters.set(value: callerId, forKey: "caller")
     parameters.set(value: minCreatedTimestamp, forKey: "minCreated")
     parameters.set(value: maxCreatedTimestamp, forKey: "maxCreated")
