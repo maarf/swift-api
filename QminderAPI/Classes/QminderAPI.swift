@@ -231,7 +231,7 @@ open class QminderAPI {
     - Parameters:
       - locationId: Optional parameter for searching tickets in specified location
       - lineId: Optional array of line ID's
-      - status: Optional array of enum statuses "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
+      - status: Optional array of enum statuses
       - callerId: Optional parameter for searching tickets which were called by specified user ID
       - minCreatedTimestamp: Optional parameter for searching tickets which are created after specified time. UTF Unix timestamp or ISO 8601
       - maxCreatedTimestamp: Optional parameter for searching tickets which are created before specified time. UTF Unix timestamp or ISO 8601
