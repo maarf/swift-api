@@ -261,7 +261,7 @@ class QminderApiTests : QuickSpec {
         var tickets:Array<Ticket>?
         
         waitUntil(action: {done in
-          qminderAPI.searchTickets(locationId: locationId, status: ["NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW", "SERVED"], limit: 10, completion: {result in
+          qminderAPI.searchTickets(locationId: locationId, status: [.new, .called, .cancelled, .cancelledByClerk, .noShow, .served], limit: 10, completion: {result in
             if result.isSuccess {
               tickets = result.value
             }
