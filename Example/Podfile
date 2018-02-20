@@ -8,21 +8,5 @@ target 'QminderTVApp' do
   target 'QminderApiTests' do
     inherit! :search_paths
 
-    pod 'Nimble'
-    pod 'Quick'
   end
-end
-
-
-
-post_install do |installer|
-	myTargets = ['Nimble', 'Quick']
-
-	installer.pods_project.targets.each do |target|
-		if myTargets.include? target.name
-			target.build_configurations.each do |config|
-				config.build_settings['SWIFT_VERSION'] = '3.2'
-			end
-		end
-	end
 end

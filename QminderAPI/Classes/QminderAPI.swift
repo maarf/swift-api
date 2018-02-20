@@ -194,34 +194,6 @@ open class QminderAPI {
     })
   }
   
-  /**
-   Get estimated time of service
-   
-   - Parameters:
-     - lineId:  line ID
-     - completion: Callback block what is executed when estimated time of service is received
-  */
-  public func getEstimatedTimeOfService(lineId: Int, completion: @escaping (Result<EstimatedTimeOfService>) -> Void) {
-    
-    makeRequest(url: "/lines/\(lineId)/estimated-time", completion: {result in
-      switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
-        
-        case .success(let data):
-          
-          let jsonDecoder = JSONDecoder()
-          jsonDecoder.dateDecodingStrategy = .iso8601
-        
-          guard let estimatedTimeOfService = try? jsonDecoder.decode(EstimatedTimeOfService.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-          
-          return completion(Result.success(estimatedTimeOfService))
-      }
-    })
-  }
-  
   
   // MARK: - Tickets
   
