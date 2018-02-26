@@ -53,5 +53,3 @@ struct LinesResponse: EventResponsable, Codable {
     return lines
   }
 }
-
-
