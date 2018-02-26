@@ -12,7 +12,9 @@ jobs:
 
       - run:
           name: Update cocoapods
-          command: cd Example && pod update
+          command: |
+            sudo gem install cocoapods
+            cd Example && pod update
 
       - run:
           name: Add vapor to homebrew
