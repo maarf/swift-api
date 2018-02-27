@@ -16,6 +16,10 @@ jobs:
             cd Example && pod install
 
       - run:
+          name: Install Swiftlint
+          command: brew install swiftlint
+
+      - run:
           name: Add vapor to homebrew and install
           command: |
             brew tap vapor/homebrew-tap
@@ -41,7 +45,9 @@ jobs:
 
       - run:
           name: Codeconv
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            export COVERAGE__NOTIFY__SLACK__DEFAULT__URL=${CODECONV_SLACK_URL}
+            bash <(curl -s https://codecov.io/bash)
 
 workflows:
   version: 2
