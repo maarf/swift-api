@@ -7,18 +7,17 @@ jobs:
     steps:
       - checkout
 
-      # - restore_cache:
-          # key: cocoapods-{{ checksum "QminderAPI.podspec" }}
-
-# curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - restore_cache:
+          key: cocoapods-{{ checksum "QminderAPI.podspec" }}
 
       - run:
           name: Update ruby and cocoapods
           command: |
             echo "ruby-2.4" > ~/.ruby-version
-            sudo gem install cocoapods
-            cd ~/.cocoapods/repos/master && git pull
-            cd ~/project/Example/ && pod install
+#            sudo gem install cocoapods
+#            cd ~/.cocoapods/repos/master && git pull
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            cd Example && pod install
 
       - run:
           name: Add vapor to homebrew and install
