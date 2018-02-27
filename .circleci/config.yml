@@ -16,6 +16,10 @@ jobs:
             cd Example && pod install
 
       - run:
+          name: Install Swiftlint
+          command: brew install swiftlint
+
+      - run:
           name: Add vapor to homebrew and install
           command: |
             brew tap vapor/homebrew-tap
