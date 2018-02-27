@@ -7,15 +7,15 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          key: cocoapods-{{ checksum "QminderAPI.podspec" }}
+      # - restore_cache:
+      #     key: cocoapods-{{ checksum "QminderAPI.podspec" }}
 
       - run:
           name: Update ruby and cocoapods
           command: |
             echo "ruby-2.4" > ~/.ruby-version
             sudo gem install cocoapods
-            sudo gem cleanup
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             cd Example && pod update
 
       - run:
