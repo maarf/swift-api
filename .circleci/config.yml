@@ -18,7 +18,7 @@ jobs:
             echo "ruby-2.4" > ~/.ruby-version
             sudo gem install cocoapods
             cd ~/.cocoapods/repos/master && git pull
-            cd ~/project/Example/ && pod update
+            cd ~/project/Example/ && pod install
 
       - run:
           name: Add vapor to homebrew and install
