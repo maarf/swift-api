@@ -28,7 +28,6 @@ public struct Location: Codable {
   
 }
 
-
 /// Locations object
 struct Locations: CodableResponsableWithData {
 

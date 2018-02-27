@@ -21,7 +21,6 @@ public struct Line: Codable {
   public let location: Int?
 }
 
-
 /// Lines object
 struct Lines: CodableResponsableWithData {
   

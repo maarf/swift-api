@@ -5,9 +5,9 @@
 //  Created by Qminder on 24/10/2016.
 //
 //
+// swiftlint:disable file_length
 
 import Foundation
-
 
 /// Qminder API for iOS in Swift
 open class QminderAPI {
@@ -38,7 +38,7 @@ open class QminderAPI {
       - apiKey: Qminder API key
       - serverAddress: Optional server address (used for tests)
   */
-  public init(apiKey:String, serverAddress: String = "https://api.qminder.com/v1") {
+  public init(apiKey: String, serverAddress: String = "https://api.qminder.com/v1") {
     self.apiKey = apiKey
     self.serverAddress = serverAddress
   }
@@ -53,20 +53,19 @@ open class QminderAPI {
   */
   public func getLocationsList(completion: @escaping (Result<[Location]>) -> Void) {
   
-    makeRequest(url: "/locations/", completion: {result in
+    makeRequest(url: "/locations/") { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let locations = try? JSONDecoder().decode(Locations.self, from: data).data else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-          
-          return completion(Result.success(locations))
+      case let .success(data):
+        guard let locations = try? JSONDecoder().decode(Locations.self, from: data).data else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(Result.success(locations))
       }
-    })
+    }
   }
   
   /**
@@ -76,22 +75,21 @@ open class QminderAPI {
       - locationId: Location ID
       - completion: Callback block what is executed when location data is received
   */
-  public func getLocationDetails(locationId:Int, completion: @escaping (Result<Location>) -> Void) {
+  public func getLocationDetails(locationId: Int, completion: @escaping (Result<Location>) -> Void) {
   
-    makeRequest(url: "/locations/\(locationId)", completion: {result in
+    makeRequest(url: "/locations/\(locationId)") { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let location = try? JSONDecoder().decode(Location.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
+      case let .success(data):
+        guard let location = try? JSONDecoder().decode(Location.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
         
-          return completion(Result.success(location))
+        return completion(Result.success(location))
       }
-    })
+    }
   }
   
   /**
@@ -101,22 +99,22 @@ open class QminderAPI {
       - locationId: Location ID
       - completion: Callback block what is executed when location lines is received
   */
-  public func getLocationLines(locationId:Int, completion: @escaping (Result<[Line]>) -> Void) {
+  public func getLocationLines(locationId: Int, completion: @escaping (Result<[Line]>) -> Void) {
     
-    makeRequest(url: "/locations/\(locationId)/lines", completion: {result in
+    makeRequest(url: "/locations/\(locationId)/lines") {result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-      
-          guard let lines = try? JSONDecoder().decode(Lines.self, from: data).data else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-          
-          return completion(Result.success(lines))
+      case let .success(data):
+        
+        guard let lines = try? JSONDecoder().decode(Lines.self, from: data).data else {
+          return completion(Result.failure(QminderError.unreadableObject))
         }
-      })
+        
+        return completion(Result.success(lines))
+      }
+    }
   }
   
   /**
@@ -128,20 +126,19 @@ open class QminderAPI {
   */
   public func getLocationUsers(locationId: Int, completion: @escaping (Result<[User]>) -> Void) {
     
-    makeRequest(url: "/locations/\(locationId)/users", completion: {result in
+    makeRequest(url: "/locations/\(locationId)/users") {result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let users = try? JSONDecoder().decode(Users.self, from: data).data else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
+      case let .success(data):
+        guard let users = try? JSONDecoder().decode(Users.self, from: data).data else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
         
-          return completion(Result.success(users))
+        return completion(Result.success(users))
       }
-    })
+    }
   }
   
   /**
@@ -154,10 +151,10 @@ open class QminderAPI {
   public func getLocationDesks(locationId: Int, completion: @escaping (Result<[Desk]>) -> Void) {
     makeRequest(url: "/locations/\(locationId)/desks") { result in
       switch result {
-      case .failure(let error):
+      case let .failure(error):
         return completion(Result.failure(error))
         
-      case .success(let data):
+      case let .success(data):
         guard let desks = try? JSONDecoder().decode(Desks.self, from: data).desks else {
           return completion(Result.failure(QminderError.unreadableObject))
         }
@@ -176,27 +173,24 @@ open class QminderAPI {
       - lineId: Line ID
       - completion: Callback block what is executed when line data is received
   */
-  public func getLineDetails(lineId:Int, completion: @escaping (Result<Line>) -> Void) {
+  public func getLineDetails(lineId: Int, completion: @escaping (Result<Line>) -> Void) {
     
-    makeRequest(url: "/lines/\(lineId)", completion: {result in
+    makeRequest(url: "/lines/\(lineId)") { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-      
-          guard let line = try? JSONDecoder().decode(Line.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
+      case let .success(data):
+        guard let line = try? JSONDecoder().decode(Line.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
         
-          return completion(Result.success(line))
+        return completion(Result.success(line))
       }
-    })
+    }
   }
   
-  
   // MARK: - Tickets
-  
   /**
     Search tickets
     
@@ -205,16 +199,20 @@ open class QminderAPI {
       - lineId: Optional array of line ID's
       - status: Optional array of enum statuses
       - callerId: Optional parameter for searching tickets which were called by specified user ID
-      - minCreatedTimestamp: Optional parameter for searching tickets which are created after specified time. UTF Unix timestamp or ISO 8601
-      - maxCreatedTimestamp: Optional parameter for searching tickets which are created before specified time. UTF Unix timestamp or ISO 8601
-      - minCalledTimestamp: Optional parameter for searching tickets which are called after specified time. UTF Unix timestamp or ISO 8601
-      - maxCalledTimestamp: Optional parameter for searching tickets which are called before specified time. UTF Unix timestamp or ISO 8601
-      - limit: Optional parameter for limiting number of search results. Value has to be between 1 and 10000. If no limit is specified, 1000 will be used
-      - order: Optional parameter for ordering results. Valid values are "id", "number", "created" and "called". It's allowed to specify asc or desc ordering. Eg. "id ASC", "created DESC"
-      - responseScope: Optional parameter for additional details about the found tickets. Value "MESSAGES" will also include ticket messages with response. Value "INTERACTIONS" will also include ticket interactions with response.
+      - minCreatedTimestamp: Optional parameter for searching tickets which are created after specified time
+      - maxCreatedTimestamp: Optional parameter for searching tickets which are created before specified time
+      - minCalledTimestamp: Optional parameter for searching tickets which are called after specified time
+      - maxCalledTimestamp: Optional parameter for searching tickets which are called before specified time
+      - limit: Optional parameter for limiting number of search results. If no limit is specified, 1000 will be used
+      - order: Optional parameter for ordering results
+      - responseScope: Optional parameter for additional details about the found tickets.
       - completion: Callback block executed when tickets are received back
   */
-  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [Status]? = nil, callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil, minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil, limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil, completion: @escaping (Result<[Ticket]>) -> Void) {
+  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [Status]? = nil,
+                            callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil,
+                            minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil,
+                            limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil,
+                            completion: @escaping (Result<[Ticket]>) -> Void) {
   
     var parameters = [String: Any]()
     
@@ -230,21 +228,19 @@ open class QminderAPI {
     parameters.set(value: order, forKey: "order")
     parameters.set(value: responseScope?.flatMap({ String($0) }).joined(separator: ","), forKey: "responseScope")
     
-    makeRequest(url: "/tickets/search", parameters: parameters, completion: {result in
-    
+    makeRequest(url: "/tickets/search", parameters: parameters) { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let tickets = try? self.jsonDecoderWithMilliseconds.decode(Tickets.self, from: data).data else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
+      case let .success(data):
+        guard let tickets = try? self.jsonDecoderWithMilliseconds.decode(Tickets.self, from: data).data else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
         
-          return completion(Result.success(tickets))
+        return completion(Result.success(tickets))
       }
-    })
+    }
   }
   
   /**
@@ -254,28 +250,24 @@ open class QminderAPI {
       - ticketId: Ticket ID
       - completion: Callback block when ticket details are received
   */
-  public func getTicketDetails(ticketId:String, completion: @escaping (Result<Ticket>) -> Void) {
+  public func getTicketDetails(ticketId: String, completion: @escaping (Result<Ticket>) -> Void) {
     
-    makeRequest(url: "/tickets/\(ticketId)", completion: {result in
-    
+    makeRequest(url: "/tickets/\(ticketId)") { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let ticket = try? self.jsonDecoderWithMilliseconds.decode(Ticket.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-      
-          return completion(Result.success(ticket))
+      case let .success(data):
+        guard let ticket = try? self.jsonDecoderWithMilliseconds.decode(Ticket.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(Result.success(ticket))
       }
-    })
+    }
   }
   
-  
   // MARK: - Users
-  
   /**
     Get user details
     
@@ -283,22 +275,21 @@ open class QminderAPI {
       - userId: User ID
       - completion: Callback block when user details are received
   */
-  public func getUserDetails(userId:Int, completion: @escaping (Result<User>) -> Void) {
-    makeRequest(url: "/users/\(userId)", completion: {result in
+  public func getUserDetails(userId: Int, completion: @escaping (Result<User>) -> Void) {
     
+    makeRequest(url: "/users/\(userId)") { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let user = try? JSONDecoder().decode(User.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-          
-          return completion(Result.success(user))
+      case let .success(data):
+        guard let user = try? JSONDecoder().decode(User.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(Result.success(user))
       }
-    })
+    }
   }
   
   // MARK: - Devices
@@ -311,21 +302,19 @@ open class QminderAPI {
   */
   public func getPairingCodeAndSecret(completion: @escaping (Result<TVPairingCode>) -> Void) {
   
-    makeRequest(url: "/tv/code", apiKeyNeeded: false, completion: {result in
-    
+    makeRequest(url: "/tv/code", apiKeyNeeded: false) { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
-          
-        case .success(let data):
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-          guard let pairingData = try? JSONDecoder().decode(TVPairingCode.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
+      case let .success(data):
+        guard let pairingData = try? JSONDecoder().decode(TVPairingCode.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
         
-          return completion(Result.success(pairingData))
+        return completion(Result.success(pairingData))
       }
-    })
+    }
   }
   
   /**
@@ -336,24 +325,21 @@ open class QminderAPI {
       - secret: Secret key
       - completion: Callback block when pairing is done on server:
   */
-  public func pairTV(code:String, secret:String, completion: @escaping (Result<TVAPIData>) -> Void) {
+  public func pairTV(code: String, secret: String, completion: @escaping (Result<TVAPIData>) -> Void) {
     
-    makeRequest(url: "/tv/code/\(code)",
-      parameters: ["secret": secret], apiKeyNeeded: false, completion: {result in
-    
+    makeRequest(url: "/tv/code/\(code)", parameters: ["secret": secret], apiKeyNeeded: false) { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
-          
-        case .success(let data):
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-          guard let tvAPIData = try? JSONDecoder().decode(TVAPIData.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-          
-          return completion(Result.success(tvAPIData))
+      case let .success(data):
+        guard let tvAPIData = try? JSONDecoder().decode(TVAPIData.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(Result.success(tvAPIData))
       }
-    })
+    }
   }
   
   /**
@@ -363,22 +349,21 @@ open class QminderAPI {
       - tvID: TV ID
       - completion: Callback block when TV details are received
   */
-  public func tvDetails(id:Int, completion: @escaping (Result<TVDevice>) -> Void) {
-    makeRequest(url: "/tv/\(id)", completion: {result in
+  public func tvDetails(id: Int, completion: @escaping (Result<TVDevice>) -> Void) {
+    makeRequest(url: "/tv/\(id)") { result in
     
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
+      case let .failure(error):
+        return completion(Result.failure(error))
         
-        case .success(let data):
-          
-          guard let device = try? JSONDecoder().decode(TVDevice.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-      
-          return completion(Result.success(device))
+      case let .success(data):
+        guard let device = try? JSONDecoder().decode(TVDevice.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(Result.success(device))
       }
-    })
+    }
   }
   
   /**
@@ -389,16 +374,16 @@ open class QminderAPI {
       - metadata: Dictionary of metadata to send with heartbeat
       - completion: Callback block when TV heartbeat is received
   */
-  public func tvHeartbeat(id:Int, metadata: [String: Any], completion: @escaping (Result<Void?>) -> Void) {
+  public func tvHeartbeat(id: Int, metadata: [String: Any], completion: @escaping (Result<Void?>) -> Void) {
     let parameters = metadata
     
     makeRequest(url: "/tv/\(id)/heartbeat", method: .post, parameters: parameters, encoding: .json) { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
-      
-        case .success:
-          return completion(Result.success(nil))
+      case let .failure(error):
+        return completion(Result.failure(error))
+        
+      case .success:
+        return completion(Result.success(nil))
       }
     }
     
@@ -416,20 +401,19 @@ open class QminderAPI {
     var parameters = [String: Any]()
     parameters.set(value: language, forKey: "language")
     
-    makeRequest(url: "/tv/\(id)/emptystate", method: .get, parameters: parameters, completion: {result in
+    makeRequest(url: "/tv/\(id)/emptystate", method: .get, parameters: parameters) { result in
       switch result {
-        case .failure(let error):
-          return completion(Result.failure(error))
-          
-        case .success(let data):
-          
-          guard let emptyState = try? JSONDecoder().decode(EmptyState.self, from: data) else {
-            return completion(Result.failure(QminderError.unreadableObject))
-          }
-          
-          return completion(Result.success(emptyState))
+      case let .failure(error):
+        return completion(Result.failure(error))
+        
+      case let .success(data):
+        guard let emptyState = try? JSONDecoder().decode(EmptyState.self, from: data) else {
+          return completion(Result.failure(QminderError.unreadableObject))
+        }
+        
+        return completion(Result.success(emptyState))
       }
-    })
+    }
       
   }
   
@@ -442,7 +426,9 @@ open class QminderAPI {
       - url: URL
       - completion: Callback block with result
   */
-  fileprivate func makeRequest(url:String, method:HTTPMethod = .get, parameters: [String: Any] = [:], encoding:ParameterEncoding = .none, apiKeyNeeded:Bool = true, completion: @escaping (Result<Data>) -> Void) {
+  fileprivate func makeRequest(url: String, method: HTTPMethod = .get, parameters: [String: Any] = [:],
+                               encoding: ParameterEncoding = .none, apiKeyNeeded: Bool = true,
+                               completion: @escaping (Result<Data>) -> Void) {
     
     var url = URLComponents(string: "\(serverAddress)\(url)")!
     

@@ -66,7 +66,6 @@ public extension DateFormatter {
   }()
 }
 
-
 extension String {
   
   /**
@@ -85,7 +84,6 @@ extension String {
     self = randomString
   }
 }
-
 
 public extension Dictionary where Key == String, Value == Any {
   /**

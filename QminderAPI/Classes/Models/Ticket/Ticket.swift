@@ -8,7 +8,7 @@
 
 import Foundation
 
-//MARK: - Protocols
+// MARK: - Protocols
 
 /// Ticket describing protocol
 public protocol Ticketable: Codable {
@@ -22,7 +22,7 @@ public protocol Ticketable: Codable {
   /// Line ID
   var line: Int { get set }
   
-  /// Source of the ticket. "MANUAL", "NAME" or "PRINTER". This field will not be present if no source has been specified when creating a ticket.
+  /// Source of the ticket.
   var source: Source { get }
   
   /// Ticket status
@@ -89,7 +89,7 @@ public extension Ticketable {
   }
 }
 
-//MARK: - Structs
+// MARK: - Structs
 /// Ticket mapping object
 public struct Ticket: Ticketable {
   public let id: String

@@ -10,43 +10,14 @@ import Foundation
 
 import Starscream
 
-/// Qminder Event error
-public enum QminderEventError: Error {
-  
-  /// Simple error
-  case error(Error)
-  
-  /// Parsing error
-  case parse
-}
-
-/**
-  QminderEvents delagate methods
-*/
-public protocol QminderEventsDelegate {
-  
-  /**
-    Called when connected to Websocket
-  */
-  func onConnected()
-  
-  /**
-    Called when disconnected from Websocket
-    
-    - Parameter error: Error why it got disconnected
-  */
-  func onDisconnected(error:Error?)
-  
-}
-
 /// Callback type when subscrubing to evenets
 public typealias EventsCallbackType<T> = (Result<T>) -> Void
 
 /// Qminder Events works with Qminder Websockets
-public class QminderEvents : WebSocketDelegate {
+public class QminderEvents: WebSocketDelegate {
 
   /// Class delegate
-  public var delegate: QminderEventsDelegate?
+  public weak var delegate: QminderEventsDelegate?
   
   /// Qminder close code
   fileprivate let websocketReservedCloseCode = UInt16(1099)
@@ -80,7 +51,7 @@ public class QminderEvents : WebSocketDelegate {
   fileprivate typealias CallbackMap = (callback: Any, eventType: QminderEvent)
   
   /// Callback map to call specific block when data is received from Websocket
-  fileprivate var callbackMap = [String:CallbackMap]()
+  fileprivate var callbackMap = [String: CallbackMap]()
   
   /// Is currently connection being opened (Boolean)
   fileprivate var openingConnection = false
@@ -89,7 +60,7 @@ public class QminderEvents : WebSocketDelegate {
   fileprivate var connectionClosed = false
   
   /// Websocket object
-  fileprivate var socket:WebSocket!
+  fileprivate var socket: WebSocket!
   
   /// Ping queue
   fileprivate let pingQueue = DispatchQueue(label: "com.qminder.pingQueue")
@@ -111,7 +82,7 @@ public class QminderEvents : WebSocketDelegate {
 
     - Returns: Creates Qminder Events client
   */
-  public init(apiKey:String, serverAddress: String = "wss://api.qminder.com") {
+  public init(apiKey: String, serverAddress: String = "wss://api.qminder.com") {
     self.socket = WebSocket(url: URL(string: "\(serverAddress)/events?rest-api-key=\(apiKey)")!)
     self.socket?.delegate = self
   }
@@ -156,7 +127,9 @@ public class QminderEvents : WebSocketDelegate {
       - parameters: Dictionary of parameters
       - callback: Callback executed when response got from Websocket
   */
-  public func subscribe(toTicketEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
+  public func subscribe(toTicketEvent eventType: QminderEvent,
+                        parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
+    
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(Result.failure(QminderEventError.parse))
       return
@@ -173,7 +146,8 @@ public class QminderEvents : WebSocketDelegate {
    - parameters: Dictionary of parameters
    - callback: Callback executed when response got from Websocket
    */
-  public func subscribe(toDeviceEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
+  public func subscribe(toDeviceEvent eventType: QminderEvent,
+                        parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(Result.failure(QminderEventError.parse))
@@ -191,7 +165,8 @@ public class QminderEvents : WebSocketDelegate {
    - parameters: Dictionary of parameters
    - callback: Callback executed when response got from Websocket
    */
-  public func subscribe(toLineEvent eventType: QminderEvent, parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
+  public func subscribe(toLineEvent eventType: QminderEvent,
+                        parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
       callback(Result.failure(QminderEventError.parse))
@@ -203,11 +178,14 @@ public class QminderEvents : WebSocketDelegate {
   
   private func sendMessageToWebsocket(subscriptionId: String, eventType: QminderEvent, message: String, callback: Any) {
     if socket.isConnected {
-      sendMessage(subscriptionId: subscriptionId, eventType: eventType, messageToSend: message, callback: callback);
+      sendMessage(subscriptionId: subscriptionId, eventType: eventType, messageToSend: message, callback: callback)
       
       messageHistory.append(message)
     } else {
-      messageQueue.append(WebsocketMessage(subscriptionId:subscriptionId, eventType: eventType, messageToSend: message, callback: callback))
+      messageQueue.append(WebsocketMessage(subscriptionId: subscriptionId,
+                                           eventType: eventType,
+                                           messageToSend: message,
+                                           callback: callback))
       
       if !openingConnection {
         openSocket()
@@ -215,7 +193,16 @@ public class QminderEvents : WebSocketDelegate {
     }
   }
   
-  private func parseParameters(eventType: QminderEvent, parameters: [String: Any]) -> (message: String, subscriptionId: String)? {
+  /**
+   Parse parameters
+   
+   - Parameters:
+     - eventType: Qminder event type
+     - parameters: Parameters
+  */
+  private func parseParameters(eventType: QminderEvent,
+                               parameters: [String: Any]) -> (message: String, subscriptionId: String)? {
+    
     var parameters = parameters
     let subscriptionId = String(withRandomLenght: 30)
     
@@ -248,7 +235,6 @@ public class QminderEvents : WebSocketDelegate {
     }
   }
   
-  
   // MARK: - Websocket delegate methods
   /**
     Delegate methods when websocket did connect
@@ -266,9 +252,13 @@ public class QminderEvents : WebSocketDelegate {
     
     //send message queue
     while messageQueue.count > 0 {
-      let queueItem:WebsocketMessage = messageQueue.removeFirst()
+      let queueItem = messageQueue.removeFirst()
 
-      sendMessage(subscriptionId: queueItem.subscriptionId, eventType: queueItem.eventType, messageToSend: queueItem.messageToSend, callback: queueItem.callback)
+      sendMessage(subscriptionId: queueItem.subscriptionId,
+                  eventType: queueItem.eventType,
+                  messageToSend: queueItem.messageToSend,
+                  callback: queueItem.callback)
+      
       messageHistory.append(queueItem.messageToSend)
     }
     
@@ -328,6 +318,7 @@ public class QminderEvents : WebSocketDelegate {
       - socket: Websocket object
       - text: Received text
   */
+  // swiftlint:disable cyclomatic_complexity
   public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     
     guard let data = text.data(using: .utf8) else { return }
@@ -392,7 +383,6 @@ public class QminderEvents : WebSocketDelegate {
     print("Got pong! Maybe some data: \(String(describing: data))")
   }
   
-  
   // MARK: - Additional methods
   /**
     Send message to Websocket
@@ -402,10 +392,8 @@ public class QminderEvents : WebSocketDelegate {
       - messageToSend: Message to send to Websocket
       - callback: Callback block when response is received
   */
-  private func sendMessage(subscriptionId:String, eventType: QminderEvent, messageToSend:String, callback:Any) {
+  private func sendMessage(subscriptionId: String, eventType: QminderEvent, messageToSend: String, callback: Any) {
     self.callbackMap[subscriptionId] = CallbackMap(callback: callback, eventType: eventType)
     self.socket.write(string: messageToSend)
   }
-  
-  
 }

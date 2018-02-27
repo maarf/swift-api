@@ -7,20 +7,19 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          key: cocoapods-{{ checksum "QminderAPI.podspec" }}
+      - run:
+          name: Update ruby and cocoapods
+          command: |
+            echo "ruby-2.4" > ~/.ruby-version
+            sudo gem install cocoapods
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            cd Example && pod install
 
       - run:
-          name: Update cocoapods
-          command: cd Example && pod update
-
-      - run:
-          name: Add vapor to homebrew
-          command: brew tap vapor/homebrew-tap
-
-      - run:
-          name: Install vapor
-          command: brew install vapor
+          name: Add vapor to homebrew and install
+          command: |
+            brew tap vapor/homebrew-tap
+            brew install vapor
 
       - run:
           name: Build vapor
@@ -43,11 +42,6 @@ jobs:
       - run:
           name: Codeconv
           command: bash <(curl -s https://codecov.io/bash)
-
-      - save_cache:
-         key: cocoapods-{{ checksum "QminderAPI.podspec" }}
-         paths:
-           - ~/.cocoapods
 
 workflows:
   version: 2

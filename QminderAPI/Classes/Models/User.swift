@@ -27,10 +27,10 @@ public struct User: Codable {
   public let desk: Int?
   
   /// User roles
-  public let roles: Array<Role>?
+  public let roles: [Role]?
   
   /// User pictures
-  public let picture: Array<Picture>?
+  public let picture: [Picture]?
 }
 
 /// User role object

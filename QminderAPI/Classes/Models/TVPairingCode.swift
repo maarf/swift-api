@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// TV pairing code data
 public struct TVPairingCode: CodableResponsable {
   
