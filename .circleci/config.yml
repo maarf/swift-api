@@ -45,7 +45,9 @@ jobs:
 
       - run:
           name: Codeconv
-          command: bash <(curl -s https://codecov.io/bash)
+          command: |
+            export COVERAGE__NOTIFY__SLACK__DEFAULT__URL=${CODECONV_SLACK_URL}
+            bash <(curl -s https://codecov.io/bash)
 
 workflows:
   version: 2
