@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          key: cocoapods-{{ checksum "QminderAPI.podspec" }}
-
       - run:
           name: Update ruby and cocoapods
           command: |
@@ -33,10 +30,8 @@ jobs:
       - run:
           name: Start vapor and test
           command: |
-            cd test-server
-            vapor run&
-            cd ..
-            set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
+            cd test-server && vapor run&
+            cd .. && set -o pipefail && xcodebuild -workspace Example/QminderTVApp.xcworkspace -scheme QminderTVApp -destination 'platform=tvOS Simulator,name=Apple TV' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
 
       - run:
           name: Pod lib lint
@@ -45,11 +40,6 @@ jobs:
       - run:
           name: Codeconv
           command: bash <(curl -s https://codecov.io/bash)
-
-      - save_cache:
-         key: cocoapods-{{ checksum "QminderAPI.podspec" }}
-         paths:
-           - ~/.cocoapods
 
 workflows:
   version: 2
