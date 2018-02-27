@@ -14,8 +14,7 @@ jobs:
           name: Update ruby and cocoapods
           command: |
             echo "ruby-2.4" > ~/.ruby-version
-#            sudo gem install cocoapods
-#            cd ~/.cocoapods/repos/master && git pull
+            sudo gem install cocoapods
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             cd Example && pod install
 
