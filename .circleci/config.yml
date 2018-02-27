@@ -11,12 +11,9 @@ jobs:
           key: cocoapods-{{ checksum "QminderAPI.podspec" }}
 
       - run:
-          name: Set Ruby Version
-          command: echo "ruby-2.4" > ~/.ruby-version
-
-      - run:
-          name: Update cocoapods
+          name: Update ruby and cocoapods
           command: |
+            echo "ruby-2.4" > ~/.ruby-version
             sudo gem install cocoapods
             sudo gem cleanup
             cd Example && pod update
