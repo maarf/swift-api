@@ -9,6 +9,8 @@ import Foundation
 
 /// Protocol to conform to event response
 public protocol EventResponsable {
+  
+  /// Event response data object
   associatedtype Data
   
   /// Subscription ID
@@ -17,6 +19,6 @@ public protocol EventResponsable {
   /// Message ID
   var messageId: Int { get }
   
-  /// Cata event containts
+  /// Data event containts
   var data: Data { get }
 }

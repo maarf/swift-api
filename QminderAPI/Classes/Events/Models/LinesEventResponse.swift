@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Lines event response object
 public struct LinesEventResponse: EventResponsable, Codable {
   public typealias Data = [String: [Line]]
   

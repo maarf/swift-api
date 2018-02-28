@@ -7,7 +7,7 @@
 
 import Foundation
 
-// QminderEvents delagate methods
+/// QminderEvents delagate methods
 public protocol QminderEventsDelegate: class {
   
   /**

@@ -311,6 +311,7 @@ public class QminderEvents: WebSocketDelegate {
     })
   }
   
+  // swiftlint:disable cyclomatic_complexity
   /**
     Delegate function when Websocket received message
     
@@ -318,7 +319,6 @@ public class QminderEvents: WebSocketDelegate {
       - socket: Websocket object
       - text: Received text
   */
-  // swiftlint:disable cyclomatic_complexity
   public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     
     guard let data = text.data(using: .utf8) else { return }
