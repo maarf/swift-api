@@ -1,7 +1,7 @@
 import Foundation
 import QminderAPI
 
-public func prettyPrint<V: Codable, E: Error>(_ title: String, _ result: Result<V, E>){
+public func prettyPrint<V: Codable, E: Swift.Error>(_ title: String, _ result: Result<V, E>){
   print("-- \(title) --")
   
   switch result {

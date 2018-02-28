@@ -69,7 +69,7 @@ class DevicesAPITests: QminderAPITests {
           emptyState = value
           
           expectation.fulfill()
-        case .failure(_):
+        case .failure:
           XCTFail("Can't get TV empty state")
         }
       })
@@ -86,7 +86,7 @@ class DevicesAPITests: QminderAPITests {
         switch result {
         case .success:
           expectation.fulfill()
-        case .failure(_):
+        case .failure:
           XCTFail("Can't send TV heartbeat")
         }
       }

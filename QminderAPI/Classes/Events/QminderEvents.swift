@@ -333,7 +333,7 @@ public class QminderEvents: WebSocketDelegate {
       switch callbackMap.eventType {
       case .ticketCalled, .ticketCancelled, .ticketCreated, .ticketServed, .ticketChanged, .ticketRecalled:
 
-        guard let ticket = try? self.jsonDecoderWithMilliseconds.decode(TicketResponsable.self, from: data).data else {
+        guard let ticket = try? jsonDecoderWithMilliseconds.decode(TicketEventResponse.self, from: data).data else {
           return
         }
         
@@ -342,13 +342,14 @@ public class QminderEvents: WebSocketDelegate {
         callback(Result<Ticket, QminderError>.success(ticket))
         
       case .overviewMonitorChange:
-        let device = try? self.jsonDecoderWithMilliseconds.decode(DeviceResponsable.self, from: data).data
+        let device = try? jsonDecoderWithMilliseconds.decode(DeviceEventResponse.self, from: data).data
       
         guard let callback = callbackMap.callback as? ((Result<TVDevice?, QminderError>) -> Void) else { return }
         
         callback(Result<TVDevice?, QminderError>.success(device))
+        
       case .linesChanged:
-        guard let lines = try? self.jsonDecoderWithMilliseconds.decode(LinesResponsable.self, from: data).lines else {
+        guard let lines = try? jsonDecoderWithMilliseconds.decode(LinesEventResponse.self, from: data).lines else {
           return
         }
         

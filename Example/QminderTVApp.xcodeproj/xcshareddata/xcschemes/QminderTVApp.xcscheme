@@ -91,23 +91,18 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "QMINDER_USER_ID"
-            value = "$(QMINDER_USER_ID)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
             key = "QMINDER_TV_ID"
             value = "$(QMINDER_TV_ID)"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
+            key = "QMINDER_USER_ID"
+            value = "$(QMINDER_USER_ID)"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "QMINDER_LINE_ID"
-            value = "$(QMINDER_LINE_ID)"
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

@@ -13,13 +13,14 @@ import QminderAPI
 class QminderResultTests: XCTestCase {
   
   func testResultSucess() {
-    var result: Result<Int, QminderError>
-    result = .success(1)
+    let result = Result<Int, QminderError>(value: 1)
     
     XCTAssertFalse(result.isFailure)
     XCTAssertTrue(result.isSuccess)
     XCTAssertEqual(result.value, 1)
     XCTAssertNil(result.error)
+    XCTAssertNotNil(result.result)
+    XCTAssertNotNil(result.description)
     
     switch result {
     case let .success(value):
@@ -30,13 +31,17 @@ class QminderResultTests: XCTestCase {
   }
   
   func testResultFailure() {
-    var result: Result<Int, QminderError>
-    result = .failure(.apiKeyNotSet)
+//    var result: Result<Int, QminderError>
+//    result = .failure(.apiKeyNotSet)
+    
+    let result = Result<Int, QminderError>(error: .apiKeyNotSet)
     
     XCTAssertTrue(result.isFailure)
     XCTAssertFalse(result.isSuccess)
     XCTAssertNil(result.value)
     XCTAssertNotNil(result.error)
+    XCTAssertNotNil(result.result)
+    XCTAssertNotNil(result.description)
     
     switch result {
     case .success:
