@@ -98,7 +98,7 @@
          <EnvironmentVariable
             key = "QMINDER_TV_ID"
             value = "$(QMINDER_TV_ID)"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "OS_ACTIVITY_MODE"
