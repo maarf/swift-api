@@ -12,8 +12,7 @@ import QminderAPI
 
 class TVPairingCodeModelTests: ModelTests {
   
-  
-  let tvPairingData : [String: Any] = [
+  let tvPairingData: [String: Any] = [
     "statusCode": 200,
     "code": "PW3R",
     "secret": "75aa16d7923ac707cc302e1ce7c81e8a"

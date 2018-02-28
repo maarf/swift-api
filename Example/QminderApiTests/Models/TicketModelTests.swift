@@ -13,19 +13,19 @@ import QminderAPI
 class TicketModelTests: ModelTests {
   
   var ticketData: [String: Any] = [
-    "status" : "NEW",
-    "source" : "MANUAL",
-    "firstName" : "Name",
-    "created": ["date" : "2017-02-06T12:35:29.123Z"],
-    "id" : "999",
-    "line" : 333,
-    "lastName" : "Surname"
+    "status": "NEW",
+    "source": "MANUAL",
+    "firstName": "Name",
+    "created": ["date": "2017-02-06T12:35:29.123Z"],
+    "id": "999",
+    "line": 333,
+    "lastName": "Surname"
   ]
   
   func testTicketWithoutMilliseconds() {
     let createdDateString = "2017-02-06T12:35:29Z"
     
-    ticketData["created"] = ["date" : createdDateString]
+    ticketData["created"] = ["date": createdDateString]
     
     let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
     let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
@@ -41,7 +41,7 @@ class TicketModelTests: ModelTests {
   
   func testTicketWithMilliseconds() {
     let createdDateString = "2017-02-06T12:35:29.123Z"
-    ticketData["created"] = ["date" : createdDateString]
+    ticketData["created"] = ["date": createdDateString]
     
     let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
     let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
@@ -52,7 +52,7 @@ class TicketModelTests: ModelTests {
   func testOrderAfterWithoutMilliseconds() {
     let orderAfterDateString = "2017-02-06T12:35:29Z"
     ticketData["orderAfter"] = orderAfterDateString
-    ticketData["created"] = ["date" : "2017-02-06T12:35:29Z"]
+    ticketData["created"] = ["date": "2017-02-06T12:35:29Z"]
     
     let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
     let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
@@ -111,7 +111,7 @@ class TicketModelTests: ModelTests {
     XCTAssertNotNil(ticket?.labels)
     
     guard let labels = ticket?.labels else {
-      XCTFail()
+      XCTFail("Can't get ticket labels")
       return
     }
     
@@ -129,7 +129,7 @@ class TicketModelTests: ModelTests {
     XCTAssertNotNil(ticket?.extra)
     
     guard let extra = ticket?.extra else {
-      XCTFail()
+      XCTFail("Can't get ticket extra data")
       return
     }
     
@@ -154,7 +154,7 @@ class TicketModelTests: ModelTests {
     XCTAssertNotNil(ticket?.interactions)
     
     guard let interaction = ticket?.interactions?.first else {
-      XCTFail()
+      XCTFail("Can't get ticket interactions")
       return
     }
     
@@ -163,5 +163,32 @@ class TicketModelTests: ModelTests {
     XCTAssertEqual(interaction.line, 62633)
     XCTAssertEqual(interaction.desk, 6202)
     XCTAssertEqual(interaction.user, 891)
+  }
+  
+  func testSourceName() {
+    ticketData["source"] = "NAME"
+    
+    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
+    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    
+    XCTAssertEqual(ticket?.source, .name)
+  }
+  
+  func testSourcePrinter() {
+    ticketData["source"] = "PRINTER"
+    
+    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
+    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    
+    XCTAssertEqual(ticket?.source, .printer)
+  }
+  
+  func testSourceOther() {
+    ticketData["source"] = "OTHER"
+    
+    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
+    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    
+    XCTAssertEqual(ticket?.source, .other)
   }
 }

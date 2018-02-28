@@ -12,9 +12,9 @@ import QminderAPI
 
 class LineModelTests: ModelTests {
   var lineData: [String: Any] = [
-    "id" : 999,
-    "name" : "Line name",
-    "location" : 333
+    "id": 999,
+    "name": "Line name",
+    "location": 333
   ]
   
   func testLineModel() {

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Qminder result
-public enum Result<Value> {
+public enum Result<Value, Error: Swift.Error> {
   
   /// Success
   case success(Value)
