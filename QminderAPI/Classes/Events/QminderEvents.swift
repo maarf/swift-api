@@ -11,7 +11,7 @@ import Foundation
 import Starscream
 
 /// Callback type when subscrubing to evenets
-public typealias EventsCallbackType<T> = (Result<T>) -> Void
+public typealias EventsCallbackType<T> = (Result<T, QminderError>) -> Void
 
 /// Qminder Events works with Qminder Websockets
 public class QminderEvents: WebSocketDelegate {
@@ -131,7 +131,7 @@ public class QminderEvents: WebSocketDelegate {
                         parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
-      callback(Result.failure(QminderEventError.parse))
+      callback(Result.failure(QminderError.parse))
       return
     }
     
@@ -150,7 +150,7 @@ public class QminderEvents: WebSocketDelegate {
                         parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
-      callback(Result.failure(QminderEventError.parse))
+      callback(Result.failure(QminderError.parse))
       return
     }
     
@@ -169,7 +169,7 @@ public class QminderEvents: WebSocketDelegate {
                         parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
-      callback(Result.failure(QminderEventError.parse))
+      callback(Result.failure(QminderError.parse))
       return
     }
     
@@ -311,6 +311,7 @@ public class QminderEvents: WebSocketDelegate {
     })
   }
   
+  // swiftlint:disable cyclomatic_complexity
   /**
     Delegate function when Websocket received message
     
@@ -318,7 +319,6 @@ public class QminderEvents: WebSocketDelegate {
       - socket: Websocket object
       - text: Received text
   */
-  // swiftlint:disable cyclomatic_complexity
   public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     
     guard let data = text.data(using: .utf8) else { return }
@@ -333,28 +333,29 @@ public class QminderEvents: WebSocketDelegate {
       switch callbackMap.eventType {
       case .ticketCalled, .ticketCancelled, .ticketCreated, .ticketServed, .ticketChanged, .ticketRecalled:
 
-        guard let ticket = try? self.jsonDecoderWithMilliseconds.decode(TicketResponse.self, from: data).data else {
+        guard let ticket = try? jsonDecoderWithMilliseconds.decode(TicketEventResponse.self, from: data).data else {
           return
         }
         
-        guard let callback = callbackMap.callback as? ((Result<Ticket>) -> Void) else { return }
+        guard let callback = callbackMap.callback as? ((Result<Ticket, QminderError>) -> Void) else { return }
       
-        callback(Result<Ticket>.success(ticket))
+        callback(Result<Ticket, QminderError>.success(ticket))
         
       case .overviewMonitorChange:
-        let device = try? self.jsonDecoderWithMilliseconds.decode(DeviceResponse.self, from: data).data
+        let device = try? jsonDecoderWithMilliseconds.decode(DeviceEventResponse.self, from: data).data
       
-        guard let callback = callbackMap.callback as? ((Result<TVDevice?>) -> Void) else { return }
+        guard let callback = callbackMap.callback as? ((Result<TVDevice?, QminderError>) -> Void) else { return }
         
-        callback(Result<TVDevice?>.success(device))
+        callback(Result<TVDevice?, QminderError>.success(device))
+        
       case .linesChanged:
-        guard let lines = try? self.jsonDecoderWithMilliseconds.decode(LinesResponse.self, from: data).lines else {
+        guard let lines = try? jsonDecoderWithMilliseconds.decode(LinesEventResponse.self, from: data).lines else {
           return
         }
         
-        guard let callback = callbackMap.callback as? ((Result<[Line]>) -> Void) else { return }
+        guard let callback = callbackMap.callback as? ((Result<[Line], QminderError>) -> Void) else { return }
         
-        callback(Result<[Line]>.success(lines))
+        callback(Result<[Line], QminderError>.success(lines))
       }
     } catch {
       print("Error deserializing JSON")

@@ -1,0 +1,9 @@
+podspec: QminderAPI.podspec
+author: Qminder
+author_url: https://www.qminder.com/
+github_url: https://github.com/Qminder/swift-api
+copyright: "© 2017-2018 [Qminder](https://www.qminder.com/)"
+theme: apple
+output: docs
+clean: true
+documentation: docs/*.md

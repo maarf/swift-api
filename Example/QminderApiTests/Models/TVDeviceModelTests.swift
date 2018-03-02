@@ -21,7 +21,6 @@ class TVDeviceModelTests: ModelTests {
     "layout": "standard"
   ]
   
-  
   func testTVDeviceModel() {
   
     let jsonData = try? JSONSerialization.data(withJSONObject: tvDeviceData, options: [])
@@ -34,7 +33,7 @@ class TVDeviceModelTests: ModelTests {
     XCTAssertEqual(device?.settings?.clearTickets, "afterCalling")
     
     guard let lines = device?.settings?.lines else {
-      XCTFail()
+      XCTFail("Can't get device lines")
       return
     }
     
@@ -43,8 +42,6 @@ class TVDeviceModelTests: ModelTests {
     XCTAssertTrue(lines.contains(where: { $0 == 2 }))
     XCTAssertTrue(lines.contains(where: { $0 == 3 }))
   }
-  
-  
   
   func testWithoutSettings() {
     tvDeviceData["settings"] = nil

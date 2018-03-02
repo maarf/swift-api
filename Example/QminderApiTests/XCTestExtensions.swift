@@ -18,7 +18,8 @@ extension XCTestCase {
       - timeout: Expectations timeout
       - testingClosure: Testing closure
   */
-  func wait(description: String = #function, timeout: TimeInterval = 1.0, testingClosure: (_ expectation: XCTestExpectation) -> Void) {
+  func wait(description: String = #function, timeout: TimeInterval = 1.0,
+            testingClosure: (_ expectation: XCTestExpectation) -> Void) {
     let expectation = self.expectation(description: description)
     testingClosure(expectation)
     waitForExpectations(timeout: timeout, handler: nil)

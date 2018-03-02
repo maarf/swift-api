@@ -31,4 +31,11 @@ platform :ios do
     end
   end
 
+  desc "Generate documentation"
+  lane :generate_docs do
+    jazzy(
+      config: ".jazzy.yaml"
+    )
+  end
+
 end

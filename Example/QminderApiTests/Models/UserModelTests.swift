@@ -26,7 +26,6 @@ class UserModelTests: ModelTests {
     let jsonData = try? JSONSerialization.data(withJSONObject: userData, options: [])
     let user = try? JSONDecoder().decode(User.self, from: jsonData!)
     
-    
     XCTAssertEqual(user?.id, 999)
     XCTAssertEqual(user?.email, "john@example.com")
     XCTAssertEqual(user?.firstName, "John")
@@ -34,7 +33,7 @@ class UserModelTests: ModelTests {
     XCTAssertEqual(user?.desk, 1)
     
     guard let roles = user?.roles else {
-      XCTFail()
+      XCTFail("Can't get user roles")
       return
     }
     
@@ -42,7 +41,7 @@ class UserModelTests: ModelTests {
     XCTAssertTrue(roles.contains(where: { $0.type == "USER" && $0.location == 1265 }))
     
     guard let picture = user?.picture else {
-      XCTFail()
+      XCTFail("Can't get user picture")
       return
     }
     

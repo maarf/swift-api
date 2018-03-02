@@ -51,7 +51,7 @@ open class QminderAPI {
     - Parameters:
       - completion: Callback block what is executed when location list is received
   */
-  public func getLocationsList(completion: @escaping (Result<[Location]>) -> Void) {
+  public func getLocationsList(completion: @escaping (Result<[Location], QminderError>) -> Void) {
   
     makeRequest(url: "/locations/") { result in
       switch result {
@@ -75,7 +75,7 @@ open class QminderAPI {
       - locationId: Location ID
       - completion: Callback block what is executed when location data is received
   */
-  public func getLocationDetails(locationId: Int, completion: @escaping (Result<Location>) -> Void) {
+  public func getLocationDetails(locationId: Int, completion: @escaping (Result<Location, QminderError>) -> Void) {
   
     makeRequest(url: "/locations/\(locationId)") { result in
       switch result {
@@ -99,7 +99,7 @@ open class QminderAPI {
       - locationId: Location ID
       - completion: Callback block what is executed when location lines is received
   */
-  public func getLocationLines(locationId: Int, completion: @escaping (Result<[Line]>) -> Void) {
+  public func getLocationLines(locationId: Int, completion: @escaping (Result<[Line], QminderError>) -> Void) {
     
     makeRequest(url: "/locations/\(locationId)/lines") {result in
       switch result {
@@ -124,7 +124,7 @@ open class QminderAPI {
       - locationId: Location ID
       - completion: Callback block what is executed when location users is received
   */
-  public func getLocationUsers(locationId: Int, completion: @escaping (Result<[User]>) -> Void) {
+  public func getLocationUsers(locationId: Int, completion: @escaping (Result<[User], QminderError>) -> Void) {
     
     makeRequest(url: "/locations/\(locationId)/users") {result in
       switch result {
@@ -148,7 +148,7 @@ open class QminderAPI {
      - locationId: Location ID
      - completion: Callback block what is executed when location users is received
   */
-  public func getLocationDesks(locationId: Int, completion: @escaping (Result<[Desk]>) -> Void) {
+  public func getLocationDesks(locationId: Int, completion: @escaping (Result<[Desk], QminderError>) -> Void) {
     makeRequest(url: "/locations/\(locationId)/desks") { result in
       switch result {
       case let .failure(error):
@@ -173,7 +173,7 @@ open class QminderAPI {
       - lineId: Line ID
       - completion: Callback block what is executed when line data is received
   */
-  public func getLineDetails(lineId: Int, completion: @escaping (Result<Line>) -> Void) {
+  public func getLineDetails(lineId: Int, completion: @escaping (Result<Line, QminderError>) -> Void) {
     
     makeRequest(url: "/lines/\(lineId)") { result in
       switch result {
@@ -212,7 +212,7 @@ open class QminderAPI {
                             callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil,
                             minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil,
                             limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil,
-                            completion: @escaping (Result<[Ticket]>) -> Void) {
+                            completion: @escaping (Result<[Ticket], QminderError>) -> Void) {
   
     var parameters = [String: Any]()
     
@@ -250,7 +250,7 @@ open class QminderAPI {
       - ticketId: Ticket ID
       - completion: Callback block when ticket details are received
   */
-  public func getTicketDetails(ticketId: String, completion: @escaping (Result<Ticket>) -> Void) {
+  public func getTicketDetails(ticketId: String, completion: @escaping (Result<Ticket, QminderError>) -> Void) {
     
     makeRequest(url: "/tickets/\(ticketId)") { result in
       switch result {
@@ -275,7 +275,7 @@ open class QminderAPI {
       - userId: User ID
       - completion: Callback block when user details are received
   */
-  public func getUserDetails(userId: Int, completion: @escaping (Result<User>) -> Void) {
+  public func getUserDetails(userId: Int, completion: @escaping (Result<User, QminderError>) -> Void) {
     
     makeRequest(url: "/users/\(userId)") { result in
       switch result {
@@ -300,7 +300,7 @@ open class QminderAPI {
     - Parameters:
       - completion: Callback block what is executed when pairing code and secret key is received from server
   */
-  public func getPairingCodeAndSecret(completion: @escaping (Result<TVPairingCode>) -> Void) {
+  public func getPairingCodeAndSecret(completion: @escaping (Result<TVPairingCode, QminderError>) -> Void) {
   
     makeRequest(url: "/tv/code", apiKeyNeeded: false) { result in
       switch result {
@@ -325,7 +325,7 @@ open class QminderAPI {
       - secret: Secret key
       - completion: Callback block when pairing is done on server:
   */
-  public func pairTV(code: String, secret: String, completion: @escaping (Result<TVAPIData>) -> Void) {
+  public func pairTV(code: String, secret: String, completion: @escaping (Result<TVAPIData, QminderError>) -> Void) {
     
     makeRequest(url: "/tv/code/\(code)", parameters: ["secret": secret], apiKeyNeeded: false) { result in
       switch result {
@@ -349,7 +349,7 @@ open class QminderAPI {
       - tvID: TV ID
       - completion: Callback block when TV details are received
   */
-  public func tvDetails(id: Int, completion: @escaping (Result<TVDevice>) -> Void) {
+  public func tvDetails(id: Int, completion: @escaping (Result<TVDevice, QminderError>) -> Void) {
     makeRequest(url: "/tv/\(id)") { result in
     
       switch result {
@@ -374,7 +374,8 @@ open class QminderAPI {
       - metadata: Dictionary of metadata to send with heartbeat
       - completion: Callback block when TV heartbeat is received
   */
-  public func tvHeartbeat(id: Int, metadata: [String: Any], completion: @escaping (Result<Void?>) -> Void) {
+  public func tvHeartbeat(id: Int, metadata: [String: Any],
+                          completion: @escaping (Result<Void?, QminderError>) -> Void) {
     let parameters = metadata
     
     makeRequest(url: "/tv/\(id)/heartbeat", method: .post, parameters: parameters, encoding: .json) { result in
@@ -396,7 +397,8 @@ open class QminderAPI {
       - id: TV ID
       - completion: Callback block when empty state is received
   */
-  public func tvEmptyState(id: Int, language: String, completion: @escaping (Result<EmptyState>) -> Void) {
+  public func tvEmptyState(id: Int, language: String,
+                           completion: @escaping (Result<EmptyState, QminderError>) -> Void) {
     
     var parameters = [String: Any]()
     parameters.set(value: language, forKey: "language")
@@ -428,7 +430,7 @@ open class QminderAPI {
   */
   fileprivate func makeRequest(url: String, method: HTTPMethod = .get, parameters: [String: Any] = [:],
                                encoding: ParameterEncoding = .none, apiKeyNeeded: Bool = true,
-                               completion: @escaping (Result<Data>) -> Void) {
+                               completion: @escaping (Result<Data, QminderError>) -> Void) {
     
     var url = URLComponents(string: "\(serverAddress)\(url)")!
     

@@ -11,7 +11,22 @@ import XCTest
 import QminderAPI
 
 class EmptyStateModelTests: ModelTests {
-  func testParsingEmptyState() {
+  
+  func testParsingEmptyStateSimple() {
+    let data: [String: Any] = [
+      "statusCode": 200,
+      "layout": "simple",
+      "message": "Simple message"
+    ]
+    
+    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
+    let emptyState = try? JSONDecoder().decode(EmptyState.self, from: jsonData!)
+    
+    XCTAssertEqual(emptyState?.message, "Simple message")
+    XCTAssertEqual(emptyState?.layout, .simple)
+  }
+  
+  func testParsingEmptyStateClosed() {
     let data: [String: Any] = [
       "statusCode": 200,
       "layout": "closed",

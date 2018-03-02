@@ -7,9 +7,9 @@
 ![Swift](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
 [![codecov](https://codecov.io/gh/Qminder/swift-api/branch/master/graph/badge.svg)](https://codecov.io/gh/Qminder/swift-api)
 
-## Example
+## Qminder
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Qminder is waiting list management for physical locations. Designed for best customer experience & to deliver insightful data for your Service Intelligence.
 
 ## Requirements
 
@@ -19,16 +19,25 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 brew install swiftlint
 ```
 
+### jazzy
 
+```
+sudo gem install jazzy
+```
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Installation
 
-QminderAPI is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+QminderAPI is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod "QminderAPI"
 ```
+
+You need to have a Qminder account to use this API.
 
 ## Author
 
