@@ -459,6 +459,8 @@ open class QminderAPI {
       request.httpBody = jsonData
     }
     
+    print("\(request.curlString)")
+    
     URLSession.shared.dataTask(with: request) { data, response, error in
       DispatchQueue.main.async {
         if let error = error {
