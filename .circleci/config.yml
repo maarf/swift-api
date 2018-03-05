@@ -9,7 +9,10 @@ jobs:
 
       - run:
           name: Carthage
-          command: carthage update
+          command: |
+            brew update
+            brew outdated carthage || brew upgrade carthage
+            carthage update
 
       - run:
           name: Install Swiftlint
@@ -41,6 +44,13 @@ jobs:
           command: |
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-macOS CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build | xcpretty --color
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-watchOS CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build | xcpretty --color
+
+      - run:
+          name: Update ruby and cocoapods
+          command: |
+            echo "ruby-2.4" > ~/.ruby-version
+            sudo gem install cocoapods
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
       - run:
           name: Pod lib lint
