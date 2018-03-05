@@ -459,7 +459,7 @@ open class QminderAPI {
       request.httpBody = jsonData
     }
     
-    print("\(request.curlString)")
+    request.printCurlString()
     
     URLSession.shared.dataTask(with: request) { data, response, error in
       DispatchQueue.main.async {
