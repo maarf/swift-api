@@ -3,6 +3,7 @@ ignore:
   - "test-server"
   - "docs"
   - "Pods"
+  - "QminderAPITests"
 comment:
   layout: "header, reach, diff, flags, files, footer"
   behavior: default
