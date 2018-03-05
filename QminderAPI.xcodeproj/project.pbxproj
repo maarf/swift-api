@@ -1505,7 +1505,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "QminderAPITests copy2-Info.plist";
+				INFOPLIST_FILE = QminderAPITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qminder.QminderAPITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1521,7 +1521,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "QminderAPITests copy2-Info.plist";
+				INFOPLIST_FILE = QminderAPITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qminder.QminderAPITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
