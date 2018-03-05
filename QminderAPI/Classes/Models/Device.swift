@@ -37,7 +37,7 @@ public struct Settings: Codable {
   public let selectedLine: Int?
   
   /// Selected lines ID array
-  public let lines: [Int]?
+  public let lines: Set<Int>?
   
   /// Clear tickets afterCalling or afterServing
   public let clearTickets: String?
