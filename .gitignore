@@ -1,6 +1,8 @@
 # OS X
 .DS_Store
 
+docs
+
 # Xcode
 build/
 *.pbxuser
@@ -51,3 +53,17 @@ DerivedData/
 .DS_Store
 
 # End of https://www.gitignore.io/api/vapor
+
+
+# Created by https://www.gitignore.io/api/carthage
+
+### Carthage ###
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+Carthage/Build
+
+
+# End of https://www.gitignore.io/api/carthage

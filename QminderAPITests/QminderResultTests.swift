@@ -8,7 +8,7 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
 class QminderResultTests: XCTestCase {
   
@@ -31,8 +31,6 @@ class QminderResultTests: XCTestCase {
   }
   
   func testResultFailure() {
-//    var result: Result<Int, QminderError>
-//    result = .failure(.apiKeyNotSet)
     
     let result = Result<Int, QminderError>(error: .apiKeyNotSet)
     

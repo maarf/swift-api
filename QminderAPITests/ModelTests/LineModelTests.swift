@@ -8,7 +8,7 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
 class LineModelTests: ModelTests {
   var lineData: [String: Any] = [

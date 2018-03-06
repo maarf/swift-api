@@ -1,6 +1,6 @@
 included:
-  - ../QminderAPI
-  - QminderApiTests
+  - Sources
+  - QminderAPITests
 disabled_rules:
   - trailing_whitespace
 

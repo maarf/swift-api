@@ -8,7 +8,7 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
 class LinesAPITests: QminderAPITests {
   func testLineDetails() {

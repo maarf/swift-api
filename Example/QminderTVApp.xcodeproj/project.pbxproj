@@ -7,79 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		634B1C2C201F342A0068F2D3 /* QminderWebsocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B1C2B201F342A0068F2D3 /* QminderWebsocketTests.swift */; };
-		638E93622045ACB30018A7B1 /* LocationsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E93612045ACB30018A7B1 /* LocationsAPITests.swift */; };
-		638E93662045ACFE0018A7B1 /* QminderAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E93642045ACFE0018A7B1 /* QminderAPITests.swift */; };
-		638E93682045AD970018A7B1 /* LinesAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E93672045AD970018A7B1 /* LinesAPITests.swift */; };
-		638E936A2045ADE00018A7B1 /* TicketsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E93692045ADE00018A7B1 /* TicketsAPITests.swift */; };
-		638E936C2045AEC00018A7B1 /* DevicesAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E936B2045AEC00018A7B1 /* DevicesAPITests.swift */; };
-		638E936E2045B6CC0018A7B1 /* QminderResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E936D2045B6CC0018A7B1 /* QminderResultTests.swift */; };
-		638E93722045C00E0018A7B1 /* UsersAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638E93712045C00E0018A7B1 /* UsersAPITests.swift */; };
-		639122F6203AFC0100DB7A1B /* XCTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639122F5203AFC0100DB7A1B /* XCTestExtensions.swift */; };
-		639122F9203B09CE00DB7A1B /* TicketModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639122F8203B09CE00DB7A1B /* TicketModelTests.swift */; };
-		639122FB203B0A0700DB7A1B /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639122FA203B0A0700DB7A1B /* ModelTests.swift */; };
-		639122FD203B0A8100DB7A1B /* LineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639122FC203B0A8100DB7A1B /* LineModelTests.swift */; };
-		639122FF203B0AB900DB7A1B /* EmptyStateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639122FE203B0AB900DB7A1B /* EmptyStateModelTests.swift */; };
-		63912301203B0B2000DB7A1B /* LocationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63912300203B0B2000DB7A1B /* LocationModelTests.swift */; };
-		63912303203B0BAF00DB7A1B /* TVDeviceModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63912302203B0BAF00DB7A1B /* TVDeviceModelTests.swift */; };
-		63912305203B0D4A00DB7A1B /* UserModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63912304203B0D4A00DB7A1B /* UserModelTests.swift */; };
-		63912309203B0F5900DB7A1B /* ApiDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63912308203B0F5900DB7A1B /* ApiDataModelTests.swift */; };
-		6391230B203B0F6A00DB7A1B /* TVPairingCodeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6391230A203B0F6A00DB7A1B /* TVPairingCodeModelTests.swift */; };
-		639256592046B3540042CDDA /* LinesResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639256582046B3540042CDDA /* LinesResponseTests.swift */; };
 		639473351DC1E87C00E37961 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639473341DC1E87C00E37961 /* AppDelegate.swift */; };
 		639473371DC1E87C00E37961 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639473361DC1E87C00E37961 /* ViewController.swift */; };
 		6394733A1DC1E87C00E37961 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 639473381DC1E87C00E37961 /* Main.storyboard */; };
 		6394733C1DC1E87C00E37961 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6394733B1DC1E87C00E37961 /* Assets.xcassets */; };
-		63D282F52046AEDB00F85894 /* TicketResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D282F42046AEDB00F85894 /* TicketResponseTests.swift */; };
-		63D282F92046B27E00F85894 /* DeviceResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D282F82046B27E00F85894 /* DeviceResponseTests.swift */; };
-		657407E528C30B634F74D6D9 /* Pods_QminderApiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54458F6059A0E2902560923 /* Pods_QminderApiTests.framework */; };
 		8EDE36A0DF7A5D0663BFC41C /* Pods_QminderTVApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DBD28E244AAEF28DC824181 /* Pods_QminderTVApp.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6333638E1DCCB53000C531BF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 639473291DC1E87C00E37961 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 639473301DC1E87C00E37961;
-			remoteInfo = QminderTVApp;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1DBD28E244AAEF28DC824181 /* Pods_QminderTVApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QminderTVApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		410D08679EA27C093654692F /* Pods_QminderTVApp_QminderApiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QminderTVApp_QminderApiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4522466F7C1B81E12F043D64 /* Pods-QminderApiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderApiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		45F68B0F67538E3B76FFAD85 /* Pods-QminderApiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderApiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests.release.xcconfig"; sourceTree = "<group>"; };
-		633363891DCCB53000C531BF /* QminderApiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QminderApiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6333638D1DCCB53000C531BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		634B1C2B201F342A0068F2D3 /* QminderWebsocketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QminderWebsocketTests.swift; sourceTree = "<group>"; };
-		638E93612045ACB30018A7B1 /* LocationsAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsAPITests.swift; sourceTree = "<group>"; };
-		638E93642045ACFE0018A7B1 /* QminderAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderAPITests.swift; sourceTree = "<group>"; };
-		638E93672045AD970018A7B1 /* LinesAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesAPITests.swift; sourceTree = "<group>"; };
-		638E93692045ADE00018A7B1 /* TicketsAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsAPITests.swift; sourceTree = "<group>"; };
-		638E936B2045AEC00018A7B1 /* DevicesAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesAPITests.swift; sourceTree = "<group>"; };
-		638E936D2045B6CC0018A7B1 /* QminderResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QminderResultTests.swift; sourceTree = "<group>"; };
-		638E93712045C00E0018A7B1 /* UsersAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAPITests.swift; sourceTree = "<group>"; };
-		639122F5203AFC0100DB7A1B /* XCTestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestExtensions.swift; sourceTree = "<group>"; };
-		639122F8203B09CE00DB7A1B /* TicketModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketModelTests.swift; sourceTree = "<group>"; };
-		639122FA203B0A0700DB7A1B /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
-		639122FC203B0A8100DB7A1B /* LineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineModelTests.swift; sourceTree = "<group>"; };
-		639122FE203B0AB900DB7A1B /* EmptyStateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateModelTests.swift; sourceTree = "<group>"; };
-		63912300203B0B2000DB7A1B /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
-		63912302203B0BAF00DB7A1B /* TVDeviceModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDeviceModelTests.swift; sourceTree = "<group>"; };
-		63912304203B0D4A00DB7A1B /* UserModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModelTests.swift; sourceTree = "<group>"; };
-		63912308203B0F5900DB7A1B /* ApiDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDataModelTests.swift; sourceTree = "<group>"; };
-		6391230A203B0F6A00DB7A1B /* TVPairingCodeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPairingCodeModelTests.swift; sourceTree = "<group>"; };
-		639256582046B3540042CDDA /* LinesResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesResponseTests.swift; sourceTree = "<group>"; };
 		639473311DC1E87C00E37961 /* QminderTVApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QminderTVApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		639473341DC1E87C00E37961 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		639473361DC1E87C00E37961 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		639473391DC1E87C00E37961 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6394733B1DC1E87C00E37961 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6394733D1DC1E87C00E37961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63D282F42046AEDB00F85894 /* TicketResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketResponseTests.swift; sourceTree = "<group>"; };
-		63D282F82046B27E00F85894 /* DeviceResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponseTests.swift; sourceTree = "<group>"; };
 		7F3BC6394EF24E9C8CFE219E /* Pods-QminderTVApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderTVApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8A110045E5EABEEB66546DA9 /* Pods-QminderTVApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QminderTVApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp.release.xcconfig"; sourceTree = "<group>"; };
 		B54458F6059A0E2902560923 /* Pods_QminderApiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QminderApiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,14 +33,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		633363861DCCB53000C531BF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				657407E528C30B634F74D6D9 /* Pods_QminderApiTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6394732E1DC1E87C00E37961 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,53 +44,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6333638A1DCCB53000C531BF /* QminderApiTests */ = {
-			isa = PBXGroup;
-			children = (
-				639122F5203AFC0100DB7A1B /* XCTestExtensions.swift */,
-				638E936D2045B6CC0018A7B1 /* QminderResultTests.swift */,
-				63D282F32046AE9300F85894 /* Events */,
-				638E935C2045AC770018A7B1 /* API tests */,
-				639122F7203B09BF00DB7A1B /* Models */,
-				6333638D1DCCB53000C531BF /* Info.plist */,
-			);
-			path = QminderApiTests;
-			sourceTree = "<group>";
-		};
-		638E935C2045AC770018A7B1 /* API tests */ = {
-			isa = PBXGroup;
-			children = (
-				638E93642045ACFE0018A7B1 /* QminderAPITests.swift */,
-				638E93612045ACB30018A7B1 /* LocationsAPITests.swift */,
-				638E93672045AD970018A7B1 /* LinesAPITests.swift */,
-				638E93692045ADE00018A7B1 /* TicketsAPITests.swift */,
-				638E93712045C00E0018A7B1 /* UsersAPITests.swift */,
-				638E936B2045AEC00018A7B1 /* DevicesAPITests.swift */,
-			);
-			path = "API tests";
-			sourceTree = "<group>";
-		};
-		639122F7203B09BF00DB7A1B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				639122FA203B0A0700DB7A1B /* ModelTests.swift */,
-				639122FE203B0AB900DB7A1B /* EmptyStateModelTests.swift */,
-				639122F8203B09CE00DB7A1B /* TicketModelTests.swift */,
-				639122FC203B0A8100DB7A1B /* LineModelTests.swift */,
-				63912300203B0B2000DB7A1B /* LocationModelTests.swift */,
-				63912302203B0BAF00DB7A1B /* TVDeviceModelTests.swift */,
-				63912304203B0D4A00DB7A1B /* UserModelTests.swift */,
-				63912308203B0F5900DB7A1B /* ApiDataModelTests.swift */,
-				6391230A203B0F6A00DB7A1B /* TVPairingCodeModelTests.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		639473281DC1E87C00E37961 = {
 			isa = PBXGroup;
 			children = (
 				639473331DC1E87C00E37961 /* QminderTVApp */,
-				6333638A1DCCB53000C531BF /* QminderApiTests */,
 				639473321DC1E87C00E37961 /* Products */,
 				B734891ECD175D82094A9B5B /* Pods */,
 				D9C3137B768265F5EEF7DD91 /* Frameworks */,
@@ -164,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				639473311DC1E87C00E37961 /* QminderTVApp.app */,
-				633363891DCCB53000C531BF /* QminderApiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,17 +72,6 @@
 				6394733D1DC1E87C00E37961 /* Info.plist */,
 			);
 			path = QminderTVApp;
-			sourceTree = "<group>";
-		};
-		63D282F32046AE9300F85894 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				634B1C2B201F342A0068F2D3 /* QminderWebsocketTests.swift */,
-				63D282F42046AEDB00F85894 /* TicketResponseTests.swift */,
-				63D282F82046B27E00F85894 /* DeviceResponseTests.swift */,
-				639256582046B3540042CDDA /* LinesResponseTests.swift */,
-			);
-			path = Events;
 			sourceTree = "<group>";
 		};
 		B734891ECD175D82094A9B5B /* Pods */ = {
@@ -218,27 +100,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		633363881DCCB53000C531BF /* QminderApiTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 633363921DCCB53000C531BF /* Build configuration list for PBXNativeTarget "QminderApiTests" */;
-			buildPhases = (
-				3181090F1D291FF49CE50B54 /* [CP] Check Pods Manifest.lock */,
-				633363851DCCB53000C531BF /* Sources */,
-				633363861DCCB53000C531BF /* Frameworks */,
-				633363871DCCB53000C531BF /* Resources */,
-				DD69BDEDD0F60EABE75338C1 /* [CP] Embed Pods Frameworks */,
-				3569C39E735A7D96A4EFA831 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6333638F1DCCB53000C531BF /* PBXTargetDependency */,
-			);
-			name = QminderApiTests;
-			productName = QminderApiTests;
-			productReference = 633363891DCCB53000C531BF /* QminderApiTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		639473301DC1E87C00E37961 /* QminderTVApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 639473401DC1E87C00E37961 /* Build configuration list for PBXNativeTarget "QminderTVApp" */;
@@ -249,7 +110,6 @@
 				6394732F1DC1E87C00E37961 /* Resources */,
 				3343B45CDBA6F00E060ACEF4 /* [CP] Embed Pods Frameworks */,
 				5BF588981EE5AD7FF5EC11C3 /* [CP] Copy Pods Resources */,
-				637D10BE204460B300105F05 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -270,12 +130,6 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Qminder;
 				TargetAttributes = {
-					633363881DCCB53000C531BF = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = XT7W2QD6JZ;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 639473301DC1E87C00E37961;
-					};
 					639473301DC1E87C00E37961 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Manual;
@@ -296,19 +150,11 @@
 			projectRoot = "";
 			targets = (
 				639473301DC1E87C00E37961 /* QminderTVApp */,
-				633363881DCCB53000C531BF /* QminderApiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		633363871DCCB53000C531BF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6394732F1DC1E87C00E37961 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,24 +167,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3181090F1D291FF49CE50B54 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QminderApiTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3343B45CDBA6F00E060ACEF4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,21 +185,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3569C39E735A7D96A4EFA831 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4AA6B86BFBE65402A6A5BB6D /* [CP] Check Pods Manifest.lock */ = {
@@ -407,71 +220,9 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QminderTVApp/Pods-QminderTVApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		637D10BE204460B300105F05 /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		DD69BDEDD0F60EABE75338C1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QminderApiTests/Pods-QminderApiTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		633363851DCCB53000C531BF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				639122F9203B09CE00DB7A1B /* TicketModelTests.swift in Sources */,
-				639122FF203B0AB900DB7A1B /* EmptyStateModelTests.swift in Sources */,
-				639122F6203AFC0100DB7A1B /* XCTestExtensions.swift in Sources */,
-				638E93682045AD970018A7B1 /* LinesAPITests.swift in Sources */,
-				638E936A2045ADE00018A7B1 /* TicketsAPITests.swift in Sources */,
-				638E93662045ACFE0018A7B1 /* QminderAPITests.swift in Sources */,
-				639122FB203B0A0700DB7A1B /* ModelTests.swift in Sources */,
-				63912303203B0BAF00DB7A1B /* TVDeviceModelTests.swift in Sources */,
-				639122FD203B0A8100DB7A1B /* LineModelTests.swift in Sources */,
-				634B1C2C201F342A0068F2D3 /* QminderWebsocketTests.swift in Sources */,
-				63D282F92046B27E00F85894 /* DeviceResponseTests.swift in Sources */,
-				639256592046B3540042CDDA /* LinesResponseTests.swift in Sources */,
-				6391230B203B0F6A00DB7A1B /* TVPairingCodeModelTests.swift in Sources */,
-				638E93622045ACB30018A7B1 /* LocationsAPITests.swift in Sources */,
-				63912301203B0B2000DB7A1B /* LocationModelTests.swift in Sources */,
-				638E93722045C00E0018A7B1 /* UsersAPITests.swift in Sources */,
-				638E936C2045AEC00018A7B1 /* DevicesAPITests.swift in Sources */,
-				63912305203B0D4A00DB7A1B /* UserModelTests.swift in Sources */,
-				638E936E2045B6CC0018A7B1 /* QminderResultTests.swift in Sources */,
-				63912309203B0F5900DB7A1B /* ApiDataModelTests.swift in Sources */,
-				63D282F52046AEDB00F85894 /* TicketResponseTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6394732D1DC1E87C00E37961 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -482,14 +233,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6333638F1DCCB53000C531BF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 639473301DC1E87C00E37961 /* QminderTVApp */;
-			targetProxy = 6333638E1DCCB53000C531BF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		639473381DC1E87C00E37961 /* Main.storyboard */ = {
@@ -503,40 +246,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		633363901DCCB53000C531BF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4522466F7C1B81E12F043D64 /* Pods-QminderApiTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = XT7W2QD6JZ;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
-				INFOPLIST_FILE = QminderApiTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qminder.QminderApiTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QminderTVApp.app/QminderTVApp";
-			};
-			name = Debug;
-		};
-		633363911DCCB53000C531BF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45F68B0F67538E3B76FFAD85 /* Pods-QminderApiTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = XT7W2QD6JZ;
-				INFOPLIST_FILE = QminderApiTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qminder.QminderApiTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QminderTVApp.app/QminderTVApp";
-			};
-			name = Release;
-		};
 		6394733E1DC1E87C00E37961 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -697,15 +406,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		633363921DCCB53000C531BF /* Build configuration list for PBXNativeTarget "QminderApiTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				633363901DCCB53000C531BF /* Debug */,
-				633363911DCCB53000C531BF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		6394732C1DC1E87C00E37961 /* Build configuration list for PBXProject "QminderTVApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
