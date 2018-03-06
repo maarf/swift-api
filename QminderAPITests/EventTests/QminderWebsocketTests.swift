@@ -20,6 +20,8 @@ class QminderWebsocketTests: XCTestCase {
   
   var parameters: [String: Any] = [:]
   var eventsResponses: [Ticket] = []
+  var deviceResponse = false
+  var linesResponses: [[Line]] = []
   
   override func setUp() {
     super.setUp()
@@ -37,25 +39,15 @@ class QminderWebsocketTests: XCTestCase {
     subscribeToTicket(.ticketCancelled, parameters: parameters)
     subscribeToTicket(.ticketServed, parameters: parameters)
     subscribeToTicket(.ticketChanged, parameters: parameters)
+    
+    subscribeToTVChanged()
+    subscribeLines(parameters: parameters)
   }
   
   override func tearDown() {
     super.tearDown()
     
     events.closeConnection()
-  }
-  
-  fileprivate func subscribeToTicket(_ ticketEvent: QminderEvent, parameters: [String: Any]) {
-    events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: { result in
-      switch result {
-      case .success(let ticket):
-        print(ticket)
-        
-        self.eventsResponses.append(ticket)
-      default:
-        break
-      }
-    })
   }
   
   func testWebsocketEvents() {
@@ -93,7 +85,10 @@ class QminderWebsocketTests: XCTestCase {
     ticketRecalled()
     ticketServed()
     
-    waitForExpectations(timeout: 30, handler: nil)
+    overviewMonitorDidChange()
+    linesChanged()
+    
+    waitForExpectations(timeout: 40, handler: nil)
   }
   
   fileprivate func ticketCalled() {
@@ -153,6 +148,69 @@ class QminderWebsocketTests: XCTestCase {
         ticket.firstName == "Name" &&
         ticket.lastName == "Surname" &&
         date.compare(servedDate) == ComparisonResult.orderedSame
+    }
+  }
+  
+  func overviewMonitorDidChange() {
+    let expectation = self.expectation(description: "testOverviewMonitorDidChange")
+
+    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+      if self.deviceResponse {
+        expectation.fulfill()
+        timer.invalidate()
+      }
+    }
+  }
+
+  func linesChanged() {
+    let expectation = self.expectation(description: "testLinesChanged")
+
+    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+      if let lines = self.linesResponses.first,
+        lines.contains(where: { $0.id == 1 && $0.name == "Business" }),
+        lines.contains(where: { $0.id == 2 && $0.name == "Private" }),
+        lines.contains(where: { $0.id == 3 && $0.name == "Information" }) {
+        expectation.fulfill()
+        timer.invalidate()
+      }
+    }
+  }
+  
+  fileprivate func subscribeToTicket(_ ticketEvent: QminderEvent, parameters: [String: Any]) {
+    events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: { result in
+      switch result {
+      case let .success(ticket):
+        print(ticket)
+        
+        self.eventsResponses.append(ticket)
+      default:
+        break
+      }
+    })
+  }
+  
+  fileprivate func subscribeToTVChanged() {
+    events.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["id": 333]) { result in
+      switch result {
+      case .success:
+        self.deviceResponse = true
+        
+      default:
+        break
+      }
+    }
+  }
+  
+  fileprivate func subscribeLines(parameters: [String: Any]) {
+    events.subscribe(toLineEvent: .linesChanged, parameters: parameters) { result in
+      switch result {
+      case let .success(line):
+        print(line)
+        self.linesResponses.append(line)
+        
+      default:
+        break
+      }
     }
   }
   

@@ -80,19 +80,9 @@
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "QMINDER_LOCATION_ID"
-            value = "9438"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
             key = "QMINDER_API_KEY"
             value = "$(QMINDER_API_KEY)"
             isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QMINDER_API_KEY"
-            value = "eKsenRpCbpkrpcAkia6nzwzPYkzkNQMOnAYEXSr5"
-            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "QMINDER_LINE_ID"
@@ -105,24 +95,9 @@
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "QMINDER_USER_ID"
-            value = "37700"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QMINDER_TV_ID"
-            value = "11389"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
             key = "QMINDER_TV_ID"
             value = "$(QMINDER_TV_ID)"
             isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QMINDER_LINE_ID"
-            value = "68540"
-            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>

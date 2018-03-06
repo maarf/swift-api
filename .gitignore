@@ -1,7 +1,8 @@
 # OS X
 .DS_Store
 
-docs
+/docs/
+publish.sh
 
 # Xcode
 build/
