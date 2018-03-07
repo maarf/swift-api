@@ -48,7 +48,8 @@ jobs:
       - run:
           name: Check code coverage
           command: |
-            sudo gem install atomos
+            brew install jq
+            sudo gem install atomos --no-document
             sudo gem install jazzy --no-document
             ./documentation-coverage.sh
 
