@@ -19,12 +19,6 @@ jobs:
           command: brew install swiftlint
 
       - run:
-          name: Check code coverage
-          command: |
-            sudo gem install jazzy --no-document
-            ./documentation-coverage.sh
-
-      - run:
           name: Add vapor to homebrew and install
           command: |
             brew tap vapor/homebrew-tap
@@ -50,6 +44,13 @@ jobs:
             cd ..
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-iOS -destination 'platform=iOS Simulator,name=iPhone X' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
+
+      - run:
+          name: Check code coverage
+          command: |
+            sudo gem install atomos
+            sudo gem install jazzy --no-document
+            ./documentation-coverage.sh
 
       - run:
           name: Update ruby and cocoapods
