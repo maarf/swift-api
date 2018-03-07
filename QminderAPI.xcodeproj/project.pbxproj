@@ -202,16 +202,6 @@
 /* Begin PBXFileReference section */
 		6320D83F204D806D0041FFAC /* QminderAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QminderAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6320D866204D81660041FFAC /* QminderAPI.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QminderAPI.podspec; sourceTree = "<group>"; };
-		6320D89F204D8ADB0041FFAC /* LinesResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesResponseTests.swift; sourceTree = "<group>"; };
-		6320D8A0204D8ADB0041FFAC /* TicketResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketResponseTests.swift; sourceTree = "<group>"; };
-		6320D8A1204D8ADB0041FFAC /* DeviceResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceResponseTests.swift; sourceTree = "<group>"; };
-		6320D8A2204D8ADB0041FFAC /* QminderWebsocketTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderWebsocketTests.swift; sourceTree = "<group>"; };
-		6320D8A4204D8ADB0041FFAC /* TicketsAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsAPITests.swift; sourceTree = "<group>"; };
-		6320D8A5204D8ADB0041FFAC /* DevicesAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPITests.swift; sourceTree = "<group>"; };
-		6320D8A6204D8ADB0041FFAC /* LocationsAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsAPITests.swift; sourceTree = "<group>"; };
-		6320D8A7204D8ADB0041FFAC /* QminderApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderApiTests.swift; sourceTree = "<group>"; };
-		6320D8A8204D8ADB0041FFAC /* UsersAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersAPITests.swift; sourceTree = "<group>"; };
-		6320D8A9204D8ADB0041FFAC /* LinesAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesAPITests.swift; sourceTree = "<group>"; };
 		63520631204D78E5008C8C54 /* ResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultProtocol.swift; sourceTree = "<group>"; };
 		63520632204D78E5008C8C54 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		63520633204D78E5008C8C54 /* QminderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderError.swift; sourceTree = "<group>"; };
@@ -332,32 +322,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6320D89E204D8ADB0041FFAC /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				6320D89F204D8ADB0041FFAC /* LinesResponseTests.swift */,
-				6320D8A0204D8ADB0041FFAC /* TicketResponseTests.swift */,
-				6320D8A1204D8ADB0041FFAC /* DeviceResponseTests.swift */,
-				6320D8A2204D8ADB0041FFAC /* QminderWebsocketTests.swift */,
-			);
-			name = Events;
-			path = Example/QminderApiTests/Events;
-			sourceTree = SOURCE_ROOT;
-		};
-		6320D8A3204D8ADB0041FFAC /* API tests */ = {
-			isa = PBXGroup;
-			children = (
-				6320D8A4204D8ADB0041FFAC /* TicketsAPITests.swift */,
-				6320D8A5204D8ADB0041FFAC /* DevicesAPITests.swift */,
-				6320D8A6204D8ADB0041FFAC /* LocationsAPITests.swift */,
-				6320D8A7204D8ADB0041FFAC /* QminderApiTests.swift */,
-				6320D8A8204D8ADB0041FFAC /* UsersAPITests.swift */,
-				6320D8A9204D8ADB0041FFAC /* LinesAPITests.swift */,
-			);
-			name = "API tests";
-			path = "Example/QminderApiTests/API tests";
-			sourceTree = SOURCE_ROOT;
-		};
 		635205F1204D76C9008C8C54 = {
 			isa = PBXGroup;
 			children = (
@@ -396,8 +360,6 @@
 				63520648204D78E5008C8C54 /* QminderAPI.swift */,
 				63520649204D78E5008C8C54 /* Extensions.swift */,
 				6352064A204D78E5008C8C54 /* HTTPMethod.swift */,
-				6320D8A3204D8ADB0041FFAC /* API tests */,
-				6320D89E204D8ADB0041FFAC /* Events */,
 				6352064B204D78E5008C8C54 /* Events */,
 			);
 			path = Sources;

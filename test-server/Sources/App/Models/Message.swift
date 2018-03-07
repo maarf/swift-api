@@ -9,7 +9,8 @@ import Foundation
 
 
 /// Qminder Event type
-public enum QminderEvent: String {
+public enum QminderEvent: String, CustomStringConvertible {
+  
   /// Ticket created
   case ticketCreated = "TICKET_CREATED"
   
@@ -33,6 +34,10 @@ public enum QminderEvent: String {
   
   /// Lines changed
   case linesChanged = "LINES_CHANGED"
+  
+  public var description: String {
+    return self.rawValue
+  }
 }
 
 /// Websocket message model
