@@ -19,6 +19,12 @@ jobs:
           command: brew install swiftlint
 
       - run:
+          name: Check code coverage
+          command: |
+            sudo gem install jazzy --no-document
+            ./documentation-coverage.sh
+
+      - run:
           name: Add vapor to homebrew and install
           command: |
             brew tap vapor/homebrew-tap
@@ -49,7 +55,7 @@ jobs:
           name: Update ruby and cocoapods
           command: |
             echo "ruby-2.4" > ~/.ruby-version
-            sudo gem install cocoapods
+            sudo gem install cocoapods --no-document
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
       - run:
