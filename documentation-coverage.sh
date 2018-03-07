@@ -4,7 +4,11 @@ coverage="$(cat 'docs/undocumented.json' | jq '.warnings | length')"
 
 if [ $coverage != 0 ]
 then
-  exit 65
+  echo "Code isn't documented with 100%"
+  warnings="$(cat 'docs/undocumented.json' | jq '.warnings')"
+  echo "Warnings:"
+  echo $warnings
+  exit 1
 else
   echo "Code documented with 100%"
 fi
