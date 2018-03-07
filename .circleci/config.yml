@@ -46,6 +46,13 @@ jobs:
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
 
       - run:
+          name: Update ruby and cocoapods
+          command: |
+            echo "ruby-2.4" > ~/.ruby-version
+            sudo gem install cocoapods --no-document
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+
+      - run:
           name: Check code coverage
           command: |
             brew install jq
@@ -53,13 +60,6 @@ jobs:
             sudo gem install jazzy --no-document
             jazzy
             ./documentation-coverage.sh
-
-      - run:
-          name: Update ruby and cocoapods
-          command: |
-            echo "ruby-2.4" > ~/.ruby-version
-            sudo gem install cocoapods --no-document
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
       - run:
           name: Pod lib lint
