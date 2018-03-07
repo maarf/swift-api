@@ -51,6 +51,7 @@ jobs:
             brew install jq
             sudo gem install atomos --no-document
             sudo gem install jazzy --no-document
+            jazzy
             ./documentation-coverage.sh
 
       - run:
