@@ -36,6 +36,27 @@ class DevicesAPITests: QminderAPITests {
     XCTAssertFalse((secret?.isEmpty)!)
   }
   
+  func testPairTV() {
+    var e: Error?
+    var tvApiData: TVAPIData?
+    
+    wait { expectation in
+      qminderAPI.pairTV(code: "XXX", secret: "YYY", completion: { result in
+        switch result {
+        case let .failure(error):
+          e = error
+          
+          expectation.fulfill()
+        case let .success(value):
+          tvApiData = value
+        }
+      })
+    }
+    
+    XCTAssertNotNil(e)
+    XCTAssertNil(tvApiData)
+  }
+  
   func testTVDetails() {
     var device: TVDevice?
     
