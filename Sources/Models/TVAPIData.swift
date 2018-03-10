@@ -9,9 +9,10 @@
 import Foundation
 
 /// TV device API data
-public struct TVAPIData: CodableResponsable {
+public struct TVAPIData: Responsable {
   
-  let statusCode: Int
+  var statusCode: Int?
+  
   
   /// "NOT_PAIRED" or "PAIRED"
   public let status: String

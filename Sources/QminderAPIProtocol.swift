@@ -54,17 +54,6 @@ protocol QminderAPIProtocol {
   func getLocationLines(locationId: Int, completion: @escaping (Result<[Line], QminderError>) -> Void)
   
   /**
-   Make URL request with Alamofire
-   
-   - Parameters:
-     - url: URL
-     - completion: Callback block with result
-   */
-  func makeRequest(url: String, method: HTTPMethod, parameters: [String: Any],
-                   encoding: ParameterEncoding, apiKeyNeeded: Bool,
-                   completion: @escaping (Result<Data, QminderError>) -> Void)
-  
-  /**
    Get location users
    
    - Parameters:

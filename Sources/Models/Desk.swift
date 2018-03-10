@@ -17,8 +17,19 @@ public struct Desk: Codable {
   public let name: String
 }
 
-/// Tickets object
-struct Desks: CodableResponsable {
-  let statusCode: Int
+protocol DesksResponsable: Responsable {
+  /// Data with API request
+  associatedtype Data
+  
+  /// Desks from API
+  var desks: [Data] { get }
+}
+
+/// Desks object
+struct Desks: ResponsableWithData {
+  
+  static var dataContainer = \Desks.desks
+  
+  internal let statusCode: Int?
   let desks: [Desk]
 }

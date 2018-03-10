@@ -31,4 +31,19 @@ public enum QminderError: Error {
   
   /// Parsing error
   case parse
+  
+  /// Parsing with error
+  case jsonParsing(Error)
+}
+
+extension Error {
+  
+  /// Qminder error representation
+  var qminderError: QminderError {
+    guard let error = self as? QminderError else {
+      return QminderError.request(self)
+    }
+    
+    return error
+  }
 }

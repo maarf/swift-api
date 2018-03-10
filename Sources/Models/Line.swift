@@ -9,7 +9,9 @@
 import Foundation
 
 /// Line Object
-public struct Line: Codable {
+public struct Line: Responsable {
+  
+  var statusCode: Int?
   
   /// ID of a line
   public let id: Int
@@ -22,14 +24,13 @@ public struct Line: Codable {
 }
 
 /// Lines object
-struct Lines: CodableResponsableWithData {
+struct Lines: ResponsableWithData {
   
-  typealias Data = Line
-
+  static var dataContainer = \Lines.data
+  
   /// Status code from API
-  let statusCode: Int
+  internal let statusCode: Int?
   
   /// Lines array
-  var data: [Data]
-  
+  let data: [Line]
 }

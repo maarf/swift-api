@@ -13,7 +13,7 @@ import XCTest
 class QminderResultTests: XCTestCase {
   
   func testResultSucess() {
-    let result = Result<Int, QminderError>(value: 1)
+    let result = Result<Int, QminderError>(1)
     
     XCTAssertFalse(result.isFailure)
     XCTAssertTrue(result.isSuccess)
@@ -32,7 +32,7 @@ class QminderResultTests: XCTestCase {
   
   func testResultFailure() {
     
-    let result = Result<Int, QminderError>(error: .apiKeyNotSet)
+    let result = Result<Int, QminderError>(.apiKeyNotSet)
     
     XCTAssertTrue(result.isFailure)
     XCTAssertFalse(result.isSuccess)

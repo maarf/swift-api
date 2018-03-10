@@ -33,10 +33,9 @@ public enum EmptyStateLayout: String, Codable {
 }
 
 /// Empty state object
-public struct EmptyState: CodableResponsable {
+public struct EmptyState: Responsable {
   
-  /// Status code from API
-  let statusCode: Int
+  internal let statusCode: Int?
   
   /// Empty state layout
   public let layout: EmptyStateLayout

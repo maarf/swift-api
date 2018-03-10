@@ -8,7 +8,7 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
 class TicketsAPITests: QminderAPITests {
   func testSearchTickets() {
@@ -69,7 +69,7 @@ class TicketsAPITests: QminderAPITests {
     wait { expectation in
       qminderAPI.searchTickets(locationId: locationId,
                                status: [.new, .called, .cancelled, .cancelledByClerk, .noShow, .served],
-                               limit: 10) { result in
+                               limit: 10, responseScope: ["INTERACTIONS"]) { result in
         switch result {
         case let .success(value):
           tickets = value
