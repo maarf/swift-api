@@ -43,6 +43,29 @@ public struct QminderAPI: QminderAPIProtocol {
     fetch(.line(lineId), decodingType: Line.self) { completion($0) }
   }
   
+  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [Status]? = nil,
+                            callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil,
+                            minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil,
+                            limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil,
+                            completion: @escaping (Result<[Ticket], QminderError>) -> Void) {
+    
+    var parameters = [String: Any]()
+    
+    parameters.set(value: locationId, forKey: "location")
+    parameters.set(value: lineId?.flatMap({ String($0) }).joined(separator: ","), forKey: "line")
+    parameters.set(value: status?.flatMap({ $0.rawValue }).joined(separator: ","), forKey: "status")
+    parameters.set(value: callerId, forKey: "caller")
+    parameters.set(value: minCreatedTimestamp, forKey: "minCreated")
+    parameters.set(value: maxCreatedTimestamp, forKey: "maxCreated")
+    parameters.set(value: minCalledTimestamp, forKey: "minCalled")
+    parameters.set(value: maxCalledTimestamp, forKey: "maxCalled")
+    parameters.set(value: limit, forKey: "limit")
+    parameters.set(value: order, forKey: "order")
+    parameters.set(value: responseScope?.flatMap({ String($0) }).joined(separator: ","), forKey: "responseScope")
+    
+    fetch(.tickets(parameters), decodingType: Tickets.self) { completion($0) }
+  }
+  
   public func getTicketDetails(ticketId: String, completion: @escaping (Result<Ticket, QminderError>) -> Void) {
     fetch(.ticket(ticketId), decodingType: Ticket.self) { completion($0) }
   }

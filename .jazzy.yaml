@@ -7,3 +7,4 @@ theme: apple
 output: docs
 clean: true
 documentation: docs/*.md
+xcodebuild_arguments: ["-propject", "QminderAPI.xcodeproj", "-scheme", "QminderAPI-iOS", "-sdk","iphonesimulator"]
