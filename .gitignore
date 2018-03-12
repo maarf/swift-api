@@ -4,6 +4,8 @@
 /docs/
 publish.sh
 
+/QminderAPIPlayground.playground/Resources/apiKey.txt
+
 # Xcode
 build/
 *.pbxuser
