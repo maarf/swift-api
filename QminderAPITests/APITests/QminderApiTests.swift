@@ -8,11 +8,11 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
 class QminderAPITests: XCTestCase {
-  /// Qminder API client
-  var qminderAPI: QminderAPI!
+  /// Qminder API protocol
+  var qminderAPI: QminderAPIProtocol!
   
   /// Events
   var events: QminderEvents!

@@ -9,10 +9,10 @@
 import Foundation
 
 /// User object
-public struct TVDevice: CodableResponsable {
+public struct TVDevice: Responsable {
   
   /// Status code from API
-  let statusCode: Int
+  internal let statusCode: Int?
 
   /// Device ID
   public let id: Int

@@ -9,7 +9,9 @@
 import Foundation
 
 /// Location object
-public struct Location: Codable {
+public struct Location: Responsable {
+  
+  internal var statusCode: Int?
 
   /// A unique location ID
   public let id: Int?
@@ -29,13 +31,13 @@ public struct Location: Codable {
 }
 
 /// Locations object
-struct Locations: CodableResponsableWithData {
+struct Locations: ResponsableWithData {
 
-  typealias Data = Location
+  static var dataContainer = \Locations.data
   
   /// Status code from API
-  let statusCode: Int
+  internal let statusCode: Int?
 
   /// Locations data from API
-  let data: [Data]
+  let data: [Location]
 }

@@ -9,9 +9,9 @@
 import Foundation
 
 /// TV pairing code data
-public struct TVPairingCode: CodableResponsable {
+public struct TVPairingCode: Responsable {
   
-  let statusCode: Int
+  var statusCode: Int?
   
   /// Pairing code for enduser to enter to the Dashboard
   public let code: String

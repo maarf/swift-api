@@ -49,8 +49,17 @@ jobs:
           name: Update ruby and cocoapods
           command: |
             echo "ruby-2.4" > ~/.ruby-version
-            sudo gem install cocoapods
+            sudo gem install cocoapods --no-document
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+
+      - run:
+          name: Check code coverage
+          command: |
+            brew install jq
+            sudo gem install atomos --no-document
+            sudo gem install jazzy --no-document
+            jazzy
+            ./documentation-coverage.sh
 
       - run:
           name: Pod lib lint
@@ -59,7 +68,7 @@ jobs:
       - run:
           name: Codeconv
           command: |
-            export COVERAGE__NOTIFY__SLACK__DEFAULT__URL=${CODECONV_SLACK_URL}
+            sed -i"any_symbol" "s/SLACK_KEY/${SLACK_KEY}/" codecov.yml
             bash <(curl -s https://codecov.io/bash)
 
 workflows:

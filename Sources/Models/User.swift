@@ -9,7 +9,9 @@
 import Foundation
 
 /// User object
-public struct User: Codable {
+public struct User: Responsable {
+  
+  internal var statusCode: Int?
   
   /// User ID
   public let id: Int
@@ -54,9 +56,10 @@ public struct Picture: Codable {
 }
 
 /// Tickets object
-struct Users: CodableResponsableWithData {
-  typealias Data = User
+struct Users: ResponsableWithData {
   
-  let statusCode: Int
-  let data: [Data]
+  static var dataContainer = \Users.data
+  
+  internal let statusCode: Int?
+  let data: [User]
 }

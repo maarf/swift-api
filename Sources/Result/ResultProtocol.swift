@@ -1,3 +1,5 @@
+import Foundation
+
 /// A protocol that can be used to constrain associated types as `Result`.
 public protocol ResultProtocol: CustomStringConvertible {
   
@@ -13,7 +15,7 @@ public protocol ResultProtocol: CustomStringConvertible {
    - Parameters:
      - value: Generic type Value
   */
-	init(value: Value)
+	init(_ value: Value)
   
   /**
    Init Result with error
@@ -21,7 +23,7 @@ public protocol ResultProtocol: CustomStringConvertible {
    - Parameters:
      - error: Error protocol type
   */
-	init(error: Error)
+	init(_ error: Error)
 	
   /// Result
 	var result: Result<Value, Error> { get }
@@ -30,12 +32,12 @@ public protocol ResultProtocol: CustomStringConvertible {
 public extension Result {
   
   /// Constructs a success wrapping a `value`.
-  public init(value: Value) {
+  public init(_ value: Value) {
     self = .success(value)
   }
   
   /// Constructs a failure wrapping an `error`.
-  public init(error: Error) {
+  public init(_ error: Error) {
     self = .failure(error)
   }
   
