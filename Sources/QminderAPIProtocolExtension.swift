@@ -34,7 +34,7 @@ extension QminderAPIProtocol {
   }
   
   internal func fetch<T: ResponsableWithData>(_ endPoint: QminderAPIEndpoint, decodingType: T.Type,
-                                                        _ completion: @escaping (Result<T.Data, QminderError>) -> Void) {
+                                              _ completion: @escaping (Result<T.Data, QminderError>) -> Void) {
     performRequestWith(endPoint) { result in
       switch result {
       case let .success(data):
@@ -46,7 +46,7 @@ extension QminderAPIProtocol {
   }
   
   internal func fetch<T: Responsable>(_ endPoint: QminderAPIEndpoint, decodingType: T.Type,
-                                     _ completion: @escaping (Result<T, QminderError>) -> Void) {
+                                      _ completion: @escaping (Result<T, QminderError>) -> Void) {
     performRequestWith(endPoint) { result in
       switch result {
       case let .success(data):
@@ -69,7 +69,7 @@ extension QminderAPIProtocol {
   }
 
   internal func performRequestWith(_ endPoint: QminderAPIEndpoint,
-                                  completion: @escaping (Result<Data, QminderError>) -> Void) {
+                                   _ completion: @escaping (Result<Data, QminderError>) -> Void) {
     
     do {
       let request = try endPoint.request(serverAddress: serverAddress, apiKey: apiKey)
@@ -111,8 +111,9 @@ extension QminderAPIProtocol {
      - completion: Callback block with result
    */
   private func makeRequest(url: String, method: HTTPMethod = .get, parameters: [String: Any] = [:],
-                               encoding: ParameterEncoding = .none, apiKeyNeeded: Bool = true,
-                               completion: @escaping (Result<Data, QminderError>) -> Void) {
+                           encoding: ParameterEncoding = .none, apiKeyNeeded: Bool = true,
+                           completion: @escaping (Result<Data, QminderError>) -> Void) {
+    
     var url = URLComponents(string: "\(serverAddress)\(url)")!
     
     if encoding == .none {

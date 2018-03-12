@@ -26,7 +26,6 @@ extension Data {
     }
   }
   
-  
   /**
    Decode response data without data container
    

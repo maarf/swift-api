@@ -13,7 +13,6 @@ public struct TVAPIData: Responsable {
   
   var statusCode: Int?
   
-  
   /// "NOT_PAIRED" or "PAIRED"
   public let status: String
   
