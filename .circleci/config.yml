@@ -68,7 +68,7 @@ jobs:
       - run:
           name: Codeconv
           command: |
-            export COVERAGE__NOTIFY__SLACK__DEFAULT__URL=${CODECONV_SLACK_URL}
+            sed -i"any_symbol" "s/SLACK_KEY/${SLACK_KEY}/" codecov.yml
             bash <(curl -s https://codecov.io/bash)
 
 workflows:
