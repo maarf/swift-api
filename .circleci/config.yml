@@ -46,6 +46,10 @@ jobs:
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
 
       - run:
+          name: SwiftPM Build
+          command: swift build
+
+      - run:
           name: Update ruby and cocoapods
           command: |
             echo "ruby-2.4" > ~/.ruby-version
