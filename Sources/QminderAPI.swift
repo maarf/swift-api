@@ -43,10 +43,10 @@ public struct QminderAPI: QminderAPIProtocol {
     fetch(.line(lineId), decodingType: Line.self) { completion($0) }
   }
   
-  public func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [Status]? = nil,
+  public func searchTickets(locationId: Int? = nil, lineId: Set<Int>? = nil, status: Set<Status>? = nil,
                             callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil,
                             minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil,
-                            limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil,
+                            limit: Int? = nil, order: String? = nil, responseScope: Set<String>? = nil,
                             completion: @escaping (Result<[Ticket], QminderError>) -> Void) {
     
     var parameters = [String: Any]()

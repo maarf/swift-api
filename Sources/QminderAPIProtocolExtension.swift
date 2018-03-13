@@ -10,10 +10,10 @@ import Foundation
 
 extension QminderAPIProtocol {
   
-  func searchTickets(locationId: Int? = nil, lineId: [Int]? = nil, status: [Status]? = nil,
+  func searchTickets(locationId: Int? = nil, lineId: Set<Int>? = nil, status: Set<Status>? = nil,
                      callerId: Int? = nil, minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil,
                      minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil,
-                     limit: Int? = nil, order: String? = nil, responseScope: [String]? = nil,
+                     limit: Int? = nil, order: String? = nil, responseScope: Set<String>? = nil,
                      completion: @escaping (Result<[Ticket], QminderError>) -> Void) {
     searchTickets(locationId: locationId, lineId: lineId,
                   status: status, callerId: callerId,
