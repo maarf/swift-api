@@ -100,10 +100,10 @@ protocol QminderAPIProtocol {
      - responseScope: Optional parameter for additional details about the found tickets.
      - completion: Callback block executed when tickets are received back
    */
-  func searchTickets(locationId: Int?, lineId: [Int]?, status: [Status]?,
+  func searchTickets(locationId: Int?, lineId: Set<Int>?, status: Set<Status>?,
                      callerId: Int?, minCreatedTimestamp: Int?, maxCreatedTimestamp: Int?,
                      minCalledTimestamp: Int?, maxCalledTimestamp: Int?,
-                     limit: Int?, order: String?, responseScope: [String]?,
+                     limit: Int?, order: String?, responseScope: Set<String>?,
                      completion: @escaping (Result<[Ticket], QminderError>) -> Void)
   
   /**
