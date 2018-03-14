@@ -66,21 +66,23 @@ extension QminderAPIProtocol {
       request.printCurlString()
       
       URLSession.shared.dataTask(with: request) { data, response, error in
-        if let error = error {
-          completion(Result(.request(error)))
-        } else {
-          
-          guard let httpResponse = response as? HTTPURLResponse, let resultData = data else {
-            completion(Result(.parseRequest))
-            return
+        self.queue.async {
+          if let error = error {
+            completion(Result(.request(error)))
+          } else {
+            
+            guard let httpResponse = response as? HTTPURLResponse, let resultData = data else {
+              completion(Result(.parseRequest))
+              return
+            }
+            
+            if httpResponse.statusCode != 200 {
+              completion(Result(.statusCode(httpResponse.statusCode)))
+              return
+            }
+            
+            completion(Result(resultData))
           }
-          
-          if httpResponse.statusCode != 200 {
-            completion(Result(.statusCode(httpResponse.statusCode)))
-            return
-          }
-          
-          completion(Result(resultData))
         }
       }.resume()
     } catch {
