@@ -17,6 +17,9 @@ protocol QminderAPIProtocol {
   /// Qminder API address
   var serverAddress: String { get set }
   
+  /// Queue to return result in
+  var queue: DispatchQueue { get }
+  
   /**
    Intialize Qminder API
    
