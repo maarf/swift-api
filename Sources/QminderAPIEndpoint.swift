@@ -78,7 +78,7 @@ enum QminderAPIEndpoint: QminderAPIEndpointProtocol {
   
   var apiKeyNeeded: Bool {
     switch self {
-    case .tvCode:
+    case .tvCode, .tvPairingStatus:
       return false
     default:
       return true
