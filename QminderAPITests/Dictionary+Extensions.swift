@@ -40,9 +40,9 @@ public extension Dictionary where Key == String, Value == Any {
    
    - Returns: Decoded decodable as given type
   */
-  public func decodeAs<T>(_ type: T.Type) throws -> T where T: Decodable {
-    let data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-    let object = try JSONDecoder().decode(type, from: data)
+  public func decodeAs<T>(_ type: T.Type, decoder: JSONDecoder = JSONDecoder()) throws -> T where T: Decodable {
+    let data = try JSONSerialization.data(withJSONObject: self, options: [])
+    let object = try decoder.decode(type, from: data)
     
     return object
   }

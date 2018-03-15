@@ -26,7 +26,8 @@ class TicketResponseTests: ModelTests {
         "lastName": "Surname"
       ]
     ]
-    let ticketResponse = try? ticketResponseData.decodeAs(TicketEventResponse.self)
+    let ticketResponse = try? ticketResponseData.decodeAs(TicketEventResponse.self,
+                                                          decoder: JSONDecoder.withMilliseconds)
     
     XCTAssertEqual(ticketResponse?.subscriptionId, "1")
     XCTAssertEqual(ticketResponse?.messageId, 2)

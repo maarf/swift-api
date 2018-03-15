@@ -168,6 +168,6 @@ class TicketModelTests: ModelTests {
   }
   
   fileprivate func decodeToTicket() -> Ticket? {
-    return try? ticketData.decodeAs(Ticket.self)
+    return try? ticketData.decodeAs(Ticket.self, decoder: JSONDecoder.withMilliseconds)
   }
 }
