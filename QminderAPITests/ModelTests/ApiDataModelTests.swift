@@ -20,10 +20,9 @@ class ApiDataModelTests: ModelTests {
       "apiKey": "804ef75ba9b6b5264c96150b457f8f30",
       "location": 666
     ]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: apiData, options: [])
-    let tvAPIData = try? JSONDecoder().decode(TVAPIData.self, from: jsonData!)
-    
+   
+    let tvAPIData = try? apiData.decodeAs(TVAPIData.self)
+      
     XCTAssertEqual(tvAPIData?.status, "PAIRED")
     XCTAssertEqual(tvAPIData?.id, 41078)
     XCTAssertEqual(tvAPIData?.apiKey, "804ef75ba9b6b5264c96150b457f8f30")
@@ -36,8 +35,7 @@ class ApiDataModelTests: ModelTests {
       "status": "NOT_PAIRED"
     ]
     
-    let jsonData = try? JSONSerialization.data(withJSONObject: apiData, options: [])
-    let tvAPIData = try? JSONDecoder().decode(TVAPIData.self, from: jsonData!)
+    let tvAPIData = try? apiData.decodeAs(TVAPIData.self)
     
     XCTAssertEqual(tvAPIData?.status, "NOT_PAIRED")
     XCTAssertNil(tvAPIData?.id)

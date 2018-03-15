@@ -18,8 +18,7 @@ class LineModelTests: ModelTests {
   ]
   
   func testLineModel() {
-    let jsonData = try? JSONSerialization.data(withJSONObject: lineData, options: [])
-    let line = try? JSONDecoder().decode(Line.self, from: jsonData!)
+    let line = decodeToLine()
     
     XCTAssertEqual(line?.id, 999)
     XCTAssertEqual(line?.name, "Line name")
@@ -30,10 +29,13 @@ class LineModelTests: ModelTests {
     lineData["id"] = 999
     lineData["location"] = 333
     
-    let jsonData = try? JSONSerialization.data(withJSONObject: lineData, options: [])
-    let line = try? JSONDecoder().decode(Line.self, from: jsonData!)
+    let line = decodeToLine()
     
     XCTAssertEqual(line?.id, 999)
     XCTAssertEqual(line?.location, 333)
+  }
+  
+  fileprivate func decodeToLine() -> Line? {
+    return try? lineData.decodeAs(Line.self)
   }
 }

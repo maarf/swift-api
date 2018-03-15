@@ -18,9 +18,7 @@ class EmptyStateModelTests: ModelTests {
       "layout": "simple",
       "message": "Simple message"
     ]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
-    let emptyState = try? JSONDecoder().decode(EmptyState.self, from: jsonData!)
+    let emptyState = try? data.decodeAs(EmptyState.self)
     
     XCTAssertEqual(emptyState?.message, "Simple message")
     XCTAssertEqual(emptyState?.layout, .simple)
@@ -32,9 +30,7 @@ class EmptyStateModelTests: ModelTests {
       "layout": "closed",
       "message": "closed message"
     ]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
-    let emptyState = try? JSONDecoder().decode(EmptyState.self, from: jsonData!)
+    let emptyState = try? data.decodeAs(EmptyState.self)
     
     XCTAssertEqual(emptyState?.message, "closed message")
     XCTAssertEqual(emptyState?.layout, .closed)
@@ -46,9 +42,7 @@ class EmptyStateModelTests: ModelTests {
       "layout": "other",
       "message": "other message"
     ]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
-    let emptyState = try? JSONDecoder().decode(EmptyState.self, from: jsonData!)
+    let emptyState = try? data.decodeAs(EmptyState.self)
     
     XCTAssertEqual(emptyState?.message, "other message")
     XCTAssertEqual(emptyState?.layout, .other)

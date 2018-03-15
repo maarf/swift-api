@@ -12,19 +12,17 @@ import QminderAPI
 
 class UserModelTests: ModelTests {
   
-  let userData: [String: Any] = [
-    "id": 999,
-    "email": "john@example.com",
-    "firstName": "John",
-    "lastName": "Appleseed",
-    "desk": 1,
-    "roles": [["type": "MANAGER", "location": 3245], ["type": "USER", "location": 1265]],
-    "picture": [["size": "medium", "url": "http://www.google.com/"]]
-  ]
-  
   func testUserModel() {
-    let jsonData = try? JSONSerialization.data(withJSONObject: userData, options: [])
-    let user = try? JSONDecoder().decode(User.self, from: jsonData!)
+    let userData: [String: Any] = [
+      "id": 999,
+      "email": "john@example.com",
+      "firstName": "John",
+      "lastName": "Appleseed",
+      "desk": 1,
+      "roles": [["type": "MANAGER", "location": 3245], ["type": "USER", "location": 1265]],
+      "picture": [["size": "medium", "url": "http://www.google.com/"]]
+    ]
+    let user = try? userData.decodeAs(User.self)
     
     XCTAssertEqual(user?.id, 999)
     XCTAssertEqual(user?.email, "john@example.com")

@@ -12,23 +12,21 @@ import QminderAPI
 
 class TicketResponseTests: ModelTests {
   
-  var ticketResponseData: [String: Any] = [
-    "subscriptionId": "1",
-    "messageId": 2,
-    "data": [
-      "status": "NEW",
-      "source": "MANUAL",
-      "firstName": "Name",
-      "created": ["date": "2017-02-06T12:35:29.123Z"],
-      "id": "999",
-      "line": 333,
-      "lastName": "Surname"
-    ]
-  ]
-  
   func testTicketResponsable() {
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketResponseData, options: [])
-    let ticketResponse = try? JSONDecoder.withMilliseconds.decode(TicketEventResponse.self, from: jsonData!)
+    let ticketResponseData: [String: Any] = [
+      "subscriptionId": "1",
+      "messageId": 2,
+      "data": [
+        "status": "NEW",
+        "source": "MANUAL",
+        "firstName": "Name",
+        "created": ["date": "2017-02-06T12:35:29.123Z"],
+        "id": "999",
+        "line": 333,
+        "lastName": "Surname"
+      ]
+    ]
+    let ticketResponse = try? ticketResponseData.decodeAs(TicketEventResponse.self)
     
     XCTAssertEqual(ticketResponse?.subscriptionId, "1")
     XCTAssertEqual(ticketResponse?.messageId, 2)

@@ -29,8 +29,7 @@ class LinesResponseTests: ModelTests {
   ]
   
   func testLineResponse() {
-    let jsonData = try? JSONSerialization.data(withJSONObject: lineResponseData, options: [])
-    let lineResponse = try? JSONDecoder().decode(LinesEventResponse.self, from: jsonData!)
+    let lineResponse = decodeToLinesResponse()
     
     guard let lines = lineResponse?.data["lines"] else {
       XCTFail("Can't get lines from TV device response")
@@ -55,11 +54,12 @@ class LinesResponseTests: ModelTests {
   
   func testEmptyLinesResponse() {
     lineResponseData["data"] = ["lines": []]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: lineResponseData, options: [])
-    let lineResponse = try? JSONDecoder().decode(LinesEventResponse.self, from: jsonData!)
+    let lineResponse = decodeToLinesResponse()
     
     XCTAssertTrue(lineResponse?.lines.count == 0)
-    
+  }
+  
+  fileprivate func decodeToLinesResponse() -> LinesEventResponse? {
+    return try? lineResponseData.decodeAs(LinesEventResponse.self)
   }
 }

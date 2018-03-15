@@ -24,11 +24,8 @@ class TicketModelTests: ModelTests {
   
   func testTicketWithoutMilliseconds() {
     let createdDateString = "2017-02-06T12:35:29Z"
-    
     ticketData["created"] = ["date": createdDateString]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.id, "999")
     XCTAssertEqual(ticket?.source, .manual)
@@ -42,9 +39,7 @@ class TicketModelTests: ModelTests {
   func testTicketWithMilliseconds() {
     let createdDateString = "2017-02-06T12:35:29.123Z"
     ticketData["created"] = ["date": createdDateString]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.createdDate, dateISO8601MillisecondsFormatter.date(from: createdDateString))
   }
@@ -53,9 +48,7 @@ class TicketModelTests: ModelTests {
     let orderAfterDateString = "2017-02-06T12:35:29Z"
     ticketData["orderAfter"] = orderAfterDateString
     ticketData["created"] = ["date": "2017-02-06T12:35:29Z"]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.orderAfter)
     XCTAssertEqual(ticket?.orderAfter, dateISO8601Formatter.date(from: orderAfterDateString))
@@ -64,9 +57,7 @@ class TicketModelTests: ModelTests {
   func testOrderAfterWithMilliseconds() {
     let orderAfterDateString = "2017-02-06T12:35:29.123Z"
     ticketData["orderAfter"] = orderAfterDateString
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.orderAfter)
     XCTAssertEqual(ticket?.orderAfter, dateISO8601MillisecondsFormatter.date(from: orderAfterDateString))
@@ -81,9 +72,7 @@ class TicketModelTests: ModelTests {
        "user": 444
       ]
     ]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.calledDate)
     XCTAssertEqual(ticket?.calledDate, dateISO8601Formatter.date(from: calledDateString))
@@ -94,9 +83,7 @@ class TicketModelTests: ModelTests {
   func testServedDate() {
     let servedDateString = "2017-02-06T12:35:29Z"
     ticketData["served"] = ["date": servedDateString]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.servedDate)
     XCTAssertEqual(ticket?.servedDate, dateISO8601Formatter.date(from: servedDateString))
@@ -104,9 +91,7 @@ class TicketModelTests: ModelTests {
   
   func testLabels() {
     ticketData["labels"] = [["color": "#000000", "value": "Test"]]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.labels)
     
@@ -122,9 +107,7 @@ class TicketModelTests: ModelTests {
   
   func testExtraFields() {
     ticketData["extra"] = [["title": "Title", "value": "Test", "url": "http://www.google.com"]]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.extra)
     
@@ -147,9 +130,7 @@ class TicketModelTests: ModelTests {
        "user": 891
       ]
     ]
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.interactions)
     
@@ -167,28 +148,26 @@ class TicketModelTests: ModelTests {
   
   func testSourceName() {
     ticketData["source"] = "NAME"
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.source, .name)
   }
   
   func testSourcePrinter() {
     ticketData["source"] = "PRINTER"
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.source, .printer)
   }
   
   func testSourceOther() {
     ticketData["source"] = "OTHER"
-    
-    let jsonData = try? JSONSerialization.data(withJSONObject: ticketData, options: [])
-    let ticket = try? JSONDecoder.withMilliseconds.decode(Ticket.self, from: jsonData!)
+    let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.source, .other)
+  }
+  
+  fileprivate func decodeToTicket() -> Ticket? {
+    return try? ticketData.decodeAs(Ticket.self)
   }
 }

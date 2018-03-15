@@ -22,9 +22,7 @@ class TVDeviceModelTests: ModelTests {
   ]
   
   func testTVDeviceModel() {
-  
-    let jsonData = try? JSONSerialization.data(withJSONObject: tvDeviceData, options: [])
-    let device = try? JSONDecoder().decode(TVDevice.self, from: jsonData!)
+    let device = decodeToTVDevice()
     
     XCTAssertEqual(device?.id, 999)
     XCTAssertEqual(device?.name, "Apple TV")
@@ -45,11 +43,14 @@ class TVDeviceModelTests: ModelTests {
   
   func testWithoutSettings() {
     tvDeviceData["settings"] = nil
-  
-    let jsonData = try? JSONSerialization.data(withJSONObject: tvDeviceData, options: [])
-    let device = try? JSONDecoder().decode(TVDevice.self, from: jsonData!)
+    
+    let device = decodeToTVDevice()
   
     XCTAssertNil(device?.settings)
     XCTAssertNil(device?.settings?.lines)
+  }
+  
+  fileprivate func decodeToTVDevice() -> TVDevice? {
+    return try? tvDeviceData.decodeAs(TVDevice.self)
   }
 }
