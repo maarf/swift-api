@@ -12,6 +12,9 @@ import XCTest
 
 class DevicesAPITests: QminderAPITests {
   func testPairingCodeSecret() {
+
+    qminderAPI = QminderAPI()
+    
     var code: String?
     var secret: String?
     
@@ -41,6 +44,8 @@ class DevicesAPITests: QminderAPITests {
   
   func testPairTV() {
     var e: Error?
+    
+    qminderAPI = QminderAPI()
     
     wait { expectation in
       qminderAPI.pairTV(code: "XXX", secret: "YYY", completion: { result in
