@@ -12,22 +12,20 @@ import QminderAPI
 
 class DeviceResponseTests: ModelTests {
   
-  var tvDeviceResponseData: [String: Any] = [
-    "subscriptionId": "1",
-    "messageId": 2,
-    "data": [
-      "statusCode": 200,
-      "id": 999,
-      "name": "Apple TV",
-      "settings": ["lines": [1, 2, 3], "clearTickets": "afterCalling"],
-      "theme": "Default",
-      "layout": "standard"
-    ]
-  ]
-  
   func testDeviceResponse() {
-    let jsonData = try? JSONSerialization.data(withJSONObject: tvDeviceResponseData, options: [])
-    let deviceResponse = try? JSONDecoder().decode(DeviceEventResponse.self, from: jsonData!)
+    let tvDeviceResponseData: [String: Any] = [
+      "subscriptionId": "1",
+      "messageId": 2,
+      "data": [
+        "statusCode": 200,
+        "id": 999,
+        "name": "Apple TV",
+        "settings": ["lines": [1, 2, 3], "clearTickets": "afterCalling"],
+        "theme": "Default",
+        "layout": "standard"
+      ]
+    ]
+    let deviceResponse = try? tvDeviceResponseData.decodeAs(DeviceEventResponse.self)
     
     XCTAssertEqual(deviceResponse?.subscriptionId, "1")
     XCTAssertEqual(deviceResponse?.messageId, 2)

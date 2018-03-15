@@ -18,6 +18,9 @@ class LocationsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getLocationsList { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           locations = value
@@ -44,6 +47,9 @@ class LocationsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getLocationDetails(locationId: locationId) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           location = value
@@ -69,6 +75,9 @@ class LocationsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getLocationLines(locationId: locationId) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           lines = value
@@ -94,6 +103,9 @@ class LocationsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getLocationUsers(locationId: locationId) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           users = value
@@ -121,6 +133,9 @@ class LocationsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getLocationDesks(locationId: locationId) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           desks = value

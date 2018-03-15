@@ -31,12 +31,7 @@ class ResponseDataTests: XCTestCase {
       ]
     ]
     
-    guard let data = try? JSONSerialization.data(withJSONObject: locationLines, options: []) else {
-      XCTFail("Should be able to serialize data")
-      return
-    }
-    
-    let result = data.decode(Lines.self)
+    let result = locationLines.jsonData()!.decode(Lines.self)
     
     switch result {
     case let .success(value):
@@ -66,13 +61,7 @@ class ResponseDataTests: XCTestCase {
         ]
       ]
     ]
-    
-    guard let data = try? JSONSerialization.data(withJSONObject: locationLines, options: []) else {
-      XCTFail("Should be able to serialize data")
-      return
-    }
-    
-    let result = data.decode(Lines.self)
+    let result = locationLines.jsonData()!.decode(Lines.self)
     
     switch result {
     case let .success(value):
@@ -98,12 +87,7 @@ class ResponseDataTests: XCTestCase {
       "location": 333
     ]
     
-    guard let data = try? JSONSerialization.data(withJSONObject: line, options: []) else {
-      XCTFail("Should be able to serialize data")
-      return
-    }
-    
-    let result = data.decode(Line.self)
+    let result = line.jsonData()!.decode(Line.self)
     
     switch result {
     case let .success(value):
@@ -121,12 +105,7 @@ class ResponseDataTests: XCTestCase {
       "Error": 666
     ]
     
-    guard let data = try? JSONSerialization.data(withJSONObject: line, options: []) else {
-      XCTFail("Should be able to serialize data")
-      return
-    }
-    
-    let result = data.decode(Line.self)
+    let result = line.jsonData()!.decode(Line.self)
     
     switch result {
     case let .success(value):

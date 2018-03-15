@@ -20,8 +20,7 @@ class LocationModelTests: ModelTests {
   ]
   
   func testLocationModel() {
-    let jsonData = try? JSONSerialization.data(withJSONObject: locationData, options: [])
-    let location = try? JSONDecoder().decode(Location.self, from: jsonData!)
+    let location = try? locationData.decodeAs(Location.self)
     
     XCTAssertEqual(location?.id, 999)
     XCTAssertEqual(location?.name, "Location name")

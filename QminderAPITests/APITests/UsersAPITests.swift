@@ -16,6 +16,9 @@ class UsersAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getUserDetails(userId: userID) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           user = value

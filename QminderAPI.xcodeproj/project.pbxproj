@@ -187,6 +187,14 @@
 		63C422E620567F3000941DA4 /* ResponseDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E520567F3000941DA4 /* ResponseDataTests.swift */; };
 		63C422E82056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E72056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift */; };
 		63C422EA2056B6EE00941DA4 /* QminderError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E92056B6EE00941DA4 /* QminderError+Extensions.swift */; };
+		63C5D262205A6F5500269A16 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5D261205A6F5500269A16 /* Data+Extensions.swift */; };
+		63C5D264205A6F7100269A16 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5D263205A6F7100269A16 /* Dictionary+Extensions.swift */; };
+		63C5D265205AA15E00269A16 /* QminderError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E92056B6EE00941DA4 /* QminderError+Extensions.swift */; };
+		63C5D266205AA16000269A16 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5D261205A6F5500269A16 /* Data+Extensions.swift */; };
+		63C5D267205AA16200269A16 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5D263205A6F7100269A16 /* Dictionary+Extensions.swift */; };
+		63C5D268205AA16600269A16 /* QminderErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E3205678D600941DA4 /* QminderErrorTests.swift */; };
+		63C5D269205AA16B00269A16 /* ResponseDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E520567F3000941DA4 /* ResponseDataTests.swift */; };
+		63C5D26A205AA17400269A16 /* QminderAPITestWithoutAPIKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E72056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift */; };
 		63DED682204D8D61001554AC /* LineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED66C204D8D60001554AC /* LineModelTests.swift */; };
 		63DED683204D8D61001554AC /* ApiDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED66D204D8D60001554AC /* ApiDataModelTests.swift */; };
 		63DED684204D8D61001554AC /* LinesResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED66E204D8D60001554AC /* LinesResponseTests.swift */; };
@@ -286,6 +294,8 @@
 		63C422E520567F3000941DA4 /* ResponseDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataTests.swift; sourceTree = "<group>"; };
 		63C422E72056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QminderAPITestWithoutAPIKeyTests.swift; sourceTree = "<group>"; };
 		63C422E92056B6EE00941DA4 /* QminderError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QminderError+Extensions.swift"; sourceTree = "<group>"; };
+		63C5D261205A6F5500269A16 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		63C5D263205A6F7100269A16 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		63DED66C204D8D60001554AC /* LineModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineModelTests.swift; sourceTree = "<group>"; };
 		63DED66D204D8D60001554AC /* ApiDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDataModelTests.swift; sourceTree = "<group>"; };
 		63DED66E204D8D60001554AC /* LinesResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesResponseTests.swift; sourceTree = "<group>"; };
@@ -495,6 +505,8 @@
 				63C422E3205678D600941DA4 /* QminderErrorTests.swift */,
 				63DED679204D8D60001554AC /* XCTestExtensions.swift */,
 				63C422E92056B6EE00941DA4 /* QminderError+Extensions.swift */,
+				63C5D261205A6F5500269A16 /* Data+Extensions.swift */,
+				63C5D263205A6F7100269A16 /* Dictionary+Extensions.swift */,
 				6352067E204D79B9008C8C54 /* Info.plist */,
 			);
 			path = QminderAPITests;
@@ -503,11 +515,11 @@
 		63DED66B204D8D60001554AC /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				63DED670204D8D60001554AC /* ModelTests.swift */,
 				63DED66C204D8D60001554AC /* LineModelTests.swift */,
 				63DED66D204D8D60001554AC /* ApiDataModelTests.swift */,
 				63DED66E204D8D60001554AC /* LinesResponseTests.swift */,
 				63DED66F204D8D60001554AC /* LocationModelTests.swift */,
-				63DED670204D8D60001554AC /* ModelTests.swift */,
 				63DED671204D8D60001554AC /* EmptyStateModelTests.swift */,
 				63DED672204D8D60001554AC /* TVPairingCodeModelTests.swift */,
 				63DED673204D8D60001554AC /* TicketResponseTests.swift */,
@@ -970,6 +982,7 @@
 				63DED697204D8E27001554AC /* QminderApiTests.swift in Sources */,
 				63DED68A204D8D61001554AC /* TVDeviceModelTests.swift in Sources */,
 				63DED685204D8D61001554AC /* LocationModelTests.swift in Sources */,
+				63C5D262205A6F5500269A16 /* Data+Extensions.swift in Sources */,
 				63C422EA2056B6EE00941DA4 /* QminderError+Extensions.swift in Sources */,
 				63DED68F204D8D61001554AC /* XCTestExtensions.swift in Sources */,
 				63DED686204D8D61001554AC /* ModelTests.swift in Sources */,
@@ -982,6 +995,7 @@
 				63C422E82056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift in Sources */,
 				63DED68C204D8D61001554AC /* UserModelTests.swift in Sources */,
 				63DED68B204D8D61001554AC /* DeviceResponseTests.swift in Sources */,
+				63C5D264205A6F7100269A16 /* Dictionary+Extensions.swift in Sources */,
 				63DED687204D8D61001554AC /* EmptyStateModelTests.swift in Sources */,
 				63C422E4205678D600941DA4 /* QminderErrorTests.swift in Sources */,
 				63DED695204D8D61001554AC /* QminderWebsocketTests.swift in Sources */,
@@ -1131,23 +1145,29 @@
 				635E0DD5204D915F00B1123A /* UsersAPITests.swift in Sources */,
 				635E0DD6204D915F00B1123A /* LineModelTests.swift in Sources */,
 				635E0DD7204D915F00B1123A /* TicketsAPITests.swift in Sources */,
+				63C5D268205AA16600269A16 /* QminderErrorTests.swift in Sources */,
 				635E0DD8204D915F00B1123A /* QminderApiTests.swift in Sources */,
 				635E0DD9204D915F00B1123A /* TVDeviceModelTests.swift in Sources */,
 				635E0DDA204D915F00B1123A /* LocationModelTests.swift in Sources */,
 				635E0DDB204D915F00B1123A /* XCTestExtensions.swift in Sources */,
 				635E0DDC204D915F00B1123A /* ModelTests.swift in Sources */,
+				63C5D265205AA15E00269A16 /* QminderError+Extensions.swift in Sources */,
 				635E0DDD204D915F00B1123A /* ApiDataModelTests.swift in Sources */,
 				635E0DDE204D915F00B1123A /* TicketResponseTests.swift in Sources */,
 				635E0DDF204D915F00B1123A /* DevicesAPITests.swift in Sources */,
+				63C5D266205AA16000269A16 /* Data+Extensions.swift in Sources */,
 				635E0DE0204D915F00B1123A /* TVPairingCodeModelTests.swift in Sources */,
 				635E0DE1204D915F00B1123A /* LinesResponseTests.swift in Sources */,
 				635E0DE2204D915F00B1123A /* UserModelTests.swift in Sources */,
 				635E0DE3204D915F00B1123A /* DeviceResponseTests.swift in Sources */,
 				635E0DE4204D915F00B1123A /* EmptyStateModelTests.swift in Sources */,
+				63C5D269205AA16B00269A16 /* ResponseDataTests.swift in Sources */,
 				635E0DE5204D915F00B1123A /* QminderWebsocketTests.swift in Sources */,
 				635E0DE6204D915F00B1123A /* TicketModelTests.swift in Sources */,
+				63C5D26A205AA17400269A16 /* QminderAPITestWithoutAPIKeyTests.swift in Sources */,
 				635E0DE7204D915F00B1123A /* QminderResultTests.swift in Sources */,
 				635E0DE8204D915F00B1123A /* LocationsAPITests.swift in Sources */,
+				63C5D267205AA16200269A16 /* Dictionary+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

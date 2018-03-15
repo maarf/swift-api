@@ -16,6 +16,9 @@ class LinesAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getLineDetails(lineId: lineId) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           details = value

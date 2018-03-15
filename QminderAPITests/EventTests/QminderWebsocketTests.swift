@@ -178,6 +178,9 @@ class QminderWebsocketTests: XCTestCase {
   
   fileprivate func subscribeToTicket(_ ticketEvent: QminderEvent, parameters: [String: Any]) {
     events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: { result in
+      
+      XCTAssertTrue(Thread.isMainThread)
+      
       switch result {
       case let .success(ticket):
         print(ticket)
@@ -191,6 +194,9 @@ class QminderWebsocketTests: XCTestCase {
   
   fileprivate func subscribeToTVChanged() {
     events.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["id": 333]) { result in
+      
+      XCTAssertTrue(Thread.isMainThread)
+      
       switch result {
       case .success:
         self.deviceResponse = true
@@ -203,6 +209,9 @@ class QminderWebsocketTests: XCTestCase {
   
   fileprivate func subscribeLines(parameters: [String: Any]) {
     events.subscribe(toLineEvent: .linesChanged, parameters: parameters) { result in
+      
+      XCTAssertTrue(Thread.isMainThread)
+      
       switch result {
       case let .success(line):
         print(line)
