@@ -17,6 +17,9 @@ class TicketsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.searchTickets(locationId: locationId, limit: 10) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           tickets = value
@@ -49,6 +52,9 @@ class TicketsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.searchTickets(locationId: locationId, lineId: [lineId], limit: 10) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           tickets = value
@@ -70,6 +76,9 @@ class TicketsAPITests: QminderAPITests {
       qminderAPI.searchTickets(locationId: locationId,
                                status: [.new, .called, .cancelled, .cancelledByClerk, .noShow, .served],
                                limit: 10, responseScope: ["INTERACTIONS"]) { result in
+                                
+        XCTAssertTrue(Thread.isMainThread)
+                                
         switch result {
         case let .success(value):
           tickets = value
@@ -89,6 +98,9 @@ class TicketsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getTicketDetails(ticketId: ticketID) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           ticket = value

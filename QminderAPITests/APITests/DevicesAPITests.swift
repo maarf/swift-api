@@ -17,6 +17,9 @@ class DevicesAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.getPairingCodeAndSecret { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           code = value.code
@@ -41,6 +44,9 @@ class DevicesAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.pairTV(code: "XXX", secret: "YYY", completion: { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case .success:
           XCTFail("Should not be succesfull")
@@ -59,6 +65,9 @@ class DevicesAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.tvDetails(id: tvID) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           device = value
@@ -82,6 +91,9 @@ class DevicesAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.tvEmptyState(id: tvID, language: "en", completion: { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           emptyState = value
@@ -101,6 +113,9 @@ class DevicesAPITests: QminderAPITests {
   func testSendHeartbeat() {
     wait { expectation in
       qminderAPI.tvHeartbeat(id: tvID, metadata: ["foo": "bar"]) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case .success:
           expectation.fulfill()
@@ -116,6 +131,9 @@ class DevicesAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.tvHeartbeat(id: 666, metadata: ["foo": "bar"]) { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case .success:
           XCTFail("Can't send heartbeat to false TV")

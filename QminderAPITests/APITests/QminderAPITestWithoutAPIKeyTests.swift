@@ -26,6 +26,9 @@ class QminderAPITestWithoutAPIKeyTests: XCTestCase {
   func testLocationListWithoutAPIKey() {
     wait { expectation in
       qminderAPI.getLocationsList { result in
+        
+        XCTAssertTrue(Thread.isMainThread)
+        
         switch result {
         case let .success(value):
           XCTFail("Should not be success because API key is not set \(value)")
