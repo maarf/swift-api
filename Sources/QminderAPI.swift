@@ -54,8 +54,8 @@ public struct QminderAPI: QminderAPIProtocol {
     var parameters = [String: Any]()
     
     parameters.set(value: locationId, forKey: "location")
-    parameters.set(value: lineId?.flatMap({ String($0) }).joined(separator: ","), forKey: "line")
-    parameters.set(value: status?.flatMap({ $0.rawValue }).joined(separator: ","), forKey: "status")
+    parameters.set(value: lineId?.compactMap({ String($0) }).joined(separator: ","), forKey: "line")
+    parameters.set(value: status?.compactMap({ $0.rawValue }).joined(separator: ","), forKey: "status")
     parameters.set(value: callerId, forKey: "caller")
     parameters.set(value: minCreatedTimestamp, forKey: "minCreated")
     parameters.set(value: maxCreatedTimestamp, forKey: "maxCreated")
@@ -63,7 +63,7 @@ public struct QminderAPI: QminderAPIProtocol {
     parameters.set(value: maxCalledTimestamp, forKey: "maxCalled")
     parameters.set(value: limit, forKey: "limit")
     parameters.set(value: order, forKey: "order")
-    parameters.set(value: responseScope?.flatMap({ String($0) }).joined(separator: ","), forKey: "responseScope")
+    parameters.set(value: responseScope?.compactMap({ String($0) }).joined(separator: ","), forKey: "responseScope")
     
     fetch(.tickets(parameters), decodingType: Tickets.self) { completion($0) }
   }

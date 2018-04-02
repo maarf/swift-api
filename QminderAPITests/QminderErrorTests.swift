@@ -17,8 +17,8 @@ class QminderErrorTests: XCTestCase {
     let qminderError = error.qminderError
     
     switch qminderError {
-    case let .request(e as NSError):
-      XCTAssertEqual(e, error)
+    case let .request(requestError as NSError):
+      XCTAssertEqual(requestError, error)
     default:
       XCTFail("Should be request QminderError")
     }
