@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "SSCZLib",
-        "repositoryURL": "https://github.com/daltoniam/zlib-spm.git",
-        "state": {
-          "branch": null,
-          "revision": "83ac8d719a2f3aa775dbdf116a57f56fb2c49abb",
-          "version": "1.1.0"
-        }
-      },
-      {
         "package": "SSCommonCrypto",
         "repositoryURL": "https://github.com/daltoniam/common-crypto-spm",
         "state": {
@@ -26,6 +17,15 @@
           "branch": null,
           "revision": "6e10c04c8387d00f41a17450fa45b51427971022",
           "version": "3.0.4"
+        }
+      },
+      {
+        "package": "SSCZLib",
+        "repositoryURL": "https://github.com/daltoniam/zlib-spm.git",
+        "state": {
+          "branch": null,
+          "revision": "83ac8d719a2f3aa775dbdf116a57f56fb2c49abb",
+          "version": "1.1.0"
         }
       }
     ]

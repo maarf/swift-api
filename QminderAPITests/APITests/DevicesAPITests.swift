@@ -43,7 +43,7 @@ class DevicesAPITests: QminderAPITests {
   }
   
   func testPairTV() {
-    var e: Error?
+    var error: Error?
     
     qminderAPI = QminderAPI()
     
@@ -55,14 +55,14 @@ class DevicesAPITests: QminderAPITests {
         switch result {
         case .success:
           XCTFail("Should not be succesfull")
-        case let .failure(error):
-          e = error
+        case let .failure(requestError):
+          error = requestError
           expectation.fulfill()
         }
       })
     }
     
-    XCTAssertNotNil(e)
+    XCTAssertNotNil(error)
   }
   
   func testTVDetails() {
@@ -132,7 +132,7 @@ class DevicesAPITests: QminderAPITests {
   }
   
   func testSendHeartbeatUnknownTV() {
-    var e: Error?
+    var error: Error?
     
     wait { expectation in
       qminderAPI.tvHeartbeat(id: 666, metadata: ["foo": "bar"]) { result in
@@ -142,14 +142,14 @@ class DevicesAPITests: QminderAPITests {
         switch result {
         case .success:
           XCTFail("Can't send heartbeat to false TV")
-        case let .failure(error):
-          e = error
+        case let .failure(requestError):
+          error = requestError
         }
         
         expectation.fulfill()
       }
     }
     
-    XCTAssertNotNil(e)
+    XCTAssertNotNil(error)
   }
 }
