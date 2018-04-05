@@ -72,5 +72,6 @@ qminderAPI.tvEmptyState(id: 11389, language: "en") {
 }
 
 qminderAPI.tvHeartbeat(id: 11389, metadata: ["test": "test"]) {
-  let result = prettyPrint("TV heartbeat", $0)
+  print("TV heartbeat")
+  print($0)
 }

@@ -1,6 +1,7 @@
 import Foundation
 import QminderAPI
 
+@discardableResult
 public func prettyPrint<V: Codable, E: Swift.Error>(_ title: String, _ result: Result<V, E>) -> V? {
   print("-- \(title) --")
   
