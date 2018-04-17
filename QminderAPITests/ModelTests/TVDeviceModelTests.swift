@@ -28,7 +28,7 @@ class TVDeviceModelTests: ModelTests {
     XCTAssertEqual(device?.name, "Apple TV")
     XCTAssertEqual(device?.theme, "Default")
     XCTAssertNotNil(device?.settings)
-    XCTAssertEqual(device?.settings?.clearTickets, "afterCalling")
+    XCTAssertEqual(device?.settings?.clearTickets, .afterCalling)
     
     guard let lines = device?.settings?.lines else {
       XCTFail("Can't get device lines")
