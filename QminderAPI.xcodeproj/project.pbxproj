@@ -172,6 +172,9 @@
 		635E0DE8204D915F00B1123A /* LocationsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED67D204D8D60001554AC /* LocationsAPITests.swift */; };
 		635E0DF3204D918A00B1123A /* QminderAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6352068A204D79E9008C8C54 /* QminderAPI.framework */; };
 		6370FF3020860ADC00ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
+		6370FF3120861C5700ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
+		6370FF3220861C5800ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
+		6370FF3320861C5800ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
 		637D698F2052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		637D69902052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		637D69912052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
@@ -1044,6 +1047,7 @@
 				635206CF204D7A39008C8C54 /* Extra.swift in Sources */,
 				635206CB204D7A39008C8C54 /* Source.swift in Sources */,
 				635206BA204D7A34008C8C54 /* TVAPIData.swift in Sources */,
+				6370FF3120861C5700ED3196 /* ClearTickets.swift in Sources */,
 				635206F1204D7A3F008C8C54 /* QminderAPI.swift in Sources */,
 				635206FF204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206AC204D7A2A008C8C54 /* ResultProtocol.swift in Sources */,
@@ -1088,6 +1092,7 @@
 				635206D8204D7A39008C8C54 /* Extra.swift in Sources */,
 				635206D4204D7A39008C8C54 /* Source.swift in Sources */,
 				635206C0204D7A35008C8C54 /* TVAPIData.swift in Sources */,
+				6370FF3220861C5800ED3196 /* ClearTickets.swift in Sources */,
 				635206EC204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
 				63520703204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206AE204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
@@ -1132,6 +1137,7 @@
 				635206E1204D7A3A008C8C54 /* Extra.swift in Sources */,
 				635206DD204D7A3A008C8C54 /* Source.swift in Sources */,
 				635206C6204D7A35008C8C54 /* TVAPIData.swift in Sources */,
+				6370FF3320861C5800ED3196 /* ClearTickets.swift in Sources */,
 				635206E7204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
 				63520707204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206B0204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
