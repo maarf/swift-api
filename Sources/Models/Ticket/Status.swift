@@ -7,16 +7,13 @@
 
 import Foundation
 
-/// Ticket status. "NEW", "CALLED", "CANCELLED", "CANCELLED_BY_CLERK", "NOSHOW" or "SERVED"
+/// Ticket status
 public enum Status: String, Codable {
   /// New
   case new = "NEW"
   
   /// Called
   case called = "CALLED"
-  
-  /// Cancelled
-  case cancelled = "CANCELLED"
   
   /// Cancelled by clerk
   case cancelledByClerk = "CANCELLED_BY_CLERK"
