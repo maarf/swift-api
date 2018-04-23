@@ -70,3 +70,6 @@ Carthage/Build
 
 
 # End of https://www.gitignore.io/api/carthage
+
+# fastlane
+fastlane/report.xml

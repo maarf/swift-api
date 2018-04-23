@@ -39,6 +39,6 @@ class DeviceResponseTests: ModelTests {
     XCTAssertEqual(device.name, "Apple TV")
     XCTAssertEqual(device.theme, "Default")
     XCTAssertNotNil(device.settings)
-    XCTAssertEqual(device.settings?.clearTickets, "afterCalling")
+    XCTAssertEqual(device.settings?.clearTickets, .afterCalling)
   }
 }
