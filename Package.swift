@@ -10,7 +10,7 @@ let package = Package(
             targets: ["QminderAPI"])
     ],
     dependencies: [
-        .package(url: "https://github.com/daltoniam/Starscream.git", from: "3.0.0-rc.2")
+        .package(url: "https://github.com/daltoniam/Starscream.git", from: "3.0.5")
     ],
     targets: [
         .target(
