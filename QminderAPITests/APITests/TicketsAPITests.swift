@@ -74,7 +74,7 @@ class TicketsAPITests: QminderAPITests {
     
     wait { expectation in
       qminderAPI.searchTickets(locationId: locationId,
-                               status: [.new, .called, .cancelled, .cancelledByClerk, .noShow, .served],
+                               status: [.new, .called, .cancelledByClerk, .noShow, .served],
                                limit: 10, responseScope: ["INTERACTIONS"]) { result in
                                 
         XCTAssertTrue(Thread.isMainThread)
