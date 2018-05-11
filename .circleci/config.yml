@@ -19,28 +19,16 @@ jobs:
           command: brew install swiftlint
 
       - run:
-          name: Add vapor to homebrew and install
-          command: |
-            brew tap vapor/homebrew-tap
-            brew install vapor
-
-      - run:
-          name: Build vapor
-          command: |
-            cd test-server
-            vapor build --verbose
-
-      - run:
           name: Build macOS and watchOS
           command: |
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-macOS CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build | xcpretty --color
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-watchOS CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build | xcpretty --color
 
       - run:
-          name: Start vapor and test
+          name: Start websockets test server
           command: |
-            cd test-server
-            vapor run&
+            cd TestWebsockets
+            swift build && .build/debug/TestWebsockets&
             cd ..
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-iOS -destination 'platform=iOS Simulator,name=iPhone X' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
             set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
