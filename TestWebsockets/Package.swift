@@ -15,5 +15,3 @@ let package = Package(
             dependencies: ["WebSocket", "HTTP"]),
     ]
 )
-
-

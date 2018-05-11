@@ -28,6 +28,7 @@ jobs:
           name: Start websockets test server
           command: |
             cd TestWebsockets
+            brew install libressl
             swift build
             .build/debug/TestWebsockets&
             cd ..
