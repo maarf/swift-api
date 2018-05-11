@@ -9,30 +9,34 @@ import WebSocket
 
 /// Dictionary which keeps what already has been subscribed to
 class QminderEventsTester {
-  
+
   let ws: WebSocket
-  
+
   var subscriptions: [QminderEvent: String] = [:]
-  
+
   /// What events we need to start tests?
   let events: Set<QminderEvent> = [.ticketCreated, .ticketCalled,
                                    .ticketRecalled, .ticketServed,
                                    .ticketCancelled, .ticketChanged,
                                    .overviewMonitorChange, .linesChanged]
-  
+
   init(ws: WebSocket) {
     self.ws = ws
   }
-  
+
   func parseInput(_ text: String) {
     print("RECEIVED: \(text)")
-    
+
+    guard text != "PING" else {
+      return
+    }
+
     do {
       guard let data = text.data(using: .utf8) else { return }
       let message = try JSONDecoder().decode(WebsocketMessage.self, from: data)
       print(message)
       subscriptions[message.eventType] = message.id
-      
+
       if self.events == Set(subscriptions.keys) {
         self.executeTests()
       }
@@ -40,13 +44,13 @@ class QminderEventsTester {
       print(error)
     }
   }
-  
+
   /**
    Execute Websocket mocking tests
    */
   private func executeTests() {
     print("Start tests")
-    
+
     var firstTicketData: [String: Any] = [
       "data": [
         "status": "NEW",
@@ -60,7 +64,7 @@ class QminderEventsTester {
         ]
       ]
     ]
-    
+
     var secondTicketData: [String: Any] = [
       "data": [
         "status": "NEW",
@@ -74,7 +78,7 @@ class QminderEventsTester {
         ]
       ]
     ]
-    
+
     Async.waterfall(1, [
       { callback, counter in
         self.send(.ticketCreated, counter, firstTicketData) {
@@ -82,20 +86,20 @@ class QminderEventsTester {
         }
       },
       { callback, counter in
-        
+
         let data = [
           "firstName": "Name2",
           "lastName": "Surname2"
         ]
         firstTicketData.changeTicketData(data)
-        
+
         self.send(.ticketChanged, counter, firstTicketData) {
           callback(3)
         }
       },
       { callback, counter in
         firstTicketData.changeTicketData(["status": "CANCELLED_BY_CLERK"])
-        
+
         self.send(.ticketCancelled, counter, firstTicketData) {
           callback(4)
         }
@@ -111,13 +115,13 @@ class QminderEventsTester {
           "lastName": "Surname"
         ]
         secondTicketData.changeTicketData(data)
-        
+
         self.send(.ticketChanged, counter, secondTicketData) {
           callback(6)
         }
       },
       { callback, counter in
-        
+
         let data: [String: Any] = [
           "status": "CALLED",
           "interactions": [
@@ -129,13 +133,13 @@ class QminderEventsTester {
           ]
         ]
         secondTicketData.changeTicketData(data)
-        
+
         self.send(.ticketCalled, counter, secondTicketData) {
           callback(7)
         }
       },
       { callback, counter in
-        
+
         let data: [String: Any] = [
           "status": "CALLED",
           "interactions": [
@@ -147,7 +151,7 @@ class QminderEventsTester {
           ]
         ]
         secondTicketData.changeTicketData(data)
-        
+
         self.send(.ticketRecalled, counter, secondTicketData) {
           callback(8)
         }
@@ -160,7 +164,7 @@ class QminderEventsTester {
           ]
         ]
         secondTicketData.changeTicketData(data)
-        
+
         self.send(.ticketServed, counter, secondTicketData) {
           callback(9)
         }
@@ -192,41 +196,41 @@ class QminderEventsTester {
             ]
           ]
         ]
-        
+
         self.send(.linesChanged, counter, data) {
           callback(11)
         }
       }
-      
+
       ], end: { _, _ in
         self.subscriptions = [:]
         print("Tests executed")
     })
   }
-  
+
   /**
    Send message to Websocket
-   
+
    - Parameters:
    - message: Message to send
    - callback: Execute callback after it's done
    */
   private func send(_ eventType: QminderEvent, _ counter: Any?, _ data: [String: Any], _ callback: () -> ()) {
-    
+
     var data = data
     data["subscriptionId"] = subscriptions[eventType]!.description
     data["messageId"] = counter as! Int
-    
+
     sleep(UInt32(3))
-    
+
     let jsonData = try! JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
     let jsonString = String(data: jsonData, encoding: .utf8)
-    
+
     print(jsonString!)
-    
+
     ws.send(jsonString!)
-    
+
     callback()
   }
-  
+
 }
