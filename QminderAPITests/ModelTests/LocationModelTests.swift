@@ -11,21 +11,29 @@ import XCTest
 import QminderAPI
 
 class LocationModelTests: ModelTests {
-  let locationData: [String: Any] = [
-    "id": 999,
-    "name": "Location name",
-    "latitude": 25.5555,
-    "longitude": 24.666,
-    "timezoneOffset": 4
-  ]
   
   func testLocationModel() {
+    
+    let locationId = Int.random
+    let locationName = String.random
+    let timezoneOffset = Int.random(max: 10)
+    let latitude = Double.random
+    let longitude = Double.random
+    
+    let locationData: [String: Any] = [
+      "id": locationId,
+      "name": locationName,
+      "latitude": latitude,
+      "longitude": longitude,
+      "timezoneOffset": timezoneOffset
+    ]
+    
     let location = try? locationData.decodeAs(Location.self)
     
-    XCTAssertEqual(location?.id, 999)
-    XCTAssertEqual(location?.name, "Location name")
-    XCTAssertEqual(location?.timezoneOffset, 4)
-    XCTAssertEqual(location?.latitude, 25.5555)
-    XCTAssertEqual(location?.longitude, 24.666)
+    XCTAssertEqual(location?.id, locationId)
+    XCTAssertEqual(location?.name, locationName)
+    XCTAssertEqual(location?.timezoneOffset, timezoneOffset)
+    XCTAssertEqual(location?.latitude, latitude)
+    XCTAssertEqual(location?.longitude, longitude)
   }
 }

@@ -26,8 +26,8 @@ class TicketsAPITests: QminderAPITests {
           ticket = tickets?.first
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't search tickets")
+        case let .failure(error):
+          XCTFail("Can't search tickets \(error)")
         }
       }
     }
@@ -60,8 +60,8 @@ class TicketsAPITests: QminderAPITests {
           tickets = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't search tickets with line ID")
+        case let .failure(error):
+          XCTFail("Can't search tickets with line ID \(error)")
         }
       }
     }
@@ -84,8 +84,8 @@ class TicketsAPITests: QminderAPITests {
           tickets = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't search tickets with status")
+        case let .failure(error):
+          XCTFail("Can't search tickets with status \(error)")
         }
       }
     }
@@ -106,8 +106,8 @@ class TicketsAPITests: QminderAPITests {
           ticket = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get ticket details")
+        case let .failure(error):
+          XCTFail("Can't get ticket details \(error)")
         }
       }
     }

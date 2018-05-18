@@ -24,8 +24,8 @@ class UsersAPITests: QminderAPITests {
           user = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get user details")
+        case let .failure(error):
+          XCTFail("Can't get user details \(error)")
         }
       }
     }

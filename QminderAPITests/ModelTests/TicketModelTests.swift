@@ -12,85 +12,122 @@ import QminderAPI
 
 class TicketModelTests: ModelTests {
   
-  var ticketData: [String: Any] = [
-    "status": "NEW",
-    "source": "MANUAL",
-    "firstName": "Name",
-    "created": ["date": "2017-02-06T12:35:29.123Z"],
-    "id": "999",
-    "line": 333,
-    "lastName": "Surname"
-  ]
+  private let ticketId = String(Int.random)
+  private let firstName = String.random
+  private let lastName = String.random
+  private let lineId = Int.random
+  private let createdDate = Date.random
+  
+  private var ticketData: [String: Any]!
+  
+  private func decodeToTicket() -> Ticket? {
+    return try? ticketData.decodeAs(Ticket.self, decoder: JSONDecoder.withMilliseconds)
+  }
+  
+  override func setUp() {
+    super.setUp()
+    
+    ticketData = [
+      "status": "NEW",
+      "source": "MANUAL",
+      "firstName": firstName,
+      "created": ["date": createdDate.format(.withMilliseconds)],
+      "id": ticketId,
+      "line": lineId,
+      "lastName": lastName
+    ]
+  }
   
   func testTicketWithoutMilliseconds() {
-    let createdDateString = "2017-02-06T12:35:29Z"
-    ticketData["created"] = ["date": createdDateString]
+    let createdDateWithoutMilliseconds = Date.random
+    ticketData["created"] = ["date": createdDate.format(.withoutMilliseconds)]
     let ticket = decodeToTicket()
     
-    XCTAssertEqual(ticket?.id, "999")
+    XCTAssertEqual(ticket?.id, ticketId)
     XCTAssertEqual(ticket?.source, .manual)
     XCTAssertEqual(ticket?.status, .new)
-    XCTAssertEqual(ticket?.firstName, "Name")
-    XCTAssertEqual(ticket?.lastName, "Surname")
-    XCTAssertEqual(ticket?.line, 333)
-    XCTAssertEqual(ticket?.createdDate, dateISO8601Formatter.date(from: createdDateString))
+    XCTAssertEqual(ticket?.firstName, firstName)
+    XCTAssertEqual(ticket?.lastName, lastName)
+    XCTAssertEqual(ticket?.line, lineId)
+    XCTAssertEqual(ticket?.createdDate, createdDateWithoutMilliseconds)
   }
   
   func testTicketWithMilliseconds() {
-    let createdDateString = "2017-02-06T12:35:29.123Z"
-    ticketData["created"] = ["date": createdDateString]
+    let createdDateStringWithMilliseconds = Date.random
+    ticketData["created"] = ["date": createdDateStringWithMilliseconds.format(.withMilliseconds)]
     let ticket = decodeToTicket()
     
-    XCTAssertEqual(ticket?.createdDate, dateISO8601MillisecondsFormatter.date(from: createdDateString))
+    XCTAssertEqual(ticket?.createdDate, createdDateStringWithMilliseconds)
   }
   
   func testOrderAfterWithoutMilliseconds() {
-    let orderAfterDateString = "2017-02-06T12:35:29Z"
-    ticketData["orderAfter"] = orderAfterDateString
-    ticketData["created"] = ["date": "2017-02-06T12:35:29Z"]
+    let createdDate = Date.random
+    let orderAfterDate = createdDate.addingTimeInterval(1.0)
+    
+    ticketData["created"] = ["date": createdDate.format()]
+    ticketData["orderAfter"] = orderAfterDate.format()
+    
     let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.orderAfter)
-    XCTAssertEqual(ticket?.orderAfter, dateISO8601Formatter.date(from: orderAfterDateString))
+    XCTAssertEqual(ticket?.orderAfter, orderAfterDate)
+    XCTAssertNotEqual(ticket?.orderAfter, ticket?.createdDate)
   }
   
   func testOrderAfterWithMilliseconds() {
-    let orderAfterDateString = "2017-02-06T12:35:29.123Z"
-    ticketData["orderAfter"] = orderAfterDateString
+    let createdDate = Date.random
+    let orderAfterDate = createdDate.addingTimeInterval(1.0)
+    
+    ticketData["created"] = ["date": createdDate.format(.withMilliseconds)]
+    ticketData["orderAfter"] = orderAfterDate.format(.withMilliseconds)
+    
     let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.orderAfter)
-    XCTAssertEqual(ticket?.orderAfter, dateISO8601MillisecondsFormatter.date(from: orderAfterDateString))
+    XCTAssertEqual(ticket?.orderAfter, orderAfterDate)
+    XCTAssertNotEqual(ticket?.orderAfter, ticket?.createdDate)
   }
   
   func testCalledDataUserDesk() {
-    let calledDateString = "2017-02-06T12:35:29Z"
+    let calledDate = Date.random
+    let lineId = Int.random
+    let deskId = Int.random
+    let userId = Int.random
+    
     ticketData["interactions"] = [
-      ["start": calledDateString,
-       "line": 62633,
-       "desk": 1,
-       "user": 444
+      ["start": calledDate.format(),
+       "line": lineId,
+       "desk": deskId,
+       "user": userId
       ]
     ]
     let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.calledDate)
-    XCTAssertEqual(ticket?.calledDate, dateISO8601Formatter.date(from: calledDateString))
-    XCTAssertEqual(ticket?.calledUserID, 444)
-    XCTAssertEqual(ticket?.calledDeskID, 1)
+    XCTAssertEqual(ticket?.calledDate, calledDate)
+    XCTAssertEqual(ticket?.calledUserID, userId)
+    XCTAssertEqual(ticket?.calledDeskID, deskId)
   }
   
   func testServedDate() {
-    let servedDateString = "2017-02-06T12:35:29Z"
-    ticketData["served"] = ["date": servedDateString]
+    let servedDate = Date.random
+    ticketData["served"] = ["date": servedDate.format()]
     let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.servedDate)
-    XCTAssertEqual(ticket?.servedDate, dateISO8601Formatter.date(from: servedDateString))
+    XCTAssertEqual(ticket?.servedDate, servedDate)
   }
   
   func testLabels() {
-    ticketData["labels"] = [["color": "#000000", "value": "Test"]]
+    let labelValue = String.random
+    let labelColor = String.random
+    
+    ticketData["labels"] = [
+      [
+        "color": labelColor,
+        "value": labelValue
+      ]
+    ]
     let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.labels)
@@ -101,12 +138,22 @@ class TicketModelTests: ModelTests {
     }
     
     XCTAssertTrue(labels.contains(where: {
-      $0.color == "#000000" && $0.value == "Test"
+      $0.color == labelColor && $0.value == labelValue
     }))
   }
   
   func testExtraFields() {
-    ticketData["extra"] = [["title": "Title", "value": "Test", "url": "http://www.google.com"]]
+    let title = String.random
+    let value = String.random
+    let url = "http://www.\(String.random).com"
+    
+    ticketData["extra"] = [
+      [
+        "title": title,
+        "value": value,
+        "url": url
+      ]
+    ]
     let ticket = decodeToTicket()
     
     XCTAssertNotNil(ticket?.extra)
@@ -117,17 +164,23 @@ class TicketModelTests: ModelTests {
     }
     
     XCTAssertTrue(extra.contains(where: {
-      $0.title == "Title" && $0.value == "Test" && $0.url == "http://www.google.com"
+      $0.title == title && $0.value == value && $0.url == url
     }))
   }
   
   func testInteractions() {
+    let startDate = Date.random
+    let endDate = startDate.addingTimeInterval(10.0)
+    let lineId = Int.random
+    let deskId = Int.random
+    let userId = Int.random
+    
     ticketData["interactions"] = [
-      ["start": "2018-01-29T12:55:46Z",
-       "end": "2018-01-29T12:55:51Z",
-       "line": 62633,
-       "desk": 6202,
-       "user": 891
+      ["start": startDate.format(),
+       "end": endDate.format(),
+       "line": lineId,
+       "desk": deskId,
+       "user": userId
       ]
     ]
     let ticket = decodeToTicket()
@@ -139,11 +192,11 @@ class TicketModelTests: ModelTests {
       return
     }
     
-    XCTAssertEqual(interaction.start, dateISO8601Formatter.date(from: "2018-01-29T12:55:46Z"))
-    XCTAssertEqual(interaction.end, dateISO8601Formatter.date(from: "2018-01-29T12:55:51Z"))
-    XCTAssertEqual(interaction.line, 62633)
-    XCTAssertEqual(interaction.desk, 6202)
-    XCTAssertEqual(interaction.user, 891)
+    XCTAssertEqual(interaction.start, startDate)
+    XCTAssertEqual(interaction.end, endDate)
+    XCTAssertEqual(interaction.line, lineId)
+    XCTAssertEqual(interaction.desk, deskId)
+    XCTAssertEqual(interaction.user, userId)
   }
   
   func testSourceName() {
@@ -151,6 +204,13 @@ class TicketModelTests: ModelTests {
     let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.source, .name)
+  }
+  
+  func testSourceManual() {
+    ticketData["source"] = "MANUAL"
+    let ticket = decodeToTicket()
+    
+    XCTAssertEqual(ticket?.source, .manual)
   }
   
   func testSourcePrinter() {
@@ -165,9 +225,5 @@ class TicketModelTests: ModelTests {
     let ticket = decodeToTicket()
     
     XCTAssertEqual(ticket?.source, .other)
-  }
-  
-  fileprivate func decodeToTicket() -> Ticket? {
-    return try? ticketData.decodeAs(Ticket.self, decoder: JSONDecoder.withMilliseconds)
   }
 }

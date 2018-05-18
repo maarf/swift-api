@@ -12,39 +12,44 @@ import QminderAPI
 
 class EmptyStateModelTests: ModelTests {
   
+  private var message: String!
+  
+  override func setUp() {
+    super.setUp()
+    message = String.random
+  }
+  
   func testParsingEmptyStateSimple() {
+    
     let data: [String: Any] = [
-      "statusCode": 200,
       "layout": "simple",
-      "message": "Simple message"
+      "message": message
     ]
     let emptyState = try? data.decodeAs(EmptyState.self)
     
-    XCTAssertEqual(emptyState?.message, "Simple message")
+    XCTAssertEqual(emptyState?.message, message)
     XCTAssertEqual(emptyState?.layout, .simple)
   }
   
   func testParsingEmptyStateClosed() {
     let data: [String: Any] = [
-      "statusCode": 200,
       "layout": "closed",
-      "message": "closed message"
+      "message": message
     ]
     let emptyState = try? data.decodeAs(EmptyState.self)
     
-    XCTAssertEqual(emptyState?.message, "closed message")
+    XCTAssertEqual(emptyState?.message, message)
     XCTAssertEqual(emptyState?.layout, .closed)
   }
   
   func testOtherEmptyState() {
     let data: [String: Any] = [
-      "statusCode": 200,
       "layout": "other",
-      "message": "other message"
+      "message": message
     ]
     let emptyState = try? data.decodeAs(EmptyState.self)
     
-    XCTAssertEqual(emptyState?.message, "other message")
+    XCTAssertEqual(emptyState?.message, message)
     XCTAssertEqual(emptyState?.layout, .other)
   }
 }

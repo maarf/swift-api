@@ -12,21 +12,38 @@ import QminderAPI
 
 class LinesResponseTests: ModelTests {
   
-  var lineResponseData: [String: Any] = [
-    "subscriptionId": "1",
-    "messageId": 2,
-    "data": [
-      "lines": [
-        ["id": 999,
-         "name": "Line name 1",
-         "location": 333],
-        ["id": 111,
-         "name": "Line name 2",
-         "location": 222
+  private let subscriptionId = String(Int.random)
+  private let messageId = Int.random
+  
+  private let firstLineId = Int.random
+  private let firstLineName = String.random
+  private let firstLineLocationId = Int.random
+  
+  private let secondLineId = Int.random
+  private let secondLineName = String.random
+  private let secondLineLocationId = Int.random
+  
+  private var lineResponseData: [String: Any]!
+  
+  override func setUp() {
+    super.setUp()
+    
+    lineResponseData = [
+      "subscriptionId": subscriptionId,
+      "messageId": messageId,
+      "data": [
+        "lines": [
+          ["id": firstLineId,
+           "name": firstLineName,
+           "location": firstLineLocationId],
+          ["id": secondLineId,
+           "name": secondLineName,
+           "location": secondLineLocationId
+          ]
         ]
       ]
     ]
-  ]
+  }
   
   func testLineResponse() {
     let lineResponse = decodeToLinesResponse()
@@ -37,19 +54,19 @@ class LinesResponseTests: ModelTests {
     }
     XCTAssertEqual(lines.count, 2)
     
-    XCTAssertEqual(lineResponse?.subscriptionId, "1")
-    XCTAssertEqual(lineResponse?.messageId, 2)
+    XCTAssertEqual(lineResponse?.subscriptionId, subscriptionId)
+    XCTAssertEqual(lineResponse?.messageId, messageId)
     
     XCTAssertTrue(lineResponse?.lines.count == 2)
     XCTAssertFalse((lineResponse?.lines.isEmpty)!)
     
-    XCTAssertEqual(lineResponse?.lines.first?.id, 999)
-    XCTAssertEqual(lineResponse?.lines.first?.name, "Line name 1")
-    XCTAssertEqual(lineResponse?.lines.first?.location, 333)
+    XCTAssertEqual(lineResponse?.lines.first?.id, firstLineId)
+    XCTAssertEqual(lineResponse?.lines.first?.name, firstLineName)
+    XCTAssertEqual(lineResponse?.lines.first?.location, firstLineLocationId)
     
-    XCTAssertEqual(lineResponse?.lines[1].id, 111)
-    XCTAssertEqual(lineResponse?.lines[1].name, "Line name 2")
-    XCTAssertEqual(lineResponse?.lines[1].location, 222)
+    XCTAssertEqual(lineResponse?.lines[1].id, secondLineId)
+    XCTAssertEqual(lineResponse?.lines[1].name, secondLineName)
+    XCTAssertEqual(lineResponse?.lines[1].location, secondLineLocationId)
   }
   
   func testEmptyLinesResponse() {

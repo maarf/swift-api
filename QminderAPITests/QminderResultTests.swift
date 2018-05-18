@@ -13,20 +13,22 @@ import XCTest
 class QminderResultTests: XCTestCase {
   
   func testResultSucess() {
-    let result = Result<Int, QminderError>(1)
+    
+    let value = UUID().uuidString
+    let result = Result<String, QminderError>(value)
     
     XCTAssertFalse(result.isFailure)
     XCTAssertTrue(result.isSuccess)
-    XCTAssertEqual(result.value, 1)
+    XCTAssertEqual(result.value, value)
     XCTAssertNil(result.error)
     XCTAssertNotNil(result.result)
     XCTAssertNotNil(result.description)
     
     switch result {
     case let .success(value):
-      XCTAssertEqual(value, 1)
-    case .failure:
-      XCTFail("Result should be success")
+      XCTAssertEqual(value, value)
+    case let .failure(error):
+      XCTFail("Result should be success \(error)")
     }
   }
   

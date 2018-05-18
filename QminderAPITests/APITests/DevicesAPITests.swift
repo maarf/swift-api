@@ -29,8 +29,8 @@ class DevicesAPITests: QminderAPITests {
           secret = value.secret
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get pairing code and secret")
+        case let .failure(error):
+          XCTFail("Can't get pairing code and secret \(error)")
         }
       }
     }
@@ -76,8 +76,8 @@ class DevicesAPITests: QminderAPITests {
         switch result {
         case let .success(value):
           device = value
-        case .failure:
-          XCTFail("Can't get TV details")
+        case let .failure(error):
+          XCTFail("Can't get TV details \(error)")
         }
         
         expectation.fulfill()
@@ -104,8 +104,8 @@ class DevicesAPITests: QminderAPITests {
           emptyState = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get TV empty state")
+        case let .failure(error):
+          XCTFail("Can't get TV empty state \(error)")
         }
       })
     }
@@ -124,8 +124,8 @@ class DevicesAPITests: QminderAPITests {
         switch result {
         case .success:
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't send TV heartbeat")
+        case let .failure(error):
+          XCTFail("Can't send TV heartbeat \(error)")
         }
       }
     }

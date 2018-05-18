@@ -13,36 +13,44 @@ import QminderAPI
 class TicketResponseTests: ModelTests {
   
   func testTicketResponsable() {
+    let subScriptionId = String(Int.random)
+    let messageId = Int.random
+    let ticketId = String(Int.random)
+    let firstName = String.random
+    let lastName = String.random
+    let ticketCreated = Date.random
+    let lineId = Int.random
+    
     let ticketResponseData: [String: Any] = [
-      "subscriptionId": "1",
-      "messageId": 2,
+      "subscriptionId": subScriptionId,
+      "messageId": messageId,
       "data": [
         "status": "NEW",
         "source": "MANUAL",
-        "firstName": "Name",
-        "created": ["date": "2017-02-06T12:35:29.123Z"],
-        "id": "999",
-        "line": 333,
-        "lastName": "Surname"
+        "firstName": firstName,
+        "created": ["date": ticketCreated.format(.withMilliseconds)],
+        "id": ticketId,
+        "line": lineId,
+        "lastName": lastName
       ]
     ]
     let ticketResponse = try? ticketResponseData.decodeAs(TicketEventResponse.self,
                                                           decoder: JSONDecoder.withMilliseconds)
     
-    XCTAssertEqual(ticketResponse?.subscriptionId, "1")
-    XCTAssertEqual(ticketResponse?.messageId, 2)
+    XCTAssertEqual(ticketResponse?.subscriptionId, subScriptionId)
+    XCTAssertEqual(ticketResponse?.messageId, messageId)
     
     guard let ticket = ticketResponse?.data else {
       XCTFail("Can't parse data to ticket")
       return
     }
     
-    XCTAssertEqual(ticket.id, "999")
+    XCTAssertEqual(ticket.id, ticketId)
     XCTAssertEqual(ticket.source, .manual)
     XCTAssertEqual(ticket.status, .new)
-    XCTAssertEqual(ticket.firstName, "Name")
-    XCTAssertEqual(ticket.lastName, "Surname")
-    XCTAssertEqual(ticket.line, 333)
-    XCTAssertEqual(ticket.createdDate, dateISO8601MillisecondsFormatter.date(from: "2017-02-06T12:35:29.123Z"))
+    XCTAssertEqual(ticket.firstName, firstName)
+    XCTAssertEqual(ticket.lastName, lastName)
+    XCTAssertEqual(ticket.line, lineId)
+    XCTAssertEqual(ticket.createdDate, ticketCreated)
   }
 }
