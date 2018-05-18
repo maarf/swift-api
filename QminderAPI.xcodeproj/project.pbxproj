@@ -24,6 +24,8 @@
 		631849712051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
 		631849722051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
 		631849732051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
+		631E0C4720AEE6340017C1BF /* TestHelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E578D20AD8DF50089C90B /* TestHelperExtensions.swift */; };
+		631E0C4820AEE6510017C1BF /* QminderEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470620A4A1680032B2EC /* QminderEventsTests.swift */; };
 		6320D847204D81420041FFAC /* QminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520648204D78E5008C8C54 /* QminderAPI.swift */; };
 		6320D848204D81420041FFAC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520649204D78E5008C8C54 /* Extensions.swift */; };
 		6320D849204D81420041FFAC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064A204D78E5008C8C54 /* HTTPMethod.swift */; };
@@ -1180,6 +1182,7 @@
 				63C5D265205AA15E00269A16 /* QminderError+Extensions.swift in Sources */,
 				635E0DDD204D915F00B1123A /* ApiDataModelTests.swift in Sources */,
 				635E0DDE204D915F00B1123A /* TicketResponseTests.swift in Sources */,
+				631E0C4820AEE6510017C1BF /* QminderEventsTests.swift in Sources */,
 				635E0DDF204D915F00B1123A /* DevicesAPITests.swift in Sources */,
 				63C5D266205AA16000269A16 /* Data+Extensions.swift in Sources */,
 				635E0DE0204D915F00B1123A /* TVPairingCodeModelTests.swift in Sources */,
@@ -1192,6 +1195,7 @@
 				635E0DE6204D915F00B1123A /* TicketModelTests.swift in Sources */,
 				63C5D26A205AA17400269A16 /* QminderAPITestWithoutAPIKeyTests.swift in Sources */,
 				635E0DE7204D915F00B1123A /* QminderResultTests.swift in Sources */,
+				631E0C4720AEE6340017C1BF /* TestHelperExtensions.swift in Sources */,
 				635E0DE8204D915F00B1123A /* LocationsAPITests.swift in Sources */,
 				63C5D267205AA16200269A16 /* Dictionary+Extensions.swift in Sources */,
 			);
