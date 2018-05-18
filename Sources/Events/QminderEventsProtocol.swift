@@ -11,6 +11,7 @@ import Foundation
 /// Callback type when subscrubing to evenets
 public typealias EventsCallbackType<T> = (Result<T, QminderError>) -> Void
 
+/// Qminder Events protocol
 public protocol QminderEventsProtocol {
   /// Class delegate
   var delegate: QminderEventsDelegate? { get set }
