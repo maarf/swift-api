@@ -11,28 +11,43 @@ import XCTest
 @testable import QminderAPI
 
 class LineModelTests: ModelTests {
-  var lineData: [String: Any] = [
-    "id": 999,
-    "name": "Line name",
-    "location": 333
-  ]
+  
+  private let lineId = Int.random
+  private let lineName = String.random
+  private let locationId = Int.random
+  
+  private var lineData: [String: Any]!
+  
+  override func setUp() {
+    super.setUp()
+    
+    lineData = [
+      "id": lineId,
+      "name": lineName,
+      "location": locationId
+    ]
+  }
   
   func testLineModel() {
     let line = decodeToLine()
     
-    XCTAssertEqual(line?.id, 999)
-    XCTAssertEqual(line?.name, "Line name")
-    XCTAssertEqual(line?.location, 333)
+    XCTAssertEqual(line?.id, lineId)
+    XCTAssertEqual(line?.name, lineName)
+    XCTAssertEqual(line?.location, locationId)
   }
   
   func testLocationAsSting() {
-    lineData["id"] = 999
-    lineData["location"] = 333
+    
+    let newLineId = Int.random
+    let newLocationId = Int.random
+    
+    lineData["id"] = newLineId
+    lineData["location"] = newLocationId
     
     let line = decodeToLine()
     
-    XCTAssertEqual(line?.id, 999)
-    XCTAssertEqual(line?.location, 333)
+    XCTAssertEqual(line?.id, newLineId)
+    XCTAssertEqual(line?.location, newLocationId)
   }
   
   fileprivate func decodeToLine() -> Line? {

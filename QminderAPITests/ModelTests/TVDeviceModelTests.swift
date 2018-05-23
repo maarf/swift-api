@@ -12,21 +12,46 @@ import QminderAPI
 
 class TVDeviceModelTests: ModelTests {
   
-  var tvDeviceData: [String: Any] = [
-    "statusCode": 200,
-    "id": 999,
-    "name": "Apple TV",
-    "settings": ["lines": [1, 2, 3], "clearTickets": "afterCalling"],
-    "theme": "Default",
-    "layout": "standard"
-  ]
+  private let tvDeviceId = Int.random
+  private let tvDeviceName = String.random
+  private let theme = String.random
+  private let layout = String.random
+  
+  private let firstLineId = Int.random
+  private let secondLineId = Int.random
+  private let thirdLineId = Int.random
+  
+  private var tvDeviceData: [String: Any]!
+  
+  private func decodeToTVDevice() -> TVDevice? {
+    return try? tvDeviceData.decodeAs(TVDevice.self)
+  }
+  
+  override func setUp() {
+    super.setUp()
+    
+    tvDeviceData = [
+      "id": tvDeviceId,
+      "name": tvDeviceName,
+      "settings": [
+        "lines": [
+          firstLineId,
+          secondLineId,
+          thirdLineId],
+        "clearTickets": "afterCalling"
+      ],
+      "theme": theme,
+      "layout": layout
+    ]
+  }
   
   func testTVDeviceModel() {
     let device = decodeToTVDevice()
     
-    XCTAssertEqual(device?.id, 999)
-    XCTAssertEqual(device?.name, "Apple TV")
-    XCTAssertEqual(device?.theme, "Default")
+    XCTAssertEqual(device?.id, tvDeviceId)
+    XCTAssertEqual(device?.name, tvDeviceName)
+    XCTAssertEqual(device?.theme, theme)
+    XCTAssertEqual(device?.layout, layout)
     XCTAssertNotNil(device?.settings)
     XCTAssertEqual(device?.settings?.clearTickets, .afterCalling)
     
@@ -36,9 +61,9 @@ class TVDeviceModelTests: ModelTests {
     }
     
     XCTAssertFalse(lines.isEmpty)
-    XCTAssertTrue(lines.contains(where: { $0 == 1 }))
-    XCTAssertTrue(lines.contains(where: { $0 == 2 }))
-    XCTAssertTrue(lines.contains(where: { $0 == 3 }))
+    XCTAssertTrue(lines.contains(where: { $0 == firstLineId }))
+    XCTAssertTrue(lines.contains(where: { $0 == secondLineId }))
+    XCTAssertTrue(lines.contains(where: { $0 == thirdLineId }))
   }
   
   func testWithoutSettings() {
@@ -48,9 +73,5 @@ class TVDeviceModelTests: ModelTests {
   
     XCTAssertNil(device?.settings)
     XCTAssertNil(device?.settings?.lines)
-  }
-  
-  fileprivate func decodeToTVDevice() -> TVDevice? {
-    return try? tvDeviceData.decodeAs(TVDevice.self)
   }
 }

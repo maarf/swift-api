@@ -24,8 +24,8 @@ class LinesAPITests: QminderAPITests {
           details = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get line details")
+        case let .failure(error):
+          XCTFail("Can't get line details \(error)")
         }
       }
     }

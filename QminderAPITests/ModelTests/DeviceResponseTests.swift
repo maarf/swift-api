@@ -13,31 +13,43 @@ import QminderAPI
 class DeviceResponseTests: ModelTests {
   
   func testDeviceResponse() {
+    
+    let subScriptionId = String(Int.random)
+    let messageId = Int.random
+    let deviceId = Int.random
+    let deviceName = String.random
+    let themeName = String.random
+    let layout = String.random
+    
     let tvDeviceResponseData: [String: Any] = [
-      "subscriptionId": "1",
-      "messageId": 2,
+      "subscriptionId": subScriptionId,
+      "messageId": messageId,
       "data": [
         "statusCode": 200,
-        "id": 999,
-        "name": "Apple TV",
-        "settings": ["lines": [1, 2, 3], "clearTickets": "afterCalling"],
-        "theme": "Default",
-        "layout": "standard"
+        "id": deviceId,
+        "name": deviceName,
+        "settings": [
+          "lines": [1, 2, 3],
+          "clearTickets": "afterCalling"
+        ],
+        "theme": themeName,
+        "layout": layout
       ]
     ]
     let deviceResponse = try? tvDeviceResponseData.decodeAs(DeviceEventResponse.self)
     
-    XCTAssertEqual(deviceResponse?.subscriptionId, "1")
-    XCTAssertEqual(deviceResponse?.messageId, 2)
+    XCTAssertEqual(deviceResponse?.subscriptionId, subScriptionId)
+    XCTAssertEqual(deviceResponse?.messageId, messageId)
     
     guard let device = deviceResponse?.data else {
       XCTFail("Can't parse data to ticket")
       return
     }
     
-    XCTAssertEqual(device.id, 999)
-    XCTAssertEqual(device.name, "Apple TV")
-    XCTAssertEqual(device.theme, "Default")
+    XCTAssertEqual(device.id, deviceId)
+    XCTAssertEqual(device.name, deviceName)
+    XCTAssertEqual(device.theme, themeName)
+    XCTAssertEqual(device.layout, layout)
     XCTAssertNotNil(device.settings)
     XCTAssertEqual(device.settings?.clearTickets, .afterCalling)
   }

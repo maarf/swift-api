@@ -11,10 +11,14 @@ import Foundation
 /// Qminder API
 public struct QminderAPI: QminderAPIProtocol {
   
-  internal var apiKey: String?
-  internal var serverAddress: String
+  /// Qminder API key
+  private var apiKey: String?
   
-  internal var queue = DispatchQueue.main
+  /// Qminder API address
+  private var serverAddress: String
+  
+  /// Queue to return result in
+  private var queue = DispatchQueue.main
   
   public init(apiKey: String? = nil, serverAddress: String = "https://api.qminder.com/v1") {
     self.apiKey = apiKey
@@ -96,5 +100,118 @@ public struct QminderAPI: QminderAPIProtocol {
   public func tvEmptyState(id: Int, language: String,
                            completion: @escaping (Result<EmptyState, QminderError>) -> Void) {
     fetch(.tvEmptyState(id, ["language": language]), decodingType: EmptyState.self) { completion($0) }
+  }
+}
+  
+private extension QminderAPI {
+  /**
+   Fetch with responsable data
+   
+   - Parameters:
+     - endPoint: Qminder API endpoint
+     - decodingType: Decoding data type
+     - completion: Closure called when data is retrieved correctly
+  */
+  func fetch<T: ResponsableWithData>(_ endPoint: QminderAPIEndpoint, decodingType: T.Type,
+                                     _ completion: @escaping (Result<T.Data, QminderError>) -> Void) {
+    performRequestWith(endPoint) { result in
+      switch result {
+      case let .success(data):
+        completion(data.decode(decodingType))
+      case let .failure(error):
+        completion(Result(error))
+      }
+    }
+  }
+  
+  /**
+   Fetch with responsable
+   
+   - Parameters:
+     - endPoint: Qminder API endpoint
+     - decodingType: Decoding data type
+     - completion: Closure called when data is retrieved correctly
+  */
+  func fetch<T: Responsable>(_ endPoint: QminderAPIEndpoint, decodingType: T.Type,
+                             _ completion: @escaping (Result<T, QminderError>) -> Void) {
+    performRequestWith(endPoint) { result in
+      switch result {
+      case let .success(data):
+        completion(data.decode(decodingType))
+      case let .failure(error):
+        completion(Result(error))
+      }
+    }
+  }
+  
+  /**
+   Fetch from API
+   
+   - Parameters:
+     - endPoint: Qminder API endpoint
+     - completion: Closure called when data is retrieved correctly
+  */
+  func fetch(_ endPoint: QminderAPIEndpoint,
+             _ completion: @escaping (Result<Void?, QminderError>) -> Void) {
+    performRequestWith(endPoint) { result in
+      switch result {
+      case .success:
+        completion(Result.success(nil))
+      case let .failure(error):
+        completion(Result(error))
+      }
+    }
+  }
+  
+  /**
+   Perform request
+   
+   - Parameters:
+     - endPoint: Qminder API endpoint
+     - completion: Closure called when data is retrieved correctly
+  */
+  func performRequestWith(_ endPoint: QminderAPIEndpoint,
+                          _ completion: @escaping (Result<Data, QminderError>) -> Void) {
+    do {
+      let request = try endPoint.request(serverAddress: serverAddress, apiKey: apiKey)
+      
+      request.printCurlString()
+      
+      URLSession.shared.dataTask(with: request) { data, response, error in
+        self.queue.async {
+          completion(self.parseResponse(data: data, response: response, error: error))
+        }
+      }.resume()
+    } catch {
+      completion(Result(error.qminderError))
+    }
+  }
+  
+  /**
+   Parse response
+   
+   - Parameters:
+     - data: Data
+     - response: URL response
+     - error: Error
+   
+   - Returns: Result of data or Qmidner Error
+  */
+  func parseResponse(data: Data?, response: URLResponse?, error: Error?) -> Result<Data, QminderError> {
+    if let error = error {
+      return Result(.request(error))
+    } else {
+      
+      guard let httpResponse = response as? HTTPURLResponse, let resultData = data else {
+        return Result(.parseRequest)
+      }
+      
+      if httpResponse.statusCode != 200 {
+        return Result(.statusCode(httpResponse.statusCode))
+      }
+      
+      return Result(resultData)
+    }
+    
   }
 }

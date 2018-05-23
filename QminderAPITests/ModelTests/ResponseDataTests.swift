@@ -13,20 +13,29 @@ import XCTest
 class ResponseDataTests: XCTestCase {
   
   func testResponsableWithData() {
+    
+    let firstLineId = Int.random
+    let firstLineName = String.random
+    
+    let secondLineId = Int.random
+    let secondLineName = String.random
+    
+    let thirdLineId = Int.random
+    let thirdLineName = String.random
+    
     let locationLines: [String: Any] = [
-      "statusCode": 200,
       "data": [
         [
-          "id": 1,
-          "name": "Private"
+          "id": firstLineId,
+          "name": firstLineName
         ],
         [
-          "id": 2,
-          "name": "Business"
+          "id": secondLineId,
+          "name": secondLineName
         ],
         [
-          "id": 3,
-          "name": "Information"
+          "id": thirdLineId,
+          "name": thirdLineName
         ]
       ]
     ]
@@ -36,15 +45,15 @@ class ResponseDataTests: XCTestCase {
     switch result {
     case let .success(value):
       XCTAssertTrue(value.contains(where: {
-        $0.id == 1 && $0.name == "Private"
+        $0.id == firstLineId && $0.name == firstLineName
       }))
       
       XCTAssertTrue(value.contains(where: {
-        $0.id == 2 && $0.name == "Business"
+        $0.id == secondLineId && $0.name == secondLineName
       }))
       
       XCTAssertTrue(value.contains(where: {
-        $0.id == 3 && $0.name == "Information"
+        $0.id == thirdLineId && $0.name == thirdLineName
       }))
       
     case let .failure(error):
@@ -54,7 +63,6 @@ class ResponseDataTests: XCTestCase {
   
   func testResponsableWithDataError() {
     let locationLines: [String: Any] = [
-      "statusCode": 200,
       "data": [
         [
           "Error": 666
@@ -80,20 +88,24 @@ class ResponseDataTests: XCTestCase {
   }
   
   func testResponsable() {
+    let lineId = Int.random
+    let lineName = String.random
+    let locationId = Int.random
+    
     let line: [String: Any] = [
       "statusCode": 200,
-      "id": 1,
-      "name": "Private",
-      "location": 333
+      "id": lineId,
+      "name": lineName,
+      "location": locationId
     ]
     
     let result = line.jsonData()!.decode(Line.self)
     
     switch result {
     case let .success(value):
-      XCTAssertEqual(value.id, 1)
-      XCTAssertEqual(value.name, "Private")
-      XCTAssertEqual(value.location, 333)
+      XCTAssertEqual(value.id, lineId)
+      XCTAssertEqual(value.name, lineName)
+      XCTAssertEqual(value.location, locationId)
     case let .failure(error):
       XCTFail("Should not fail with \(error)")
     }

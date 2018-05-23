@@ -9,16 +9,7 @@
 import Foundation
 
 /// Qminder API protocol
-protocol QminderAPIProtocol {
-  
-  /// Qminder API key
-  var apiKey: String? { get }
-  
-  /// Qminder API address
-  var serverAddress: String { get set }
-  
-  /// Queue to return result in
-  var queue: DispatchQueue { get }
+public protocol QminderAPIProtocol {
   
   /**
    Intialize Qminder API
@@ -174,4 +165,21 @@ protocol QminderAPIProtocol {
      - completion: Callback block when empty state is received
    */
   func tvEmptyState(id: Int, language: String, completion: @escaping (Result<EmptyState, QminderError>) -> Void)
+}
+
+extension QminderAPIProtocol {
+  
+  public func searchTickets(locationId: Int? = nil, lineId: Set<Int>? = nil,
+                            status: Set<Status>? = nil, callerId: Int? = nil,
+                            minCreatedTimestamp: Int? = nil, maxCreatedTimestamp: Int? = nil,
+                            minCalledTimestamp: Int? = nil, maxCalledTimestamp: Int? = nil,
+                            limit: Int? = nil, order: String? = nil,
+                            responseScope: Set<String>? = nil,
+                            completion: @escaping (Result<[Ticket], QminderError>) -> Void) {
+    searchTickets(locationId: locationId, lineId: lineId,
+                  status: status, callerId: callerId,
+                  minCreatedTimestamp: minCreatedTimestamp, maxCreatedTimestamp: maxCreatedTimestamp,
+                  minCalledTimestamp: minCalledTimestamp, maxCalledTimestamp: maxCalledTimestamp,
+                  limit: limit, order: order, responseScope: responseScope, completion: completion)
+  }
 }

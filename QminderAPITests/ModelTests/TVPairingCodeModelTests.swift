@@ -13,14 +13,16 @@ import QminderAPI
 class TVPairingCodeModelTests: ModelTests {
   
   func testTVPairing() {
+    let secret = String.random
+    let pairingCode = String(String.random.dropFirst(4))
+    
     let tvPairingData: [String: Any] = [
-      "statusCode": 200,
-      "code": "PW3R",
-      "secret": "75aa16d7923ac707cc302e1ce7c81e8a"
+      "code": pairingCode,
+      "secret": secret
     ]
     let tvPairingCode = try? tvPairingData.decodeAs(TVPairingCode.self)
     
-    XCTAssertEqual(tvPairingCode?.code, "PW3R")
-    XCTAssertEqual(tvPairingCode?.secret, "75aa16d7923ac707cc302e1ce7c81e8a")
+    XCTAssertEqual(tvPairingCode?.code, pairingCode)
+    XCTAssertEqual(tvPairingCode?.secret, secret)
   }
 }

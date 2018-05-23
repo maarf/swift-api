@@ -28,7 +28,7 @@ class QminderWebsocketTests: XCTestCase {
     
     if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
       qminderAPI = QminderAPI(apiKey: apiKey)
-      events = QminderEvents(apiKey: apiKey, serverAddress: "ws://localhost:8889")
+      events = QminderEvents(apiKey: apiKey, serverAddress: "ws://127.0.0.1:8889")
     }
     
     parameters = ["location": locationId]

@@ -27,8 +27,8 @@ class LocationsAPITests: QminderAPITests {
           location = locations?.first
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get locations list")
+        case let .failure(error):
+          XCTFail("Can't get locations list \(error)")
         }
       }
     }
@@ -55,8 +55,8 @@ class LocationsAPITests: QminderAPITests {
           location = value
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get location details")
+        case let .failure(error):
+          XCTFail("Can't get location details \(error)")
         }
       }
     }
@@ -84,8 +84,8 @@ class LocationsAPITests: QminderAPITests {
           line = lines?.first
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get lines list")
+        case let .failure(error):
+          XCTFail("Can't get lines list \(error)")
         }
       }
     }
@@ -112,8 +112,8 @@ class LocationsAPITests: QminderAPITests {
           user = users?.first
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get users list")
+        case let .failure(error):
+          XCTFail("Can't get users list \(error)")
         }
       }
     }
@@ -142,8 +142,8 @@ class LocationsAPITests: QminderAPITests {
           desk = desks?.first
           
           expectation.fulfill()
-        case .failure:
-          XCTFail("Can't get desks list")
+        case let .failure(error):
+          XCTFail("Can't get desks list \(error)")
         }
       }
     }

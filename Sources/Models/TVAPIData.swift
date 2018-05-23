@@ -8,13 +8,23 @@
 
 import Foundation
 
+/// TV API data status
+public enum TVAPIDataStatus: String, Codable {
+  
+  /// Not paired
+  case notPaired = "NOT_PAIRED"
+  
+  /// Paired
+  case paired = "PAIRED"
+}
+
 /// TV device API data
 public struct TVAPIData: Responsable {
   
   var statusCode: Int?
   
-  /// "NOT_PAIRED" or "PAIRED"
-  public let status: String
+  /// TV API data status
+  public let status: TVAPIDataStatus
   
   /// TV ID. Omitted when status is "NOT_PAIRED"
   public let id: Int?
