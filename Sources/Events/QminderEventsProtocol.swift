@@ -13,54 +13,46 @@ public typealias EventsCallbackType<T> = (Result<T, QminderError>) -> Void
 
 /// Qminder Events protocol
 public protocol QminderEventsProtocol {
+  
   /// Class delegate
   var delegate: QminderEventsDelegate? { get set }
   
-  /**
-   Open websocket
-  */
+  /// Open websocket
   func openSocket()
   
-  /**
-   Reopen websocket
-  */
+  /// Reopen websocket
   func reOpenSocket()
   
-  /**
-   Close websocket connection
-  */
-  func closeConnection()
+  /// Close websocket connection
+  func closeSocket()
   
-  /**
-   Subscribe to ticket event
-   
-   - Parameters:
-   - eventType: Event type to subscribe
-   - parameters: Dictionary of parameters
-   - callback: Callback executed when response got from Websocket
-   */
-  func subscribe(toTicketEvent eventType: QminderEvent,
-                 parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>)
+  /// Subscribe to ticket event
+  ///
+  /// - Parameters:
+  ///   - eventType: Event type to subscribe
+  ///   - parameters: Dictionary of parameters
+  ///   - callback: Callback executed when response got from Websocket
+  func subscribe(toTicketEvent eventType: TicketEvent,
+                 parameters: [String: Any],
+                 callback: @escaping EventsCallbackType<Ticket>)
   
-  /**
-   Subscribe to device event
-   
-   - Parameters:
-   - eventType: Event type to subscribe
-   - parameters: Dictionary of parameters
-   - callback: Callback executed when response got from Websocket
-   */
-  func subscribe(toDeviceEvent eventType: QminderEvent,
-                 parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>)
+  /// Subscribe to device event
+  ///
+  /// - Parameters:
+  ///   - eventType: Event type to subscribe
+  ///   - parameters: Dictionary of parameters
+  ///   - callback: Callback executed when response got from Websocket
+  func subscribe(toDeviceEvent eventType: DeviceEvent,
+                 parameters: [String: Any],
+                 callback: @escaping EventsCallbackType<TVDevice?>)
   
-  /**
-   Subscribe to lines event
-   
-   - Parameters:
-   - eventType: Event type to subscribe
-   - parameters: Dictionary of parameters
-   - callback: Callback executed when response got from Websocket
-   */
-  func subscribe(toLineEvent eventType: QminderEvent,
-                 parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>)
+  /// Subscribe to lines event
+  ///
+  /// - Parameters:
+  ///   - eventType: Event type to subscribe
+  ///   - parameters: Dictionary of parameters
+  ///   - callback: Callback executed when response got from Websocket
+  func subscribe(toLineEvent eventType: LineEvent,
+                 parameters: [String: Any],
+                 callback: @escaping EventsCallbackType<[Line]>)
 }
