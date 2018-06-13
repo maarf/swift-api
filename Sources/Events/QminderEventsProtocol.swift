@@ -24,7 +24,7 @@ public protocol QminderEventsProtocol {
   func reOpenSocket()
   
   /// Close websocket connection
-  func closeConnection()
+  func closeSocket()
   
   /// Subscribe to ticket event
   ///

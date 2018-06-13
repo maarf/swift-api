@@ -4,6 +4,7 @@ ignore:
   - "docs"
   - "Pods"
   - "QminderAPITests"
+  - "Example/Pods"
 comment:
   layout: "header, reach, diff, flags, files, footer"
   behavior: new

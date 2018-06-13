@@ -86,7 +86,7 @@ public class QminderEvents: QminderEventsProtocol {
     }
   }
   
-  public func closeConnection() {
+  public func closeSocket() {
     messageHistory.removeAll()
     messageQueue.removeAll()
     
@@ -209,7 +209,7 @@ public class QminderEvents: QminderEventsProtocol {
   ///   - messageToSend: Message to send to Websocket
   ///   - callback: Callback block when response is received
   private func sendMessage(subscriptionId: String, eventType: QminderEvent, messageToSend: String, callback: Callback) {
-    self.callbackMap[subscriptionId] = callback //CallbackMap(callback: callback, eventType: eventType)
+    self.callbackMap[subscriptionId] = callback
     self.socket.write(string: messageToSend)
   }
 }
@@ -313,9 +313,7 @@ extension QminderEvents: WebSocketDelegate {
   /// - Parameters:
   ///   - socket: Websocket object
   ///   - data: Received data
-  public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-    print("Recieved data", data)
-  }
+  public func websocketDidReceiveData(socket: WebSocketClient, data: Data) { }
   
   /// Reconnect to Websocket
   ///

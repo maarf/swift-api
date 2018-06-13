@@ -22,7 +22,7 @@ class QminderEventsMock: QminderEventsProtocol {
     delegate?.onConnected()
   }
   
-  func closeConnection() {
+  func closeSocket() {
     let error = NSError(domain: "FakeError", code: 1, userInfo: [:])
     delegate?.onDisconnected(error: error)
   }
@@ -89,7 +89,7 @@ class QminderEventsTests: XCTestCase {
   }
   
   func testClosed() {
-    qminderEvents?.closeConnection()
+    qminderEvents?.closeSocket()
     
     XCTAssertFalse(isConnected)
     

@@ -47,7 +47,7 @@ class QminderWebsocketTests: XCTestCase {
   override func tearDown() {
     super.tearDown()
     
-    events.closeConnection()
+    events.closeSocket()
   }
   
   func testWebsocketEvents() {
