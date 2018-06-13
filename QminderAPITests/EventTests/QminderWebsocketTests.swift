@@ -33,12 +33,12 @@ class QminderWebsocketTests: XCTestCase {
     
     parameters = ["location": locationId]
     
-    subscribeToTicket(.ticket(.created), parameters: parameters)
-    subscribeToTicket(.ticket(.called), parameters: parameters)
-    subscribeToTicket(.ticket(.recalled), parameters: parameters)
-    subscribeToTicket(.ticket(.cancelled), parameters: parameters)
-    subscribeToTicket(.ticket(.served), parameters: parameters)
-    subscribeToTicket(.ticket(.changed), parameters: parameters)
+    subscribeToTicket(.created, parameters: parameters)
+    subscribeToTicket(.called, parameters: parameters)
+    subscribeToTicket(.recalled, parameters: parameters)
+    subscribeToTicket(.cancelled, parameters: parameters)
+    subscribeToTicket(.served, parameters: parameters)
+    subscribeToTicket(.changed, parameters: parameters)
     
     subscribeToTVChanged()
     subscribeLines(parameters: parameters)
@@ -176,7 +176,7 @@ class QminderWebsocketTests: XCTestCase {
     }
   }
   
-  fileprivate func subscribeToTicket(_ ticketEvent: QminderEvent, parameters: [String: Any]) {
+  fileprivate func subscribeToTicket(_ ticketEvent: TicketEvent, parameters: [String: Any]) {
     events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: { result in
       
       XCTAssertTrue(Thread.isMainThread)
@@ -193,7 +193,7 @@ class QminderWebsocketTests: XCTestCase {
   }
   
   fileprivate func subscribeToTVChanged() {
-    events.subscribe(toDeviceEvent: .device(.overviewMonitorChange), parameters: ["id": 333]) { result in
+    events.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["id": 333]) { result in
       
       XCTAssertTrue(Thread.isMainThread)
       
@@ -208,7 +208,7 @@ class QminderWebsocketTests: XCTestCase {
   }
   
   fileprivate func subscribeLines(parameters: [String: Any]) {
-    events.subscribe(toLineEvent: .line(.changed), parameters: parameters) { result in
+    events.subscribe(toLineEvent: .changed, parameters: parameters) { result in
       
       XCTAssertTrue(Thread.isMainThread)
       

@@ -94,44 +94,44 @@ public class QminderEvents: QminderEventsProtocol {
     self.socket.disconnect(closeCode: Constants.websocketReservedCloseCode)
   }
 
-  public func subscribe(toTicketEvent eventType: QminderEvent,
+  public func subscribe(toTicketEvent eventType: TicketEvent,
                         parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
     
-    guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
+    guard let (message, subscriptionId) = parseParameters(eventType: .ticket(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
       return
     }
     
     sendMessageToWebsocket(subscriptionId: subscriptionId,
-                           eventType: eventType,
+                           eventType: .ticket(eventType),
                            message: message,
                            callback: .ticket(callback))
   }
 
-  public func subscribe(toDeviceEvent eventType: QminderEvent,
+  public func subscribe(toDeviceEvent eventType: DeviceEvent,
                         parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
     
-    guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
+    guard let (message, subscriptionId) = parseParameters(eventType: .device(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
       return
     }
     
     sendMessageToWebsocket(subscriptionId: subscriptionId,
-                           eventType: eventType,
+                           eventType: .device(eventType),
                            message: message,
                            callback: .device(callback))
   }
   
-  public func subscribe(toLineEvent eventType: QminderEvent,
+  public func subscribe(toLineEvent eventType: LineEvent,
                         parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
     
-    guard let (message, subscriptionId) = parseParameters(eventType: eventType, parameters: parameters) else {
+    guard let (message, subscriptionId) = parseParameters(eventType: .line(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
       return
     }
     
     sendMessageToWebsocket(subscriptionId: subscriptionId,
-                           eventType: eventType,
+                           eventType: .line(eventType),
                            message: message,
                            callback: .line(callback))
   }

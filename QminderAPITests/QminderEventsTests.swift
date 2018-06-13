@@ -27,7 +27,7 @@ class QminderEventsMock: QminderEventsProtocol {
     delegate?.onDisconnected(error: error)
   }
   
-  func subscribe(toTicketEvent eventType: QminderEvent,
+  func subscribe(toTicketEvent eventType: TicketEvent,
                  parameters: [String: Any], callback: @escaping (Result<Ticket, QminderError>) -> Void) {
     let ticket = Ticket(statusCode: 200,
                         id: "1",
@@ -47,7 +47,7 @@ class QminderEventsMock: QminderEventsProtocol {
     callback(Result.init(ticket))
   }
   
-  func subscribe(toDeviceEvent eventType: QminderEvent,
+  func subscribe(toDeviceEvent eventType: DeviceEvent,
                  parameters: [String: Any], callback: @escaping (Result<TVDevice?, QminderError>) -> Void) {
     
     let settings = Settings.init(selectedLine: 1, lines: [1, 2, 3], clearTickets: .afterCalling)
@@ -61,7 +61,7 @@ class QminderEventsMock: QminderEventsProtocol {
     callback(Result.init(tvDevice))
   }
   
-  func subscribe(toLineEvent eventType: QminderEvent,
+  func subscribe(toLineEvent eventType: LineEvent,
                  parameters: [String: Any], callback: @escaping (Result<[Line], QminderError>) -> Void) {
     
     let lines = [Line(statusCode: 200, id: 1, name: "Line1", location: 1),
@@ -101,7 +101,7 @@ class QminderEventsTests: XCTestCase {
   
   func testOverviewMonitorChange() {
     let overviewMonitorChangeExpectation = self.expectation(description: "overviewMonitorChange")
-    qminderEvents?.subscribe(toDeviceEvent: .device(.overviewMonitorChange), parameters: ["id": "1"]) { result in
+    qminderEvents?.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["id": "1"]) { result in
       
       XCTAssertNil(result.error)
       
@@ -129,7 +129,7 @@ class QminderEventsTests: XCTestCase {
   
   func testLineEvent() {
     let lineEventExpectation = self.expectation(description: "lineEvent")
-    qminderEvents?.subscribe(toLineEvent: .line(.changed), parameters: ["id": 1]) { result in
+    qminderEvents?.subscribe(toLineEvent: .changed, parameters: ["id": 1]) { result in
       switch result {
       case .failure(let error):
         print("fail \(error)")
@@ -155,7 +155,7 @@ class QminderEventsTests: XCTestCase {
   
   func testTicketEvent() {
     let ticketCreatedExpectation = self.expectation(description: "ticketCreated")
-    qminderEvents?.subscribe(toTicketEvent: .ticket(.created), parameters: ["location": 1]) { result in
+    qminderEvents?.subscribe(toTicketEvent: .created, parameters: ["location": 1]) { result in
       switch result {
       case .failure(let error):
         print("fail \(error)")

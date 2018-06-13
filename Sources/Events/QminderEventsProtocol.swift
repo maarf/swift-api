@@ -32,7 +32,7 @@ public protocol QminderEventsProtocol {
   ///   - eventType: Event type to subscribe
   ///   - parameters: Dictionary of parameters
   ///   - callback: Callback executed when response got from Websocket
-  func subscribe(toTicketEvent eventType: QminderEvent,
+  func subscribe(toTicketEvent eventType: TicketEvent,
                  parameters: [String: Any],
                  callback: @escaping EventsCallbackType<Ticket>)
   
@@ -42,7 +42,7 @@ public protocol QminderEventsProtocol {
   ///   - eventType: Event type to subscribe
   ///   - parameters: Dictionary of parameters
   ///   - callback: Callback executed when response got from Websocket
-  func subscribe(toDeviceEvent eventType: QminderEvent,
+  func subscribe(toDeviceEvent eventType: DeviceEvent,
                  parameters: [String: Any],
                  callback: @escaping EventsCallbackType<TVDevice?>)
   
@@ -52,7 +52,7 @@ public protocol QminderEventsProtocol {
   ///   - eventType: Event type to subscribe
   ///   - parameters: Dictionary of parameters
   ///   - callback: Callback executed when response got from Websocket
-  func subscribe(toLineEvent eventType: QminderEvent,
+  func subscribe(toLineEvent eventType: LineEvent,
                  parameters: [String: Any],
                  callback: @escaping EventsCallbackType<[Line]>)
 }
