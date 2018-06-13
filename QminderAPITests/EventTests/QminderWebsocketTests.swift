@@ -28,17 +28,17 @@ class QminderWebsocketTests: XCTestCase {
     
     if let apiKey = ProcessInfo.processInfo.environment["QMINDER_API_KEY"] {
       qminderAPI = QminderAPI(apiKey: apiKey)
-      events = QminderEvents(apiKey: apiKey, serverAddress: "ws://127.0.0.1:8889")
+      events = QminderEvents(serverAddress: "ws://127.0.0.1:8889")
     }
     
     parameters = ["location": locationId]
     
-    subscribeToTicket(.ticketCreated, parameters: parameters)
-    subscribeToTicket(.ticketCalled, parameters: parameters)
-    subscribeToTicket(.ticketRecalled, parameters: parameters)
-    subscribeToTicket(.ticketCancelled, parameters: parameters)
-    subscribeToTicket(.ticketServed, parameters: parameters)
-    subscribeToTicket(.ticketChanged, parameters: parameters)
+    subscribeToTicket(.ticket(.created), parameters: parameters)
+    subscribeToTicket(.ticket(.called), parameters: parameters)
+    subscribeToTicket(.ticket(.recalled), parameters: parameters)
+    subscribeToTicket(.ticket(.cancelled), parameters: parameters)
+    subscribeToTicket(.ticket(.served), parameters: parameters)
+    subscribeToTicket(.ticket(.changed), parameters: parameters)
     
     subscribeToTVChanged()
     subscribeLines(parameters: parameters)
@@ -193,7 +193,7 @@ class QminderWebsocketTests: XCTestCase {
   }
   
   fileprivate func subscribeToTVChanged() {
-    events.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["id": 333]) { result in
+    events.subscribe(toDeviceEvent: .device(.overviewMonitorChange), parameters: ["id": 333]) { result in
       
       XCTAssertTrue(Thread.isMainThread)
       
@@ -208,7 +208,7 @@ class QminderWebsocketTests: XCTestCase {
   }
   
   fileprivate func subscribeLines(parameters: [String: Any]) {
-    events.subscribe(toLineEvent: .linesChanged, parameters: parameters) { result in
+    events.subscribe(toLineEvent: .line(.changed), parameters: parameters) { result in
       
       XCTAssertTrue(Thread.isMainThread)
       

@@ -11,6 +11,7 @@ import XCTest
 @testable import QminderAPI
 
 class QminderEventsMock: QminderEventsProtocol {
+  
   weak var delegate: QminderEventsDelegate?
   
   func openSocket() {
@@ -100,7 +101,7 @@ class QminderEventsTests: XCTestCase {
   
   func testOverviewMonitorChange() {
     let overviewMonitorChangeExpectation = self.expectation(description: "overviewMonitorChange")
-    qminderEvents?.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["id": "1"]) { result in
+    qminderEvents?.subscribe(toDeviceEvent: .device(.overviewMonitorChange), parameters: ["id": "1"]) { result in
       
       XCTAssertNil(result.error)
       
@@ -128,7 +129,7 @@ class QminderEventsTests: XCTestCase {
   
   func testLineEvent() {
     let lineEventExpectation = self.expectation(description: "lineEvent")
-    qminderEvents?.subscribe(toLineEvent: .linesChanged, parameters: ["id": 1]) { result in
+    qminderEvents?.subscribe(toLineEvent: .line(.changed), parameters: ["id": 1]) { result in
       switch result {
       case .failure(let error):
         print("fail \(error)")
@@ -154,7 +155,7 @@ class QminderEventsTests: XCTestCase {
   
   func testTicketEvent() {
     let ticketCreatedExpectation = self.expectation(description: "ticketCreated")
-    qminderEvents?.subscribe(toTicketEvent: .ticketCreated, parameters: ["location": 1]) { result in
+    qminderEvents?.subscribe(toTicketEvent: .ticket(.created), parameters: ["location": 1]) { result in
       switch result {
       case .failure(let error):
         print("fail \(error)")

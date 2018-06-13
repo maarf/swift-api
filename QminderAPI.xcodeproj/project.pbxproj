@@ -30,7 +30,7 @@
 		6320D848204D81420041FFAC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520649204D78E5008C8C54 /* Extensions.swift */; };
 		6320D849204D81420041FFAC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064A204D78E5008C8C54 /* HTTPMethod.swift */; };
 		6320D84A204D81440041FFAC /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064C204D78E5008C8C54 /* QminderEvents.swift */; };
-		6320D84B204D81440041FFAC /* QminderEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEventType.swift */; };
+		6320D84B204D81440041FFAC /* QminderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEvent.swift */; };
 		6320D84C204D81480041FFAC /* EventResponsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064F204D78E5008C8C54 /* EventResponsable.swift */; };
 		6320D84D204D81480041FFAC /* LinesEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520650204D78E5008C8C54 /* LinesEventResponse.swift */; };
 		6320D84E204D81480041FFAC /* DeviceEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520651204D78E5008C8C54 /* DeviceEventResponse.swift */; };
@@ -133,11 +133,11 @@
 		635206F2204D7A3F008C8C54 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520649204D78E5008C8C54 /* Extensions.swift */; };
 		635206F3204D7A3F008C8C54 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064A204D78E5008C8C54 /* HTTPMethod.swift */; };
 		635206F4204D7A43008C8C54 /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064C204D78E5008C8C54 /* QminderEvents.swift */; };
-		635206F5204D7A43008C8C54 /* QminderEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEventType.swift */; };
+		635206F5204D7A43008C8C54 /* QminderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEvent.swift */; };
 		635206F6204D7A43008C8C54 /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064C204D78E5008C8C54 /* QminderEvents.swift */; };
-		635206F7204D7A43008C8C54 /* QminderEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEventType.swift */; };
+		635206F7204D7A43008C8C54 /* QminderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEvent.swift */; };
 		635206F8204D7A43008C8C54 /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064C204D78E5008C8C54 /* QminderEvents.swift */; };
-		635206F9204D7A43008C8C54 /* QminderEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEventType.swift */; };
+		635206F9204D7A43008C8C54 /* QminderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderEvent.swift */; };
 		635206FA204D7A46008C8C54 /* QminderEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */; };
 		635206FB204D7A46008C8C54 /* QminderEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */; };
 		635206FC204D7A47008C8C54 /* QminderEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */; };
@@ -187,6 +187,26 @@
 		637D69912052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		637D69922052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		639E578E20AD8DF50089C90B /* TestHelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E578D20AD8DF50089C90B /* TestHelperExtensions.swift */; };
+		63AFBA9720D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
+		63AFBA9820D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
+		63AFBA9920D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
+		63AFBA9A20D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
+		63AFBA9C20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
+		63AFBA9D20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
+		63AFBA9E20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
+		63AFBA9F20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
+		63AFBAA120D0FC21009E3D1C /* TicketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketEvent.swift */; };
+		63AFBAA220D0FC21009E3D1C /* TicketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketEvent.swift */; };
+		63AFBAA320D0FC21009E3D1C /* TicketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketEvent.swift */; };
+		63AFBAA420D0FC21009E3D1C /* TicketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketEvent.swift */; };
+		63AFBAA620D0FC42009E3D1C /* DeviceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceEvent.swift */; };
+		63AFBAA720D0FC42009E3D1C /* DeviceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceEvent.swift */; };
+		63AFBAA820D0FC42009E3D1C /* DeviceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceEvent.swift */; };
+		63AFBAA920D0FC42009E3D1C /* DeviceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceEvent.swift */; };
+		63AFBAAB20D0FC54009E3D1C /* LineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineEvent.swift */; };
+		63AFBAAC20D0FC54009E3D1C /* LineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineEvent.swift */; };
+		63AFBAAD20D0FC54009E3D1C /* LineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineEvent.swift */; };
+		63AFBAAE20D0FC54009E3D1C /* LineEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineEvent.swift */; };
 		63B913EE2050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
 		63B913EF2050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
 		63B913F02050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
@@ -277,7 +297,7 @@
 		63520649204D78E5008C8C54 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6352064A204D78E5008C8C54 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6352064C204D78E5008C8C54 /* QminderEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderEvents.swift; sourceTree = "<group>"; };
-		6352064D204D78E5008C8C54 /* QminderEventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderEventType.swift; sourceTree = "<group>"; };
+		6352064D204D78E5008C8C54 /* QminderEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderEvent.swift; sourceTree = "<group>"; };
 		6352064F204D78E5008C8C54 /* EventResponsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventResponsable.swift; sourceTree = "<group>"; };
 		63520650204D78E5008C8C54 /* LinesEventResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesEventResponse.swift; sourceTree = "<group>"; };
 		63520651204D78E5008C8C54 /* DeviceEventResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceEventResponse.swift; sourceTree = "<group>"; };
@@ -300,6 +320,11 @@
 		6370FF2F20860ADC00ED3196 /* ClearTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTickets.swift; sourceTree = "<group>"; };
 		637D698E2052EA0500C59BA2 /* Extensions+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Data.swift"; sourceTree = "<group>"; };
 		639E578D20AD8DF50089C90B /* TestHelperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelperExtensions.swift; sourceTree = "<group>"; };
+		63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsocketMessage.swift; sourceTree = "<group>"; };
+		63AFBA9B20D00A0D009E3D1C /* Callback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
+		63AFBAA020D0FC21009E3D1C /* TicketEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketEvent.swift; sourceTree = "<group>"; };
+		63AFBAA520D0FC42009E3D1C /* DeviceEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceEvent.swift; sourceTree = "<group>"; };
+		63AFBAAA20D0FC54009E3D1C /* LineEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineEvent.swift; sourceTree = "<group>"; };
 		63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QminderAPIProtocol.swift; sourceTree = "<group>"; };
 		63C422E3205678D600941DA4 /* QminderErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QminderErrorTests.swift; sourceTree = "<group>"; };
 		63C422E520567F3000941DA4 /* ResponseDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataTests.swift; sourceTree = "<group>"; };
@@ -477,7 +502,12 @@
 			children = (
 				6315470120A47B9A0032B2EC /* QminderEventsProtocol.swift */,
 				6352064C204D78E5008C8C54 /* QminderEvents.swift */,
-				6352064D204D78E5008C8C54 /* QminderEventType.swift */,
+				63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */,
+				63AFBA9B20D00A0D009E3D1C /* Callback.swift */,
+				6352064D204D78E5008C8C54 /* QminderEvent.swift */,
+				63AFBAA020D0FC21009E3D1C /* TicketEvent.swift */,
+				63AFBAA520D0FC42009E3D1C /* DeviceEvent.swift */,
+				63AFBAAA20D0FC54009E3D1C /* LineEvent.swift */,
 				6352064E204D78E5008C8C54 /* Models */,
 				63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */,
 			);
@@ -953,7 +983,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6320D84B204D81440041FFAC /* QminderEventType.swift in Sources */,
+				6320D84B204D81440041FFAC /* QminderEvent.swift in Sources */,
 				6320D85F204D81550041FFAC /* Status.swift in Sources */,
 				6304932C2052AFBB001529B4 /* Responsable.swift in Sources */,
 				631849702051703C0082068A /* QminderAPIEndpoint.swift in Sources */,
@@ -962,8 +992,10 @@
 				6318496B20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */,
 				6320D854204D81510041FFAC /* EmptyState.swift in Sources */,
 				6315470220A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */,
+				63AFBAAB20D0FC54009E3D1C /* LineEvent.swift in Sources */,
 				6320D85E204D81550041FFAC /* Extra.swift in Sources */,
 				6320D858204D81510041FFAC /* Desk.swift in Sources */,
+				63AFBA9720D009E8009E3D1C /* WebsocketMessage.swift in Sources */,
 				6320D851204D81510041FFAC /* Location.swift in Sources */,
 				6320D857204D81510041FFAC /* Device.swift in Sources */,
 				6320D85B204D81550041FFAC /* TicketResponse.swift in Sources */,
@@ -981,7 +1013,9 @@
 				6320D863204D81580041FFAC /* ParameterEncoding.swift in Sources */,
 				6320D864204D815B0041FFAC /* ResultProtocol.swift in Sources */,
 				6320D84E204D81480041FFAC /* DeviceEventResponse.swift in Sources */,
+				63AFBAA120D0FC21009E3D1C /* TicketEvent.swift in Sources */,
 				6320D861204D81550041FFAC /* Created.swift in Sources */,
+				63AFBA9C20D00A0D009E3D1C /* Callback.swift in Sources */,
 				6320D865204D815B0041FFAC /* Result.swift in Sources */,
 				6320D84A204D81440041FFAC /* QminderEvents.swift in Sources */,
 				6320D852204D81510041FFAC /* TVPairingCode.swift in Sources */,
@@ -990,6 +1024,7 @@
 				6320D85D204D81550041FFAC /* Ticket.swift in Sources */,
 				6320D84C204D81480041FFAC /* EventResponsable.swift in Sources */,
 				637D698F2052EA0500C59BA2 /* Extensions+Data.swift in Sources */,
+				63AFBAA620D0FC42009E3D1C /* DeviceEvent.swift in Sources */,
 				6320D853204D81510041FFAC /* TVAPIData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1043,8 +1078,10 @@
 				6318496C20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */,
 				635206AD204D7A2A008C8C54 /* Result.swift in Sources */,
 				6315470320A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */,
+				63AFBAAC20D0FC54009E3D1C /* LineEvent.swift in Sources */,
 				635206B8204D7A34008C8C54 /* Location.swift in Sources */,
 				635206D0204D7A39008C8C54 /* Status.swift in Sources */,
+				63AFBA9820D009E8009E3D1C /* WebsocketMessage.swift in Sources */,
 				635206BB204D7A34008C8C54 /* EmptyState.swift in Sources */,
 				635206CA204D7A39008C8C54 /* Label.swift in Sources */,
 				635206B9204D7A34008C8C54 /* TVPairingCode.swift in Sources */,
@@ -1052,7 +1089,7 @@
 				635206D2204D7A39008C8C54 /* Created.swift in Sources */,
 				635206CE204D7A39008C8C54 /* Ticket.swift in Sources */,
 				635206B3204D7A2E008C8C54 /* ParameterEncoding.swift in Sources */,
-				635206F5204D7A43008C8C54 /* QminderEventType.swift in Sources */,
+				635206F5204D7A43008C8C54 /* QminderEvent.swift in Sources */,
 				63B913EF2050124D0096F92D /* QminderAPIProtocol.swift in Sources */,
 				635206CD204D7A39008C8C54 /* Interaction.swift in Sources */,
 				635206CF204D7A39008C8C54 /* Extra.swift in Sources */,
@@ -1062,7 +1099,9 @@
 				635206F1204D7A3F008C8C54 /* QminderAPI.swift in Sources */,
 				635206FF204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206AC204D7A2A008C8C54 /* ResultProtocol.swift in Sources */,
+				63AFBAA220D0FC21009E3D1C /* TicketEvent.swift in Sources */,
 				635206CC204D7A39008C8C54 /* TicketResponse.swift in Sources */,
+				63AFBA9D20D00A0D009E3D1C /* Callback.swift in Sources */,
 				635206FD204D7A4B008C8C54 /* EventResponsable.swift in Sources */,
 				635206F0204D7A3F008C8C54 /* Desk.swift in Sources */,
 				635206F3204D7A3F008C8C54 /* HTTPMethod.swift in Sources */,
@@ -1071,6 +1110,7 @@
 				635206BD204D7A34008C8C54 /* Line.swift in Sources */,
 				635206FA204D7A46008C8C54 /* QminderEventsDelegate.swift in Sources */,
 				637D69902052EA0500C59BA2 /* Extensions+Data.swift in Sources */,
+				63AFBAA720D0FC42009E3D1C /* DeviceEvent.swift in Sources */,
 				635206EF204D7A3F008C8C54 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1088,8 +1128,10 @@
 				6318496D20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */,
 				635206AF204D7A2B008C8C54 /* Result.swift in Sources */,
 				6315470420A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */,
+				63AFBAAD20D0FC54009E3D1C /* LineEvent.swift in Sources */,
 				635206BE204D7A35008C8C54 /* Location.swift in Sources */,
 				635206D9204D7A39008C8C54 /* Status.swift in Sources */,
+				63AFBA9920D009E8009E3D1C /* WebsocketMessage.swift in Sources */,
 				635206C1204D7A35008C8C54 /* EmptyState.swift in Sources */,
 				635206D3204D7A39008C8C54 /* Label.swift in Sources */,
 				635206BF204D7A35008C8C54 /* TVPairingCode.swift in Sources */,
@@ -1097,7 +1139,7 @@
 				635206DB204D7A39008C8C54 /* Created.swift in Sources */,
 				635206D7204D7A39008C8C54 /* Ticket.swift in Sources */,
 				635206B5204D7A2E008C8C54 /* ParameterEncoding.swift in Sources */,
-				635206F7204D7A43008C8C54 /* QminderEventType.swift in Sources */,
+				635206F7204D7A43008C8C54 /* QminderEvent.swift in Sources */,
 				63B913F02050124D0096F92D /* QminderAPIProtocol.swift in Sources */,
 				635206D6204D7A39008C8C54 /* Interaction.swift in Sources */,
 				635206D8204D7A39008C8C54 /* Extra.swift in Sources */,
@@ -1107,7 +1149,9 @@
 				635206EC204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
 				63520703204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206AE204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
+				63AFBAA320D0FC21009E3D1C /* TicketEvent.swift in Sources */,
 				635206D5204D7A39008C8C54 /* TicketResponse.swift in Sources */,
+				63AFBA9E20D00A0D009E3D1C /* Callback.swift in Sources */,
 				63520701204D7A4B008C8C54 /* EventResponsable.swift in Sources */,
 				635206EB204D7A3E008C8C54 /* Desk.swift in Sources */,
 				635206EE204D7A3E008C8C54 /* HTTPMethod.swift in Sources */,
@@ -1116,6 +1160,7 @@
 				635206C3204D7A35008C8C54 /* Line.swift in Sources */,
 				635206FB204D7A46008C8C54 /* QminderEventsDelegate.swift in Sources */,
 				637D69912052EA0500C59BA2 /* Extensions+Data.swift in Sources */,
+				63AFBAA820D0FC42009E3D1C /* DeviceEvent.swift in Sources */,
 				635206EA204D7A3E008C8C54 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1133,8 +1178,10 @@
 				6318496E20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */,
 				635206B1204D7A2B008C8C54 /* Result.swift in Sources */,
 				6315470520A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */,
+				63AFBAAE20D0FC54009E3D1C /* LineEvent.swift in Sources */,
 				635206C4204D7A35008C8C54 /* Location.swift in Sources */,
 				635206E2204D7A3A008C8C54 /* Status.swift in Sources */,
+				63AFBA9A20D009E8009E3D1C /* WebsocketMessage.swift in Sources */,
 				635206C7204D7A35008C8C54 /* EmptyState.swift in Sources */,
 				635206DC204D7A3A008C8C54 /* Label.swift in Sources */,
 				635206C5204D7A35008C8C54 /* TVPairingCode.swift in Sources */,
@@ -1142,7 +1189,7 @@
 				635206E4204D7A3A008C8C54 /* Created.swift in Sources */,
 				635206E0204D7A3A008C8C54 /* Ticket.swift in Sources */,
 				635206B7204D7A2F008C8C54 /* ParameterEncoding.swift in Sources */,
-				635206F9204D7A43008C8C54 /* QminderEventType.swift in Sources */,
+				635206F9204D7A43008C8C54 /* QminderEvent.swift in Sources */,
 				63B913F12050124D0096F92D /* QminderAPIProtocol.swift in Sources */,
 				635206DF204D7A3A008C8C54 /* Interaction.swift in Sources */,
 				635206E1204D7A3A008C8C54 /* Extra.swift in Sources */,
@@ -1152,7 +1199,9 @@
 				635206E7204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
 				63520707204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206B0204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
+				63AFBAA420D0FC21009E3D1C /* TicketEvent.swift in Sources */,
 				635206DE204D7A3A008C8C54 /* TicketResponse.swift in Sources */,
+				63AFBA9F20D00A0D009E3D1C /* Callback.swift in Sources */,
 				63520705204D7A4B008C8C54 /* EventResponsable.swift in Sources */,
 				635206E6204D7A3E008C8C54 /* Desk.swift in Sources */,
 				635206E9204D7A3E008C8C54 /* HTTPMethod.swift in Sources */,
@@ -1161,6 +1210,7 @@
 				635206C9204D7A35008C8C54 /* Line.swift in Sources */,
 				635206FC204D7A47008C8C54 /* QminderEventsDelegate.swift in Sources */,
 				637D69922052EA0500C59BA2 /* Extensions+Data.swift in Sources */,
+				63AFBAA920D0FC42009E3D1C /* DeviceEvent.swift in Sources */,
 				635206E5204D7A3E008C8C54 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
