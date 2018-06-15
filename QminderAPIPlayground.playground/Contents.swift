@@ -75,3 +75,29 @@ qminderAPI.tvHeartbeat(id: 11389, metadata: ["test": "test"]) {
   print("TV heartbeat")
   print($0)
 }
+
+extension TicketEvent: CustomStringConvertible {
+  public var description: String {
+    switch self {
+      
+    case .created:
+      return "creat"
+    case .called:
+      return "c"
+    case .recalled:
+      return "c"
+    case .cancelled:
+      return "c"
+    case .served:
+      return "c"
+    case .changed:
+      return "c"
+    }
+  }
+  
+  
+}
+
+let te = TicketEvent.created
+
+print(te)

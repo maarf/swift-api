@@ -9,7 +9,7 @@
 import Foundation
 
 /// Device events
-public enum DeviceEvent: String {
+public enum DeviceWebsocketEvent: String {
   
   /// Overview monitor changed
   case overviewMonitorChange = "OVERVIEW_MONITOR_CHANGE"

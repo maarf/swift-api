@@ -15,7 +15,7 @@ internal struct WebsocketMessage {
   var subscriptionId: String
   
   /// Qminder event
-  var eventType: QminderEvent
+  var eventType: QminderWebsocketEvent
   
   /// String message what should be sent to Websocket
   var messageToSend: String

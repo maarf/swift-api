@@ -7,17 +7,17 @@
 
 import Foundation
 
-/// Qminder Event type
-public enum QminderEvent {
+/// Qminder Websocket Event type
+public enum QminderWebsocketEvent {
   
   /// Ticket events
-  case ticket(TicketEvent)
+  case ticket(TicketWebsocketEvent)
   
   /// Device events
-  case device(DeviceEvent)
+  case device(DeviceWebsocketEvent)
   
   /// Line events
-  case line(LineEvent)
+  case line(LineWebsocketEvent)
   
   /// String value for event
   var value: String {
