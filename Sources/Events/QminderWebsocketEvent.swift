@@ -18,9 +18,10 @@ public enum QminderWebsocketEvent {
   
   /// Line events
   case line(LineWebsocketEvent)
-  
-  /// String value for event
-  var value: String {
+}
+
+extension QminderWebsocketEvent: CustomStringConvertible {
+  public var description: String {
     switch self {
     case .ticket(let ticketEvent):
       return ticketEvent.rawValue

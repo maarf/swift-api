@@ -95,7 +95,8 @@ public class QminderEvents: QminderEventsProtocol {
   }
 
   public func subscribe(toTicketEvent eventType: TicketWebsocketEvent,
-                        parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
+                        parameters: [String: Any],
+                        callback: @escaping (Result<Ticket, QminderError>) -> Void) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: .ticket(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
@@ -109,7 +110,8 @@ public class QminderEvents: QminderEventsProtocol {
   }
 
   public func subscribe(toDeviceEvent eventType: DeviceWebsocketEvent,
-                        parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
+                        parameters: [String: Any],
+                        callback: @escaping (Result<TVDevice?, QminderError>) -> Void) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: .device(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
@@ -123,7 +125,8 @@ public class QminderEvents: QminderEventsProtocol {
   }
   
   public func subscribe(toLineEvent eventType: LineWebsocketEvent,
-                        parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
+                        parameters: [String: Any],
+                        callback: @escaping (Result<[Line], QminderError>) -> Void) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: .line(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
@@ -175,7 +178,7 @@ public class QminderEvents: QminderEventsProtocol {
     let subscriptionId = String(withRandomLenght: 30)
     
     parameters["id"] = subscriptionId
-    parameters["subscribe"] = eventType.value
+    parameters["subscribe"] = eventType.description
     
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])

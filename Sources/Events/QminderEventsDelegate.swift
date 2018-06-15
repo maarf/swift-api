@@ -10,16 +10,12 @@ import Foundation
 /// QminderEvents delagate methods
 public protocol QminderEventsDelegate: class {
   
-  /**
-   Called when connected to Websocket
-   */
+  /// Called when connected to Websocket
   func onConnected()
   
-  /**
-   Called when disconnected from Websocket
-   
-   - Parameter error: Error why it got disconnected
-   */
+  /// Called when disconnected from Websocket
+  ///
+  /// - Parameter error: Error why it got disconnected
   func onDisconnected(error: Error?)
   
 }
