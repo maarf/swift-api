@@ -94,8 +94,9 @@ public class QminderEvents: QminderEventsProtocol {
     self.socket.disconnect(closeCode: Constants.websocketReservedCloseCode)
   }
 
-  public func subscribe(toTicketEvent eventType: TicketEvent,
-                        parameters: [String: Any], callback: @escaping EventsCallbackType<Ticket>) {
+  public func subscribe(toTicketEvent eventType: TicketWebsocketEvent,
+                        parameters: [String: Any],
+                        callback: @escaping (Result<Ticket, QminderError>) -> Void) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: .ticket(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
@@ -108,8 +109,9 @@ public class QminderEvents: QminderEventsProtocol {
                            callback: .ticket(callback))
   }
 
-  public func subscribe(toDeviceEvent eventType: DeviceEvent,
-                        parameters: [String: Any], callback: @escaping EventsCallbackType<TVDevice?>) {
+  public func subscribe(toDeviceEvent eventType: DeviceWebsocketEvent,
+                        parameters: [String: Any],
+                        callback: @escaping (Result<TVDevice?, QminderError>) -> Void) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: .device(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
@@ -122,8 +124,9 @@ public class QminderEvents: QminderEventsProtocol {
                            callback: .device(callback))
   }
   
-  public func subscribe(toLineEvent eventType: LineEvent,
-                        parameters: [String: Any], callback: @escaping EventsCallbackType<[Line]>) {
+  public func subscribe(toLineEvent eventType: LineWebsocketEvent,
+                        parameters: [String: Any],
+                        callback: @escaping (Result<[Line], QminderError>) -> Void) {
     
     guard let (message, subscriptionId) = parseParameters(eventType: .line(eventType), parameters: parameters) else {
       callback(Result.failure(QminderError.parse))
@@ -144,7 +147,7 @@ public class QminderEvents: QminderEventsProtocol {
   ///   - message: Message to send
   ///   - callback: Callback execute when websocket event has accoured
   private func sendMessageToWebsocket(subscriptionId: String,
-                                      eventType: QminderEvent,
+                                      eventType: QminderWebsocketEvent,
                                       message: String,
                                       callback: Callback) {
     if socket.isConnected {
@@ -168,14 +171,14 @@ public class QminderEvents: QminderEventsProtocol {
   /// - Parameters:
   ///   - eventType: Qminder event type
   ///   - parameters: Parameters
-  private func parseParameters(eventType: QminderEvent,
+  private func parseParameters(eventType: QminderWebsocketEvent,
                                parameters: [String: Any]) -> (message: String, subscriptionId: String)? {
     
     var parameters = parameters
     let subscriptionId = String(withRandomLenght: 30)
     
     parameters["id"] = subscriptionId
-    parameters["subscribe"] = eventType.value
+    parameters["subscribe"] = eventType.description
     
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -208,7 +211,10 @@ public class QminderEvents: QminderEventsProtocol {
   ///   - eventType: Qminder event type
   ///   - messageToSend: Message to send to Websocket
   ///   - callback: Callback block when response is received
-  private func sendMessage(subscriptionId: String, eventType: QminderEvent, messageToSend: String, callback: Callback) {
+  private func sendMessage(subscriptionId: String,
+                           eventType: QminderWebsocketEvent,
+                           messageToSend: String,
+                           callback: Callback) {
     self.callbackMap[subscriptionId] = callback
     self.socket.write(string: messageToSend)
   }

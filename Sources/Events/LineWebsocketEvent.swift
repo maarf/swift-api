@@ -9,7 +9,7 @@
 import Foundation
 
 /// Line events
-public enum LineEvent: String {
+public enum LineWebsocketEvent: String {
   
   /// Lines changed
   case changed = "LINES_CHANGED"

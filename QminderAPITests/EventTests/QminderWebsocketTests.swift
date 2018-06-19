@@ -176,7 +176,7 @@ class QminderWebsocketTests: XCTestCase {
     }
   }
   
-  fileprivate func subscribeToTicket(_ ticketEvent: TicketEvent, parameters: [String: Any]) {
+  fileprivate func subscribeToTicket(_ ticketEvent: TicketWebsocketEvent, parameters: [String: Any]) {
     events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: { result in
       
       XCTAssertTrue(Thread.isMainThread)

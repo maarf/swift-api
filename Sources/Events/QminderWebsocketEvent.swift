@@ -7,20 +7,21 @@
 
 import Foundation
 
-/// Qminder Event type
-public enum QminderEvent {
+/// Qminder Websocket Event type
+public enum QminderWebsocketEvent {
   
   /// Ticket events
-  case ticket(TicketEvent)
+  case ticket(TicketWebsocketEvent)
   
   /// Device events
-  case device(DeviceEvent)
+  case device(DeviceWebsocketEvent)
   
   /// Line events
-  case line(LineEvent)
-  
-  /// String value for event
-  var value: String {
+  case line(LineWebsocketEvent)
+}
+
+extension QminderWebsocketEvent: CustomStringConvertible {
+  public var description: String {
     switch self {
     case .ticket(let ticketEvent):
       return ticketEvent.rawValue

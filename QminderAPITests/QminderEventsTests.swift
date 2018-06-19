@@ -27,7 +27,7 @@ class QminderEventsMock: QminderEventsProtocol {
     delegate?.onDisconnected(error: error)
   }
   
-  func subscribe(toTicketEvent eventType: TicketEvent,
+  func subscribe(toTicketEvent eventType: TicketWebsocketEvent,
                  parameters: [String: Any], callback: @escaping (Result<Ticket, QminderError>) -> Void) {
     let ticket = Ticket(statusCode: 200,
                         id: "1",
@@ -47,7 +47,7 @@ class QminderEventsMock: QminderEventsProtocol {
     callback(Result.init(ticket))
   }
   
-  func subscribe(toDeviceEvent eventType: DeviceEvent,
+  func subscribe(toDeviceEvent eventType: DeviceWebsocketEvent,
                  parameters: [String: Any], callback: @escaping (Result<TVDevice?, QminderError>) -> Void) {
     
     let settings = Settings.init(selectedLine: 1, lines: [1, 2, 3], clearTickets: .afterCalling)
@@ -61,7 +61,7 @@ class QminderEventsMock: QminderEventsProtocol {
     callback(Result.init(tvDevice))
   }
   
-  func subscribe(toLineEvent eventType: LineEvent,
+  func subscribe(toLineEvent eventType: LineWebsocketEvent,
                  parameters: [String: Any], callback: @escaping (Result<[Line], QminderError>) -> Void) {
     
     let lines = [Line(statusCode: 200, id: 1, name: "Line1", location: 1),

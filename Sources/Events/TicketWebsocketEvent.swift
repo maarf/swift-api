@@ -9,7 +9,7 @@
 import Foundation
 
 /// Ticket events
-public enum TicketEvent: String {
+public enum TicketWebsocketEvent: String {
   
   /// Ticket created
   case created = "TICKET_CREATED"
