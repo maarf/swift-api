@@ -50,7 +50,10 @@ class QminderEventsMock: QminderEventsProtocol {
   func subscribe(toDeviceEvent eventType: DeviceWebsocketEvent,
                  parameters: [String: Any], callback: @escaping (Result<TVDevice?, QminderError>) -> Void) {
     
-    let settings = Settings.init(selectedLine: 1, lines: [1, 2, 3], clearTickets: .afterCalling)
+    let settings = Settings.init(selectedLine: 1,
+                                 lines: [1, 2, 3],
+                                 clearTickets: .afterCalling,
+                                 notificationViewLineVisible: false)
     let tvDevice = TVDevice(statusCode: 200,
                             id: 1,
                             name: "Device",

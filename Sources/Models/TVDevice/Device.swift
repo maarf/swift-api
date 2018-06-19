@@ -41,4 +41,7 @@ public struct Settings: Codable {
   
   /// Clear tickets
   public let clearTickets: ClearTickets?
+  
+  /// Show notification view line
+  public let notificationViewLineVisible: Bool?
 }
