@@ -8,7 +8,7 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
 class TVDeviceModelTests: ModelTests {
   
@@ -24,7 +24,12 @@ class TVDeviceModelTests: ModelTests {
   private var tvDeviceData: [String: Any]!
   
   private func decodeToTVDevice() -> TVDevice? {
-    return try? tvDeviceData.decodeAs(TVDevice.self)
+    do {
+      return try tvDeviceData.decodeAs(TVDevice.self)
+    } catch {
+      print("Can't decode device", error)
+      return nil
+    }
   }
   
   override func setUp() {
@@ -38,7 +43,8 @@ class TVDeviceModelTests: ModelTests {
           firstLineId,
           secondLineId,
           thirdLineId],
-        "clearTickets": "afterCalling"
+        "clearTickets": "afterCalling",
+        "notificationViewLineVisible": true
       ],
       "theme": theme,
       "layout": layout
@@ -73,5 +79,17 @@ class TVDeviceModelTests: ModelTests {
   
     XCTAssertNil(device?.settings)
     XCTAssertNil(device?.settings?.lines)
+  }
+  
+  func testnotificationViewLineVisible() {
+    let device = decodeToTVDevice()
+    
+    guard let settings = device?.settings,
+      let notificationViewLineVisible = settings.notificationViewLineVisible else {
+      XCTFail("Can't get device settings and notificationViewLineVisible")
+      return
+    }
+    
+    XCTAssertTrue(notificationViewLineVisible)
   }
 }
