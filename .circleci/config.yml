@@ -1,4 +1,16 @@
-version: 2
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build-and-test
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
 jobs:
   build-and-test:
     macos:
@@ -65,9 +77,3 @@ jobs:
           command: |
             sed -i"any_symbol" "s/SLACK_KEY/${SLACK_KEY}/" codecov.yml
             bash <(curl -s https://codecov.io/bash)
-
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build-and-test
