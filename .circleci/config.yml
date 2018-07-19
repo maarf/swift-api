@@ -70,7 +70,6 @@ workflows:
              branches:
                only:
                  - master
-                 - beta
      jobs:
        - test
   build-and-test:
