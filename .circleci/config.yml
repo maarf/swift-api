@@ -31,8 +31,15 @@ jobs:
             swift build
             .build/debug/TestWebsockets&
             cd ..
-            set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-iOS -destination 'platform=iOS Simulator,name=iPhone X' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
-            set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean test build | xcpretty --color
+            set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-iOS -destination 'platform=iOS Simulator,name=iPhone X' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -enableCodeCoverage YES clean test build | xcpretty --color
+            set -o pipefail && xcodebuild -project QminderAPI.xcodeproj -scheme QminderAPI-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -enableCodeCoverage YES clean test build | xcpretty --color
+
+      - run:
+          name: Codeconv
+          command: |
+            sed -i"any_symbol" "s/SLACK_KEY/${SLACK_KEY}/" codecov.yml
+            bash <(curl -s https://codecov.io/bash)
+
       - run:
           name: SwiftPM Build
           command: swift build
@@ -54,12 +61,6 @@ jobs:
       - run:
           name: Pod lib lint
           command: pod lib lint --allow-warnings
-
-      - run:
-          name: Codeconv
-          command: |
-            sed -i"any_symbol" "s/SLACK_KEY/${SLACK_KEY}/" codecov.yml
-            bash <(curl -s https://codecov.io/bash)
 workflows:
   version: 2
   nightly:
@@ -71,7 +72,7 @@ workflows:
                only:
                  - master
      jobs:
-       - test
+       - build-and-test
   build-and-test:
     jobs:
       - build-and-test
