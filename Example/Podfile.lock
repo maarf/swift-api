@@ -1,19 +1,23 @@
 PODS:
-  - QminderAPI (1.5.2):
+  - QminderAPI (1.7.1):
     - Starscream (~> 3.0)
-  - Starscream (3.0.4)
+  - Starscream (3.0.5)
 
 DEPENDENCIES:
   - QminderAPI (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Starscream
+
 EXTERNAL SOURCES:
   QminderAPI:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  QminderAPI: 0f3092c9dbd1aff09a0b0be1002ef19218076c98
-  Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
+  QminderAPI: 95be8c5cd82fa4af5b5afa7ed86c98f368caf4f6
+  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
 
 PODFILE CHECKSUM: 8803218db304784d073990b287c0b1577218675a
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
