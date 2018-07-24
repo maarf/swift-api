@@ -20,6 +20,7 @@ class TicketResponseTests: ModelTests {
     let lastName = String.random
     let ticketCreated = Date.random
     let lineId = Int.random
+    let email = "\(String.random)@\(String.random).com"
     
     let ticketResponseData: [String: Any] = [
       "subscriptionId": subScriptionId,
@@ -31,7 +32,8 @@ class TicketResponseTests: ModelTests {
         "created": ["date": ticketCreated.format(.withMilliseconds)],
         "id": ticketId,
         "line": lineId,
-        "lastName": lastName
+        "lastName": lastName,
+        "email": email
       ]
     ]
     let ticketResponse = try? ticketResponseData.decodeAs(TicketEventResponse.self,
@@ -52,5 +54,6 @@ class TicketResponseTests: ModelTests {
     XCTAssertEqual(ticket.lastName, lastName)
     XCTAssertEqual(ticket.line, lineId)
     XCTAssertEqual(ticket.createdDate, ticketCreated)
+    XCTAssertEqual(ticket.email, email)
   }
 }

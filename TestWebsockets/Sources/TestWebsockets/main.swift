@@ -1,6 +1,6 @@
 import WebSocket
 
-let group = MultiThreadedEventLoopGroup(numThreads: 8)
+let group = MultiThreadedEventLoopGroup(numberOfThreads: 8)
 
 let ws = HTTPServer.webSocketUpgrader(shouldUpgrade: { req in
   [:]

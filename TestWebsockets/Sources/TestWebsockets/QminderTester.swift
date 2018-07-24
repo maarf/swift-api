@@ -57,6 +57,7 @@ class QminderEventsTester {
         "source": "MANUAL",
         "firstName": "Name",
         "lastName": "Surname",
+        "email": "test@example.com",
         "line": 62633,
         "id": "23853943",
         "created" : [
@@ -71,6 +72,7 @@ class QminderEventsTester {
         "source": "MANUAL",
         "firstName": "Name1",
         "lastName": "Surname1",
+        "email": "test1@example.com",
         "line": 62633,
         "id": "23856820",
         "created": [
