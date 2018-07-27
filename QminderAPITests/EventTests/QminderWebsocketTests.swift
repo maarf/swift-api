@@ -10,7 +10,7 @@ import XCTest
 
 @testable import QminderAPI
 
-class QminderWebsocketTests: XCTestCase, Loggable {
+class QminderWebsocketTests: XCTestCase {
   /// Qminder API client
   var qminderAPI: QminderAPI!
   var events: QminderEvents!
@@ -183,7 +183,7 @@ class QminderWebsocketTests: XCTestCase, Loggable {
       
       switch result {
       case let .success(ticket):
-        self?.log(ticket)
+        print(ticket)
         
         self?.eventsResponses.append(ticket)
       default:
@@ -214,7 +214,7 @@ class QminderWebsocketTests: XCTestCase, Loggable {
       
       switch result {
       case let .success(line):
-        self?.log(line)
+        print(line)
         self?.linesResponses.append(line)
         
       default:

@@ -10,7 +10,7 @@ import XCTest
 
 @testable import QminderAPI
 
-class TVDeviceModelTests: ModelTests, Loggable {
+class TVDeviceModelTests: ModelTests {
   
   private let tvDeviceId = Int.random
   private let tvDeviceName = String.random
