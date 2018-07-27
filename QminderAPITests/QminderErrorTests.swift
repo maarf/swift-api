@@ -29,7 +29,7 @@ class QminderErrorTests: XCTestCase {
     
     switch error.qminderError {
     case .parse:
-      print("Error is QminderError.parse")
+      log("Error is QminderError.parse")
     default:
       XCTFail("Should be parse QminderError")
     }

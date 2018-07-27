@@ -8,9 +8,9 @@
 
 import XCTest
 
-import QminderAPI
+@testable import QminderAPI
 
-class QminderWebsocketTests: XCTestCase {
+class QminderWebsocketTests: XCTestCase, Loggable {
   /// Qminder API client
   var qminderAPI: QminderAPI!
   var events: QminderEvents!
@@ -177,15 +177,15 @@ class QminderWebsocketTests: XCTestCase {
   }
   
   fileprivate func subscribeToTicket(_ ticketEvent: TicketWebsocketEvent, parameters: [String: Any]) {
-    events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: { result in
+    events.subscribe(toTicketEvent: ticketEvent, parameters: parameters, callback: {[weak self] result in
       
       XCTAssertTrue(Thread.isMainThread)
       
       switch result {
       case let .success(ticket):
-        print(ticket)
+        self?.log(ticket)
         
-        self.eventsResponses.append(ticket)
+        self?.eventsResponses.append(ticket)
       default:
         break
       }
@@ -208,14 +208,14 @@ class QminderWebsocketTests: XCTestCase {
   }
   
   fileprivate func subscribeLines(parameters: [String: Any]) {
-    events.subscribe(toLineEvent: .changed, parameters: parameters) { result in
+    events.subscribe(toLineEvent: .changed, parameters: parameters) {[weak self] result in
       
       XCTAssertTrue(Thread.isMainThread)
       
       switch result {
       case let .success(line):
-        print(line)
-        self.linesResponses.append(line)
+        self?.log(line)
+        self?.linesResponses.append(line)
         
       default:
         break

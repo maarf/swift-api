@@ -49,7 +49,7 @@ class QminderResultTests: XCTestCase {
     case let .failure(error):
       switch error {
       case .apiKeyNotSet:
-        print("Error set correctly")
+        log("Error set correctly")
       default:
         XCTFail("Error not correctly set")
       }

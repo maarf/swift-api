@@ -156,6 +156,10 @@
 		6352070A204D7A55008C8C54 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63520709204D7A55008C8C54 /* Starscream.framework */; };
 		6352070C204D7A64008C8C54 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6352070B204D7A64008C8C54 /* Starscream.framework */; };
 		6352070E204D7A6B008C8C54 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6352070D204D7A6B008C8C54 /* Starscream.framework */; };
+		635BDB66210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
+		635BDB67210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
+		635BDB68210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
+		635BDB69210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
 		635E0DD4204D915F00B1123A /* LinesAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED67F204D8D60001554AC /* LinesAPITests.swift */; };
 		635E0DD5204D915F00B1123A /* UsersAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED67E204D8D60001554AC /* UsersAPITests.swift */; };
 		635E0DD6204D915F00B1123A /* LineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED66C204D8D60001554AC /* LineModelTests.swift */; };
@@ -316,6 +320,7 @@
 		63520715204D7D57008C8C54 /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
 		63520717204D7D5E008C8C54 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		63520719204D7D66008C8C54 /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
+		635BDB65210B296B000EFDEC /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
 		635E0DEF204D915F00B1123A /* QminderAPITests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QminderAPITests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6370FF2F20860ADC00ED3196 /* ClearTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearTickets.swift; sourceTree = "<group>"; };
 		637D698E2052EA0500C59BA2 /* Extensions+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Data.swift"; sourceTree = "<group>"; };
@@ -439,6 +444,7 @@
 				63520717204D7D5E008C8C54 /* Info-tvOS.plist */,
 				63520715204D7D57008C8C54 /* Info-watchOS.plist */,
 				63520719204D7D66008C8C54 /* Info-macOS.plist */,
+				635BDB64210B2953000EFDEC /* Logger */,
 				63520630204D78E5008C8C54 /* Result */,
 				63520633204D78E5008C8C54 /* QminderError.swift */,
 				63520634204D78E5008C8C54 /* ParameterEncoding.swift */,
@@ -553,6 +559,14 @@
 				6352067E204D79B9008C8C54 /* Info.plist */,
 			);
 			path = QminderAPITests;
+			sourceTree = "<group>";
+		};
+		635BDB64210B2953000EFDEC /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				635BDB65210B296B000EFDEC /* Loggable.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 		6370FF2E20860ACB00ED3196 /* TVDevice */ = {
@@ -1013,6 +1027,7 @@
 				6320D863204D81580041FFAC /* ParameterEncoding.swift in Sources */,
 				6320D864204D815B0041FFAC /* ResultProtocol.swift in Sources */,
 				6320D84E204D81480041FFAC /* DeviceEventResponse.swift in Sources */,
+				635BDB66210B296B000EFDEC /* Loggable.swift in Sources */,
 				63AFBAA120D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */,
 				6320D861204D81550041FFAC /* Created.swift in Sources */,
 				63AFBA9C20D00A0D009E3D1C /* Callback.swift in Sources */,
@@ -1099,6 +1114,7 @@
 				635206F1204D7A3F008C8C54 /* QminderAPI.swift in Sources */,
 				635206FF204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206AC204D7A2A008C8C54 /* ResultProtocol.swift in Sources */,
+				635BDB67210B296B000EFDEC /* Loggable.swift in Sources */,
 				63AFBAA220D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */,
 				635206CC204D7A39008C8C54 /* TicketResponse.swift in Sources */,
 				63AFBA9D20D00A0D009E3D1C /* Callback.swift in Sources */,
@@ -1149,6 +1165,7 @@
 				635206EC204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
 				63520703204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206AE204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
+				635BDB68210B296B000EFDEC /* Loggable.swift in Sources */,
 				63AFBAA320D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */,
 				635206D5204D7A39008C8C54 /* TicketResponse.swift in Sources */,
 				63AFBA9E20D00A0D009E3D1C /* Callback.swift in Sources */,
@@ -1199,6 +1216,7 @@
 				635206E7204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
 				63520707204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
 				635206B0204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
+				635BDB69210B296B000EFDEC /* Loggable.swift in Sources */,
 				63AFBAA420D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */,
 				635206DE204D7A3A008C8C54 /* TicketResponse.swift in Sources */,
 				63AFBA9F20D00A0D009E3D1C /* Callback.swift in Sources */,

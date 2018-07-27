@@ -10,7 +10,7 @@ import XCTest
 
 @testable import QminderAPI
 
-class TVDeviceModelTests: ModelTests {
+class TVDeviceModelTests: ModelTests, Loggable {
   
   private let tvDeviceId = Int.random
   private let tvDeviceName = String.random
@@ -27,7 +27,7 @@ class TVDeviceModelTests: ModelTests {
     do {
       return try tvDeviceData.decodeAs(TVDevice.self)
     } catch {
-      print("Can't decode device", error)
+      log("Can't decode device", error)
       return nil
     }
   }

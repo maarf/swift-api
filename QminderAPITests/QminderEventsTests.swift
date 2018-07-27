@@ -110,7 +110,7 @@ class QminderEventsTests: XCTestCase {
       
       switch result {
       case .failure(let error):
-        print("fail \(error)")
+        log("fail \(error)")
         
       case let .success(device):
         XCTAssertNotNil(device)
@@ -135,7 +135,7 @@ class QminderEventsTests: XCTestCase {
     qminderEvents?.subscribe(toLineEvent: .changed, parameters: ["id": 1]) { result in
       switch result {
       case .failure(let error):
-        print("fail \(error)")
+        log("fail \(error)")
         
       case let .success(lines):
         XCTAssertEqual(lines.count, 3)
@@ -161,7 +161,7 @@ class QminderEventsTests: XCTestCase {
     qminderEvents?.subscribe(toTicketEvent: .created, parameters: ["location": 1]) { result in
       switch result {
       case .failure(let error):
-        print("fail \(error)")
+        log("fail \(error)")
       case let .success(ticket):
         XCTAssertEqual(ticket.id, "1")
         XCTAssertEqual(ticket.firstName, "Name")
@@ -196,6 +196,7 @@ extension QminderEventsTests: QminderEventsDelegate {
   }
   
   func onDisconnected(error: Error?) {
+    log(error)
     self.error = error
     isConnected = false
   }

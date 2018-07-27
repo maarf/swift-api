@@ -10,7 +10,7 @@ import XCTest
 
 @testable import QminderAPI
 
-class ResponseDataTests: XCTestCase {
+class ResponseDataTests: XCTestCase, Loggable {
   
   func testResponsableWithData() {
     
@@ -80,7 +80,7 @@ class ResponseDataTests: XCTestCase {
       
       switch error {
       case let .jsonParsing(jsonError as DecodingError):
-        print("Parsing error \(jsonError)")
+        log("Parsing error \(jsonError)")
       default:
         XCTFail("Should not be other error than jsonParsing")
       }
@@ -127,7 +127,7 @@ class ResponseDataTests: XCTestCase {
       
       switch error {
       case let .jsonParsing(jsonError as DecodingError):
-        print("Parsing error \(jsonError)")
+        log("Parsing error \(jsonError)")
       default:
         XCTFail("Should not be other error than jsonParsing")
       }
