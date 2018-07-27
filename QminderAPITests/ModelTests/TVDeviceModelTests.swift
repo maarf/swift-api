@@ -27,7 +27,7 @@ class TVDeviceModelTests: ModelTests {
     do {
       return try tvDeviceData.decodeAs(TVDevice.self)
     } catch {
-      log("Can't decode device", error)
+      print("Can't decode device", error)
       return nil
     }
   }
