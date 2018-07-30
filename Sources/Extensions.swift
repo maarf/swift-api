@@ -100,14 +100,14 @@ public extension Dictionary where Key == String, Value == Any {
   }
 }
 
-extension URLRequest {
+extension URLRequest: Loggable {
   
   /**
    Print curl String from request
   */
   public func printCurlString() {
     #if DEBUG
-      print("\(curlString)")
+      log("\(curlString)")
     #endif
   }
   

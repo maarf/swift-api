@@ -11,7 +11,7 @@ import Foundation
 import Starscream
 
 /// Qminder Events works with Qminder Websockets
-public class QminderEvents: QminderEventsProtocol {
+public class QminderEvents: QminderEventsProtocol, Loggable {
 
   public weak var delegate: QminderEventsDelegate?
 
@@ -73,7 +73,7 @@ public class QminderEvents: QminderEventsProtocol {
   
   public func openSocket() {
     if !openingConnection {
-      print("openSocket")
+      log("openSocket")
       openingConnection = true
       connectionClosed = false
       self.socket.connect()
@@ -82,11 +82,14 @@ public class QminderEvents: QminderEventsProtocol {
   
   public func reOpenSocket() {
     if !self.socket.isConnected {
+      log("reOpenSocket")
       openSocket()
     }
   }
   
   public func closeSocket() {
+    log("close Socket")
+    
     messageHistory.removeAll()
     messageQueue.removeAll()
     
@@ -226,7 +229,7 @@ extension QminderEvents: WebSocketDelegate {
   ///
   /// - Parameter socket: Websocket object
   public func websocketDidConnect(socket: WebSocketClient) {
-    print("Connection opened")
+    log("Connection opened")
 
     openingConnection = false
     
@@ -257,6 +260,8 @@ extension QminderEvents: WebSocketDelegate {
   ///   - socket: Websocket object
   ///   - error: Error why Websocket disconnected
   public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+    log("Connection disconnected \(String(describing: error))")
+    
     openingConnection = false
     
     delegate?.onDisconnected(error: error)
@@ -283,7 +288,7 @@ extension QminderEvents: WebSocketDelegate {
       
       parseWebSocketEvent(with: data, using: callback)
     } catch {
-      print("Error deserializing JSON")
+      log("Error deserializing JSON")
     }
   }
   
