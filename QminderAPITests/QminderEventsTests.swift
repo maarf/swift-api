@@ -197,6 +197,7 @@ extension QminderEventsTests: QminderEventsDelegate {
   }
   
   func onDisconnected(error: Error?) {
+    print(error)
     self.error = error
     isConnected = false
   }
