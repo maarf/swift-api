@@ -8,12 +8,21 @@
 
 import Foundation
 
+/// Loggable protocol
 protocol Loggable {
-  func log(_ closure: @autoclosure () -> Any)
+  
+  /// Log message
+  ///
+  /// - Parameters:
+  ///   - message: Message to log
+  ///   - path: File path
+  ///   - function: Function name
+  ///   - line: Line number
+  func log(_ message: @autoclosure () -> Any, _ path: String, _ function: String, line: Int)
 }
 
 extension Loggable {
-  func log(_ closure: @autoclosure () -> Any) {
-    print("%@", "\(closure())")
+  func log(_ message: @autoclosure () -> Any, _ path: String = #file, _ function: String = #function, line: Int = #line) {
+    print("\(Date()) \(path):\(line) \(function) \(message())")
   }
 }
