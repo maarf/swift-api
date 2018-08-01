@@ -1,6 +1,6 @@
 import WebSocket
 
-let group = MultiThreadedEventLoopGroup(numThreads: 8)
+let group = MultiThreadedEventLoopGroup(numberOfThreads: 8)
 
 let ws = HTTPServer.webSocketUpgrader(shouldUpgrade: { req in
   [:]
@@ -25,7 +25,7 @@ let server = try HTTPServer.start(
   upgraders: [ws],
   on: group
 ) { error in
-  print("error")
+  print("error", error)
 }.wait()
 
 try server.onClose.wait()
