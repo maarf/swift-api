@@ -18,11 +18,14 @@ protocol Loggable {
   ///   - path: File path
   ///   - function: Function name
   ///   - line: Line number
-  func log(_ message: @autoclosure () -> Any, _ path: String, _ function: String, line: Int)
+  func log(_ message: @autoclosure () -> Any, _ path: String, _ function: String, _ line: Int)
 }
 
 extension Loggable {
-  func log(_ message: @autoclosure () -> Any, _ path: String = #file, _ function: String = #function, line: Int = #line) {
+  func log(_ message: @autoclosure () -> Any,
+           _ path: String = #file,
+           _ function: String = #function,
+           _ line: Int = #line) {
     print("\(Date()) \(path):\(line) \(function) \(message())")
   }
 }

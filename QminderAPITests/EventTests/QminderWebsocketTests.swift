@@ -12,7 +12,7 @@ import XCTest
 
 class QminderWebsocketTests: XCTestCase {
   /// Qminder API client
-  var qminderAPI: QminderAPI!
+  var qminderAPI: QminderAPIProtocol!
   var events: QminderEvents!
   
   /// Location ID

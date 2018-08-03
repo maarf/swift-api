@@ -15,7 +15,7 @@ class QminderAPITests: XCTestCase {
   var qminderAPI: QminderAPIProtocol!
   
   /// Events
-  var events: QminderEvents!
+  var events: QminderEventsProtocol!
   
   /// Location ID
   let locationId = Int(ProcessInfo.processInfo.environment["QMINDER_LOCATION_ID"]!)!
