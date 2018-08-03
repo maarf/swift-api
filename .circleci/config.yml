@@ -12,7 +12,7 @@ jobs:
           command: |
             brew update
             brew outdated carthage || brew upgrade carthage
-            carthage bootstrap
+            carthage update
       - run:
           name: Install Swiftlint
           command: brew install swiftlint
