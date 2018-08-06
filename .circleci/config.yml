@@ -8,11 +8,11 @@ jobs:
       - checkout
 
       - run:
-        name: Reset simulators
-        command: |
-          export LC_ALL=en_US.UTF-8
-          export LANG=en_US.UTF-8
-          fastlane snapshot reset_simulators --force
+          name: Reset simulators
+          command: |
+            export LC_ALL=en_US.UTF-8
+            export LANG=en_US.UTF-8
+            fastlane snapshot reset_simulators --force
 
       - run:
           name: Carthage
@@ -20,6 +20,7 @@ jobs:
             brew update
             brew outdated carthage || brew upgrade carthage
             carthage update --platform ios
+            
       - run:
           name: Install Swiftlint
           command: brew install swiftlint
