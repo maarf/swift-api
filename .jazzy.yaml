@@ -1,4 +1,4 @@
-podspec: QminderAPI.podspec
+# podspec: QminderAPI.podspec
 author: Qminder
 author_url: https://www.qminder.com/
 github_url: https://github.com/Qminder/swift-api
@@ -7,4 +7,5 @@ theme: apple
 output: docs
 clean: true
 documentation: docs/*.md
-xcodebuild_arguments: ["-propject", "QminderAPI.xcodeproj", "-scheme", "QminderAPI-iOS", "-sdk","iphonesimulator"]
+xcodebuild_arguments: ["-project", "QminderAPI.xcodeproj", "-scheme", "QminderAPI-iOS", "-sdk","iphonesimulator"]
+swift_version: "4.2"
