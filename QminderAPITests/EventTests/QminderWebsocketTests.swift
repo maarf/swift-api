@@ -54,12 +54,15 @@ class QminderWebsocketTests: XCTestCase {
     // Test run #1
     // Ticket created
     addTestTimer { ticket in
-      ticket.status == .new && ticket.id == "23853943" && ticket.firstName == "Name" && ticket.lastName == "Surname"
+      ticket.status == .new && ticket.id == "23853943"
+        && ticket.firstName == "Name" && ticket.lastName == "Surname"
+        && ticket.email == "test@example.com"
     }
     
     // Ticket edited
     addTestTimer { ticket in
-      ticket.id == "23853943"  && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
+      ticket.id == "23853943"
+        && ticket.firstName == "Name2" && ticket.lastName == "Surname2"
     }
     
     // Ticket deleted
@@ -73,7 +76,9 @@ class QminderWebsocketTests: XCTestCase {
     // Test run #2
     // Ticket created
     addTestTimer { ticket in
-      ticket.status == .new && ticket.id == "23856820"  && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
+      ticket.status == .new && ticket.id == "23856820"
+        && ticket.firstName == "Name1" && ticket.lastName == "Surname1"
+        && ticket.email == "test1@example.com"
     }
     
     // Ticket edited

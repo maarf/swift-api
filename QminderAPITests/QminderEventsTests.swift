@@ -38,6 +38,7 @@ class QminderEventsMock: QminderEventsProtocol {
                         firstName: "Name",
                         lastName: "Surname",
                         phoneNumber: 123456789,
+                        email: "test@example.com",
                         created: Created.init(date: Date()),
                         served: nil,
                         labels: [Label(color: "black", value: "blackLabel")],

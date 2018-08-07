@@ -17,6 +17,7 @@ class TicketModelTests: ModelTests {
   private let lastName = String.random
   private let lineId = Int.random
   private let createdDate = Date.random
+  private let email = "\(String.random)@\(String.random).com"
   
   private var ticketData: [String: Any]!
   
@@ -34,7 +35,8 @@ class TicketModelTests: ModelTests {
       "created": ["date": createdDate.format(.withMilliseconds)],
       "id": ticketId,
       "line": lineId,
-      "lastName": lastName
+      "lastName": lastName,
+      "email": email
     ]
   }
   
@@ -48,6 +50,7 @@ class TicketModelTests: ModelTests {
     XCTAssertEqual(ticket?.status, .new)
     XCTAssertEqual(ticket?.firstName, firstName)
     XCTAssertEqual(ticket?.lastName, lastName)
+    XCTAssertEqual(ticket?.email, email)
     XCTAssertEqual(ticket?.line, lineId)
     XCTAssertEqual(ticket?.createdDate, createdDateWithoutMilliseconds)
   }

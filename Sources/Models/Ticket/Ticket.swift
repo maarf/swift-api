@@ -37,6 +37,9 @@ public protocol Ticketable: Codable {
   /// Phone number
   var phoneNumber: Int? { get set }
   
+  /// Email
+  var email: String? { get set }
+  
   /// Created date
   var created: Created { get }
   
@@ -103,6 +106,7 @@ public struct Ticket: Ticketable, Responsable {
   public var firstName: String?
   public var lastName: String?
   public var phoneNumber: Int?
+  public var email: String?
   public var created: Created
   public var served: Served?
   public var labels: [Label]?
