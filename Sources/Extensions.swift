@@ -73,15 +73,7 @@ extension String {
    */
   init (withRandomLenght length: Int) {
     let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    let randomLength = UInt32(letters.count)
-    
-    let randomString: String = (0 ..< length).reduce(String()) { accum, _ in
-      let randomOffset = arc4random_uniform(randomLength)
-      let randomIndex = letters.index(letters.startIndex, offsetBy: Int(randomOffset))
-      return accum.appending(String(letters[randomIndex]))
-    }
-    
-    self = randomString
+    self = String((0..<length).compactMap {_ in letters.randomElement() })
   }
 }
 
