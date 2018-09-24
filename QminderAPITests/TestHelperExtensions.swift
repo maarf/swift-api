@@ -24,7 +24,7 @@ extension Int {
    - Returns: Random Int
   */
   static func random(max: Int = 20) -> Int {
-    return Int(arc4random_uniform(UInt32(max) + 1))
+    return Int.random(in: 0...max)
   }
 }
 
@@ -44,7 +44,7 @@ extension Double {
    - Returns: Random Double
   */
   static func random(min: Double, max: Double) -> Double {
-    return (Double(arc4random()) / 0xFFFFFFFF) * (max - min) + min
+    return Double.random(in: min...max)
   }
 }
 
