@@ -10,20 +10,16 @@
 		6304932C2052AFBB001529B4 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304932B2052AFBB001529B4 /* Responsable.swift */; };
 		6304932D2052AFBB001529B4 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304932B2052AFBB001529B4 /* Responsable.swift */; };
 		6304932E2052AFBB001529B4 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304932B2052AFBB001529B4 /* Responsable.swift */; };
-		6304932F2052AFBB001529B4 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304932B2052AFBB001529B4 /* Responsable.swift */; };
 		6315470220A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470120A47B9A0032B2EC /* QminderEventsProtocol.swift */; };
 		6315470320A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470120A47B9A0032B2EC /* QminderEventsProtocol.swift */; };
 		6315470420A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470120A47B9A0032B2EC /* QminderEventsProtocol.swift */; };
-		6315470520A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470120A47B9A0032B2EC /* QminderEventsProtocol.swift */; };
 		6315470720A4A1680032B2EC /* QminderEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470620A4A1680032B2EC /* QminderEventsTests.swift */; };
 		6318496B20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496A20516EC40082068A /* QminderAPIEndpointProtocol.swift */; };
 		6318496C20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496A20516EC40082068A /* QminderAPIEndpointProtocol.swift */; };
 		6318496D20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496A20516EC40082068A /* QminderAPIEndpointProtocol.swift */; };
-		6318496E20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496A20516EC40082068A /* QminderAPIEndpointProtocol.swift */; };
 		631849702051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
 		631849712051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
 		631849722051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
-		631849732051703C0082068A /* QminderAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318496F2051703C0082068A /* QminderAPIEndpoint.swift */; };
 		631E0C4720AEE6340017C1BF /* TestHelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E578D20AD8DF50089C90B /* TestHelperExtensions.swift */; };
 		631E0C4820AEE6510017C1BF /* QminderEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315470620A4A1680032B2EC /* QminderEventsTests.swift */; };
 		6320D847204D81420041FFAC /* QminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520648204D78E5008C8C54 /* QminderAPI.swift */; };
@@ -64,14 +60,10 @@
 		635206AD204D7A2A008C8C54 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520632204D78E5008C8C54 /* Result.swift */; };
 		635206AE204D7A2B008C8C54 /* ResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520631204D78E5008C8C54 /* ResultProtocol.swift */; };
 		635206AF204D7A2B008C8C54 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520632204D78E5008C8C54 /* Result.swift */; };
-		635206B0204D7A2B008C8C54 /* ResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520631204D78E5008C8C54 /* ResultProtocol.swift */; };
-		635206B1204D7A2B008C8C54 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520632204D78E5008C8C54 /* Result.swift */; };
 		635206B2204D7A2E008C8C54 /* QminderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520633204D78E5008C8C54 /* QminderError.swift */; };
 		635206B3204D7A2E008C8C54 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520634204D78E5008C8C54 /* ParameterEncoding.swift */; };
 		635206B4204D7A2E008C8C54 /* QminderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520633204D78E5008C8C54 /* QminderError.swift */; };
 		635206B5204D7A2E008C8C54 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520634204D78E5008C8C54 /* ParameterEncoding.swift */; };
-		635206B6204D7A2F008C8C54 /* QminderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520633204D78E5008C8C54 /* QminderError.swift */; };
-		635206B7204D7A2F008C8C54 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520634204D78E5008C8C54 /* ParameterEncoding.swift */; };
 		635206B8204D7A34008C8C54 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520636204D78E5008C8C54 /* Location.swift */; };
 		635206B9204D7A34008C8C54 /* TVPairingCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520637204D78E5008C8C54 /* TVPairingCode.swift */; };
 		635206BA204D7A34008C8C54 /* TVAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520638204D78E5008C8C54 /* TVAPIData.swift */; };
@@ -84,12 +76,6 @@
 		635206C1204D7A35008C8C54 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520639204D78E5008C8C54 /* EmptyState.swift */; };
 		635206C2204D7A35008C8C54 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063A204D78E5008C8C54 /* User.swift */; };
 		635206C3204D7A35008C8C54 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063B204D78E5008C8C54 /* Line.swift */; };
-		635206C4204D7A35008C8C54 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520636204D78E5008C8C54 /* Location.swift */; };
-		635206C5204D7A35008C8C54 /* TVPairingCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520637204D78E5008C8C54 /* TVPairingCode.swift */; };
-		635206C6204D7A35008C8C54 /* TVAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520638204D78E5008C8C54 /* TVAPIData.swift */; };
-		635206C7204D7A35008C8C54 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520639204D78E5008C8C54 /* EmptyState.swift */; };
-		635206C8204D7A35008C8C54 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063A204D78E5008C8C54 /* User.swift */; };
-		635206C9204D7A35008C8C54 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063B204D78E5008C8C54 /* Line.swift */; };
 		635206CA204D7A39008C8C54 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063D204D78E5008C8C54 /* Label.swift */; };
 		635206CB204D7A39008C8C54 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063E204D78E5008C8C54 /* Source.swift */; };
 		635206CC204D7A39008C8C54 /* TicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063F204D78E5008C8C54 /* TicketResponse.swift */; };
@@ -108,20 +94,6 @@
 		635206D9204D7A39008C8C54 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520643204D78E5008C8C54 /* Status.swift */; };
 		635206DA204D7A39008C8C54 /* Served.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520644204D78E5008C8C54 /* Served.swift */; };
 		635206DB204D7A39008C8C54 /* Created.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520645204D78E5008C8C54 /* Created.swift */; };
-		635206DC204D7A3A008C8C54 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063D204D78E5008C8C54 /* Label.swift */; };
-		635206DD204D7A3A008C8C54 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063E204D78E5008C8C54 /* Source.swift */; };
-		635206DE204D7A3A008C8C54 /* TicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352063F204D78E5008C8C54 /* TicketResponse.swift */; };
-		635206DF204D7A3A008C8C54 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520640204D78E5008C8C54 /* Interaction.swift */; };
-		635206E0204D7A3A008C8C54 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520641204D78E5008C8C54 /* Ticket.swift */; };
-		635206E1204D7A3A008C8C54 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520642204D78E5008C8C54 /* Extra.swift */; };
-		635206E2204D7A3A008C8C54 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520643204D78E5008C8C54 /* Status.swift */; };
-		635206E3204D7A3A008C8C54 /* Served.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520644204D78E5008C8C54 /* Served.swift */; };
-		635206E4204D7A3A008C8C54 /* Created.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520645204D78E5008C8C54 /* Created.swift */; };
-		635206E5204D7A3E008C8C54 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520646204D78E5008C8C54 /* Device.swift */; };
-		635206E6204D7A3E008C8C54 /* Desk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520647204D78E5008C8C54 /* Desk.swift */; };
-		635206E7204D7A3E008C8C54 /* QminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520648204D78E5008C8C54 /* QminderAPI.swift */; };
-		635206E8204D7A3E008C8C54 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520649204D78E5008C8C54 /* Extensions.swift */; };
-		635206E9204D7A3E008C8C54 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064A204D78E5008C8C54 /* HTTPMethod.swift */; };
 		635206EA204D7A3E008C8C54 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520646204D78E5008C8C54 /* Device.swift */; };
 		635206EB204D7A3E008C8C54 /* Desk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520647204D78E5008C8C54 /* Desk.swift */; };
 		635206EC204D7A3E008C8C54 /* QminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520648204D78E5008C8C54 /* QminderAPI.swift */; };
@@ -136,11 +108,8 @@
 		635206F5204D7A43008C8C54 /* QminderWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderWebsocketEvent.swift */; };
 		635206F6204D7A43008C8C54 /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064C204D78E5008C8C54 /* QminderEvents.swift */; };
 		635206F7204D7A43008C8C54 /* QminderWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderWebsocketEvent.swift */; };
-		635206F8204D7A43008C8C54 /* QminderEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064C204D78E5008C8C54 /* QminderEvents.swift */; };
-		635206F9204D7A43008C8C54 /* QminderWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064D204D78E5008C8C54 /* QminderWebsocketEvent.swift */; };
 		635206FA204D7A46008C8C54 /* QminderEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */; };
 		635206FB204D7A46008C8C54 /* QminderEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */; };
-		635206FC204D7A47008C8C54 /* QminderEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520653204D78E5008C8C54 /* QminderEventsDelegate.swift */; };
 		635206FD204D7A4B008C8C54 /* EventResponsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064F204D78E5008C8C54 /* EventResponsable.swift */; };
 		635206FE204D7A4B008C8C54 /* LinesEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520650204D78E5008C8C54 /* LinesEventResponse.swift */; };
 		635206FF204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520651204D78E5008C8C54 /* DeviceEventResponse.swift */; };
@@ -149,17 +118,11 @@
 		63520702204D7A4B008C8C54 /* LinesEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520650204D78E5008C8C54 /* LinesEventResponse.swift */; };
 		63520703204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520651204D78E5008C8C54 /* DeviceEventResponse.swift */; };
 		63520704204D7A4B008C8C54 /* TicketEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520652204D78E5008C8C54 /* TicketEventResponse.swift */; };
-		63520705204D7A4B008C8C54 /* EventResponsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352064F204D78E5008C8C54 /* EventResponsable.swift */; };
-		63520706204D7A4B008C8C54 /* LinesEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520650204D78E5008C8C54 /* LinesEventResponse.swift */; };
-		63520707204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520651204D78E5008C8C54 /* DeviceEventResponse.swift */; };
-		63520708204D7A4B008C8C54 /* TicketEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63520652204D78E5008C8C54 /* TicketEventResponse.swift */; };
 		6352070A204D7A55008C8C54 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63520709204D7A55008C8C54 /* Starscream.framework */; };
 		6352070C204D7A64008C8C54 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6352070B204D7A64008C8C54 /* Starscream.framework */; };
-		6352070E204D7A6B008C8C54 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6352070D204D7A6B008C8C54 /* Starscream.framework */; };
 		635BDB66210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
 		635BDB67210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
 		635BDB68210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
-		635BDB69210B296B000EFDEC /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BDB65210B296B000EFDEC /* Loggable.swift */; };
 		635E0DD4204D915F00B1123A /* LinesAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED67F204D8D60001554AC /* LinesAPITests.swift */; };
 		635E0DD5204D915F00B1123A /* UsersAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED67E204D8D60001554AC /* UsersAPITests.swift */; };
 		635E0DD6204D915F00B1123A /* LineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DED66C204D8D60001554AC /* LineModelTests.swift */; };
@@ -185,36 +148,28 @@
 		6370FF3020860ADC00ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
 		6370FF3120861C5700ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
 		6370FF3220861C5800ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
-		6370FF3320861C5800ED3196 /* ClearTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370FF2F20860ADC00ED3196 /* ClearTickets.swift */; };
 		637D698F2052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		637D69902052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		637D69912052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
-		637D69922052EA0500C59BA2 /* Extensions+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D698E2052EA0500C59BA2 /* Extensions+Data.swift */; };
 		639E578E20AD8DF50089C90B /* TestHelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E578D20AD8DF50089C90B /* TestHelperExtensions.swift */; };
 		63AFBA9720D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
 		63AFBA9820D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
 		63AFBA9920D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
-		63AFBA9A20D009E8009E3D1C /* WebsocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9620D009E8009E3D1C /* WebsocketMessage.swift */; };
 		63AFBA9C20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
 		63AFBA9D20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
 		63AFBA9E20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
-		63AFBA9F20D00A0D009E3D1C /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBA9B20D00A0D009E3D1C /* Callback.swift */; };
 		63AFBAA120D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketWebsocketEvent.swift */; };
 		63AFBAA220D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketWebsocketEvent.swift */; };
 		63AFBAA320D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketWebsocketEvent.swift */; };
-		63AFBAA420D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA020D0FC21009E3D1C /* TicketWebsocketEvent.swift */; };
 		63AFBAA620D0FC42009E3D1C /* DeviceWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceWebsocketEvent.swift */; };
 		63AFBAA720D0FC42009E3D1C /* DeviceWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceWebsocketEvent.swift */; };
 		63AFBAA820D0FC42009E3D1C /* DeviceWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceWebsocketEvent.swift */; };
-		63AFBAA920D0FC42009E3D1C /* DeviceWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAA520D0FC42009E3D1C /* DeviceWebsocketEvent.swift */; };
 		63AFBAAB20D0FC54009E3D1C /* LineWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineWebsocketEvent.swift */; };
 		63AFBAAC20D0FC54009E3D1C /* LineWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineWebsocketEvent.swift */; };
 		63AFBAAD20D0FC54009E3D1C /* LineWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineWebsocketEvent.swift */; };
-		63AFBAAE20D0FC54009E3D1C /* LineWebsocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFBAAA20D0FC54009E3D1C /* LineWebsocketEvent.swift */; };
 		63B913EE2050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
 		63B913EF2050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
 		63B913F02050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
-		63B913F12050124D0096F92D /* QminderAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B913ED2050124D0096F92D /* QminderAPIProtocol.swift */; };
 		63C422E4205678D600941DA4 /* QminderErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E3205678D600941DA4 /* QminderErrorTests.swift */; };
 		63C422E620567F3000941DA4 /* ResponseDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E520567F3000941DA4 /* ResponseDataTests.swift */; };
 		63C422E82056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C422E72056B4C600941DA4 /* QminderAPITestWithoutAPIKeyTests.swift */; };
@@ -312,7 +267,6 @@
 		6352067E204D79B9008C8C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6352068A204D79E9008C8C54 /* QminderAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QminderAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63520697204D7A00008C8C54 /* QminderAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QminderAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		635206A4204D7A10008C8C54 /* QminderAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QminderAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63520709204D7A55008C8C54 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/tvOS/Starscream.framework; sourceTree = "<group>"; };
 		6352070B204D7A64008C8C54 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
 		6352070D204D7A6B008C8C54 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/watchOS/Starscream.framework; sourceTree = "<group>"; };
@@ -393,14 +347,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		635206A0204D7A10008C8C54 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6352070E204D7A6B008C8C54 /* Starscream.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		635E0DE9204D915F00B1123A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,7 +368,9 @@
 				635205FC204D76C9008C8C54 /* Products */,
 				63520673204D7966008C8C54 /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		635205FC204D76C9008C8C54 /* Products */ = {
 			isa = PBXGroup;
@@ -430,7 +378,6 @@
 				6352067A204D79B9008C8C54 /* QminderAPITests.xctest */,
 				6352068A204D79E9008C8C54 /* QminderAPI.framework */,
 				63520697204D7A00008C8C54 /* QminderAPI.framework */,
-				635206A4204D7A10008C8C54 /* QminderAPI.framework */,
 				6320D83F204D806D0041FFAC /* QminderAPI.framework */,
 				635E0DEF204D915F00B1123A /* QminderAPITests-tvOS.xctest */,
 			);
@@ -644,13 +591,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		635206A1204D7A10008C8C54 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -732,26 +672,6 @@
 			productReference = 63520697204D7A00008C8C54 /* QminderAPI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		635206A3204D7A10008C8C54 /* QminderAPI-watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 635206A9204D7A10008C8C54 /* Build configuration list for PBXNativeTarget "QminderAPI-watchOS" */;
-			buildPhases = (
-				6352069F204D7A10008C8C54 /* Sources */,
-				635206A0204D7A10008C8C54 /* Frameworks */,
-				635206A1204D7A10008C8C54 /* Headers */,
-				635206A2204D7A10008C8C54 /* Resources */,
-				63DED69A204D8FBB001554AC /* Carthage */,
-				635E0E1A204D954C00B1123A /* Swiftlint */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "QminderAPI-watchOS";
-			productName = "QminderAPI-watchOS";
-			productReference = 635206A4204D7A10008C8C54 /* QminderAPI.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		635E0DD0204D915F00B1123A /* QminderAPITests-tvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 635E0DEC204D915F00B1123A /* Build configuration list for PBXNativeTarget "QminderAPITests-tvOS" */;
@@ -796,10 +716,6 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Manual;
 					};
-					635206A3204D7A10008C8C54 = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
-					};
 					635E0DD0204D915F00B1123A = {
 						ProvisioningStyle = Manual;
 					};
@@ -820,7 +736,6 @@
 				6320D83E204D806D0041FFAC /* QminderAPI-iOS */,
 				63520689204D79E9008C8C54 /* QminderAPI-tvOS */,
 				63520696204D7A00008C8C54 /* QminderAPI-macOS */,
-				635206A3204D7A10008C8C54 /* QminderAPI-watchOS */,
 				63520679204D79B9008C8C54 /* QminderAPITests */,
 				635E0DD0204D915F00B1123A /* QminderAPITests-tvOS */,
 			);
@@ -857,13 +772,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		635206A2204D7A10008C8C54 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		635E0DEB204D915F00B1123A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -887,7 +795,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		635E0E17204D942C00B1123A /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -931,20 +839,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		635E0E1A204D954C00B1123A /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
 		63DED698204D8F74001554AC /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -967,21 +861,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Starscream.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		63DED69A204D8FBB001554AC /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/watchOS/Starscream.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -1179,57 +1058,6 @@
 				637D69912052EA0500C59BA2 /* Extensions+Data.swift in Sources */,
 				63AFBAA820D0FC42009E3D1C /* DeviceWebsocketEvent.swift in Sources */,
 				635206EA204D7A3E008C8C54 /* Device.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6352069F204D7A10008C8C54 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				635206F8204D7A43008C8C54 /* QminderEvents.swift in Sources */,
-				635206E8204D7A3E008C8C54 /* Extensions.swift in Sources */,
-				6304932F2052AFBB001529B4 /* Responsable.swift in Sources */,
-				631849732051703C0082068A /* QminderAPIEndpoint.swift in Sources */,
-				635206B6204D7A2F008C8C54 /* QminderError.swift in Sources */,
-				63520708204D7A4B008C8C54 /* TicketEventResponse.swift in Sources */,
-				6318496E20516EC40082068A /* QminderAPIEndpointProtocol.swift in Sources */,
-				635206B1204D7A2B008C8C54 /* Result.swift in Sources */,
-				6315470520A47B9A0032B2EC /* QminderEventsProtocol.swift in Sources */,
-				63AFBAAE20D0FC54009E3D1C /* LineWebsocketEvent.swift in Sources */,
-				635206C4204D7A35008C8C54 /* Location.swift in Sources */,
-				635206E2204D7A3A008C8C54 /* Status.swift in Sources */,
-				63AFBA9A20D009E8009E3D1C /* WebsocketMessage.swift in Sources */,
-				635206C7204D7A35008C8C54 /* EmptyState.swift in Sources */,
-				635206DC204D7A3A008C8C54 /* Label.swift in Sources */,
-				635206C5204D7A35008C8C54 /* TVPairingCode.swift in Sources */,
-				635206C8204D7A35008C8C54 /* User.swift in Sources */,
-				635206E4204D7A3A008C8C54 /* Created.swift in Sources */,
-				635206E0204D7A3A008C8C54 /* Ticket.swift in Sources */,
-				635206B7204D7A2F008C8C54 /* ParameterEncoding.swift in Sources */,
-				635206F9204D7A43008C8C54 /* QminderWebsocketEvent.swift in Sources */,
-				63B913F12050124D0096F92D /* QminderAPIProtocol.swift in Sources */,
-				635206DF204D7A3A008C8C54 /* Interaction.swift in Sources */,
-				635206E1204D7A3A008C8C54 /* Extra.swift in Sources */,
-				635206DD204D7A3A008C8C54 /* Source.swift in Sources */,
-				635206C6204D7A35008C8C54 /* TVAPIData.swift in Sources */,
-				6370FF3320861C5800ED3196 /* ClearTickets.swift in Sources */,
-				635206E7204D7A3E008C8C54 /* QminderAPI.swift in Sources */,
-				63520707204D7A4B008C8C54 /* DeviceEventResponse.swift in Sources */,
-				635206B0204D7A2B008C8C54 /* ResultProtocol.swift in Sources */,
-				635BDB69210B296B000EFDEC /* Loggable.swift in Sources */,
-				63AFBAA420D0FC21009E3D1C /* TicketWebsocketEvent.swift in Sources */,
-				635206DE204D7A3A008C8C54 /* TicketResponse.swift in Sources */,
-				63AFBA9F20D00A0D009E3D1C /* Callback.swift in Sources */,
-				63520705204D7A4B008C8C54 /* EventResponsable.swift in Sources */,
-				635206E6204D7A3E008C8C54 /* Desk.swift in Sources */,
-				635206E9204D7A3E008C8C54 /* HTTPMethod.swift in Sources */,
-				63520706204D7A4B008C8C54 /* LinesEventResponse.swift in Sources */,
-				635206E3204D7A3A008C8C54 /* Served.swift in Sources */,
-				635206C9204D7A35008C8C54 /* Line.swift in Sources */,
-				635206FC204D7A47008C8C54 /* QminderEventsDelegate.swift in Sources */,
-				637D69922052EA0500C59BA2 /* Extensions+Data.swift in Sources */,
-				63AFBAA920D0FC42009E3D1C /* DeviceWebsocketEvent.swift in Sources */,
-				635206E5204D7A3E008C8C54 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1602,66 +1430,6 @@
 			};
 			name = Release;
 		};
-		635206AA204D7A10008C8C54 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info-watchOS.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qminder.QminderAPI;
-				PRODUCT_MODULE_NAME = QminderAPI;
-				PRODUCT_NAME = QminderAPI;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
-			};
-			name = Debug;
-		};
-		635206AB204D7A10008C8C54 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info-watchOS.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qminder.QminderAPI;
-				PRODUCT_MODULE_NAME = QminderAPI;
-				PRODUCT_NAME = QminderAPI;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
-			};
-			name = Release;
-		};
 		635E0DED204D915F00B1123A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1738,15 +1506,6 @@
 			buildConfigurations = (
 				6352069D204D7A00008C8C54 /* Debug */,
 				6352069E204D7A00008C8C54 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		635206A9204D7A10008C8C54 /* Build configuration list for PBXNativeTarget "QminderAPI-watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				635206AA204D7A10008C8C54 /* Debug */,
-				635206AB204D7A10008C8C54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

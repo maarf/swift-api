@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "635206A3204D7A10008C8C54"
+               BlueprintIdentifier = "6320D83E204D806D0041FFAC"
                BuildableName = "QminderAPI.framework"
-               BlueprintName = "QminderAPI-watchOS"
+               BlueprintName = "QminderAPI-iOS"
                ReferencedContainer = "container:QminderAPI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,9 +26,29 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "63520679204D79B9008C8C54"
+               BuildableName = "QminderAPITests.xctest"
+               BlueprintName = "QminderAPITests"
+               ReferencedContainer = "container:QminderAPI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6320D83E204D806D0041FFAC"
+            BuildableName = "QminderAPI.framework"
+            BlueprintName = "QminderAPI-iOS"
+            ReferencedContainer = "container:QminderAPI.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,12 +65,39 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "635206A3204D7A10008C8C54"
+            BlueprintIdentifier = "6320D83E204D806D0041FFAC"
             BuildableName = "QminderAPI.framework"
-            BlueprintName = "QminderAPI-watchOS"
+            BlueprintName = "QminderAPI-iOS"
             ReferencedContainer = "container:QminderAPI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "QMINDER_LOCATION_ID"
+            value = "$(QMINDER_LOCATION_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_API_KEY"
+            value = "$(QMINDER_API_KEY)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_LINE_ID"
+            value = "$(QMINDER_LINE_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_USER_ID"
+            value = "$(QMINDER_USER_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "QMINDER_TV_ID"
+            value = "$(QMINDER_TV_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -63,9 +110,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "635206A3204D7A10008C8C54"
+            BlueprintIdentifier = "6320D83E204D806D0041FFAC"
             BuildableName = "QminderAPI.framework"
-            BlueprintName = "QminderAPI-watchOS"
+            BlueprintName = "QminderAPI-iOS"
             ReferencedContainer = "container:QminderAPI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
