@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://www.facebook.com/QMinder/'
   s.source           = { :git => 'https://github.com/Qminder/swift-api.git', :tag => s.version.to_s }
 
-  s.source_files = "QminderAPI/Classes/*.swift"
+  s.source_files = "QminderAPI/Classes/*{.swift,.plist}"
 
   s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'
