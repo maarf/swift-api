@@ -12,7 +12,7 @@ platform :ios do
       scheme: "QminderAPI-iOS",
       xcargs: "CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO",
       clean: true,
-      devices: ["iPhone X"]
+      devices: ["iPhone XS"]
     )
 
     # tvOS
@@ -29,16 +29,6 @@ platform :ios do
       archive: false,
       project: "QminderAPI.xcodeproj",
       scheme: "QminderAPI-macOS",
-      xcargs: "CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO",
-      clean: true,
-      build: true
-    )
-
-    # watchOS
-    xcodebuild(
-      archive: false,
-      project: "QminderAPI.xcodeproj",
-      scheme: "QminderAPI-watchOS",
       xcargs: "CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO",
       clean: true,
       build: true
