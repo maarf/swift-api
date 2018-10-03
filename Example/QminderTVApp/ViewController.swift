@@ -10,7 +10,7 @@ import UIKit
 import QminderAPI
 
 struct EventInfo {
-  var type: QminderEvent
+  var type: TicketWebsocketEvent
   var ticket: Ticket
 }
 
@@ -130,7 +130,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
                     
                     case .success(let tvData):
                   
-                      if tvData.status == "PAIRED" {
+                      if tvData.status == .paired {
                         timer.invalidate()
                       
                         UserDefaults.standard.set(tvData.apiKey, forKey: "API_KEY")
@@ -157,37 +157,36 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
   func setEvents(locationId:Int) {
     
     let parameters = ["location": locationId]
-    
-    
-    events.subscribe(toTicketEvent: .ticketCreated, parameters: parameters, callback: { result in
-      self.messageReceived(eventType: .ticketCreated, result: result)
+
+    events.subscribe(toTicketEvent: .created, parameters: parameters, callback: { result in
+      self.messageReceived(eventType: .created, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketCancelled, parameters: parameters, callback: { result in
-      self.messageReceived(eventType: .ticketCancelled, result: result)
+    events.subscribe(toTicketEvent: .cancelled, parameters: parameters, callback: { result in
+      self.messageReceived(eventType: .cancelled, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketChanged, parameters: parameters, callback: { result in
-      self.messageReceived(eventType: .ticketChanged, result: result)
+    events.subscribe(toTicketEvent: .changed, parameters: parameters, callback: { result in
+      self.messageReceived(eventType: .changed, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketCalled, parameters: parameters, callback: { result in
-      self.messageReceived(eventType: .ticketCalled, result: result)
+    events.subscribe(toTicketEvent: .called, parameters: parameters, callback: { result in
+      self.messageReceived(eventType: .called, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketRecalled, parameters: parameters, callback: { result in
-      self.messageReceived(eventType: .ticketRecalled, result: result)
+    events.subscribe(toTicketEvent: .recalled, parameters: parameters, callback: { result in
+      self.messageReceived(eventType: .recalled, result: result)
     })
     
-    events.subscribe(toTicketEvent: .ticketServed, parameters: parameters, callback: { result in
-      self.messageReceived(eventType: .ticketServed, result: result)
+    events.subscribe(toTicketEvent: .served, parameters: parameters, callback: { result in
+      self.messageReceived(eventType: .served, result: result)
     })
     
     events.subscribe(toDeviceEvent: .overviewMonitorChange, parameters: ["parameters": ["id": UserDefaults.standard.integer(forKey: "TV_ID")]], callback: { result in
       print("TV changed")
     })
     
-    events.subscribe(toLineEvent: .linesChanged, parameters: ["parameters": ["id": UserDefaults.standard.integer(forKey: "LOCATION_ID")]], callback: { result in
+    events.subscribe(toLineEvent: .changed, parameters: ["parameters": ["id": UserDefaults.standard.integer(forKey: "LOCATION_ID")]], callback: { result in
       print("Lines changed")
     })
   }
@@ -236,7 +235,7 @@ class ViewController: UIViewController, QminderEventsDelegate, UITableViewDelega
     pairingCode.isHidden = true
   }
   
-  func messageReceived(eventType: QminderEvent, result: Result<Ticket, QminderError>) {
+  func messageReceived(eventType: TicketWebsocketEvent, result: Result<Ticket, QminderError>) {
     switch result {
       case .success(let ticket):
         print("\(eventType.rawValue) \(ticket)")
