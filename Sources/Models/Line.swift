@@ -1,9 +1,9 @@
 //
 //  Line.swift
-//  Pods
+//  QminderAPI
 //
-//  Created by Kristaps Grinbergs on 16/12/2016.
-//
+//  Created by Kristaps Grinbergs on 15/10/2018.
+//  Copyright © 2018 Kristaps Grinbergs. All rights reserved.
 //
 
 import Foundation

@@ -17,6 +17,11 @@ public enum QminderError: Error {
   /// Request error
   case request(Error)
   
+  /// GraphQL error
+  case graphQL(Error)
+  
+  case graphQLErrors([Error])
+  
   /// Cant parse object
   case unreadableObject
   

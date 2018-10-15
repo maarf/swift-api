@@ -1,6 +1,8 @@
 included:
   - Sources
   - QminderAPITests
+excluded:
+  - Sources/API.swift
 disabled_rules:
   - trailing_whitespace
   - identifier_name

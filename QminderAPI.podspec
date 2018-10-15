@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/**/*.swift'
 
   s.dependency 'Starscream', '~> 3.0'
+  s.dependency 'Apollo', '~> 0.9'
 
   s.swift_version = "4.2"
 
