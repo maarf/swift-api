@@ -12,15 +12,14 @@ import XCTest
 
 struct QminderGraphQLAPIFaker: QminderGraphQLAPIProtocol {
   
-  var lines: [Line]
-  var desks: [Desk]?
+  var locationDetails: LocationDetails
   var error: Error?
   
   func locationDetails(locationID: Int, completion: @escaping (Result<LocationDetails, QminderError>) -> Void) {
     if let error = error {
       completion(Result(QminderError.graphQL(error)))
     } else {
-      completion(Result((lines, desks)))
+      completion(Result(locationDetails))
     }
   }
 }
@@ -47,7 +46,7 @@ class QminderGraphQLAPITests: XCTestCase {
       Desk(id: deskID, name: deskName)
     ]
     
-    qminderGraphQLAPI = QminderGraphQLAPIFaker(lines: oneLineArray, desks: desks, error: nil)
+    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: (oneLineArray, desks), error: nil)
     qminderGraphQLAPI.locationDetails(locationID: Int.random) { result in
       switch result {
       case .success(let lines, let desks):
@@ -73,7 +72,7 @@ class QminderGraphQLAPITests: XCTestCase {
   }
   
   func testResponseWithoutDesk() {
-    qminderGraphQLAPI = QminderGraphQLAPIFaker(lines: oneLineArray, desks: nil, error: nil)
+    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: (oneLineArray, nil), error: nil)
     qminderGraphQLAPI.locationDetails(locationID: Int.random) { result in
       switch result {
       case .success(_, let desks):
@@ -89,8 +88,7 @@ class QminderGraphQLAPITests: XCTestCase {
     let errorDomain = String.random
     let errorCode = Int.random
     
-    qminderGraphQLAPI = QminderGraphQLAPIFaker(lines: oneLineArray,
-                                               desks: nil,
+    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: (oneLineArray, nil),
                                                error: NSError(domain: errorDomain, code: errorCode, userInfo: nil))
     qminderGraphQLAPI.locationDetails(locationID: Int.random) { result in
       switch result {
