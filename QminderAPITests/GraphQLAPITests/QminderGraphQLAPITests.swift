@@ -41,7 +41,6 @@ class QminderGraphQLAPITests: XCTestCase {
   }()
   
   func testResponseWithDesk() {
-    
     let desks = [
       Desk(id: deskID, name: deskName)
     ]
@@ -84,7 +83,6 @@ class QminderGraphQLAPITests: XCTestCase {
   }
   
   func testResponseWithError() {
-    
     let errorDomain = String.random
     let errorCode = Int.random
     
@@ -104,7 +102,6 @@ class QminderGraphQLAPITests: XCTestCase {
         default:
           XCTFail("Wrong error")
         }
-        
       }
     }
   }
