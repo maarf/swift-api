@@ -10,12 +10,13 @@ let package = Package(
             targets: ["QminderAPI"])
     ],
     dependencies: [
-        .package(url: "https://github.com/daltoniam/Starscream.git", from: "3.0.6")
+        .package(url: "https://github.com/daltoniam/Starscream.git", from: "3.0.6"),
+        .package(url: "https://github.com/apollographql/apollo-ios.git", from: "0.9.4")
     ],
     targets: [
         .target(
             name: "QminderAPI",
-            dependencies: ["Starscream"],
+            dependencies: ["Starscream", "Apollo"],
             path: "Sources")
     ]
 )
