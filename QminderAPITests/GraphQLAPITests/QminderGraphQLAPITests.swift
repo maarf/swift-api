@@ -15,7 +15,7 @@ struct QminderGraphQLAPIFaker: QminderGraphQLAPIProtocol {
   var locationDetails: LocationDetails
   var error: Error?
   
-  func locationDetails(locationID: Int, completion: @escaping (Result<LocationDetails, QminderError>) -> Void) {
+  func locationDetails(_ locationID: Int, completion: @escaping (Result<LocationDetails, QminderError>) -> Void) {
     if let error = error {
       completion(Result(QminderError.graphQL(error)))
     } else {
@@ -45,20 +45,20 @@ class QminderGraphQLAPITests: XCTestCase {
       Desk(id: deskID, name: deskName)
     ]
     
-    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: (oneLineArray, desks), error: nil)
-    qminderGraphQLAPI.locationDetails(locationID: Int.random) { result in
+    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: LocationDetails(oneLineArray, desks), error: nil)
+    qminderGraphQLAPI.locationDetails(Int.random) { result in
       switch result {
-      case .success(let lines, let desks):
-        XCTAssertNotNil(lines)
-        guard let line = lines.first else {
+      case .success(let locationDetails):
+        XCTAssertNotNil(locationDetails.lines)
+        guard let line = locationDetails.lines.first else {
           XCTFail("Should be at least one line")
           return
         }
         XCTAssertEqual(line.id, self.lineID)
         XCTAssertEqual(line.name, self.lineName)
-        
-        XCTAssertNotNil(desks)
-        guard let desk = desks?.first else {
+
+        XCTAssertNotNil(locationDetails.desks)
+        guard let desk = locationDetails.desks?.first else {
           XCTFail("Should be at least one desk")
           return
         }
@@ -71,11 +71,11 @@ class QminderGraphQLAPITests: XCTestCase {
   }
   
   func testResponseWithoutDesk() {
-    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: (oneLineArray, nil), error: nil)
-    qminderGraphQLAPI.locationDetails(locationID: Int.random) { result in
+    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: LocationDetails(oneLineArray, nil), error: nil)
+    qminderGraphQLAPI.locationDetails(Int.random) { result in
       switch result {
-      case .success(_, let desks):
-        XCTAssertNil(desks)
+      case .success(let locationDetails):
+        XCTAssertNil(locationDetails.desks)
       case .failure(let error):
         XCTFail(error.localizedDescription)
       }
@@ -86,9 +86,9 @@ class QminderGraphQLAPITests: XCTestCase {
     let errorDomain = String.random
     let errorCode = Int.random
     
-    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: (oneLineArray, nil),
+    qminderGraphQLAPI = QminderGraphQLAPIFaker(locationDetails: LocationDetails(oneLineArray, nil),
                                                error: NSError(domain: errorDomain, code: errorCode, userInfo: nil))
-    qminderGraphQLAPI.locationDetails(locationID: Int.random) { result in
+    qminderGraphQLAPI.locationDetails(Int.random) { result in
       switch result {
       case .success:
         XCTFail("Should not succeed")

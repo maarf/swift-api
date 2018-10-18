@@ -19,7 +19,8 @@ public enum QminderError: Error {
   
   /// GraphQL error
   case graphQL(Error)
-  
+
+  /// GraphQL errors
   case graphQLErrors([Error])
   
   /// Cant parse object

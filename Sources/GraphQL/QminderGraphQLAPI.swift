@@ -27,7 +27,8 @@ public struct QminderGraphQLAPI: QminderGraphQLAPIProtocol {
     }()
   }
   
-  public func locationDetails(locationID: Int, completion: @escaping (Result<LocationDetails, QminderError>) -> Void) {
+  public func locationDetails(_ locationID: Int,
+                              completion: @escaping (Result<LocationDetails, QminderError>) -> Void) {
     apolloClient.fetch(query: LocationDetailsQuery(id: GraphQLID(locationID))) { result, error in
       self.queue.async {
         if let error = error {
