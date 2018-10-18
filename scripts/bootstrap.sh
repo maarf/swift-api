@@ -1,7 +1,8 @@
+#!/bin/sh
+
 #!/bin/bash
 
 carthage update --no-build
-
 
 rm "Carthage/Checkouts/SQLite.swift/SQLite.xcodeproj/xcshareddata/xcschemes/SQLite Mac.xcscheme"
 rm "Carthage/Checkouts/SQLite.swift/SQLite.xcodeproj/xcshareddata/xcschemes/SQLite tvOS.xcscheme"
@@ -13,3 +14,5 @@ rm "Carthage/Checkouts/apollo-ios/ApolloWebSocket.xcodeproj/xcshareddata/xcschem
 rm "Carthage/Checkouts/apollo-ios/Apollo.xcodeproj/xcshareddata/xcschemes/ApolloPerformanceTests.xcscheme"
 
 carthage build
+
+cp Cartfile.resolved Carthage
