@@ -4,6 +4,7 @@
 
 carthage update --no-build
 
+# Remove schemes which can't be built using tvOS, macOS and watchOS
 rm "Carthage/Checkouts/SQLite.swift/SQLite.xcodeproj/xcshareddata/xcschemes/SQLite Mac.xcscheme"
 rm "Carthage/Checkouts/SQLite.swift/SQLite.xcodeproj/xcshareddata/xcschemes/SQLite tvOS.xcscheme"
 rm "Carthage/Checkouts/SQLite.swift/SQLite.xcodeproj/xcshareddata/xcschemes/SQLite iOS.xcscheme"
