@@ -5,7 +5,6 @@ ignore:
   - "Pods"
   - "QminderAPITests"
   - "Example/Pods"
-  - "Sources/API.swift"
 comment:
   layout: "header, reach, diff, flags, files, footer"
   behavior: new
