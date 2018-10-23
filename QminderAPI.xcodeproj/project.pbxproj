@@ -248,7 +248,6 @@
 		63E8AB6B21747E4400BC140E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8AB6921747E4400BC140E /* Line.swift */; };
 		63E8AB6C21747E4400BC140E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8AB6921747E4400BC140E /* Line.swift */; };
 		63E8AB6D21747E4400BC140E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8AB6921747E4400BC140E /* Line.swift */; };
-		63E8AB8E2174D97C00BC140E /* QminderGraphQLAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8AB8D2174D97C00BC140E /* QminderGraphQLAPITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,7 +359,6 @@
 		63E8AB702174863200BC140E /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/tvOS/Apollo.framework; sourceTree = "<group>"; };
 		63E8AB722174863F00BC140E /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/Mac/Apollo.framework; sourceTree = "<group>"; };
 		63E8AB742174864D00BC140E /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/watchOS/Apollo.framework; sourceTree = "<group>"; };
-		63E8AB8D2174D97C00BC140E /* QminderGraphQLAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QminderGraphQLAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,7 +550,6 @@
 				63DED679204D8D60001554AC /* XCTestExtensions.swift */,
 				639E578D20AD8DF50089C90B /* TestHelperExtensions.swift */,
 				63DED67A204D8D60001554AC /* APITests */,
-				63E8AB8C2174D94B00BC140E /* GraphQLAPITests */,
 				63DED680204D8D61001554AC /* EventTests */,
 				63DED66B204D8D60001554AC /* ModelTests */,
 				63DED678204D8D60001554AC /* QminderResultTests.swift */,
@@ -623,14 +620,6 @@
 				63DED681204D8D61001554AC /* QminderWebsocketTests.swift */,
 			);
 			path = EventTests;
-			sourceTree = "<group>";
-		};
-		63E8AB8C2174D94B00BC140E /* GraphQLAPITests */ = {
-			isa = PBXGroup;
-			children = (
-				63E8AB8D2174D97C00BC140E /* QminderGraphQLAPITests.swift */,
-			);
-			path = GraphQLAPITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1076,7 +1065,6 @@
 				63C422EA2056B6EE00941DA4 /* QminderError+Extensions.swift in Sources */,
 				63DED68F204D8D61001554AC /* XCTestExtensions.swift in Sources */,
 				63DED686204D8D61001554AC /* ModelTests.swift in Sources */,
-				63E8AB8E2174D97C00BC140E /* QminderGraphQLAPITests.swift in Sources */,
 				63DED683204D8D61001554AC /* ApiDataModelTests.swift in Sources */,
 				63DED689204D8D61001554AC /* TicketResponseTests.swift in Sources */,
 				63DED691204D8D61001554AC /* DevicesAPITests.swift in Sources */,
