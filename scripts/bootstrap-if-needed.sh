@@ -2,7 +2,7 @@
 
 RED='\033[1;31m'
 GREEN='\033[1;32m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 if ! cmp -s Cartfile.resolved Carthage/Cartfile.resolved; then
   printf "${RED}Dependencies out of date with cache.${NC} Bootstrapping...\n"

@@ -75,9 +75,3 @@ qminderAPI.tvHeartbeat(id: 11389, metadata: ["test": "test"]) {
   print("TV heartbeat")
   print($0)
 }
-
-let qminderGraphQL = QminderGraphQLAPI(apiKey: apiKey)
-
-qminderGraphQL.locationDetails(locationID: 9135) {
-  let _ = prettyPrint("Location details", $0)
-}

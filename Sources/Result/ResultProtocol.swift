@@ -26,10 +26,10 @@ public protocol ResultProtocol: CustomStringConvertible {
 	init(_ error: Error)
 	
   /// Result
-	var result: Result<Value, Error> { get }
+	var result: QminderResult<Value, Error> { get }
 }
 
-public extension Result {
+public extension QminderResult {
   
   /// Constructs a success wrapping a `value`.
   public init(_ value: Value) {
@@ -77,7 +77,7 @@ public extension Result {
   }
   
   /// Result value
-  public var result: Result<Value, Error> {
+  public var result: QminderResult<Value, Error> {
     return self
   }
   

@@ -31,7 +31,7 @@ public protocol QminderEventsProtocol {
   ///   - callback: Callback executed when response got from Websocket
   func subscribe(toTicketEvent eventType: TicketWebsocketEvent,
                  parameters: [String: Any],
-                 callback: @escaping (Result<Ticket, QminderError>) -> Void)
+                 callback: @escaping (QminderResult<Ticket, QminderError>) -> Void)
   
   /// Subscribe to device event
   ///
@@ -41,7 +41,7 @@ public protocol QminderEventsProtocol {
   ///   - callback: Callback executed when response got from Websocket
   func subscribe(toDeviceEvent eventType: DeviceWebsocketEvent,
                  parameters: [String: Any],
-                 callback: @escaping (Result<TVDevice?, QminderError>) -> Void)
+                 callback: @escaping (QminderResult<TVDevice?, QminderError>) -> Void)
   
   /// Subscribe to lines event
   ///
@@ -51,5 +51,5 @@ public protocol QminderEventsProtocol {
   ///   - callback: Callback executed when response got from Websocket
   func subscribe(toLineEvent eventType: LineWebsocketEvent,
                  parameters: [String: Any],
-                 callback: @escaping (Result<[Line], QminderError>) -> Void)
+                 callback: @escaping (QminderResult<[Line], QminderError>) -> Void)
 }

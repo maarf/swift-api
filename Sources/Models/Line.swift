@@ -11,7 +11,7 @@ import Foundation
 /// Line Object
 public struct Line: Responsable {
   
-  var statusCode: Int?
+  public var statusCode: Int?
   
   /// ID of a line
   public let id: Int
