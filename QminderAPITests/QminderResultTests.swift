@@ -15,7 +15,7 @@ class QminderResultTests: XCTestCase {
   func testResultSucess() {
     
     let value = UUID().uuidString
-    let result = Result<String, QminderError>(value)
+    let result = QminderResult<String, QminderError>(value)
     
     XCTAssertFalse(result.isFailure)
     XCTAssertTrue(result.isSuccess)
@@ -34,7 +34,7 @@ class QminderResultTests: XCTestCase {
   
   func testResultFailure() {
     
-    let result = Result<Int, QminderError>(.apiKeyNotSet)
+    let result = QminderResult<Int, QminderError>(.apiKeyNotSet)
     
     XCTAssertTrue(result.isFailure)
     XCTAssertFalse(result.isSuccess)
