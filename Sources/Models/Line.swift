@@ -8,18 +8,25 @@
 
 import Foundation
 
-/// Line Object
-public struct Line: Responsable {
+/// Line protocol
+public protocol Lineable {
   
-  public var statusCode: Int?
+  /// Line ID
+  var id: Int { get }
   
-  /// ID of a line
-  public let id: Int
-  
-  /// Name of a line
-  public let name: String
+  /// Line name
+  var name: String { get }
   
   /// ID of the location this line belongs to
+  var location: Int? { get }
+}
+
+/// Line Object
+public struct Line: Responsable & Lineable & Codable {
+  internal var statusCode: Int?
+  
+  public let id: Int
+  public let name: String
   public let location: Int?
 }
 

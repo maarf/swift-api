@@ -354,7 +354,7 @@
 		63DED67F204D8D60001554AC /* LinesAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesAPITests.swift; sourceTree = "<group>"; };
 		63DED681204D8D61001554AC /* QminderWebsocketTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderWebsocketTests.swift; sourceTree = "<group>"; };
 		63DED696204D8E27001554AC /* QminderApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QminderApiTests.swift; sourceTree = "<group>"; };
-		63E8AB6921747E4400BC140E /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		63E8AB6921747E4400BC140E /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		63E8AB6E2174862300BC140E /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		63E8AB702174863200BC140E /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/tvOS/Apollo.framework; sourceTree = "<group>"; };
 		63E8AB722174863F00BC140E /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/Mac/Apollo.framework; sourceTree = "<group>"; };
