@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Apollo",
-        "repositoryURL": "https://github.com/apollographql/apollo-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "1a1d245d65e66bf572689b50df7602d7095b4869",
-          "version": "0.9.4"
-        }
-      },
-      {
         "package": "Starscream",
         "repositoryURL": "https://github.com/daltoniam/Starscream.git",
         "state": {
