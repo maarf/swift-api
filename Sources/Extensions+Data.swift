@@ -18,11 +18,11 @@ extension Data {
    
    - Returns: Result enum
   */
-  func decode<T: ResponsableWithData>(_ decodingType: T.Type) -> Result<T.Data, QminderError> {
+  func decode<T: ResponsableWithData>(_ decodingType: T.Type) -> QminderResult<T.Data, QminderError> {
     do {
-      return try Result(JSONDecoder.withMilliseconds.decode(decodingType, from: self).dataObject)
+      return try QminderResult(JSONDecoder.withMilliseconds.decode(decodingType, from: self).dataObject)
     } catch {
-      return Result(QminderError.jsonParsing(error))
+      return QminderResult(QminderError.jsonParsing(error))
     }
   }
   
@@ -34,11 +34,11 @@ extension Data {
    
    - Returns: Result enum
    */
-  func decode<T: Responsable>(_ decodingType: T.Type) -> Result<T, QminderError> {
+  func decode<T: Responsable>(_ decodingType: T.Type) -> QminderResult<T, QminderError> {
     do {
-      return try Result(JSONDecoder.withMilliseconds.decode(decodingType, from: self))
+      return try QminderResult(JSONDecoder.withMilliseconds.decode(decodingType, from: self))
     } catch {
-      return Result(QminderError.jsonParsing(error))
+      return QminderResult(QminderError.jsonParsing(error))
     }
   }
 }

@@ -1,25 +1,32 @@
 //
 //  Line.swift
-//  Pods
+//  QminderAPI
 //
-//  Created by Kristaps Grinbergs on 16/12/2016.
-//
+//  Created by Kristaps Grinbergs on 15/10/2018.
+//  Copyright © 2018 Kristaps Grinbergs. All rights reserved.
 //
 
 import Foundation
 
-/// Line Object
-public struct Line: Responsable {
+/// Line protocol
+public protocol Lineable {
   
-  var statusCode: Int?
+  /// Line ID
+  var id: Int { get }
   
-  /// ID of a line
-  public let id: Int
-  
-  /// Name of a line
-  public let name: String
+  /// Line name
+  var name: String { get }
   
   /// ID of the location this line belongs to
+  var location: Int? { get }
+}
+
+/// Line Object
+public struct Line: Responsable & Lineable & Codable {
+  internal var statusCode: Int?
+  
+  public let id: Int
+  public let name: String
   public let location: Int?
 }
 

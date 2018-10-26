@@ -7,13 +7,18 @@
 
 import Foundation
 
-/// Desk object
-public struct Desk: Codable {
+public protocol Deskable {
   
   /// Desk ID
-  public let id: Int
+  var id: Int { get }
   
   /// Desk name
+  var name: String { get }
+}
+
+/// Desk object
+public struct Desk: Deskable & Codable {
+  public let id: Int
   public let name: String
 }
 
