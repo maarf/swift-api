@@ -9,14 +9,14 @@
 import Foundation
 
 /// Protocl for API Response
-protocol Responsable: Codable {
+public protocol Responsable: Codable {
   
   /// Status code
   var statusCode: Int? { get }
 }
 
 /// Protocol to describe API response
-protocol ResponsableWithData: Responsable {
+public protocol ResponsableWithData: Responsable {
   
   /// Data with API request
   associatedtype Data
@@ -28,7 +28,7 @@ protocol ResponsableWithData: Responsable {
   var dataObject: Data { get }
 }
 
-extension ResponsableWithData {
+public extension ResponsableWithData {
   
   /// Data object
   var dataObject: Data {

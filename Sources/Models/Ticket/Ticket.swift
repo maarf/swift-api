@@ -96,7 +96,7 @@ public extension Ticketable {
 /// Ticket mapping object
 public struct Ticket: Ticketable, Responsable {
   
-  internal var statusCode: Int?
+  public var statusCode: Int?
   
   public let id: String
   public let number: Int?

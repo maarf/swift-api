@@ -11,7 +11,7 @@ import Foundation
 /// User object
 public struct User: Responsable {
   
-  internal var statusCode: Int?
+  public var statusCode: Int?
   
   /// User ID
   public let id: Int

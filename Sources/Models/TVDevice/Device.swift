@@ -12,7 +12,7 @@ import Foundation
 public struct TVDevice: Responsable {
   
   /// Status code from API
-  internal let statusCode: Int?
+  public let statusCode: Int?
 
   /// Device ID
   public let id: Int
