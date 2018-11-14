@@ -11,7 +11,7 @@ import Foundation
 /// Location object
 public struct Location: Responsable {
   
-  internal var statusCode: Int?
+  public var statusCode: Int?
 
   /// A unique location ID
   public let id: Int?

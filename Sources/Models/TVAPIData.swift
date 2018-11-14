@@ -21,7 +21,7 @@ public enum TVAPIDataStatus: String, Codable {
 /// TV device API data
 public struct TVAPIData: Responsable {
   
-  var statusCode: Int?
+  public var statusCode: Int?
   
   /// TV API data status
   public let status: TVAPIDataStatus

@@ -11,7 +11,7 @@ import Foundation
 /// TV pairing code data
 public struct TVPairingCode: Responsable {
   
-  var statusCode: Int?
+  public var statusCode: Int?
   
   /// Pairing code for enduser to enter to the Dashboard
   public let code: String
